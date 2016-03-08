@@ -1,0 +1,7 @@
+http://localhost/labs2/php/api_methods/SELECTz.php?
+tableName=methodProperties
+&columnNames=methodP_UUID%20AS%20id,methodP_custLotNumber%20AS%20value
+&selectColumn=methodP_2customer
+&selectData=3f561f5e-e3cf-4c51-9dd6-9d51045a214b
+&dataName=data
+&select=1

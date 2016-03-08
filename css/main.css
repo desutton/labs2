@@ -1,0 +1,128 @@
+.des_TitleBar {
+	height: 30px;
+	border-top: solid #7684c5;
+	border-width: 6px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	background-color: rgba(0,0,0,0.5);
+	font-size: 1.5em;
+	color: white;
+	text-align: center;
+}
+.des_FooterBar {
+	position: absolute;
+	bottom: 10px;
+	width: 100%;
+	height: 30px;
+	border-bottom: solid #7684c5;
+	border-width: 6px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	background-color: rgba(0,0,0,0.5);
+	font-size: 1.0em;
+	color: white;
+	text-align: center;
+}
+.des_divideBar {
+	border-top: solid #7684c5;
+	border-width: 6px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	background-color: rgba(0,0,0,0.5);
+	font-size: 1.5em;
+	color: white;
+}
+.des_labeler{
+	background-color: rgba(161,161,161,1);
+	margin-left: 24px;
+	color:#e2e2e2;
+}
+.des_levelText{
+	color: #555555
+	}
+.des_dropDown{
+	overflow: hidden;
+	width: 226px;
+	margin-left: 30px;
+	background: url("resources/Arrow.png")no-repeat #dfdfdf 200px 2px;	
+}
+des_select {
+    border:0;
+    background:transparent;
+    height:24px;
+    border:1px solid #d8d8d8;
+    width:226px;
+    -webkit-appearance: none;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 1.2em;
+    color: #777777
+}
+
+.des_logo{
+	color:#e2e2e2;
+	white-space: nowrap;
+	-webkit-animation: rightThenLeft 30s linear;
+	margin-right: 10000px;
+	margin-left: 24px; 
+}
+@-webkit-keyframes rightThenLeft {
+    0%   {margin-right:100%;}
+    50%  {margin-right:0;}
+    100% {margin-right:100%;}
+}
+.des_logoWrapper{
+	max-width: 100%;
+	border-top: solid #7684c5;
+	border-width: 6px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	background-color: rgba(0,0,0,0.5);
+	height: 18px;
+	text-align: right;
+}
+.des_button {
+  color: #7684c5;
+  font-weight: bold;
+  font-size: 110%;
+  text-transform: uppercase;
+  margin-left: 24px;
+}
+.des_logoutLink {
+	color: #e2e2e2;
+	text-align: right;
+	font-size: x-small;
+}
+.des_menuLink {
+	color: #808080;
+	text-decoration: none;
+	a:active {color: gray};
+	a:visited{color: gray};
+	
+}
+.des_mainBodyLower {
+	background-color: silver;
+	text: white;
+	
+}
+.des_LogonBackground {
+    background-image: url("../images/background/wood_dark.jpg");
+}
+
+.des_DesktopBackground {
+    background-image: url("../images/background/wood.png");
+    color: #c0c0c0;
+}
+.des_DesktopInfo {
+	display: inline-block;
+	float: right;
+}
+{
+.des_webix_ss_header
+{height:75%;
+	color: #777777;
+	padding:5px;
+	padding-left:5px 2px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;
+	box-sizing:border-box}
+
+}
