@@ -1,3 +1,4 @@
+//David Sutton ©2016
 var invoiceTypes = [
     {id: 1, value: "Invoice"},
     {id: 2, value: "Credit Card"}
