@@ -1,4 +1,7 @@
-//David Sutton ©2016
+/*
+ * <dsCode> Inc. (c) 2016. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this softwate.
+ */
+
 var invoiceTypes = [
     {id: 1, value: "Invoice"},
     {id: 2, value: "Credit Card"}
@@ -10,6 +13,8 @@ var invoiceUUID = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, functi
 });
 var custUUID = "12345678-0000-0000-000000000000";
 //var custUUID = "3f561f5e-e3cf-4c51-9dd6-9d51045a214b";
+
+//var theData = [{"prices_id":"1","prices_UUID":"1","prices_testDescription":"Test","prices_unitPrice":"10"}];
 
 webix.ui({
 
@@ -177,15 +182,16 @@ webix.ui({
                         //autowidth:true,
 
                         columns:[
-                            {id:"Invoice_qty", header:{text:"QTY"},width:50, editor:"text"},
-                            {id:"invoice_testDescription", header:{text:"Descrp"},fillspace:true, template:"#prices_testDescription#"},
-                            {id:"invoice_price", header:{text:"Price"}, width:60, template:"#prices_unitPrice#"},
-                            {id:"invoice_exPrice", header:{text:"Ext Price"},width:70, editor:"text", math:"[$r,Invoice_qty ] + [$r,invoice_price]"}
+                            {id:"prices_qty",header:"QTY",width:50, editor:"text"},
+                            {id:"prices_testDescription", header:"Descrp",fillspace:true},
+                            {id:"prices_unitPrice", header:"Price", width:60},
+                            {id:"invoice_exPrice", header:"Ext Price",width:70, editor:"text"}
                         ],
-                        math:true,
-                        data:[],
                         externalData:list2grid,
-                        //externalDate:updateGrid
+                        scheme:{
+                            $change:calck_c
+                        }
+
 
                     },
 
@@ -262,7 +268,7 @@ $$('newInvoiceForm').setValues({invoice_UUID: invoiceUUID}, {invoice_custNumber:
 console.log("Invoice:" + invoiceUUID + "   Customer:" + custUUID);//just a debug code
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// Logic to build the Invoice Number and Order Number /////////////////////////////////////////////////////////////////////////
 $$("invoice_invoiceDate").attachEvent("onChange", function (newy) {
     var invoiceDate = new Date(newy);
     var custNumber = $$("custNumber").getValue();
@@ -275,7 +281,7 @@ $$("invoice_receivedDate").attachEvent("onChange", function (newx) {
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-////// Logic for the filter on the test descriptions //////////////////////////
+////// Logic for the filter on the test descriptions list /////////////////////
 $$("list_input").attachEvent("onTimedKeyPress", function () {
     var value = this.getValue().toLowerCase();
     $$("invoiceDecript").filter(function (obj) {
@@ -286,54 +292,21 @@ $$("list_input").attachEvent("onTimedKeyPress", function () {
 
 
 /////// Detect what is in the Tests List ////////////////////////////
-/*
-webix.DragControl.addDrop("invoiceTests", {
-    $drop: function (source, target, event) {
-        var dnd = webix.DragControl.getContext();
-        target.value = dnd.from.getItem(dnd.source[0]).title; // setting source item title as input value
-    },
-});
-*/
-
 function list2grid(data, id){
+
     price_descript = data.value || data.prices_testDescription;
     price_unit = data.value || data.prices_unitPrice;
     price_UUID = data.value || data.prices_UUID;
 
-    console.log("This got moved "+price_descript+" "+price_unit+" "+price_UUID);
+    console.log("This got moved "+price_descript+" with a price of "+price_unit+" and an id of "+price_UUID);
     return data;
 }
-
-    function updateGrid(){ /* And this magic happens */
-        $$("Invoice_qty").setValue("1");
-    }
-
-
-
-/*$$("invoiceTests").attachEvent("onAfterDrop", function (items) {
- var d = webix.DragControl.getContext();
- d = d['prices_testDescription'];
- //var invoiceTestItems =  $$("invoiceTests").getValue();
- console.log("You added:  "+d);
- });
- */
-
-
-/*////////////// Add this it have a blank added to the datagrid ////////////////
-webix.DragControl.addDrag("myDrag",{
-    move:function(source, target, obj){
-        var index = -1;
-        if (target) index = obj.getIndexById(target);
-        obj.add({
-            title:"new item",
-            rank: "0"
-        }, index);
-    }
-});
-//////////////////////////////////////////////////////////////////////////////*/
-
-//////////////////////////////////////////////////////////////////////
-
+/**************** Calc the datagrids test prices ********************/
+function calck_c(obj){
+    obj.invoice_exPrice = obj.prices_qty*1*obj.prices_unitPrice*1;
+};
+ /************* *****************************************************/
+ 
 ////// Function captures the form data and creates a URL to be sent to the insert.php api. ////////////////////////////////////////////////////////////////
 function find_trackingLots() {
     var customerID = $$("invoice_2custName").getValue();
