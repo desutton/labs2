@@ -1,6 +1,7 @@
 <component name="CopyrightManager">
   <copyright>
+    <option name="allowReplaceKeyword" value="Copyright" />
     <option name="myName" value="&lt;ds-Code&gt;" />
-    <option name="notice" value="Copyright (c) &amp;#36;today.year. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this softwate." />
+    <option name="notice" value="&lt;dsCode&gt; Inc. (c) &amp;#36;today.year. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this softwate." />
   </copyright>
 </component>
