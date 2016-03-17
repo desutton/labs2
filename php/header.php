@@ -23,13 +23,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/appVersion.php';
 ?>
 <html>
 <head>
-    <link rel="stylesheet" href="/webix/codebase/skins/clouds.css" type="text/css">
-    <!--<link rel="stylesheet" href="/webix/codebase/webix.css" type="text/css">-->
+    <link rel="stylesheet" href="/webix/codebase/skins/webix.css" type="text/css">
     <link rel="stylesheet" href="../../css/font-awesome.css" type="text/css">
-    <link rel="stylesheet" href="../../css/main.css" type="text/css">
     <script src="/webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="/webix/codebase/skins/skin.js" type="text/javascript"></script>
     <!--<script src="../../supportjs/dscode.js" type="text/javascript"></script>-->
-    <link rel="stylesheet" href="../../css/main.css" type="text/css">
+   <link rel="stylesheet" href="../../css/main.css" type="text/css">
 </head>
 <body class="des_DesktopBackground">
 <div class="des_DesktopInfo">

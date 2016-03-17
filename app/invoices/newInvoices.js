@@ -175,9 +175,9 @@ webix.ui({
                         drag: true,
                         resizeColumn: true,
                         resizeRow: true,
-                        math: true,
+                        //math: true,
                         editable:true,
-                        editor:"text",
+                        //editor:"text",
                         editaction:"dblclick",
                         //autowidth:true,
 

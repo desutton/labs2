@@ -46,8 +46,7 @@
 	margin-left: 30px;
 	background: url("resources/Arrow.png")no-repeat #dfdfdf 200px 2px;	
 }
-des_select {
-    border:0;
+.des_select {
     background:transparent;
     height:24px;
     border:1px solid #d8d8d8;
@@ -96,13 +95,13 @@ des_select {
 .des_menuLink {
 	color: #808080;
 	text-decoration: none;
-	a:active {color: gray};
-	a:visited{color: gray};
-	
+	/*a:active {color: gray;}
+	a:visited {color: gray;}*/
 }
+
 .des_mainBodyLower {
 	background-color: silver;
-	text: white;
+	color: white;
 	
 }
 .des_LogonBackground {
@@ -117,12 +116,10 @@ des_select {
 	display: inline-block;
 	float: right;
 }
-{
+
 .des_webix_ss_header
 {height:75%;
 	color: #777777;
-	padding:5px;
-	padding-left:5px 2px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;
+	padding-left:2px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;
 	box-sizing:border-box}
 
-}
