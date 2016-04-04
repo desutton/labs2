@@ -5,3 +5,15 @@ tableName=methodProperties
 &selectData=3f561f5e-e3cf-4c51-9dd6-9d51045a214b
 &dataName=data
 &select=1
+
+
+http://localhost/labs2/php/api_methods/SELECTz.php?
+tableName=invoice
+&columnNames=invoice_UUID,invoice_invoiceNumber,invoice_totalDue,invoice_paid,customers.cust_company%20AS%20value,customers.cust_UUID%20AS%20id
+&joinTable=customers
+&joinColumn=invoice_2custUUID
+&joinValue=customers.cust_id
+&sortby=customers.cust_company
+&sort=ASC
+&dataName=data
+&select=7",

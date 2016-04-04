@@ -1,7 +1,7 @@
 <html>
 	<header>
 		<title>
-		LABS v.01Hi
+            LABS v.01
 		</title>
 		<link rel="stylesheet" href="http://localhost/webix/codebase/skins/clouds.css" type="text/css">
 		<!--<link rel="stylesheet" href="/webix/codebase/webix.css" type="text/css">-->

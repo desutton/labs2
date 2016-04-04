@@ -1,0 +1,22 @@
+[
+  {
+    id: "887A4F0B-2F94-4647-8329-E42FE495403B",
+    value: "Bacon East Pharmacy",
+    parent_id: 0
+  },
+  {
+    id: "887A4F0B-2F94-4647-8329-E42FE495403C",
+    value: "O",
+    parent_id: "887A4F0B-2F94-4647-8329-E42FE495403B"
+  },
+  {
+    id: "887A4F0B-2F94-4647-8329-E42FE495403D",
+    value: "2015-09-16",
+    parent_id: "887A4F0B-2F94-4647-8329-E42FE495403C"
+  },
+  {
+    id: "887A4F0B-2F94-4647-8329-E42FE495403A",
+    value: "Bp 20150916",
+    parent_id: "887A4F0B-2F94-4647-8329-E42FE495403D"
+  },
+]

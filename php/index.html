@@ -1,3 +1,7 @@
+<!--
+  ~ <dsCode> Inc. (c) 2016. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+  -->
+
 <html>
 <head>
 <title>Developer Toolkit</title>
@@ -59,6 +63,14 @@
 <div class="labeler"><a href="intercon/whatismymysql.php"style="color: rgb(226,226,226)">What's the mySQL version</a></div><br />
 <div class="labeler"><a href="echouuid.php" style="color: rgb(226,226,226)">Create a UUID: </a></div>
 <p></p>
+<div class="labeler"><a
+        href="http://localhost/labs2/php/api_methods/SELECTz.php?tableName=prices&columnNames=prices_id,prices_UUID,prices_testDescription,prices_unitPrice&dataName=data&select=5"
+        style="color: rgb(226,226,226)">Prices</a></div>
+<br/>
+<div class="labeler"><a
+        href="http://localhost/labs2/php/api_methods/SELECTz.php?tableName=invoice&columnNames=invoice_UUID,invoice_invoiceNumber,invoice_totalDue,invoice_paid,customers.cust_company%20AS%20value,customers.cust_UUID%20AS%20id&joinTable=customers&joinColumn=invoice_2custUUID&joinValue=customers.cust_id&sortby=customers.cust_company&sort=ASC&dataName=data&select=7"
+        style="color: rgb(226,226,226)">Invoiceing</a></div>
+<br/>
 <div class="logoWrapper"><span class="logo">&lt;ds-code&gt; &copy;2014</span></div>
 </body>
 </html>

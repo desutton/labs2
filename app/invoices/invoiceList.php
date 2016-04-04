@@ -4,8 +4,18 @@
  */
 
 include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php'; ?>
-List Invoice Page
-<script src="invoicesList.js" type="text/javascript"></script>
+    List Invoice Page!
+    <script src="invoiceList.js" type="text/javascript"></script>
 </body>
 </html>
 
+<?php
+require_once("../config.php");
+$res = mysql_connect($mysql_server, $mysql_user, $mysql_pass);
+mysql_select_db($mysql_db);
+
+require("../../codebase/tree_connector.php");
+$tree = new TreeConnector($res);
+//
+$tree->render_table("tasks", "taskId", "taskName", "", "parentId");
+?>

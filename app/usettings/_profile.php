@@ -1,7 +1,11 @@
 <?php
-			require_once('__php__.php');
-			
-			$sql_query = "SELECT users_UUID, users_firstname, users_lastname, users_name, users_employeeId, users_pass, users_2group, users_2accessLevel FROM users WHERE users_name = '".$theUserName."'";
+/**
+ * <dsCode> Inc. (c) 2016. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
+require_once('__php__.php');
+
+$sql_query = "SELECT users_UUID, users_firstname, users_lastname, users_name, users_employeeId, users_pass, users_2group, users_2accessLevel, users_displayName FROM users WHERE users_name = '" . $theUserName . "'";
 
 			// PDO prepare statement for the database
 			$stmt = $conn->prepare($sql_query);

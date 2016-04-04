@@ -9,6 +9,7 @@
  * Date: 3/30/16
  * Time: 12:58 PM
  */
+// Code from http://kvz.io/blog/2007/10/03/convert-anything-to-tree-structures-in-php/
 function explodeTree($array, $delimiter = '_', $baseval = false)
 {
     if(!is_array($array)) return false;

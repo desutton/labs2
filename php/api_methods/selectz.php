@@ -64,7 +64,16 @@ switch ($pickSQL) {
 		$x = 1;
 		break;
 	case 7: //Used to build the DataTree
-		$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName." JOIN ".$theJoinTable." ON ".$theJoinColumn." = ".$theJoinColumnValue." ORDER BY ".$theOrderColumn." ".$theOrderSort." LIMIT ".$rowLimits;
+        $theColumnSelection = "customers.cust_company,invoice.invoice_paid,invoice.invoice_invoiceDate,invoice.invoice_invoiceNumber,invoice.invoice_UUID";
+        $theTableName = "invoice";
+        $theJoinTable = "customers";
+        $theJoinColumn = "invoice.invoice_2custUUID";
+        $theJoinColumnValue = "customers.cust_id";
+        $theJoinColumnValue1 = "customers.cust_company";
+        $theJoinColumnValue2 = "invoice.invoice_paid";
+        $theJoinColumnValue3 = "invoice.invoice_invoiceDate";
+        //$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName." JOIN ".$theJoinTable." ON ".$theJoinColumn." = ".$theJoinColumnValue." ORDER BY ".$theOrderColumn." ".$theOrderSort." LIMIT ".$rowLimits;
+        $sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " JOIN " . $theJoinTable . " ON " . $theJoinColumn . " = " . $theJoinColumnValue . " ORDER BY " . $theJoinColumnValue1 . " ASC, " . $theJoinColumnValue2 . " ASC, " . $theJoinColumnValue3 . " ASC ";
 		$x = 1;
 		break;
 
@@ -118,5 +127,9 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // perform the JSON encode in the EXTJS format
 $JSON_RESULTS = json_encode($results);
-echo($JSON_RESULTS); //Send back to JS the results from the db and server 
+echo($JSON_RESULTS); //Send back to JS the results from the db and server
+
+// kill the connection to the database
+//$conn = null;
+
 ?>                
