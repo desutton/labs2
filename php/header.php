@@ -1,4 +1,7 @@
 <?php
+/**
+ * <dsCode> Inc. (c) 2016. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
 
 /**************************************************************
  *David Sutton
@@ -26,7 +29,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/appVersion.php';
     <link rel="stylesheet" href="/webix/codebase/skins/webix.css" type="text/css">
     <link rel="stylesheet" href="../../css/font-awesome.css" type="text/css">
     <script src="/webix/codebase/webix.js" type="text/javascript"></script>
-    <script src="/webix/codebase/skins/skin.js" type="text/javascript"></script>
+    <!--<script src="/webix/codebase/skins/skin.js" type="text/javascript"></script>
     <!--<script src="../../supportjs/dscode.js" type="text/javascript"></script>-->
    <link rel="stylesheet" href="../../css/main.css" type="text/css">
 </head>

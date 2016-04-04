@@ -1,4 +1,8 @@
 <?php
+/**
+ * <dsCode> Inc. (c) 2016. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
 /*******************************************************************************
 David Sutton
 Jun 21 2014
@@ -57,6 +61,10 @@ switch ($pickSQL) {
 		break;
 	case 6:
 		$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName." ORDER BY cust_company ASC";
+		$x = 1;
+		break;
+	case 7: //Used to build the DataTree
+		$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName." JOIN ".$theJoinTable." ON ".$theJoinColumn." = ".$theJoinColumnValue." ORDER BY ".$theOrderColumn." ".$theOrderSort." LIMIT ".$rowLimits;
 		$x = 1;
 		break;
 
