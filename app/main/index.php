@@ -1,4 +1,8 @@
 <?php
+/**
+ * <dsCode> Inc. (c) 2016. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
 		/*
 		 * This is the main background page that the javascript componants are built on top
 		 *
@@ -74,7 +78,7 @@
 								id: 2,
 								value: "Settings",
 								icon: "cogs",
-								iFrame: "../usettings/profile.php",
+								iFrame: "../usettings/index.php",
 								css: "des_menuLink"
 							},
 							{
