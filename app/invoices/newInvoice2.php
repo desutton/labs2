@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/php/header.php'; ?>
 <?php $invoiceUUID = $_GET['invoiceUUID']; ?>
 Create Invoice Page 2
 

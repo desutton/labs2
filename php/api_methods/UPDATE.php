@@ -1,4 +1,8 @@
 <?php
+/**
+ * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
 /*******************************************************************************
 David Sutton
 Jun 21 2014
@@ -34,13 +38,13 @@ if (!isset($_GET['startCol'])) {
 	//$theDataValues = ('{"success":true,"data":[{"ai_UUID":"123456-1224-1234-12345678","ai_name":"Aa Happy Compounder"}]}');
 	//$tempx = %7B%22success%22%3Atrue%2C%22data%22%3A%5B%7B%22ai_UUID%22%3A%22123456-1224-1234-12345678%22%2C%22ai_name%22%3A%22Aa%20Happy%20Compounder%22%7D%5D%7D;
 	/**/
+$theURIData = "users_UUID=10&users_firstname=David&users_lastname=Sutton&users_name=dsutton&users_employeeId=12&users_pass=init123&users_2group=1&users_2accessLevel=1&users_displayName=Dave%20Sutton";
 	// Local vars
 	$filename = 'log.txt';
 
 
 //Decode the JSON from the URL
 $decoded = json_decode($theDataValues);
-
 	
 // String for quering the database
 $sql = "select column_name from information_schema.columns where table_schema ='labs' AND table_name = '$theTableName'";

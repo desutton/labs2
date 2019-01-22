@@ -1,31 +1,13 @@
-<?php 
-	//$theUserName = $_GET['users_name'];
-	if(!isset($_COOKIE['cial'])) {
-    echo "Cookies are not enabled!";
-} else {
-    $theUserName = $_COOKIE['cial'];
-}
-	
-?>
-<html>
-	<header>
-		<title>
-		LABS v.01
-		</title>
-		<link rel="stylesheet" href="http://localhost/webix/codebase/skins/clouds.css" type="text/css">
-		<!--<link rel="stylesheet" href="/webix/codebase/webix.css" type="text/css">-->
-		<link rel="stylesheet" href="../../css/font-awesome.css" type="text/css">
-		<link rel="stylesheet" href="../../css/main.css" type="text/css">
-		<script src="http://localhost/webix/codebase/webix.js" type="text/javascript"></script> 
-		<!--<script src="../supportjs/dscode.js" type="text/javascript"></script>-->
-	</header>
-	<body>
-			
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php'; ?>
 
 		Hello <?php echo($theUserName); ?>
 		New Customer
 		<?php
-			require('../../php/uuidautogen.php'); 
+/**
+ * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
+require('../../php/uuidautogen.php');
 		?>
 		
 		<script>

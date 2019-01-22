@@ -4,11 +4,11 @@
  */
 
 		/*
-		 * This is the main background page that the javascript componants are built on top
+		 * This is the main background page that the javascript components are built on top
 		 *
 		 * */
 	    $theUserName = $_GET['users_name'];
-		include $_SERVER['DOCUMENT_ROOT'].'/labs2/appVersion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
 
 ?>
 <html>
@@ -17,11 +17,11 @@
 		<title>
 		<?php echo($theAppVersion); ?>
 		</title>
-		<link rel="stylesheet" href="/webix/codebase/skins/clouds.css" type="text/css">
-		<!--<link rel="stylesheet" href="/webix/codebase/webix.css" type="text/css">-->
-		<link rel="stylesheet" href="../../css/font-awesome.css" type="text/css">
-		<link rel="stylesheet" href="../../css/main.css" type="text/css">
-		<script src="/webix/codebase/webix.js" type="text/javascript"></script>
+        <!--<link rel="stylesheet" href="http://localhost/webix/codebase/skins/clouds.css" type="text/css">-->
+        <link rel="stylesheet" href="http://localhost/labs2/webix/codebase/webix.css" type="text/css">
+        <link rel="stylesheet" href="http://localhost/labs2/css/font-awesome.css" type="text/css">
+        <link rel="stylesheet" href="http://localhost/labs2/css/main.css" type="text/css">
+        <script src="http://localhost/labs2/webix/codebase/webix.js" type="text/javascript"></script>
 		<!--<script src="../supportjs/dscode.js" type="text/javascript"></script>-->
 	</header>
 	<body>
@@ -34,8 +34,8 @@
 			view:"window",
 			id:"my_win",
 			head:userId,
-			width: 1450,
-			height: 800,
+            width: 1450, <!-- Global size for the inside iFrame default for iMac = 1450 -->
+            height: 750, <!-- Global size for the inside iFrame default for iMac = 4096 -->
 			position:"center",
 			body: {
 				view: "layout",

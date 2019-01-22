@@ -1,3 +1,11 @@
+/*
+ * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
+.des_text {
+    font-size: 1em;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
 .des_TitleBar {
 	height: 30px;
 	border-top: solid #7684c5;
@@ -44,7 +52,9 @@
 	overflow: hidden;
 	width: 226px;
 	margin-left: 30px;
-	background: url("resources/Arrow.png")no-repeat #dfdfdf 200px 2px;	
+    background: url("/php/resources/Arrow.png") no-repeat #dfdfdf 200px 2px;
+    border-radius: 10px;
+    padding-left: 10px;
 }
 .des_select {
     background:transparent;
@@ -63,7 +73,8 @@
 	white-space: nowrap;
 	-webkit-animation: rightThenLeft 30s linear;
 	margin-right: 10000px;
-	margin-left: 24px; 
+    margin-left: 24px;
+    padding-top: 50px;
 }
 @-webkit-keyframes rightThenLeft {
     0%   {margin-right:100%;}
@@ -83,9 +94,9 @@
 .des_button {
   color: #7684c5;
   font-weight: bold;
-  font-size: 110%;
+    font-size: 80%;
   text-transform: uppercase;
-  margin-left: 24px;
+    margin-left: 25px;
 }
 .des_logoutLink {
 	color: #e2e2e2;
@@ -117,9 +128,34 @@
 	float: right;
 }
 
+.des_TextArea {
+    background-color: #8894A3;
+    margin-left: 24px;
+    color: #256187;
+}
+
+.des_ButtonLink {
+    display: block;
+    width: 115px;
+    height: 25px;
+    background: #4E9CAF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.des_select {
+    border-radius: 25%;
+}
 .des_webix_ss_header
 {height:75%;
 	color: #777777;
-	padding-left:2px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;
+    padding: 5px;
+    padding-left: 5px 2px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
 	box-sizing:border-box}
 
+}

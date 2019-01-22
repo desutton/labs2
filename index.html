@@ -1,13 +1,17 @@
+<!--
+  ~ <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+  -->
+
 <html>
 <header>
     <title>
         LABS v.01
     </title>
-    <link rel="stylesheet" href="/webix/codebase/skins/clouds.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost/labs2/webix/codebase/skins/clouds.css" type="text/css">
     <!--<link rel="stylesheet" href="/webix/codebase/webix.css" type="text/css">-->
     <!--<link rel="stylesheet" href="css/font-awesome.css" type="text/css">-->
     <link rel="stylesheet" href="css/main.css" type="text/css">
-    <script src="/webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="http://localhost/labs2/webix/codebase/webix.js" type="text/javascript"></script>
 </header>
 <body class="des_LogonBackground">
 <?php $theUserName = NULL; ?>
@@ -44,7 +48,8 @@
         var userId = $$("fld_userId").getValue();
         var pswd = $$("fld_pswd").getValue();
         //console.log(userId,pswd);
-        webix.ajax().get("./php/login.php", {users_name: userId, users_pass: pswd}, function (text) {
+        //webix.ajax().get("/labs2/php/login.php", {users_name: userId, users_pass: pswd}, function (text) {
+        webix.ajax().get("/labs2/php/login.php", {users_name: userId, users_pass: pswd}, function (text) {
             var myText = (text);
             if (myText == "Success") {
                 webix.message({text: myText});
@@ -61,7 +66,7 @@
         //window.close(); //code no longer works
     }
     function newDoc(userId) {
-        window.location.assign("./app/main/index.php?users_name=" + userId)
+        window.location.assign("/labs2/app/main/index.php?users_name=" + userId)
     }
 
 </script>

@@ -4,11 +4,16 @@
 
 <html>
 <head>
-<title>Developer Toolkit</title>
-<link rel="stylesheet" type="text/css" href="http://localhost/labs2/php/main.css">
+    <title>Developer Toolkits</title>
+    <link rel="stylesheet" type="text/css" href="http://localhost/labs2/css/main.css">
+    <?php
+    include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/appVersion.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/mode.php';
+    ?>
 </head>
-<body>
-<div class="TitleBar">Developer Toolkit <?php print_r($dtversion);?></div><p>
+<body class="des_text">
+<div class="TitleBar">Developer Toolkit (<?php print_r($theAppVersion); ?>) <i><?php print_r($sysmode); ?></i></div>
+<p>
 <p></p>
 
 <span class="divideBar">Database Reporting Tool</span><p>
@@ -71,6 +76,7 @@
         href="http://localhost/labs2/php/api_methods/SELECTz.php?tableName=invoice&columnNames=invoice_UUID,invoice_invoiceNumber,invoice_totalDue,invoice_paid,customers.cust_company%20AS%20value,customers.cust_UUID%20AS%20id&joinTable=customers&joinColumn=invoice_2custUUID&joinValue=customers.cust_id&sortby=customers.cust_company&sort=ASC&dataName=data&select=7"
         style="color: rgb(226,226,226)">Invoiceing</a></div>
 <br/>
+<div class="labeler"><a href="api_methods/index.php" style="color: rgb(226,226,226)">API Methods</a></div>
 <div class="logoWrapper"><span class="logo">&lt;ds-code&gt; &copy;2014</span></div>
 </body>
 </html>

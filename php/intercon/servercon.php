@@ -1,4 +1,8 @@
 <?php
+/**
+ * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
 /******************************************************************************
 David Sutton
 Jun 17 2014 - Jun 18 2014
@@ -44,13 +48,14 @@ $filename = 'log.txt';
 
 /* ************************** New PDO Method ******************************* */
 $hostname = 'localhost';
-$username = 'fmuser';
+$username = 'dbuser';
+//$username = 'fmuser';
 //$password = 'init123';
 $password = 'dbman';
 $DB_NAME =	"labs";
 
 try{
-	$conn = new PDO('mysql:host=localhost;dbname=labs', $username, $password); 
+    $conn = new PDO('mysql:host=localhost;dbname=labs;charset=utf8mb4', $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$errorcodesMSG= "Database Connection ".$errorcodes[200]." ".date('Y-m-d H:i:s')."\r";
 	} catch(PDOException $errorMessage) {

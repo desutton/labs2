@@ -155,8 +155,9 @@ function update_row() {
     var user2Group = $$("users_2group").getValue();
     var user2AccessLevel = $$("users_2accessLevel").getValue();
     var userDisplayName = $$("users_displayName").getValue();
-    var theResult = "users_UUID=" + userId + "&users_firstname=" + userFirstName + "&users_lastname=" + userLastName + "&users_name=" + userName + "&users_employeeId=" + userEmployeeId + "&users_pass=" + userPass + "&users_2group=" + user2Group + "&users_2accessLevel=" + user2AccessLevel + "&users_displayName=" + userDisplayName;
+    var theFormData = "users_UUID=" + userId + "&users_firstname=" + userFirstName + "&users_lastname=" + userLastName + "&users_name=" + userName + "&users_employeeId=" + userEmployeeId + "&users_pass=" + userPass + "&users_2group=" + user2Group + "&users_2accessLevel=" + user2AccessLevel + "&users_displayName=" + userDisplayName;
+    var theEncodedURI = encodeURI(theFormData);
 
-    console.log(theResult);
+    console.log(theEncodedURI);
     // webix.ajax().post("somefile.php",{JSON stuff goes here});
 }

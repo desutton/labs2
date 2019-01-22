@@ -7,4 +7,8 @@
 $sysmode = "dev";
 // $sysmode = "qa";
 // $sysmode = "prod";
+
+/**
+ * Just comment in or out the system mode
+ */
 ?>

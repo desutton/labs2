@@ -1,5 +1,9 @@
 <?php
-/*			
+/**
+ * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
+/*
 			Read Brian Vanderberg writes in:
 
 I have found that in some environments DOCUMENT_ROOT does not seem to be properly set. I have devised a way that is independent of the server, and whether the hosting provider provides the ability to set an include or auto-prepend path as well.
@@ -11,26 +15,32 @@ I also do something similar for a simple navigation bar, where each directory ha
 One advantage of this is that a part of the site can be sectioned in a sub-directory, and still get the root of that part, even if it isn't the actual document root. A disadvantage is that it may slow down while doing all the includes on a site with heavy traffic.
 */
 
-			//Set the root path to the public_html or www folder
-			$SITE_ROOT = ( $_SERVER['DOCUMENT_ROOT']);
-			
-			//Set the paths to the these resources need by almost every php file.
-			$UUIDPath = $SITE_ROOT."/php/uuidautogen.php";
-			$ServerCon = $SITE_ROOT."/php/intercon/servercon.php";
-			$ErrorCodes = $SITE_ROOT.'/php/errorcodes.php';
-						
-			//Not sure if these should be here.
-			require_once($UUIDPath);
-			require_once($ServerCon);
-			require_once($ErrorCodes);
-			
-			//$theUserName = $_GET['users_name'];
-			if(!isset($_COOKIE['cial'])) {
-				echo "Cookies are not enabled!";
-				} else {
-				$theCookieData = json_decode($_COOKIE['cial']);
-				$theUserName = $theCookieData -> UserName;
-				$theDisplayName = $theCookieData -> UserDisplayName;
-			}
+//Set the root path to the public_html or www folder
+$SITE_ROOT = ($_SERVER['DOCUMENT_ROOT']);
 
+//Set the paths to the these resources need by almost every php file.
+$UUIDPath = $SITE_ROOT . "/php/uuidautogen.php";
+$ServerCon = $SITE_ROOT . "/php/intercon/servercon.php";
+$ErrorCodes = $SITE_ROOT . '/php/errorcodes.php';
+$APPVersion = $SITE_ROOT . '/labs2/php/resources/appVersion.php';
+$SYSMode = $SITE_ROOT . '/labs2/php/resources/mode.php';
+$PHP_HEADER = $SITE_ROOT . '/php/header.php';
+
+//Not sure if these should be here.
+require_once($UUIDPath);
+require_once($ServerCon);
+require_once($ErrorCodes);
+include($APPVersion);
+include($SYSMode);
+include($PHP_HEADER);
+
+
+//$theUserName = $_GET['users_name'];
+if (!isset($_COOKIE['cial'])) {
+    echo "Cookies are not enabled!";
+} else {
+    $theCookieData = json_decode($_COOKIE['cial']);
+    $theUserName = $theCookieData->UserName;
+    $theDisplayName = $theCookieData->UserDisplayName;
+}
 ?>	
