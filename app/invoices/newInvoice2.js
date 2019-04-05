@@ -1,3 +1,7 @@
+/*
+ * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
 var invoiceUUID = "54da6e0b-2004-4be3-b6e1-ff5e551bf15f";  //(<?php Print($invoiceUUID); ?>");
 
 
@@ -9,7 +13,7 @@ webix.ui({
     view: "window",
     id: "NewInvoice",
     //height:"3000",
-    width: "100",
+    width: "1000",
     move: true,
 
     head: "Create New Invoice",
@@ -19,8 +23,8 @@ webix.ui({
                 view: "form",
                 id: "newInvoiceForm2",
                 datatype: "json",
-                width: "50",
-                height: "400",
+                width: "800",
+                height: "1000",
                 type: "space",
                 elements: [{
                     rows: [

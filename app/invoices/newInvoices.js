@@ -22,7 +22,7 @@ webix.ui({
     id: "NewInvoice",
     //height:"3000",
     width: 450,
-    height: 750,
+    height: 1024,
     move: true,
 
     head: "Create New Invoice",
@@ -234,6 +234,10 @@ webix.ui({
                 //url: "http://localhost/php/api_methods/SELECT.php?tableName=prices&columnNames=prices_id%20AS%20id,prices_testDescription%20AS%20value&dataName=data&select=5"
                 url: "/labs2/php/api_methods/SELECTz.php?tableName=prices&columnNames=prices_id,prices_UUID,prices_testDescription,prices_unitPrice&dataName=data&select=5"
 
+            },
+            {
+                view: "text",
+                value: "To add to the invoice please drag from the list above to the left"
             }
         ]
     }

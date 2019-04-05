@@ -1,4 +1,8 @@
 <?php
+/**
+ * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
 /*******************************************************************************
 David Sutton
 Jun 21 2014
@@ -26,6 +30,11 @@ $theTableName = $_GET['tableName']; // REST URL needs to send the column name.
 $theDataValues = $_GET['JSONdata']; //The JSON data coming from EXTJS
 $row = $_GET['startCol']; //The starting column number.  Used for ranged updates for large data updates.
 $count = $_GET['stopCol']; // The ending column number. Used for ranged updates for large data updates.
+
+// Testing vars
+//$theTableName = "requisitions";
+//$theDataValues = "{%22success%22:true,%22data%22:[{%22req_UUID%22:%2282026edb-e2bf-42d2-998d-044253eb168a%22,%20%22req_reqName%22:%22David%20Sutton%22,%20%22req_dept%22:%22IT%22,%20%22req_dateSubmit%22:%2201/29/2019%22,%20%22req_dateNeed%22:%2201/31/2019%22,%20%22req_ordered%22:%22ABC1234%22,%20%22req_vendor%22:%22Acme%20Inc%22,%20%22req_status%22:%221%22}]}";
+
 
 if (!isset($_GET['startCol'])) {
 	$row = 0;

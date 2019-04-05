@@ -29,18 +29,24 @@ $theJoinColumn = $_GET['joinColumn']; //The column name that you want to do a jo
 $theJoinColumnValue = $_GET['joinValue']; //The value you want to do a join quary on
 $theOrderColumn = $_GET['sortby']; //The column name you want to sort by
 $theOrderSort = $_GET['sort']; //How do you want to sort ASC or DESC?
+$theOperator = $_GET['operator'];
 
 $pickSQL = $_GET['select']; //The value for which SQL SELECT statement to use "1" = LIMIT, "2" = WHERE, no value is regular expression
 $x = NULL;
 $rowLimits = 50;
 //$rowLimits = $_GET['limit'];
 
+if ($theOperator == NULL) {
+	$theOperator = "=";
+}
+
+
 $theTreeColumnName = $_GET['treeColumn'];
 
 // String for quering the database
 switch ($pickSQL) {
 	case 1:
-		$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName." WHERE ".$theSelectColumn." = '".$theSelectColumnValue."'";
+		$sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " WHERE " . $theSelectColumn . $theOperator . "'" . $theSelectColumnValue . "'";
 		$x = 1;
 		break;
 	case 2:
