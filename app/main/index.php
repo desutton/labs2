@@ -74,14 +74,19 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
                                             css: "des_menuLink"
                                         }
                                     ]
-                                },
+                                }, */
                                 {
                                     id: 2,
                                     value: "Settings",
-                                    icon: "cogs",
-                                    iFrame: "../usettings/index.php",
-                                    css: "des_menuLink"
-                                },
+                                    icon: "fas fa-cogs",
+                                    iFrame: "../users/index.php",
+                                    css: "des_menuLink",
+                                    submenu: [
+                                        {value: "New User", icon: "fas fa-user-plus", iFrame: "../users/newUsers.php"},
+                                        {value: "User List", icon: "fas fa-users", iFrame: "../users/usersList.php"}
+                                    ]
+                                },/*
+
                                 {
                                     id: 3, value: "Customers", icon: "users",
                                     submenu: [

@@ -9,7 +9,16 @@
  * Date: 8/29/16
  * Time: 2:14 PM
  */
-include '__php__.php';
-include($PHP_HEADERS);
+include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php';
+//include "usersController.php";
+?>
 
-include "usersController.php";
+Users Page
+<body>
+<p>
+    <b><a href="newUsers.php">New Users Page:</a></b><i> Create Users</i><br \>
+    <b><a href="usersList.php">User List Page:</a></b><i> List/Delete/Edit System Users</i>
+</p>
+</body>
+</html>
+
