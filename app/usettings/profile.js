@@ -7,7 +7,7 @@ webix.ui({
     view: "window",
     id: "userProfileSettings",
     //height:"300",
-    width: "150",
+    width: "500",
     move: false,
 
     head: {
@@ -32,7 +32,7 @@ webix.ui({
                 label: "UUID",
                 labelPosition: "top",
                 labelWidth: "100",
-                width: "420"
+                width: "220"
             },
             {
                 view: "text",
@@ -108,7 +108,7 @@ webix.ui({
                 width: "220"
             }
         ],
-        url: "_profile.php"
+        //url: "_profile.php"
     }
 
 

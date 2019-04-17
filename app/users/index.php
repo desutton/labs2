@@ -16,8 +16,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php';
 Users Page
 <body>
 <p>
-    <b><a href="newUsers.php">New Users Page:</a></b><i> Create Users</i><br \>
-    <b><a href="usersList.php">User List Page:</a></b><i> List/Delete/Edit System Users</i>
+    <!-- <b><a href="newUsers.php">New Users Page:</a></b><i> Create Users</i><br \> -->
+    <b><a href="usersList.php">User List Page:</a></b><i> List/Delete/Edit System Users</i><br/>
+    <b><a href="usersAccount.php">User Edit Page:</a></b><i> Edit Users Profile</i>
 </p>
 </body>
 </html>

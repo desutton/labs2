@@ -136,6 +136,6 @@ $JSON_RESULTS = json_encode($results);
 echo($JSON_RESULTS); //Send back to JS the results from the db and server
 
 // kill the connection to the database
-//$conn = null;
+$conn = null;
 
 ?>                

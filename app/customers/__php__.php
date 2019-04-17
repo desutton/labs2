@@ -1,5 +1,9 @@
 <?php
-/*			
+/**
+ * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ */
+
+/*
 			Read Brian Vanderberg writes in:
 
 I have found that in some environments DOCUMENT_ROOT does not seem to be properly set. I have devised a way that is independent of the server, and whether the hosting provider provides the ability to set an include or auto-prepend path as well.

@@ -81,9 +81,19 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
                                     icon: "fas fa-cogs",
                                     iFrame: "../users/index.php",
                                     css: "des_menuLink",
+                                    subMenuPos: "right",
                                     submenu: [
-                                        {value: "New User", icon: "fas fa-user-plus", iFrame: "../users/newUsers.php"},
-                                        {value: "User List", icon: "fas fa-users", iFrame: "../users/usersList.php"}
+                                        {
+                                            value: "User Prefs",
+                                            icon: "fas fa-user-plus",
+                                            iFrame: "../users/usersAccount.php"
+                                        },
+                                        {
+                                            value: "User List",
+                                            icon: "fas fa-users",
+                                            id: "userList",
+                                            iFrame: "../users/usersList.php"
+                                        }
                                     ]
                                 },/*
 
@@ -158,8 +168,23 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
 					}
 				]
 			}
-		}).show();	
-		</script>
+        }).show();
+
+            webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_2group&selectColumn=users_name&selectData=" + userId + "&dataName=data&select=1", function (text, data) {
+                var userAuthor = text;
+                userAuthor = userAuthor.replace('[', "");
+                userAuthor = userAuthor.replace(']', "");
+                userAuthor = JSON.parse(userAuthor);
+                console.log(userAuthor.users_2group);
+                if (userAuthor.users_2group === "0") {
+                    $$("mainMenu").showItem("userList");
+                    // console.log("hi");
+                } else {
+                    $$("mainMenu").hideItem("userList");
+                    // console.log("bye");
+                }
+            });
+        </script>
 		
 		<div class="des_logoutLink"><a href="../../php/logout.php">Logout</a></div>
 		<div class="des_FooterBar"> Property of CIAL </div>
