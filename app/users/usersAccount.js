@@ -15,8 +15,12 @@ var tabbar = {
     id: "userProfileSettingsToolbar",
     elements: [
         //{view: "button", value: "Add", width: 70, click: "add_row"},
-        {view: "button", value: "Delete", width: 70, click: "delete_row"},
-        {view: "button", value: "Modify", width: 70, click: "update_row"},
+        {
+            view: "button", value: "Close", width: 70, click: function () {
+                $$('userMain').close();
+            }
+        },
+        {view: "button", value: "Save", width: 70, click: "update_row"},
         {view: "button", value: "Reset", width: 85, click: "refresh_row"}
     ]
 };
