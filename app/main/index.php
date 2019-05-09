@@ -103,14 +103,14 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
                                         {value: "Add Customer", icon: "user-plus", iFrame: "../customers/newCustomer.php"},
                                         {value: "Customer List", icon: "list-alt", iFrame: "../customers/customerList.php"}
                                     ]
-                                },
+                                }, */
                                 {
                                     id: 4, value: "Invoices", icon: "money",
                                     submenu: [
                                         {value: "New Invoice", icon: "plus-circle", iFrame: "../invoices/newInvoices.php"},
                                         {value: "Invoice List", icon: "bars", iFrame: "../invoices/invoiceList.php"}
                                     ]
-                                },
+                                }, /*
                                 {
                                     id: 5, value: "Reports", icon: "file",
                                     submenu: [

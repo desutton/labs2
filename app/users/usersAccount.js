@@ -117,17 +117,17 @@ webix.ui({
 
 }).show();
 
-$$("userDetail").load(function () {
-    webix.message("Data loaded");
-    window.setTimeout(refresh_row, 100);
-});
+/////////////////////////// Loads window with users data ///////////////////////////
+$$("userDetail").load("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_firstname,users_lastname,users_name,users_displayName,users_pass,users_employeeId,users_UUID&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1");
 
+/*////////////////////////// Loads window with users data ///////////////////////////
 function delete_row() {
     console.log("close window");
     webix.message({text: "Deleted"}); //Optional UI to display that something happened
     window.setTimeout(refresh_row, 1000);
 }
-
+*/
+/////////////////////////// Updates database with users data ///////////////////////////
 function update_row() {
     var firstname = $$("users_firstname").getValue();
     var lastname = $$("users_lastname").getValue();
@@ -143,6 +143,7 @@ function update_row() {
     window.setTimeout(refresh_row, 1000);
 }
 
+/////////////////////////// Reloads or refreshes window with users data ///////////////////////////
 function refresh_row() {
     //console.log("hello");
     webix.message({text: "Reloading..."});
@@ -161,6 +162,7 @@ function refresh_row() {
     });
 }
 
+/*////////////////////////// Adds the database with users data ///////////////////////////
 function add_row() {
     var firstname = $$("users_firstname").getValue();
     var lastname = $$("users_lastname").getValue();
@@ -174,3 +176,4 @@ function add_row() {
     webix.message({text: "Saved"}); //Optional UI to display that something happened
     window.setTimeout(refresh_row, 1000);
 }
+*/
