@@ -99,6 +99,10 @@ FROM method INNER JOIN activeIngredient ON method.method_2activeIngredient = act
 		$x = 500;
 }
 
+if ($sysmode ==!"prod"){
+	file_put_contents($filename, $sql_query."\r", FILE_APPEND | LOCK_EX);
+}
+
 // PDO prepare statement for the database
 $stmt = $conn->prepare($sql_query);
 

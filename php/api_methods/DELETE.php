@@ -25,6 +25,9 @@ $theRowId = $_GET['id'];
 
 // String for quering the database
 $sql_query = "DELETE FROM ".$theTableName." WHERE ".$theColumnSelection." = '".$theRowId."'";
+if ($sysmode ==!"prod"){
+    file_put_contents($filename, $sql_query."\r", FILE_APPEND | LOCK_EX);
+}
 echo($sql_query);
 // PDO prepare statement for the database
 $stmt = $conn->prepare($sql_query);

@@ -96,7 +96,10 @@ $resultColumnNames = implode(", ", $resultColumnNamesList);
 	
 // String for quering the database
 $sql_query = ("INSERT INTO ".$theTableName." ( ".$resultColumnNames." ) VALUES (".$sqlDataFormat.")");
-file_put_contents($filename, $sql_query."\r", FILE_APPEND | LOCK_EX);
+if ($sysmode ==!"prod"){
+	file_put_contents($filename, $sql_query."\r", FILE_APPEND | LOCK_EX);
+}
+
 
 // PDO prepare statement for the database
 $stmt = $conn->prepare($sql_query);

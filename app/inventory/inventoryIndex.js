@@ -376,7 +376,16 @@ var activePanelView = {
                                             view: "label",
                                             value: "req_authorizationDate",
                                             id: "req_authorizationDateA"
-                                        }]
+                                        },
+                                            {
+                                                view: "button",
+                                                id: "reqManagerDelete",
+                                                width: "50",
+                                                type: "icon",
+                                                icon: "far fa-trash",
+                                                tooltip: "Manager Delete",
+                                                hidden: false
+                                            }]
                                     }
                                 ]
                             }
@@ -849,7 +858,8 @@ var createPanelView = {
         },
         {template: "", height: 38},
         {view: "text", width: "100", id: "invoice_UUID", hidden: true, value: reqUUID},
-        {view: "button", label: "Save", align: 'left', width: "75", click: "saveTheInvoice"},
+        {view: "button", id: "req_save", label: "Save", align: 'left', width: "75", click: "saveTheInvoice"},
+        {view: "button", id: "req_update", label: "Update", align: 'left', width: "75", click: "updateTheInvoice", hidden: true},
         {},
         {
             view: "datatable", id: "lineItemList", autoheight: true, select: true, scrollable: true, columns:
@@ -861,7 +871,9 @@ var createPanelView = {
                     {id: "reqR_costUnit", header: "Unit Cost", sort: "string", adjust: true},
                     {id: "reqR_cost", header: "Cost", sort: "string", adjust: true},
                     {id: "reqR_orderType", header: "Order Type", sort: "string", adjust: true},
-                    {id: "reqR_reason", header: "Reason", sort: "string", adjust: true}
+                    {id: "reqR_reason", header: "Reason", sort: "string", adjust: true} ,
+                    {id: "reqR_UUID", header:"", hidden:true}
+                    //{id: "reqR_deleteButton", header:"Delete", checkValue:'on', uncheckValue:'off', template:"{common.checkbox()}", width:65}
                 ],
             //data: '[{"reqR_UUID":"1234567890","reqR_reqUUID":"068159d5-6b67-4e2a-ac74-31a0f284666f","reqR_itemName":"This is a Test","reqR_partNumber":"938ryqh9wuodqnoq 9qeh","reqR_unitQty":"2","reqR_qty":"1","reqR_costUnit":"999.99","reqR_cost":"9999.99","reqR_orderType":"","reqR_reason":"Because I really want it","reqR_eta":null,"reqR_status":"1"}]'
             url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + reqUUID + "&dataName=data&select=1"
@@ -909,7 +921,8 @@ var createPanelView = {
                 }
             ],
             id: "formItemList"
-        }
+        },
+        { view:"button", value:"Remove selected", click:removeRowData}
     ]
 
 };
@@ -962,7 +975,32 @@ function saveTheInvoice() {
     //var theSubmitDataRAW = '{"success":true,"data":[{"req_UUID":"' + reqUUID + '", "req_reqID":"' + reqreqID + '"}]}';
 
     webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=requisitions&JSONdata=" + theSubmitDataRAW);
-//   console.log("JSON DATA being sent to the server " + theSubmitDataRAW); //just a debug code
+    console.log("JSON DATA being sent to the server " + theSubmitDataRAW); //just a debug code
+    $$("req_update").show();
+    $$("req_save").hide();
+    webix.message({text: "Saved"}); //Optional UI to display that something happened
+}
+////// Function captures the form data and creates a URL to be sent to the insert.php api. ////////////////////////////////////////////////////////////////
+function updateTheInvoice() {
+    var reqUUID = $$("invoice_UUID").getValue();
+    var reqreqID = $$("req_reqID").getValue();
+    var reqName = $$("req_name").getText();
+    var reqDept = $$("req_dept").getText();
+    var reqDateSubmit = $$("req_subm").getValue();       //this work only for the muultiselect element. I did not find it to work with the multicombo
+    var reqNeeded = $$("req_need").getValue();
+    var reqOrder = "1970-01-01 00:00";
+    var reqVendor = $$("req_vend").getValue();  //getText gets the actual date formatted field contents
+    var reqOrderNum = $$("req_ordr").getValue();
+
+    //var creationDat = webix.Date.dateToStr("%Y-%m-%d");     //these next two line create a date format to
+    //var creationDate = creationDat(new Date());             //save in the db as to when the record was created.
+
+
+////////////////// Form Submit to DB //////////////////
+    var theSubmitDataRAW = '{"req_reqID":"' + reqreqID + '", "req_reqName":"' + reqName + '", "req_dept":"' + reqDept + '", "req_dateSubmit":"' + reqDateSubmit + '", "req_dateNeed":"' + reqNeeded + '", "req_ordered":"' + reqOrder + '", "req_vendor":"' + reqVendor + '", "req_orderNum":"' + reqOrderNum +'"}';
+
+    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataRAW + "&theWhereColumn=req_UUID&theUUID=" + reqUUID);
+    console.log("JSON DATA being sent to the server for update " + theSubmitDataRAW); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
 }
 
@@ -1143,7 +1181,7 @@ $$("reqEditSave").attachEvent("onItemClick", function () {
 
 //    var updateReqForm = '{"req_reqName":"' + reqName +'","req_dept":"' + reqDept +'","req_dateSubmit":"' + reqSubmitDate +'","req_dateNeed":"' + reqDateNeed +'","req_vendor":"' + reqVendor  +'","req_orderNum":"' + reqOrderNum +'","req_ordered":"' + reqOrderedDate +'"}';
     webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + updateReqForm + "&theWhereColumn=req_UUID&theUUID=" + reqUUIDL);
-    //console.log("JSON DATA being sent to the server " + updateReqForm +" and this data to the db under this id "+ reqUUID); //just a debug code
+    console.log("JSON DATA being sent to the server " + updateReqForm +" and this data to the db under this id "+ reqUUID); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
     window.setTimeout(refreshPanel, 1000);
     window.setTimeout(editModeOff, 10);
@@ -1151,6 +1189,20 @@ $$("reqEditSave").attachEvent("onItemClick", function () {
     webix.message({text: "Reloading..."});
 });
 
+/////////////////// Checkbox script for Manager Approval //////////////////
+$$("reqManagerDelete").attachEvent("onItemClick", function () {
+
+
+    //webix.message({text: $userId});
+    webix.message({text: theLineItemUUID});
+    //var theSubmitDataManager = '{"req_manager":"' + $userId + '","req_managerDate":"' + ymd + '","req_status":"2"}';
+    webix.ajax("/labs2/php/api_methods/DELETE.php?tableName=requisitions&columnNames=req_UUID&id=" + theLineItemUUID);
+    webix.ajax("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&columnNames=reqR_reqUUID&id=" + theLineItemUUID);
+    console.log("This data is being DELETED " + theLineItemUUID ); //just a debug code
+    webix.message({text: "Saved"}); //Optional UI to display that something happened
+    window.setTimeout(refreshPanel, 1000);
+    webix.message({text: "Reloading..."});
+});
 
 /////////////////// Checkbox script for Manager Approval //////////////////
 $$("reqManagerApproval").attachEvent("onItemClick", function () {
@@ -1346,4 +1398,18 @@ function editModeOff() {
     $$("req_orderedA1").hide();
 };
 
+
+/////////////////////////// Delete a row on the create datatable ///////////////////////////
+function removeRowData(){
+if(!$$("lineItemList").getSelectedId()){
+    webix.message("No item is selected!");
+    return;
+}
+var lineSelector= $$("lineItemList").getSelectedId();
+var lineSelectedText= $$("lineItemList").getText(lineSelector,"reqR_UUID");
+console.log("Here's what we deleted "+ lineSelectedText);
+webix.ajax().get("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&columnNames=reqR_UUID&id="  + lineSelectedText );
+webix.message("Data Deleted");
+$$("lineItemList").remove($$("lineItemList").getSelectedId());
+}
 //////////////////////////////////////////////////////////// END OF Page Controller Logic  ////////////////////////////////////////////////////////////
