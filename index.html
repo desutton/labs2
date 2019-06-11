@@ -8,15 +8,16 @@
         LABS v.01
     </title>
     <!--<link rel="stylesheet" href="http://localhost/labs2/webix/codebase/skins/clouds.css" type="text/css">-->
-    <link rel="stylesheet" href="http://localhost/labs2/webix/codebase/skins/flat.min.css" type="text/css">
+    <link rel="stylesheet" href="webix/codebase/skins/flat.min.css" type="text/css">
     <!--<link rel="stylesheet" href="/webix/codebase/webix.css" type="text/css">-->
     <!--<link rel="stylesheet" href="css/font-awesome.css" type="text/css">-->
     <link rel="stylesheet" href="css/main.css" type="text/css">
-    <script src="http://localhost/labs2/webix/codebase/webix.js" type="text/javascript"></script>
-</header>
+    <script src="webix/codebase/webix.js" type="text/javascript"></script>
+    <script src="php/resources/appVersion.js" type="text/javascript"></script>
+      </header>
 <body class="des_LogonBackground">
 <?php $theUserName = NULL; ?>
-<div class="des_TitleBar">Welcome to LABS</div>
+<div class="des_TitleBar">Welcome to LABS2</div>
 
 <script>
     webix.ui({
@@ -52,7 +53,7 @@
         //webix.ajax().get("/labs2/php/login.php", {users_name: userId, users_pass: pswd}, function (text) {
         webix.ajax().get("/labs2/php/login.php", {users_name: userId, users_pass: pswd}, function (text) {
             var myText = (text);
-            if (myText == "Success") {
+            if (myText === "Success") {
                 webix.message({text: myText});
                 newDoc(userId);
             } else {
@@ -74,8 +75,10 @@
 
 <div class="des_FooterBar"> Property of CIAL &#169 <i id="displayYear">
     <script type="text/javascript">var d = new Date();
-    document.getElementById("displayYear").innerHTML = d.getFullYear();</script>
-</i> - V.Alpha - Webix.
+    document.getElementById("displayYear").innerHTML = d.getFullYear();
+    document.write(" - "+ $theAppVersion.verNum);
+    </script>
+</i> - Webix.
     <script type="text/javascript">document.write(webix.version);</script>
 </div>
 </body>

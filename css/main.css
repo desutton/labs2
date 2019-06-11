@@ -143,3 +143,41 @@ a:visited {
 	box-sizing:border-box}
 
 }
+
+
+.des_BasicIconButton {
+	background-color: #7684c5; /* Blue */
+	border: none;
+	color: white;
+	padding: 8px 8px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.des_BasicIconButton1 {
+	background-color: rgba(255, 255, 255, 0);
+	color: white;
+	border: 2px soild #7684c5;
+}
+
+.des_BasicIconButton1:hover {
+	background-color: #7684c5;
+	color: black;
+}
+
+.des_BasicIconButton2 {
+	background-color: rgba(255, 255, 255, 0);
+	color: white;
+	border: 2px soild #cf665a;
+}
+
+.des_BasicIconButton2:hover {
+	background-color: #cf665a;
+	color: black;
+}

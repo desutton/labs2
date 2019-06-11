@@ -175,13 +175,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
                 userAuthor = userAuthor.replace('[', "");
                 userAuthor = userAuthor.replace(']', "");
                 userAuthor = JSON.parse(userAuthor);
-                console.log(userAuthor.users_2group);
+                console.log("The User Group is: "+ userAuthor.users_2group);
                 if (userAuthor.users_2group === "0") {
                     $$("mainMenu").showItem("userList");
-                    // console.log("hi");
+                     console.log("Super User");
                 } else {
                     $$("mainMenu").hideItem("userList");
-                    // console.log("bye");
+                     console.log("Normal");
                 }
             });
         </script>

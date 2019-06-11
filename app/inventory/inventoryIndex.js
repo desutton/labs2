@@ -2,8 +2,8 @@
  * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
 
-var reqUUID = 'xxxxxxxx-xxxx-5xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0, v = c === 'x' ? r : r & 0x3 | 0x8;
+const reqUUID = 'xxxxxxxx-xxxx-5xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    let r = Math.random() * 16 | 0, v = c === 'x' ? r : r & 0x3 | 0x8;
     return v.toString(16);
 });
 
@@ -18,8 +18,12 @@ d = d.getDate();
 var ymd = y + "-" + m + "-" + d;
 var theLineItemUUID = "";
 var theLineItemUUIDPast = "";
-
-
+var ztheData = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&operator=>&dataName=data&select=1");
+var ztheDataPast = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&dataName=data&select=1");
+var ztheUsers = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_displayName%20AS%20value&dataName=data&select=5");
+var ztheDeptments = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=vl_departments&columnNames=dept_name%20AS%20value&dataName=data&select=5");
+var ztheReqRowData = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=NULL&dataName=data&select=1");
+webix.ajax().post("/labs2/php/api_methods/log.txt", {id:100});
 var tabbar = {
     view: "tabbar", id: 'tabbar', /*value: 'createReq',*/ multiview: true, options: [
         {value: 'Create Requisition', id: 'createReq'},
@@ -29,7 +33,7 @@ var tabbar = {
 };
 
 
-var activePanelView = {
+const activePanelView = {
     id: "viewReq",
     height: "700",
     cols: [
@@ -83,7 +87,8 @@ var activePanelView = {
                         {id: "req_status", header: "Status", sort: "int", adjust: "header", batch: 30}
                     ],
                     select: true,
-                    url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&operator=>&dataName=data&select=1"
+                    data: ztheData,
+                    //url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&operator=>&dataName=data&select=1"
                 }
             ]
         },
@@ -148,7 +153,7 @@ var activePanelView = {
                                                     id: "req_reqNameA1",
                                                     borderless: true,
                                                     hidden: true,
-                                                    suggest: "/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_displayName%20AS%20value&dataName=data&select=5"
+                                                    suggest: ztheUsers //"/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_displayName%20AS%20value&dataName=data&select=5"
                                                 }, {
                                                     view: "text",
                                                     value: "req_UUID",
@@ -171,7 +176,7 @@ var activePanelView = {
                                                     id: "req_deptA1",
                                                     borderless: true,
                                                     hidden: true,
-                                                    suggest: "/labs2/php/api_methods/SELECTz.php?tableName=vl_departments&columnNames=dept_name%20AS%20value&dataName=data&select=5"
+                                                    suggest: ztheDeptments //"/labs2/php/api_methods/SELECTz.php?tableName=vl_departments&columnNames=dept_name%20AS%20value&dataName=data&select=5"
                                                 }]
                                             },
                                             {
@@ -292,25 +297,60 @@ var activePanelView = {
                             collapsed: true,
                             headerHeight: 50,
                             body: {
+
                                 rows: [
-                                    {
-                                        view: "datatable",
+                                    {view:"toolbar", height:35, elements:[
+
+                                            //pulldown menu
+                                            {
+                                                view: "select", label: "Show", value: 10, labelWidth: 65, width: 150,  options: [
+                                                    {id: 100, value: "Main"},
+                                                    {id: 101, value: "Debug"}
+                                                ],
+                                                on: {
+                                                    onChange: function (changeActiveView) {
+                                                        showActiveBatchRows(changeActiveView);
+                                                    }
+                                                } //copied element from Webix website
+                                            },// end of pulldown menu
+                                            {width: 335},
+                                            {view: "button", id:"addNewReqRow", width:50, type:"icon", icon:"far fa-plus-square", tooltip:"Add a new item"},
+                                            {view: "button", id: "refreshRowPanelButton", width:50, type: "icon", icon: "wxi-sync", tooltip:"Reload"},
+                                            ]},
+                                    {view: "form", elements:[
+                                            {view: "datatable",
                                         id: "orderLineItems",
                                         select: true,
+                                        visibleBatch: 100,
                                         columns: [
-                                            {id: "reqR_itemName", header: "Item Disc.", sort: "string", adjust: true},
-                                            {id: "reqR_partNumber", header: "Part No.", sort: "string", adjust: true},
-                                            {id: "reqR_unitQty", header: "Unit Qty", sort: "string", adjust: true},
-                                            {id: "reqR_qty", header: "Qty", sort: "string", adjust: true},
-                                            {id: "reqR_costUnit", header: "Unit Cost", sort: "string", adjust: true},
-                                            {id: "reqR_cost", header: "Cost", sort: "string", adjust: true},
-                                            {id: "reqR_orderType", header: "Order Type", sort: "string", adjust: true},
-                                            {id: "reqR_reason", header: "Reason", sort: "string", adjust: true}
+                                            {id: "reqR_itemName", name:"reqR_itemNameA", header: "Item Disc.", sort: "string", adjust: true, editor: "text"},
+                                            {id: "reqR_partNumber", name:"reqR_partNumberA", header: "Part No.", sort: "string", adjust: true, editor: "text"},
+                                            {id: "reqR_unitQty", name:"reqR_unitQtyA", header: "Unit Qty", sort: "string", adjust: true, editor: "text", batch: 100},
+                                            {id: "reqR_qty", name:"reqR_qtyA", header: "Qty", sort: "string", adjust: true, editor: "text", batch: 100},
+                                            {id: "reqR_costUnit", name:"reqR_costUnitA", header: "Unit Cost", sort: "string", adjust: true, editor: "text", batch: 100},
+                                            {id: "reqR_cost", name:"reqR_costA", header: "Cost", sort: "string", adjust: true, editor: "text", batch: 100},
+                                            {id: "reqR_orderType", name:"reqR_orderTypeA", header: "Order Type", sort: "string", adjust: true, editor: "text", batch: 100},
+                                            {id: "reqR_reason", name:"reqR_reasonA", header: "Reasons", sort: "string", adjust: true, editor: "text", batch: 100},
+                                            {id: "reqR_UUID", header: "UUID", sort: "string", adjust: true, batch: 101},
+                                            {id:"", template:"<button class='des_BasicIconButton des_BasicIconButton1' onclick='saveEditedReqRow()'><i class='fas fa-save'></i></button>", css:"padding_less", width:70 },
+                                            {id:"", template:"<button class='des_BasicIconButton des_BasicIconButton2' onclick='deleteReqRow()'><i class='fas fa-trash-alt'></i></button>", css:"padding_less", width:70 }
                                         ],
-                                        /* Need to load a blank record set */
-                                        url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=NULL&dataName=data&select=1"
+                                        editable:true,
+                                        editaction:"custom",
+
+                                        on:{
+                                            "onItemClick":function(id){
+                                                this.editRow(id);
+                                                this.focusEditor(id);
+                                            }
+                                        },
+
+                                        // Need to load a blank record set //
+                                        //url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=NULL&dataName=data&select=1"
+                                        data: ztheReqRowData
                                     }
-                                ]
+                                        ]}
+                                    ]
                             }
                         },
                         {view: "resizer"},
@@ -384,7 +424,7 @@ var activePanelView = {
                                                 type: "icon",
                                                 icon: "far fa-trash",
                                                 tooltip: "Manager Delete",
-                                                hidden: false
+                                                hidden: true
                                             }]
                                     }
                                 ]
@@ -483,7 +523,7 @@ var activePanelView = {
 };
 
 
-var pastPanelView = {
+const pastPanelView = {
     id: "pastReq",
     height: "700",
     cols: [
@@ -536,7 +576,8 @@ var pastPanelView = {
                         {id: "req_status", header: "Status", sort: "int", adjust: "header", batch: 300}
                     ],
                     select: true,
-                    url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&dataName=data&select=1"
+                    //url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&dataName=data&select=1"
+                    data: ztheDataPast
                 }
             ]
         },
@@ -668,7 +709,8 @@ var pastPanelView = {
                                                 },
                                                 {id: "reqR_reason", header: "Reason", sort: "string", adjust: true}
                                             ],
-                                            url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=NULL&dataName=data&select=1"
+                                            //url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=NULL&dataName=data&select=1"
+                                            data: ztheReqRowData
                                         }
                                     ]
                                 }
@@ -716,7 +758,16 @@ var pastPanelView = {
                                                 view: "label",
                                                 value: "req_authorizationDate",
                                                 id: "req_authorizationDateP"
-                                            }]
+                                            },
+                                                {
+                                                    view: "button",
+                                                    id: "reqPastManagerDelete",
+                                                    width: "50",
+                                                    type: "icon",
+                                                    icon: "far fa-trash",
+                                                    tooltip: "Manager Delete",
+                                                    hidden: true
+                                                }]
                                         }
                                     ]
                                 }
@@ -815,7 +866,7 @@ var pastPanelView = {
     ]
 };
 
-var createPanelView = {
+const createPanelView = {
     id: "createReq", width: 1375,
     ///////////////
     rows: [
@@ -826,7 +877,8 @@ var createPanelView = {
             id: "req_name",
             label: "Requester's Name",
             labelWidth: 150,
-            suggest: "/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_displayName%20AS%20value&dataName=data&select=5"
+            //suggest: ztheUsersCreate
+            suggest:"/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_displayName%20AS%20value&dataName=data&select=5"
         },
         {
             view: "combo",
@@ -834,6 +886,7 @@ var createPanelView = {
             id: "req_dept",
             label: "Department",
             labelWidth: 150,
+            //suggest: ztheDeptmentsCreate
             suggest: "/labs2/php/api_methods/SELECTz.php?tableName=vl_departments&columnNames=dept_name%20AS%20value&dataName=data&select=5"
         },
         {view: "text", width: "400", id: "req_vend", label: "Vendor", labelWidth: 150},
@@ -902,11 +955,11 @@ var createPanelView = {
                 {view: "text", placeholder: "Cost", width: 100, id: "reqR_costX"},
                 {
                     view: "select", placeholder: "Order Type", width: 150, id: "reqR_orderTypeX", value: 0, options:
-                        [{"id": 1, "value": "Supply"},
-                            {"id": 2, "value": "Reagent"},
-                            {"id": 3, "value": "Standard"},
-                            {"id": 4, "value": "Solvent"},
-                            {"id": 0, "value": ""}
+                        [{"id": "Supply", "value": "Supply"},
+                            {"id": "Reagent", "value": "Reagent"},
+                            {"id": "Standard", "value": "Standard"},
+                            {"id": "Solvent", "value": "Solvent"},
+                            {"id": "", "value": ""}
                         ]
                 },
                 {view: "text", placeholder: "Reason", width: 150, id: "reqR_reasonX"},
@@ -927,7 +980,7 @@ var createPanelView = {
 
 };
 
-var data = {cells: [createPanelView, activePanelView, pastPanelView]};
+const data = {cells: [createPanelView, activePanelView, pastPanelView]};
 
 webix.ui({
 
@@ -950,28 +1003,28 @@ webix.ui({
 
 ////// Function captures the form data and creates a URL to be sent to the insert.php api. ////////////////////////////////////////////////////////////////
 function saveTheInvoice() {
-    var reqUUID = $$("invoice_UUID").getValue();
-    var reqreqID = $$("req_reqID").getValue();
-    var reqName = $$("req_name").getText();
-    var reqDept = $$("req_dept").getText();
-    var reqDateSubmit = $$("req_subm").getValue();       //this work only for the muultiselect element. I did not find it to work with the multicombo
-    var reqNeeded = $$("req_need").getValue();
-    var reqOrder = "1970-01-01 00:00";
-    var reqVendor = $$("req_vend").getValue();  //getText gets the actual date formatted field contents
-    var reqOrderNum = $$("req_ordr").getValue();
-    var reqManager = "NULL";
-    var reqAuthor = "NULL";
-    var reqManagerDate = "1970-01-01 00:00";
-    var reqAuthorDate = "1970-01-01 00:00";
+    let reqUUID = $$("invoice_UUID").getValue();
+    let reqreqID = $$("req_reqID").getValue();
+    let reqName = $$("req_name").getText();
+    let reqDept = $$("req_dept").getText();
+    let reqDateSubmit = $$("req_subm").getValue();       //this work only for the muultiselect element. I did not find it to work with the multicombo
+    let reqNeeded = $$("req_need").getValue();
+    let reqOrder = "1970-01-01 00:00";
+    let reqVendor = $$("req_vend").getValue();  //getText gets the actual date formatted field contents
+    let reqOrderNum = $$("req_ordr").getValue();
+    let reqManager = "NULL";
+    let reqAuthor = "NULL";
+    let reqManagerDate = "1970-01-01 00:00";
+    let reqAuthorDate = "1970-01-01 00:00";
 
-    var reqStatus = 3;
+    let reqStatus = 3;
 
     //var creationDat = webix.Date.dateToStr("%Y-%m-%d");     //these next two line create a date format to
     //var creationDate = creationDat(new Date());             //save in the db as to when the record was created.
 
 
 ////////////////// Form Submit to DB //////////////////
-    var theSubmitDataRAW = '{"success":true,"data":[{"req_UUID":"' + reqUUID + '", "req_reqID":"' + reqreqID + '", "req_reqName":"' + reqName + '", "req_dept":"' + reqDept + '", "req_dateSubmit":"' + reqDateSubmit + '", "req_dateNeed":"' + reqNeeded + '", "req_ordered":"' + reqOrder + '", "req_vendor":"' + reqVendor + '", "req_orderNum":"' + reqOrderNum + '", "req_manager":"' + reqManager + '", "req_authorization":"' + reqAuthor + '", "req_managerDate":"' + reqManagerDate + '", "req_authorizationDate":"' + reqAuthorDate + '", "req_status":"' + reqStatus + '"}]}';
+    let theSubmitDataRAW = '{"success":true,"data":[{"req_UUID":"' + reqUUID + '", "req_reqID":"' + reqreqID + '", "req_reqName":"' + reqName + '", "req_dept":"' + reqDept + '", "req_dateSubmit":"' + reqDateSubmit + '", "req_dateNeed":"' + reqNeeded + '", "req_ordered":"' + reqOrder + '", "req_vendor":"' + reqVendor + '", "req_orderNum":"' + reqOrderNum + '", "req_manager":"' + reqManager + '", "req_authorization":"' + reqAuthor + '", "req_managerDate":"' + reqManagerDate + '", "req_authorizationDate":"' + reqAuthorDate + '", "req_status":"' + reqStatus + '"}]}';
     //var theSubmitDataRAW = '{"success":true,"data":[{"req_UUID":"' + reqUUID + '", "req_reqID":"' + reqreqID + '"}]}';
 
     webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=requisitions&JSONdata=" + theSubmitDataRAW);
@@ -982,22 +1035,22 @@ function saveTheInvoice() {
 }
 ////// Function captures the form data and creates a URL to be sent to the insert.php api. ////////////////////////////////////////////////////////////////
 function updateTheInvoice() {
-    var reqUUID = $$("invoice_UUID").getValue();
-    var reqreqID = $$("req_reqID").getValue();
-    var reqName = $$("req_name").getText();
-    var reqDept = $$("req_dept").getText();
-    var reqDateSubmit = $$("req_subm").getValue();       //this work only for the muultiselect element. I did not find it to work with the multicombo
-    var reqNeeded = $$("req_need").getValue();
-    var reqOrder = "1970-01-01 00:00";
-    var reqVendor = $$("req_vend").getValue();  //getText gets the actual date formatted field contents
-    var reqOrderNum = $$("req_ordr").getValue();
+    let reqUUID = $$("invoice_UUID").getValue();
+    let reqreqID = $$("req_reqID").getValue();
+    let reqName = $$("req_name").getText();
+    let reqDept = $$("req_dept").getText();
+    let reqDateSubmit = $$("req_subm").getValue();       //this work only for the muultiselect element. I did not find it to work with the multicombo
+    let reqNeeded = $$("req_need").getValue();
+    let reqOrder = "1970-01-01 00:00";
+    let reqVendor = $$("req_vend").getValue();  //getText gets the actual date formatted field contents
+    let reqOrderNum = $$("req_ordr").getValue();
 
     //var creationDat = webix.Date.dateToStr("%Y-%m-%d");     //these next two line create a date format to
     //var creationDate = creationDat(new Date());             //save in the db as to when the record was created.
 
 
 ////////////////// Form Submit to DB //////////////////
-    var theSubmitDataRAW = '{"req_reqID":"' + reqreqID + '", "req_reqName":"' + reqName + '", "req_dept":"' + reqDept + '", "req_dateSubmit":"' + reqDateSubmit + '", "req_dateNeed":"' + reqNeeded + '", "req_ordered":"' + reqOrder + '", "req_vendor":"' + reqVendor + '", "req_orderNum":"' + reqOrderNum +'"}';
+    let theSubmitDataRAW = '{"req_reqID":"' + reqreqID + '", "req_reqName":"' + reqName + '", "req_dept":"' + reqDept + '", "req_dateSubmit":"' + reqDateSubmit + '", "req_dateNeed":"' + reqNeeded + '", "req_ordered":"' + reqOrder + '", "req_vendor":"' + reqVendor + '", "req_orderNum":"' + reqOrderNum +'"}';
 
     webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataRAW + "&theWhereColumn=req_UUID&theUUID=" + reqUUID);
     console.log("JSON DATA being sent to the server for update " + theSubmitDataRAW); //just a debug code
@@ -1006,7 +1059,7 @@ function updateTheInvoice() {
 
 ////// Logic for the filter on the test descriptions list /////////////////////
 $$("list_input").attachEvent("onTimedKeyPress", function () {
-    var value = this.getValue().toLowerCase();
+    let value = this.getValue().toLowerCase();
     $$("activeReqs").filter(function (obj) {
         return obj.req_reqName.toLowerCase().indexOf(value) === 0;
     })
@@ -1015,14 +1068,14 @@ $$("list_input").attachEvent("onTimedKeyPress", function () {
 
 ////// Logic for the filter on the past descriptions list /////////////////////
 $$("past_list_input").attachEvent("onTimedKeyPress", function () {
-    var value = this.getValue().toLowerCase();
+    let value = this.getValue().toLowerCase();
     $$("pastReqs").filter(function (obj) {
         return obj.req_reqName.toLowerCase().indexOf(value) === 0;
     })
 });
 ///////////////////////Test /////////////////////////////
-var form = $$('myform');
-var list = $$('activeReqs');
+const form = $$('myform');
+const list = $$('activeReqs');
 
 form.bind(list);
 
@@ -1030,7 +1083,7 @@ form.bind(list);
 ////////////////// Click on Active Item //////////////////
 
 $$('activeReqs').attachEvent("onAfterSelect", function (id) {
-    var value = this.getItem(id).req_UUID;
+    let value = this.getItem(id).req_UUID;
     $$("req_UUIDA").setValue(value);
     theLineItemUUID = value;
     //console.log(theLineItemUUID);
@@ -1061,7 +1114,7 @@ $$('activeReqs').attachEvent("onAfterSelect", function (id) {
 
     $$("req_statusA").setValue(this.getItem(id).req_status);
 
-    var showLineItems = "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + theLineItemUUID + "&dataName=data&select=1";
+    let showLineItems = "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + theLineItemUUID + "&dataName=data&select=1";
     $$("orderLineItems").clearAll();
     $$("orderLineItems").load(showLineItems);
 
@@ -1073,13 +1126,16 @@ $$('activeReqs').attachEvent("onAfterSelect", function (id) {
 function showActiveBatch(changeActiveView) {
     $$("activeReqs").showColumnBatch(changeActiveView);
 }
+function showActiveBatchRows(changeActiveView) {
+    $$("orderLineItems").showColumnBatch(changeActiveView);
+}
 
 
 ////////////////// Click on Past Item //////////////////
 
 $$('pastReqs').attachEvent("onAfterSelect", function (id) {
 
-    var value = this.getItem(id).req_UUID;
+    let value = this.getItem(id).req_UUID;
     $$("req_UUIDP").setValue(value);
     theLineItemUUIDPast = value;
 
@@ -1111,7 +1167,7 @@ $$('pastReqs').attachEvent("onAfterSelect", function (id) {
 
     $$("req_statusP").setValue(this.getItem(id).req_status);
 
-    var showLineItemsPast = "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + theLineItemUUIDPast + "&dataName=data&select=1";
+    let showLineItemsPast = "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + theLineItemUUIDPast + "&dataName=data&select=1";
     $$("orderLineItemsPast").clearAll();
     $$("orderLineItemsPast").load(showLineItemsPast);
 
@@ -1129,28 +1185,28 @@ function showBatch(changePastView) {
 $$("saveTheInvoiceLineButton").attachEvent("onItemClick", function () {
     //saveTheInvoiceLine() {
 
-    var reqRUUID = 'xxxxxxxx-xxxx-6xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c === 'x' ? r : r & 0x3 | 0x8;
+    let reqRUUID = 'xxxxxxxx-xxxx-6xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        let r = Math.random() * 16 | 0, v = c === 'x' ? r : r & 0x3 | 0x8;
         return v.toString(16);
     });
 
-    var bb = reqUUID;
-    var cc = $$("reqR_itemNameX").getValue();
-    var dd = $$("reqR_partNumberX").getValue();
-    var ee = $$("reqR_unitQtyX").getValue();
-    var ff = $$("reqR_qtyX").getValue();
-    var gg = $$("reqR_costUnitX").getValue();
-    var hh = $$("reqR_costX").getValue();
-    var ii = $$("reqR_orderTypeX").getValue();
-    var jj = $$("reqR_reasonX").getValue();
-    var kk = "NULL";
-    var ll = 1;
+    let bb = reqUUID;
+    let cc = $$("reqR_itemNameX").getValue();
+    let dd = $$("reqR_partNumberX").getValue();
+    let ee = $$("reqR_unitQtyX").getValue();
+    let ff = $$("reqR_qtyX").getValue();
+    let gg = $$("reqR_costUnitX").getValue();
+    let hh = $$("reqR_costX").getValue();
+    let ii = $$("reqR_orderTypeX").getValue();
+    let jj = $$("reqR_reasonX").getValue();
+    let kk = "NULL";
+    let ll = 1;
 
     ////////////////// Form Submit to DB //////////////////
-    var theSubmitDataRAW2 = '{"success":true,"data":[{"reqR_UUID":"' + reqRUUID + '", "reqR_reqUUID":"' + bb + '", "reqR_itemName":"' + cc + '", "reqR_partNumber":"' + dd + '", "reqR_unitQty":"' + ee + '", "reqR_qty":"' + ff + '", "reqR_costUnit":"' + gg + '", "reqR_cost":"' + hh + '", "reqR_orderType":"' + ii + '", "reqR_reason":"' + jj + '", "reqR_eta":"' + kk + '", "reqR_status":"' + ll + '"}]}';
+    let theSubmitDataRAW2 = '{"success":true,"data":[{"reqR_UUID":"' + reqRUUID + '", "reqR_reqUUID":"' + bb + '", "reqR_itemName":"' + cc + '", "reqR_partNumber":"' + dd + '", "reqR_unitQty":"' + ee + '", "reqR_qty":"' + ff + '", "reqR_costUnit":"' + gg + '", "reqR_cost":"' + hh + '", "reqR_orderType":"' + ii + '", "reqR_reason":"' + jj + '", "reqR_eta":"' + kk + '", "reqR_status":"' + ll + '"}]}';
 
     webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=requisitionRows&JSONdata=" + theSubmitDataRAW2);
-//    console.log("JSON DATA being sent to the server " + theSubmitDataRAW2); //just a debug code
+    console.log("JSON DATA being sent to the server " + theSubmitDataRAW2); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
     window.setTimeout(refreshTheInvoiceLineButton, 1000);
     webix.message({text: "Reloading..."});
@@ -1158,26 +1214,26 @@ $$("saveTheInvoiceLineButton").attachEvent("onItemClick", function () {
 });
 
 function refreshTheInvoiceLineButton() {
-    var loadLineItems = "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + reqUUID + "&dataName=data&select=1";
+    let loadLineItems = "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + reqUUID + "&dataName=data&select=1";
     $$("lineItemList").clearAll();
     $$("lineItemList").load(loadLineItems);
     webix.message({text: "Loaded"});
-};
+}
 
 
 /////////////////// Editor script for  Editing Save //////////////////
 $$("reqEditSave").attachEvent("onItemClick", function () {
 
-    var reqUUIDL = $$("req_UUIDA1").getValue();
-    var reqName = $$("req_reqNameA1").getText();
-    var reqDept = $$("req_deptA1").getText();
-    var reqSubmitDate = $$("req_dateSubmitA1").getText();
-    var reqDateNeed = $$("req_dateNeedA1").getText();
-    var reqVendor = $$("req_vendorA1").getValue();
-    var reqOrderNum = $$("req_orderNumA1").getValue();
-    var reqOrderedDate = $$("req_orderedA1").getText();
+    let reqUUIDL = $$("req_UUIDA1").getValue();
+    //let reqName = $$("req_reqNameA1").getText();
+    //let reqDept = $$("req_deptA1").getText();
+    let reqSubmitDate = $$("req_dateSubmitA1").getText();
+    let reqDateNeed = $$("req_dateNeedA1").getText();
+    let reqVendor = $$("req_vendorA1").getValue();
+    let reqOrderNum = $$("req_orderNumA1").getValue();
+    let reqOrderedDate = $$("req_orderedA1").getText();
 
-    var updateReqForm = '{"req_dateSubmit":"' + reqSubmitDate + '","req_dateNeed":"' + reqDateNeed + '","req_vendor":"' + reqVendor + '","req_orderNum":"' + reqOrderNum + '","req_ordered":"' + reqOrderedDate + '"}';
+    let updateReqForm = '{"req_dateSubmit":"' + reqSubmitDate + '","req_dateNeed":"' + reqDateNeed + '","req_vendor":"' + reqVendor + '","req_orderNum":"' + reqOrderNum + '","req_ordered":"' + reqOrderedDate + '"}';
 
 //    var updateReqForm = '{"req_reqName":"' + reqName +'","req_dept":"' + reqDept +'","req_dateSubmit":"' + reqSubmitDate +'","req_dateNeed":"' + reqDateNeed +'","req_vendor":"' + reqVendor  +'","req_orderNum":"' + reqOrderNum +'","req_ordered":"' + reqOrderedDate +'"}';
     webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + updateReqForm + "&theWhereColumn=req_UUID&theUUID=" + reqUUIDL);
@@ -1210,9 +1266,9 @@ $$("reqManagerApproval").attachEvent("onItemClick", function () {
 
     //webix.message({text: $userId});
     //webix.message({text: theLineItemUUID});
-    var theSubmitDataManager = '{"req_manager":"' + $userId + '","req_managerDate":"' + ymd + '","req_status":"2"}';
+    let theSubmitDataManager = '{"req_manager":"' + $userId + '","req_managerDate":"' + ymd + '","req_status":"2"}';
     webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataManager + "&theWhereColumn=req_UUID&theUUID=" + theLineItemUUID);
-//console.log("JSON DATA being sent to the server " + theSubmitDataManager +" and this data to the db "+ temp); //just a debug code
+    console.log("JSON DATA being sent to the server " + theSubmitDataManager +" and this data to the db "); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
     window.setTimeout(refreshPanel, 1000);
     webix.message({text: "Reloading..."});
@@ -1221,9 +1277,9 @@ $$("reqManagerApproval").attachEvent("onItemClick", function () {
 /////////////////// Checkbox script for Authorized Approval //////////////////
 $$("reqAuthorizedApproval").attachEvent("onItemClick", function () {
 
-    var theSubmitDataAuthor = '{"req_authorization":"' + $userId + '","req_authorizationDate":"' + ymd + '","req_status":"1"}';
+    let theSubmitDataAuthor = '{"req_authorization":"' + $userId + '","req_authorizationDate":"' + ymd + '","req_status":"1"}';
     webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataAuthor + "&theWhereColumn=req_UUID&theUUID=" + theLineItemUUID);
-    //console.log("JSON DATA being sent to the server " + theSubmitDataManager +" and this data to the db "+ temp); //just a debug code
+    console.log("JSON DATA being sent to the server " + theSubmitDataAuthor +" and this data to the db "); //just a debug code
     window.setTimeout(refreshPanel, 1000);
 
 
@@ -1233,7 +1289,7 @@ $$("reqAuthorizedApproval").attachEvent("onItemClick", function () {
 /////////////////// Checkbox script for making past req active //////////////////
 $$("reqMakeActive").attachEvent("onItemClick", function () {
 
-    var theSubmitDataStatus1 = '{"req_status":"3"}';
+    let theSubmitDataStatus1 = '{"req_authorization":"NULL","req_authorizationDate":"1970-01-01","req_status":"3"}';
     webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataStatus1 + "&theWhereColumn=req_UUID&theUUID=" + theLineItemUUIDPast);
     window.setTimeout(refreshPanel, 1000);
 
@@ -1243,25 +1299,30 @@ $$("reqMakeActive").attachEvent("onItemClick", function () {
 /////////////////// Checkbox script for making active req past //////////////////
 $$("reqMakePast").attachEvent("onItemClick", function () {
 
-    var theSubmitDataStatus0 = '{"req_status":"0"}';
+    let theSubmitDataStatus0 = '{"req_status":"0"}';
     webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataStatus0 + "&theWhereColumn=req_UUID&theUUID=" + theLineItemUUID);
-    //console.log("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataStatus0 + "&theWhereColumn=req_UUID&theUUID="+ theLineItemUUID);
+    console.log("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataStatus0 + "&theWhereColumn=req_UUID&theUUID="+ theLineItemUUID);
     window.setTimeout(refreshPanel, 1000);
 
     webix.message({text: "Saved"});
 });
 
-webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_manager%20AS%20value&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1", function (text, data) {
-    var managerLevel = JSON.stringify(text);
+////////////////////////////////// Logic to set ui elements for managers to be seen //////////////////////////////////
+webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_manager%20AS%20value&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1", function (text) {
+    let managerLevel = JSON.stringify(text);
     if (managerLevel.search("Yes") !== -1) {
         $$("reqManagerApproval").show();
+        $$("reqManagerDelete").show();
+        $$("reqPastManagerDelete").show();
     }
 
 });
-webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_authorized%20AS%20value&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1", function (text, data) {
-    var authorizorLevel = JSON.stringify(text);
+webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_authorized%20AS%20value&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1", function (text) {
+    let authorizorLevel = JSON.stringify(text);
     if (authorizorLevel.search("Yes") !== -1) {
         $$("reqAuthorizedApproval").show();
+        $$("reqManagerDelete").show();
+        $$("reqPastManagerDelete").show();
     }
 
 });
@@ -1327,15 +1388,20 @@ $$("refreshPanelButton").attachEvent("onItemClick", function () {
     window.setTimeout(refreshPanel, 1000);
     webix.message({text: "Reloading..."});
 });
+$$("refreshRowPanelButton").attachEvent("onItemClick", function () {
+    window.setTimeout(refreshPanel, 1000);
+    webix.message({text: "Reloading..."});
+});
 $$("refreshPanelButtonPast").attachEvent("onItemClick", function () {
     window.setTimeout(refreshPanel, 1000);
     webix.message({text: "Reloading..."});
 });
 
+
 //////////////////////////// Function that does the work to refresh the UI elements after db transactions ////////////////////////////////////
 function refreshPanel() {
-    var refresher = "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&operator=>&dataName=data&select=1";
-    var refresher0 = "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&dataName=data&select=1";
+    let refresher = "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&operator=>&dataName=data&select=1";
+    let refresher0 = "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&dataName=data&select=1";
     $$("activeReqs").clearAll();
     $$("pastReqs").clearAll();
     $$("activeReqs").load(refresher);
@@ -1343,7 +1409,8 @@ function refreshPanel() {
     $$("authorizr").refresh();
     $$("authorizrP").refresh();
     $$("statusActive").refresh();
-};
+    $$("orderLineItems").refresh();
+}
 
 /////////////////////////// Edit Mode On ///////////////////////////////////////
 $$("reqEdit").attachEvent("onItemClick", function () {
@@ -1396,8 +1463,80 @@ function editModeOff() {
     $$("req_vendorA1").hide();
     $$("req_orderNumA1").hide();
     $$("req_orderedA1").hide();
-};
+}
 
+/////////////////////////// Delete a row in the ReqRow ///////////////////////////
+function deleteReqRow() {
+    if(!$$("orderLineItems").getSelectedId()){
+        webix.message("No item is selected!");
+        return;
+    }
+    let lineSelector= $$("orderLineItems").getSelectedId();
+    let lineSelectedText= $$("orderLineItems").getText(lineSelector,"reqR_UUID");
+    console.log("Deleted the ReqRow "+ lineSelectedText);
+    webix.ajax().get("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&columnNames=reqR_UUID&id="  + lineSelectedText );
+    webix.message("Row Deleted");
+    $$("orderLineItems").remove($$("orderLineItems").getSelectedId());
+}
+/////////////////////////// *******  REQ ROW SCRIPTS  ******* ///////////////////////////
+//                                                                                     //
+///////////////////////////     ///////////////////////////   ///////////////////////////
+
+
+
+
+/////////////////////////// Add a new row ///////////////////////////
+$$("addNewReqRow").attachEvent("onItemClick", function () {
+    reqR_reqUUID = $$("req_UUIDA1").getValue();
+
+    reqRowUUID = 'xxxxxxxx-xxxx-6xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        let r = Math.random() * 16 | 0, v = c === 'x' ? r : r & 0x3 | 0x8;
+        return v.toString(16);
+    });
+    theSubmitDataRAW = '{"success":true,"data":[{"reqR_UUID":"' + reqRowUUID + '", "reqR_reqUUID":"' + reqR_reqUUID + '", "reqR_itemName":"NULL", "reqR_partNumber":"NULL", "reqR_unitQty":"0", "reqR_qty":"0", "reqR_costUnit":"0", "reqR_cost":"0", "reqR_orderType":"NULL", "reqR_reason":"NULL", "reqR_eta":"NULL", "reqR_status":"1"}]}';
+    webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=requisitionRows&JSONdata=" + theSubmitDataRAW);
+    $$("orderLineItems").add({reqR_UUID:reqRowUUID});
+
+
+    theSubmitDataManager = '{"req_authorization":"NULL","req_authorizationDate":"1970-01-01","req_status":"2"}';
+    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataManager + "&theWhereColumn=req_UUID&theUUID=" + reqR_reqUUID);
+    window.setTimeout(refreshPanel, 1000);
+    console.log("The new row has an id of " + reqRowUUID +" parent id "+ reqR_reqUUID);
+    webix.message("New Row Added");
+});
+
+
+
+
+
+
+
+
+/////////////////////////// Edit/Save a row in the ReqRow ///////////////////////////
+function saveEditedReqRow() {
+    if(!$$("orderLineItems").getSelectedId()){
+        webix.message("No item is selected!");
+        return;
+    }
+    let lineSelector= $$("orderLineItems").getSelectedId();
+    let lineSelectedText= $$("orderLineItems").getText(lineSelector,"reqR_UUID");
+    let reqR_itemNameA = $$("orderLineItems").getText(lineSelector,"reqR_itemName");
+    let reqR_partNumberA = $$("orderLineItems").getText(lineSelector,"reqR_partNumber");
+    let reqR_unitQtyA= $$("orderLineItems").getText(lineSelector,"reqR_unitQty");
+    let reqR_qtyA= $$("orderLineItems").getText(lineSelector,"reqR_qty");
+    let reqR_costUnitA= $$("orderLineItems").getText(lineSelector,"reqR_costUnit");
+    let reqR_costA= $$("orderLineItems").getText(lineSelector,"reqR_cost");
+    let reqR_orderTypeA= $$("orderLineItems").getText(lineSelector,"reqR_orderType");
+    let reqR_reasonA= $$("orderLineItems").getText(lineSelector,"reqR_reason");
+
+    let theSubmitDataRAW = '{"reqR_itemName":"' + reqR_itemNameA + '", "reqR_partNumber":"' + reqR_partNumberA + '", "reqR_unitQty":"' + reqR_unitQtyA + '", "reqR_qty":"' + reqR_qtyA + '", "reqR_costUnit":"' + reqR_costUnitA + '", "reqR_cost":"' + reqR_costA + '", "reqR_orderType":"' + reqR_orderTypeA + '", "reqR_reason":"' + reqR_reasonA +'"}';
+
+    console.log("Saved the ReqRow "+ lineSelectedText);
+    console.log("Here is the changed row data "+ theSubmitDataRAW);
+
+    webix.ajax().get("/labs2/php/api_methods/UPDATEz.php?tableName=requisitionRows&JSONdata="+ theSubmitDataRAW +"&theWhereColumn=reqR_UUID&theUUID=" + lineSelectedText );
+    webix.message("Saved");
+}
 
 /////////////////////////// Delete a row on the create datatable ///////////////////////////
 function removeRowData(){
@@ -1405,8 +1544,8 @@ if(!$$("lineItemList").getSelectedId()){
     webix.message("No item is selected!");
     return;
 }
-var lineSelector= $$("lineItemList").getSelectedId();
-var lineSelectedText= $$("lineItemList").getText(lineSelector,"reqR_UUID");
+let lineSelector= $$("lineItemList").getSelectedId();
+let lineSelectedText= $$("lineItemList").getText(lineSelector,"reqR_UUID");
 console.log("Here's what we deleted "+ lineSelectedText);
 webix.ajax().get("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&columnNames=reqR_UUID&id="  + lineSelectedText );
 webix.message("Data Deleted");

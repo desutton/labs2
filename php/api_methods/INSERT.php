@@ -96,15 +96,30 @@ $resultColumnNames = implode(", ", $resultColumnNamesList);
 	
 // String for quering the database
 $sql_query = ("INSERT INTO ".$theTableName." ( ".$resultColumnNames." ) VALUES (".$sqlDataFormat.")");
-if ($sysmode ==!"prod"){
-	file_put_contents($filename, $sql_query."\r", FILE_APPEND | LOCK_EX);
-}
+////////////////////////////////////////////////////////////
+///             START LOGGING CODE
 
+if ($sysmode ==!"prod"){
+	file_put_contents($filename, "**insert** ".$timestamp." | ".$theUserName."@".$clientIP." - " .$sql_query."\r", FILE_APPEND | LOCK_EX);
+}
+///              END LOGGING CODE
+/// ////////////////////////////////////////////////////////}
+
+try {
 
 // PDO prepare statement for the database
-$stmt = $conn->prepare($sql_query);
+	$stmt = $conn->prepare($sql_query);
 
 // Fire off the request to the db
-$stmt->execute();
+	$stmt->execute();
+// Logging staement for the transaction
+	file_put_contents($filename, $stmt->rowCount() . " INSERT   " . $timestamp . " | " . $theUserName . "@" . $clientIP . " - " . $sql_query . "\r", FILE_APPEND | LOCK_EX);
+
+}
+// Out put the error to the file
+catch (PDOException $errorMess){
+	file_put_contents($filename, $errorMess->getMessage(). "\r", FILE_APPEND | LOCK_EX);
+}
+
 $conn = null;
 ?>                

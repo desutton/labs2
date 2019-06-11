@@ -7,7 +7,7 @@
 David Sutton
 Jun 17 2014 - Jun 18 2014
 
-Version: Beta 9
+Version: Beta 14
 
 This code is a API for a EXT4 based app. This code is called by the different 
 php files using it to make the database connection.
@@ -17,7 +17,19 @@ php files using it to make the database connection.
   	require_once( dirname( __FILE__ ).'/../errorcodes.php');
   	
 // Local vars
+////////////////////////////////////////////////////////////
+///             START LOGGING CODE
+/// ////////////////////////////////////////////////////////
+
 $filename = 'log.txt';
+    $theCookieData = json_decode($_COOKIE['cial']);
+    $theUserName = $theCookieData->UserName;
+    $theDisplayName = $theCookieData->UserDisplayName;
+$timestamp = date("Y/m/d--H:i:s");
+$clientIP = gethostbyaddr($_SERVER["REMOTE_ADDR"]);
+////////////////////////////////////////////////////////////
+///              END LOGGING CODE
+/// ////////////////////////////////////////////////////////
 
 /****************************Old Database Connect*****************************
 // Create connection

@@ -11,4 +11,5 @@ $sysmode = "dev";
 /**
  * Just comment in or out the system mode
  */
+print $sysmode;
 ?>

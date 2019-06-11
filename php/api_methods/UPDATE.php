@@ -75,15 +75,27 @@ $sqlDataFormat = implode(", ", $sqlData);
 	
 // String for quering the database
 $sql_query = ("UPDATE ".$theTableName." SET ".$sqlDataFormat." WHERE ".$result[1]." = '".($decoded->data[$i]->{$result[1]})."'");
+////////////////////////////////////////////////////////////
+///             START LOGGING CODE
+
 if ($sysmode ==!"prod"){
-	file_put_contents($filename, $sql_query."\r", FILE_APPEND | LOCK_EX);
+	file_put_contents($filename, "<b>UPDATE</b> ".$timestamp." | ".$clientIP." - " .$sql_query."  ".$theUserName."\r", FILE_APPEND | LOCK_EX);
 }
-//echo($sql_query);
+///              END LOGGING CODE
+/// //////////////////////////////////////////////////////////echo($sql_query);
+
+try{
 // PDO prepare statement for the database
 $stmt = $conn->prepare($sql_query);
 
 // Fire off the request to the db
 $stmt->execute();
+}
+// Out put the error to the file
+catch (PDOException $errorMess){
+    file_put_contents($filename, $errorMess->getMessage());
+}
+
 $conn = null;
 //echo $sql_query;
 ?>                
