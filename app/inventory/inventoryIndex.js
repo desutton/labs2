@@ -1329,23 +1329,27 @@ webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames
 
 ////////////// Status Icon Switcher Actives///////////////////////
 $$("activeReqs").attachEvent("onItemClick", function () {
-    var statusIcon = $$("req_statusA").getValue();
-    if (statusIcon == 1) {
+    let statusIcon = $$("req_statusA").getValue();
+    // 1 is done
+    if (statusIcon === "1") {
         $$("req_statusIcon").show();
         $$("req_statusIconWarning").hide();
         $$("req_statusIconDone").hide();
         $$("req_statusIconManager").hide();
-    } else if (statusIcon == 3) {
-        $$("req_statusIcon").hide();
-        $$("req_statusIconWarning").show();
-        $$("req_statusIconDone").hide();
-        $$("req_statusIconManager").hide();
-    } else if (statusIcon == 2) {
+        // 3 is base status
+        // 2 is Manager Done
+    } else if (statusIcon === "2") {
         $$("req_statusIcon").hide();
         $$("req_statusIconWarning").show();
         $$("req_statusIconDone").hide();
         $$("req_statusIconManager").show();
-    } else if (statusIcon == 0) {
+    } else if (statusIcon === "3") {
+        $$("req_statusIcon").hide();
+        $$("req_statusIconWarning").show();
+        $$("req_statusIconDone").hide();
+        $$("req_statusIconManager").hide();
+        // 0 is past
+    } else if (statusIcon === "0") {
         $$("req_statusIcon").hide();
         $$("req_statusIconWarning").hide();
         $$("req_statusIconDone").show();
@@ -1357,23 +1361,23 @@ $$("activeReqs").attachEvent("onItemClick", function () {
 
 ////////////// Status Icon Switcher Past///////////////////////
 $$("pastReqs").attachEvent("onItemClick", function () {
-    var statusIcon = $$("req_statusP").getValue();
-    if (statusIcon == 1) {
+    let statusIcon = $$("req_statusP").getValue();
+    if (statusIcon === "1") {
         $$("req_statusIconP").show();
         $$("req_statusIconWarningP").hide();
         $$("req_statusIconDoneP").hide();
         $$("req_statusIconManagerP").hide();
-    } else if (statusIcon == 3) {
+    } else if (statusIcon === "3") {
         $$("req_statusIconP").hide();
         $$("req_statusIconWarningP").show();
         $$("req_statusIconDoneP").hide();
         $$("req_statusIconManagerP").show();
-    } else if (statusIcon == 2) {
+    } else if (statusIcon === "2") {
         $$("req_statusIconP").hide();
         $$("req_statusIconWarningP").show();
         $$("req_statusIconDoneP").hide();
         $$("req_statusIconManagerP").hide();
-    } else if (statusIcon == 0) {
+    } else if (statusIcon === "0") {
         $$("req_statusIconP").hide();
         $$("req_statusIconWarningP").hide();
         $$("req_statusIconDoneP").show();
