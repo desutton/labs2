@@ -915,7 +915,8 @@ const createPanelView = {
         {view: "button", id: "req_update", label: "Update", align: 'left', width: "75", click: "updateTheInvoice", hidden: true},
         {},
         {
-            view: "datatable", id: "lineItemList", autoheight: true, select: true, scrollable: true, columns:
+            view: "datatable", id: "lineItemList", autoheight: true, select: true, scrollable: true, editable:true, editaction:"custom",
+            columns:
                 [
                     {id: "reqR_itemName", header: "Item Disc.", sort: "string", adjust: true},
                     {id: "reqR_partNumber", header: "Part No.", sort: "string", adjust: true},
@@ -925,9 +926,17 @@ const createPanelView = {
                     {id: "reqR_cost", header: "Cost", sort: "string", adjust: true},
                     {id: "reqR_orderType", header: "Order Type", sort: "string", adjust: true},
                     {id: "reqR_reason", header: "Reason", sort: "string", adjust: true} ,
-                    {id: "reqR_UUID", header:"", hidden:true}
+                    {id: "reqR_UUID", header:"", hidden:true},
+                    {id:"", template:"<button class='des_BasicIconButton des_BasicIconButton1' onclick='saveEditedReqRow()'><i class='fas fa-save'></i></button>", css:"padding_less", width:70 },
+                    {id:"", template:"<button class='des_BasicIconButton des_BasicIconButton2' onclick='deleteReqRow()'><i class='fas fa-trash-alt'></i></button>", css:"padding_less", width:70 }
                     //{id: "reqR_deleteButton", header:"Delete", checkValue:'on', uncheckValue:'off', template:"{common.checkbox()}", width:65}
                 ],
+            on:{
+                "onItemClick":function(id){
+                    this.editRow(id);
+                    this.focusEditor(id);
+                }
+            },
             //data: '[{"reqR_UUID":"1234567890","reqR_reqUUID":"068159d5-6b67-4e2a-ac74-31a0f284666f","reqR_itemName":"This is a Test","reqR_partNumber":"938ryqh9wuodqnoq 9qeh","reqR_unitQty":"2","reqR_qty":"1","reqR_costUnit":"999.99","reqR_cost":"9999.99","reqR_orderType":"","reqR_reason":"Because I really want it","reqR_eta":null,"reqR_status":"1"}]'
             url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + reqUUID + "&dataName=data&select=1"
         },
@@ -1511,13 +1520,16 @@ $$("addNewReqRow").attachEvent("onItemClick", function () {
 
 
 
-
-
+////////////////////////// Preedit controller for the following function ////////////
+function saveEditedReqRow() {
+    saveEditedReqRowMain();
+}
+///////  ----- Need to make this section above and below more generic //////
 
 
 
 /////////////////////////// Edit/Save a row in the ReqRow ///////////////////////////
-function saveEditedReqRow() {
+function saveEditedReqRowMain() {
     if(!$$("orderLineItems").getSelectedId()){
         webix.message("No item is selected!");
         return;
