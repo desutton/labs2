@@ -1,0 +1,117 @@
+ActiveIngredient = :ActiveIngredient, ActiveIngredientDescription = :ActiveIngredientDescription, ActiveIngredientPreparation = :ActiveIngredientPreparation, cb_done = :cb_done,CustLotNumber = :CustLotNumber,CustomerName = :CustomerName,CustomerOrderDescription = :CustomerOrderDescription,CustomerOrderFormLineNumber = :CustomerOrderFormLineNumber,LabJobName = :LabJobName,method2job = :method2job,Method2Mixed = :Method2Mixed,methodAIStatus = :methodAIStatus,methodCondition = :methodCondition,methodClass = :methodClass,methodDate = :methodDate,methodDueDate = :methodDueDate,MethodID = :MethodID,MethodName = :MethodName,methodReportComments = :methodReportComments,methodStorageCondition = :methodStorageCondition,methodTrackingNumber = :methodTrackingNumber,methodType = :methodType,methodUserID = :methodUserID,singleMethodCustomerComments = :singleMethodCustomerComments,singleMethodCustomerStabilityStudyInstructions = :singleMethodCustomerStabilityStudyInstructions,singleSampleAmount = :singleSampleAmount,TestTypeName = :TestTypeName,methodLocation = :methodLocation,methodAssigned = :methodAssigned,methodMixName = :methodMixName,methodLabReportButton = :methodLabReportButton,methodModifyDate = :methodModifyDate,methodQRData = :methodQRData,methodCurrentStatus = :methodCurrentStatus,methodConcentrationStandard = :methodConcentrationStandard,methodDilutionFactor = :methodDilutionFactor,methodAreaSamplePeak = :methodAreaSamplePeak,methodAreaStandardPeak = :methodAreaStandardPeak,methodAmountInSample = :methodAmountInSample,methodAmountOfSample = :methodAmountOfSample,methodCalcPotency = :methodCalcPotency,methodCalcPotencyPercent = :methodCalcPotencyPercent,methodTargetPotency = :methodTargetPotency,methodCalcPotencyPercentofPotencyTarget = :methodCalcPotencyPercentofPotencyTarget,methodTargetPotencyPercent = :methodTargetPotencyPercent,methodCalcPotencyPercentofPotencyTargetPercent = :methodCalcPotencyPercentofPotencyTargetPercent,methodMixSampleConcetration = :methodMixSampleConcetration
+
+
+
+
+
+
+
+
+':ActiveIngredient'   => $ActiveIngredient,
+':ActiveIngredientDescription'   => $ActiveIngredientDescription,
+':ActiveIngredientPreparation'   => $ActiveIngredientPreparation, 
+':cb_done'   => $cb_done, 
+':CustLotNumber'   => $CustLotNumber, 
+':CustomerName'   => $CustomerName, 
+':CustomerOrderDescription'   => $CustomerOrderDescription, 
+':CustomerOrderFormLineNumber'   => $CustomerOrderFormLineNumber, 
+':LabJobName'   => $LabJobName, 
+':method2job'   => $method2job, 
+':Method2Mixed'   => $Method2Mixed, 
+':methodAIStatus'   => $methodAIStatus, 
+':methodCondition'   => $methodCondition, 
+':methodClass'   => $methodClass, 
+':methodDate'   => $methodDate, 
+':methodDueDate'   => $methodDueDate, 
+':MethodID'   => $MethodID, 
+':MethodName'   => $MethodName, 
+':methodReportComments'   => $methodReportComments, 
+':methodStorageCondition'   => $methodStorageCondition, 
+':methodTrackingNumber'   => $methodTrackingNumber, 
+':methodType'   => $methodType, 
+':methodUserID'   => $methodUserID, 
+':singleMethodCustomerComments'   => $singleMethodCustomerComments, 
+':singleMethodCustomerStabilityStudyInstructions'   => $singleMethodCustomerStabilityStudyInstructions, 
+':singleSampleAmount'   => $singleSampleAmount, 
+':TestTypeName'   => $TestTypeName, 
+':methodLocation'   => $methodLocation, 
+':methodAssigned'   => $methodAssigned, 
+':methodMixName'   => $methodMixName, 
+':methodLabReportButton'   => $methodLabReportButton, 
+':methodModifyDate'   => $methodModifyDate, 
+':methodQRData'   => $methodQRData, 
+':methodCurrentStatus'   => $methodCurrentStatus, 
+':methodConcentrationStandard'   => $methodConcentrationStandard, 
+':methodDilutionFactor'   => $methodDilutionFactor, 
+':methodAreaSamplePeak'   => $methodAreaSamplePeak, 
+':methodAreaStandardPeak'   => $methodAreaStandardPeak, 
+':methodAmountInSample'   => $methodAmountInSample, 
+':methodAmountOfSample'   => $methodAmountOfSample, 
+':methodCalcPotency'   => $methodCalcPotency, 
+':methodCalcPotencyPercent'   => $methodCalcPotencyPercent, 
+':methodTargetPotency'   => $methodTargetPotency, 
+':methodCalcPotencyPercentofPotencyTarget'   => $methodCalcPotencyPercentofPotencyTarget, 
+':methodTargetPotencyPercent'   => $methodTargetPotencyPercent, 
+':methodCalcPotencyPercentofPotencyTargetPercent'   => $methodCalcPotencyPercentofPotencyTargetPercent, 
+':methodMixSampleConcetration'   => $methodMixSampleConcetration,
+
+
+
+
+
+
+
+
+
+
+
+
+// Build the sql query local var
+$query = "UPDATE methods SET 
+ActiveIngredient='".$ActiveIngredient."',
+ActiveIngredientDescription='".$ActiveIngredientDescription."',
+ActiveIngredientPreparation='".$ActiveIngredientPreparation, cb_done='".$cb_done."', 
+CustLotNumber='".$CustLotNumber."', 
+CustomerName='".$CustomerName."', 
+CustomerOrderDescription='".$CustomerOrderDescription."', 
+CustomerOrderFormLineNumber='".$CustomerOrderFormLineNumber."', 
+LabJobName='".$LabJobName."', 
+method2job='".$method2job."', 
+Method2Mixed='".$Method2Mixed."', 
+methodAIStatus='".$methodAIStatus."', 
+methodCondition='".$methodCondition."', 
+methodClass='".$methodClass."', 
+methodDate='".$methodDate."', 
+methodDueDate='".$methodDueDate."', 
+MethodID='".$MethodID."', 
+MethodName='".$MethodName."', 
+methodReportComments='".$methodReportComments."', 
+methodStorageCondition='".$methodStorageCondition."', 
+methodTrackingNumber='".$methodTrackingNumber."', 
+methodType='".$methodType."', 
+methodUserID='".$methodUserID."', 
+singleMethodCustomerComments='".$singleMethodCustomerComments."', 
+singleMethodCustomerStabilityStudyInstructions='".$singleMethodCustomerStabilityStudyInstructions."', 
+singleSampleAmount='".$singleSampleAmount."', 
+TestTypeName='".$TestTypeName."', 
+methodLocation='".$methodLocation."', 
+methodAssigned='".$methodAssigned."', 
+methodMixName='".$methodMixName."', 
+methodLabReportButton='".$methodLabReportButton."', 
+methodModifyDate='".$methodModifyDate."', 
+methodQRData='".$methodQRData."', 
+methodCurrentStatus='".$methodCurrentStatus."', 
+methodConcentrationStandard='".$methodConcentrationStandard."', 
+methodDilutionFactor='".$methodDilutionFactor."', 
+methodAreaSamplePeak='".$methodAreaSamplePeak."', 
+methodAreaStandardPeak='".$methodAreaStandardPeak."', 
+methodAmountInSample='".$methodAmountInSample."', 
+methodAmountOfSample='".$methodAmountOfSample."', 
+methodCalcPotency='".$methodCalcPotency."', 
+methodCalcPotencyPercent='".$methodCalcPotencyPercent."', 
+methodTargetPotency='".$methodTargetPotency."', 
+methodCalcPotencyPercentofPotencyTarget='".$methodCalcPotencyPercentofPotencyTarget."', 
+methodTargetPotencyPercent='".$methodTargetPotencyPercent."', 
+methodCalcPotencyPercentofPotencyTargetPercent='".$methodCalcPotencyPercentofPotencyTargetPercent."', 
+methodMixSampleConcetration='".$methodMixSampleConcetration."',
+FROM methods WHERE MethodID='".$MethodID."'";

@@ -1,0 +1,58 @@
+<!--
+~ <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+-->
+
+<html>
+<head>
+    <link rel="stylesheet" href="/webix/codebase/skins/webix.css" type="text/css">
+    <link rel="stylesheet" href="../../css/font-awesome.css" type="text/css">
+    <script src="/webix/codebase/webix.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../css/main.css" type="text/css">
+</head>
+<body>
+<script>
+    //var myData = webix.ajax("../../php/api_methods/SELECTz.php?select=7");
+    //var myData = webix.ajax("../../php/api_methods/treeselect.php?select=1");
+    //var myData = webix.ajax("data.json");
+    var myData = [{
+        'value': 'Bacon East Pharmacy',
+        status: [{
+            'value': 'O',
+            vdates: [{
+                'value': '2015-09-16',
+                invoice: [{value: 'Bp 20150916', id: '887A4F0B-2F94-4647-8329-E42FE495403A'}]
+            }]
+        }]
+    }];
+
+
+    var myjson = webix.DataDriver.myjson = webix.copy(webix.DataDriver.json);
+    myjson.child = function (obj) {
+        if (obj.$level == 1)
+            return obj.status;
+        if (obj.$level == 2)
+            return obj.vdates;
+        if (obj.$level == 3)
+            return obj.invoice;
+    };
+
+    webix.ui({
+        view: "tree",
+        datatype: "myjson",
+        select: "row",
+        //url: "../../php/api_methods/treeselect.php?select=1",
+        //url: "http://localhost/labs2/php/api_methods/SELECTz.php?select=7",
+        // url:"http://localhost/labs2/php/api_methods/SELECTz.php?tableName=invoice&columnNames=invoice_UUID,invoice_invoiceNumber,invoice_totalDue,invoice_paid,customers.cust_company%20AS%20value,customers.cust_UUID%20AS%20id&joinTable=customers&joinColumn=invoice_2custUUID&joinValue=customers.cust_id&sortby=customers.cust_company&sort=ASC&dataName=data&select=7",
+        //url:"data.json"
+        data: myData
+
+
+    }).show();
+    //webix.message({text: "Data Loaded", type: "error", expire: 2000});
+</script>
+<p>Hello there</p>
+<a href="../../php/api_methods/SELECTz.php?select=7">Click me</a>
+</body>
+</html>
+
+

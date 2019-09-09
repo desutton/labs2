@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "solu": [
+    {
+      "id": "null",
+      "ingredient": "Bob",
+      "formulateAs": "Smith",
+      "verySoluble": "is a",
+      "freelySoluble": "very",
+      "soluble": "cool",
+      "sparinglySoluble": "dude",
+      "slightlySoluble": "from",
+      "verySlightlySoluble": "the city",
+      "insoluble": "undefined"
+    }
+  ]
+}
