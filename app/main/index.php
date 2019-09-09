@@ -18,11 +18,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
 		<?php echo($theAppVersion); ?>
 		</title>
         <!--<link rel="stylesheet" href="http://localhost/webix/codebase/skins/clouds.css" type="text/css">-->
-        <link rel="stylesheet" href="/labs2/webix/codebase/skins/flat.min.css" type="text/css">
+        <link rel="stylesheet" href="../../webix/codebase/skins/flat.min.css" type="text/css">
         <!--<link rel="stylesheet" href="/labs2/webix/codebase/webix.css" type="text/css">-->
-        <link rel="stylesheet" href="http://localhost/labs2/css/font-awesome.css" type="text/css">
-        <link rel="stylesheet" href="http://localhost/labs2/css/main.css" type="text/css">
-        <script src="http://localhost/labs2/webix/codebase/webix.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../../css/font-awesome.css" type="text/css">
+        <link rel="stylesheet" href="../../css/main.css" type="text/css">
+        <script src="../../webix/codebase/webix.js" type="text/javascript"></script>
 		<!--<script src="../supportjs/dscode.js" type="text/javascript"></script>-->
 	</header>
 	<body>

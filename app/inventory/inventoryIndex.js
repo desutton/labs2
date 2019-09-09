@@ -1567,4 +1567,9 @@ webix.ajax().get("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&co
 webix.message("Data Deleted");
 $$("lineItemList").remove($$("lineItemList").getSelectedId());
 }
+
+function dupTheRecord() {
+
+}
+
 //////////////////////////////////////////////////////////// END OF Page Controller Logic  ////////////////////////////////////////////////////////////
