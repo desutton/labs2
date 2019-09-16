@@ -26,6 +26,7 @@ var data = {
     id: "usersTable",
     autowidth: true,
     autoheight: true,
+    editable: true,
     columns: [
         {id: "users_UUID", header: "uuid", width: 100, hidden: true},
         {id: "users_firstname", header: "First Name", width: 100, editor: "text"},
