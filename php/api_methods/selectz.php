@@ -18,6 +18,16 @@ Version History:
 *******************************************************************************/ 
 require_once( dirname( __FILE__ ).'/../intercon/servercon.php');
 require_once( dirname( __FILE__ ).'/../errorcodes.php');
+require_once(dirname(__FILE__) . '/../resources/mode.php');
+require_once(dirname(__FILE__) . '/../resources/appVersion.php');
+require_once(dirname(__FILE__) . '/../resources/cookieMonster.php');
+
+$filename = 'log.txt';
+$date = new DateTime();
+$timestamp = $date->format('Y-m-d H:i:s');
+$clientIP = $_SERVER['REMOTE_ADDR'];
+
+
 
 $theTableName = $_GET['tableName']; // Name of the db table(s). Multi use commas to seperate
 $theColumnSelection = $_GET['columnNames']; // The name(s) of the columns to search. Multi use commas to seperate
@@ -44,7 +54,7 @@ if ($theOperator == NULL) {
 
 $theTreeColumnName = $_GET['treeColumn'];
 
-// String for quering the database
+// String for querying the database
 switch ($pickSQL) {
 	case 1:
 		$sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " WHERE " . $theSelectColumn . $theOperator . "'" . $theSelectColumnValue . "'";
@@ -85,18 +95,18 @@ switch ($pickSQL) {
 		break;
 
     case 1000: //Method case
-        $sql_query = "SELECT activeIngredient.ai_name, activeIngredient.ai_description, jobs.jobs_name,	jobs.jobs_dueDate, jobs.jobs_modifyDate, jobs.jobs_createDate, jobs.jobs_assignment, jobs.jobs_2accessLevel, jobs.jobs_2group, jobs.jobs_2userLog, methodCalculation.methodC_areaSamplePeak, methodCalculation.methodC_areaStandardPeak, methodCalculation.methodC_amountInSample, methodCalculation.methodC_amountOfSample, methodCalculation.methodC_calcPotency, methodCalculation.methodC_calcPotencyPercent, methodCalculation.methodC_targetPotency, methodCalculation.methodC_calcPotencyPercentOfPotencyTarget, methodCalculation.methodC_targetPotencyPercent, methodCalculation.methodC_calcPotencyPercentOfPotencyTargetPercent, methodCalculation.methodC_mixSampleConcetration, methodCalculation.methodC_concentrationStandard, methodCalculation.methodC_dilutionFactor, customers.cust_company, customers.cust_customerNumber FROM method INNER JOIN activeIngredient ON method.method_2activeIngredient = activeIngredient.ai_UUID INNER JOIN jobs ON method.method_2jobs = jobs.jobs_UUID INNER JOIN methodProperties ON method.method_2methodProperties = methodProperties.methodP_UUID INNER JOIN methodCalculation ON method.method_2Calculation = methodCalculation.methodC_UUID INNER JOIN customers ON method.method_2customer = customers.cust_UUID";
+        //$sql_query = "SELECT activeIngredient.ai_name, activeIngredient.ai_description, jobs.jobs_name,	jobs.jobs_dueDate, jobs.jobs_modifyDate, jobs.jobs_createDate, jobs.jobs_assignment, jobs.jobs_2accessLevel, jobs.jobs_2group, jobs.jobs_2userLog, methodCalculation.methodC_areaSamplePeak, methodCalculation.methodC_areaStandardPeak, methodCalculation.methodC_amountInSample, methodCalculation.methodC_amountOfSample, methodCalculation.methodC_calcPotency, methodCalculation.methodC_calcPotencyPercent, methodCalculation.methodC_targetPotency, methodCalculation.methodC_calcPotencyPercentOfPotencyTarget, methodCalculation.methodC_targetPotencyPercent, methodCalculation.methodC_calcPotencyPercentOfPotencyTargetPercent, methodCalculation.methodC_mixSampleConcetration, methodCalculation.methodC_concentrationStandard, methodCalculation.methodC_dilutionFactor, customers.cust_company, customers.cust_customerNumber FROM method INNER JOIN activeIngredient ON method.method_2activeIngredient = activeIngredient.ai_UUID INNER JOIN jobs ON method.method_2jobs = jobs.jobs_UUID INNER JOIN methodProperties ON method.method_2methodProperties = methodProperties.methodP_UUID INNER JOIN methodCalculation ON method.method_2Calculation = methodCalculation.methodC_UUID INNER JOIN customers ON method.method_2customer = customers.cust_UUID";
         $x = 1;
         break;
 	
-	default:	
-		$sql_query = "SELECT * FROM appinfo";
+	default:
+        $sql_query = "SELECT * FROM `appinfo`";
 		$x = 500;
 }
 ////////////////////////////////////////////////////////////
 ///             START LOGGING CODE
 
-if ($sysmode ==!"prod"){
+if ($sysmode !== "prod") {
 	file_put_contents($filename, "           ".$timestamp." | ".$theUserName."@".$clientIP." - " .$sql_query."\r", FILE_APPEND | LOCK_EX);
 }
 ///              END LOGGING CODE

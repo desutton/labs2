@@ -15,13 +15,14 @@ var tabbar = {
     id: "userProfileSettingsToolbar",
     elements: [
         //{view: "button", value: "Add", width: 70, click: "add_row"},
+
+        {view: "button", value: "Save", width: 70, click: "update_row"},
+        {view: "button", value: "Reset", width: 85, click: "refresh_row"},
         {
-            view: "button", value: "Close", width: 70, click: function () {
+            view: "icon", icon: "wxi-close", click: function () {
                 $$('userMain').close();
             }
-        },
-        {view: "button", value: "Save", width: 70, click: "update_row"},
-        {view: "button", value: "Reset", width: 85, click: "refresh_row"}
+        }
     ]
 };
 

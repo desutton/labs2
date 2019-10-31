@@ -23,6 +23,7 @@ if (!isset($_COOKIE['cial'])) {
 }
 include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/appVersion.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/mode.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/accessApp.php'
 
 //echo $_SERVER['HTTP_USER_AGENT'] . "\n\n";
 
@@ -53,6 +54,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/mode.php';
 <div class="des_DesktopInfo">
     <br/>Hello: <b><?php echo($theDisplayName); ?></b>
     <br/>You are logged in as: <b><?php echo($theUserName); ?></b>
+    <br/>Your access level is: <b><?php echo($USER_ACCESS_LEVEL); ?></b>
     <br/>The version is: <b><?php echo($theAppVersion); ?></b>
     <br/>The server is in: <b><?php echo($sysmode); ?></b> mode
     <br/>Server name is: <b><?php echo $_SERVER['SERVER_NAME']; ?></b>

@@ -170,13 +170,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
 			}
         }).show();
 
-            webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_2group&selectColumn=users_name&selectData=" + userId + "&dataName=data&select=1", function (text, data) {
+            webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_2accessLevel&selectColumn=users_name&selectData=" + userId + "&dataName=data&select=1", function (text, data) {
                 var userAuthor = text;
                 userAuthor = userAuthor.replace('[', "");
                 userAuthor = userAuthor.replace(']', "");
                 userAuthor = JSON.parse(userAuthor);
-                console.log("The User Group is: "+ userAuthor.users_2group);
-                if (userAuthor.users_2group === "0") {
+                console.log("The User Access is: " + userAuthor.users_2accessLevel);
+                if (userAuthor.users_2accessLevel === "0") {
                     $$("mainMenu").showItem("userList");
                      console.log("Super User");
                 } else {

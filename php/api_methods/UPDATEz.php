@@ -28,6 +28,14 @@
 require_once(dirname(__FILE__) . '/../intercon/servercon.php');
 require_once(dirname(__FILE__) . '/../errorcodes.php');
 //require_once( dirname( __FILE__ ).'/../uuidautogen.php');
+require_once(dirname(__FILE__) . '/../resources/mode.php');
+require_once(dirname(__FILE__) . '/../resources/appVersion.php');
+require_once(dirname(__FILE__) . '/../resources/cookieMonster.php');
+
+$filename = 'log.txt';
+$date = new DateTime();
+$timestamp = $date->format('Y-m-d H:i:s');
+$clientIP = $_SERVER['REMOTE_ADDR'];
 
 // Local Vars
 $row = 0;
@@ -50,7 +58,7 @@ if (!isset($_GET['startCol'])) {
 /**/
 //$theURIData = "users_UUID=10&users_firstname=David&users_lastname=Sutton&users_name=dsutton&users_employeeId=12&users_pass=init123&users_2group=1&users_2accessLevel=1&users_displayName=Dave%20Sutton";
 // Local vars
-//	$filename = 'log.txt';
+$filename = 'log.txt';
 
 
 //Decode the JSON from the URL
@@ -109,7 +117,7 @@ $sql_query = ("UPDATE " . $theTableName . " SET " . $sqlDataFormat . " WHERE " .
 ////////////////////////////////////////////////////////////
 ///             START LOGGING CODE
 
-if ($sysmode == !"prod") {
+if ($sysmode !== "prod") {
     file_put_contents($filename, "**update** " . $timestamp . " | " . $theUserName . "@" . $clientIP . " - " . $sql_query . "\r", FILE_APPEND | LOCK_EX);
 }
 ///              END LOGGING CODE
@@ -121,7 +129,7 @@ try {
 
 // Fire off the request to the db
     $stmt->execute();
-// Logging staement for the transaction
+// Logging statement for the transaction
     file_put_contents($filename, $stmt->rowCount() . " UPDATED  " . $timestamp . " | " . $theUserName . "@" . $clientIP . " - " . $sql_query . "\r", FILE_APPEND | LOCK_EX);
 
 } // Out put the error to the file

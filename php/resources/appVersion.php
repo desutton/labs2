@@ -4,5 +4,5 @@
  */
 
 $theAppVersion = "LABS2 v.10";
-print($theAppVersion);
+//print($theAppVersion);
 ?>
