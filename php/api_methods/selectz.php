@@ -4,29 +4,42 @@
  */
 
 /*******************************************************************************
-David Sutton
-Jun 21 2014
+* David Sutton
+* Jun 21 2014
+ *
+* Version: 1.0.0
+ *
+ * SELECT
+ * This code is an API for a EXT4 based app. Used to grab data from a mySQL db,
+* then parse it and then prepare a JSON statement to be uploaded to a EXTJS Store.
+ *
+* Version History:
+* 1.0.0 - Initial release
+ * 1.5 - re-purposed for Webix lot of logging now.
+ *******************************************************************************/
 
-Version: 1.0.0
-
-INSERT
-This code is an API for a EXT4 based app. Used to grab data from a mySQL db, 
-then parse it and then prepare a JSON statement to be uploaded to a EXTJS Store. 
-
-Version History:
-1.0.0 - Initial release
-*******************************************************************************/ 
-require_once( dirname( __FILE__ ).'/../intercon/servercon.php');
+//include 'http://localhost/labs2php/intercon/servercon.php?db_name=labs'; // script to get the database connections
 require_once( dirname( __FILE__ ).'/../errorcodes.php');
 require_once(dirname(__FILE__) . '/../resources/mode.php');
 require_once(dirname(__FILE__) . '/../resources/appVersion.php');
 require_once(dirname(__FILE__) . '/../resources/cookieMonster.php');
 
-$filename = 'log.txt';
+//////////////////////// Database Selection ////////////////////////
+$DB_NAME = $_GET['db_name']; // Name of the database which you want to connect too
+if ($DB_NAME === "labs") {
+    require_once(dirname(__FILE__) . '/../intercon/servercon.php'); //use the labs database
+} elseif ($DB_NAME === "LABSPRD") {
+    require_once(dirname(__FILE__) . '/../intercon/servercon1.php'); //user the LABSPRD database
+} else {
+    require_once(dirname(__FILE__) . '/../intercon/servercon.php'); //use the labs db as a last resort
+}
+file_put_contents($filename, "Connected to db: " . $DB_NAME . "\r", FILE_APPEND | LOCK_EX); // Just a little log as to what db your connecting to
+////////////////////////////////////////////////////////////////////
+
+$filename = 'log.txt'; // log file for every transaction
 $date = new DateTime();
 $timestamp = $date->format('Y-m-d H:i:s');
-$clientIP = $_SERVER['REMOTE_ADDR'];
-
+$clientIP = $_SERVER['REMOTE_ADDR']; // grab the browsers ip just to freak-out the user
 
 
 $theTableName = $_GET['tableName']; // Name of the db table(s). Multi use commas to seperate
@@ -44,8 +57,8 @@ $theUserID = $_GET['usenid']; //Collect the user id for logging
 
 $pickSQL = $_GET['select']; //The value for which SQL SELECT statement to use "1" = LIMIT, "2" = WHERE, no value is regular expression
 $x = NULL;
-$rowLimits = 50;
-//$rowLimits = $_GET['limit'];
+//$rowLimits = 50;
+$rowLimits = $_GET['limit'];
 
 if ($theOperator == NULL) {
 	$theOperator = "=";
@@ -91,8 +104,12 @@ switch ($pickSQL) {
         $theJoinColumnValue3 = "invoice.invoice_invoiceDate";
         //$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName." JOIN ".$theJoinTable." ON ".$theJoinColumn." = ".$theJoinColumnValue." ORDER BY ".$theOrderColumn." ".$theOrderSort." LIMIT ".$rowLimits;
         $sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " JOIN " . $theJoinTable . " ON " . $theJoinColumn . " = " . $theJoinColumnValue . " ORDER BY " . $theJoinColumnValue1 . " ASC, " . $theJoinColumnValue2 . " ASC, " . $theJoinColumnValue3 . " ASC ";
-		$x = 1;
-		break;
+        $x = 1;
+        break;
+    case 8:
+        $sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " INNER JOIN " . $theJoinTable . " ON " . $theJoinColumn . " = " . $theJoinColumnValue . " WHERE " . $theSelectColumn . $theOperator . "'" . $theSelectColumnValue . "'" . " ORDER BY " . $theOrderColumn . " " . $theOrderSort . " LIMIT " . $rowLimits;
+        $x = 1;
+        break;
 
     case 1000: //Method case
         //$sql_query = "SELECT activeIngredient.ai_name, activeIngredient.ai_description, jobs.jobs_name,	jobs.jobs_dueDate, jobs.jobs_modifyDate, jobs.jobs_createDate, jobs.jobs_assignment, jobs.jobs_2accessLevel, jobs.jobs_2group, jobs.jobs_2userLog, methodCalculation.methodC_areaSamplePeak, methodCalculation.methodC_areaStandardPeak, methodCalculation.methodC_amountInSample, methodCalculation.methodC_amountOfSample, methodCalculation.methodC_calcPotency, methodCalculation.methodC_calcPotencyPercent, methodCalculation.methodC_targetPotency, methodCalculation.methodC_calcPotencyPercentOfPotencyTarget, methodCalculation.methodC_targetPotencyPercent, methodCalculation.methodC_calcPotencyPercentOfPotencyTargetPercent, methodCalculation.methodC_mixSampleConcetration, methodCalculation.methodC_concentrationStandard, methodCalculation.methodC_dilutionFactor, customers.cust_company, customers.cust_customerNumber FROM method INNER JOIN activeIngredient ON method.method_2activeIngredient = activeIngredient.ai_UUID INNER JOIN jobs ON method.method_2jobs = jobs.jobs_UUID INNER JOIN methodProperties ON method.method_2methodProperties = methodProperties.methodP_UUID INNER JOIN methodCalculation ON method.method_2Calculation = methodCalculation.methodC_UUID INNER JOIN customers ON method.method_2customer = customers.cust_UUID";
@@ -107,7 +124,7 @@ switch ($pickSQL) {
 ///             START LOGGING CODE
 
 if ($sysmode !== "prod") {
-	file_put_contents($filename, "           ".$timestamp." | ".$theUserName."@".$clientIP." - " .$sql_query."\r", FILE_APPEND | LOCK_EX);
+    file_put_contents($filename, "           " . $timestamp . " | " . $theUserName . "@" . $clientIP . " - " . $sql_query . "\r", FILE_APPEND | LOCK_EX); // write to the log file the query and db action
 }
 ///              END LOGGING CODE
 /// ////////////////////////////////////////////////////////

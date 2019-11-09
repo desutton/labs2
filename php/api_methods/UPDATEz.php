@@ -17,6 +17,7 @@
  * 1.0.0 - Inital release
  * 1.0.1 - Added a url option to start and end at a particular column number
  * 1.5.0 - Revampt to make it work with Webix code better Feb-26-2019
+ * 1.5 - re-purposed for Webix lot of logging now.
  *******************************************************************************/
 /******************** Notes ***************************************************
  *
@@ -25,12 +26,24 @@
  * "/labs2/php/api_methods/updatez.php?tableName="+ theTableName +"&JSONdata="+ theJSONData +"&theWhere="+ theWhereColumn +"&theUUID="+ theUUID +"&dataName=data&select=1"
  *
  * /******************************************************************************/
-require_once(dirname(__FILE__) . '/../intercon/servercon.php');
+//require_once(dirname(__FILE__) . '/../intercon/servercon.php');
 require_once(dirname(__FILE__) . '/../errorcodes.php');
 //require_once( dirname( __FILE__ ).'/../uuidautogen.php');
 require_once(dirname(__FILE__) . '/../resources/mode.php');
 require_once(dirname(__FILE__) . '/../resources/appVersion.php');
 require_once(dirname(__FILE__) . '/../resources/cookieMonster.php');
+
+//////////////////////// Database Selection ////////////////////////
+$DB_NAME = $_GET['db_name']; // Name of the database which you want to connect too
+if ($DB_NAME === "labs") {
+    require_once(dirname(__FILE__) . '/../intercon/servercon.php'); //use the labs database
+} elseif ($DB_NAME === "LABSPRD") {
+    require_once(dirname(__FILE__) . '/../intercon/servercon1.php'); //user the LABSPRD database
+} else {
+    require_once(dirname(__FILE__) . '/../intercon/servercon.php'); //use the labs db as a last resort
+}
+file_put_contents($filename, "Connected to db: " . $DB_NAME . "\r", FILE_APPEND | LOCK_EX); // Just a little log as to what db your connecting to
+////////////////////////////////////////////////////////////////////
 
 $filename = 'log.txt';
 $date = new DateTime();

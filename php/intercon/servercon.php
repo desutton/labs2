@@ -15,7 +15,10 @@ php files using it to make the database connection.
   // Might want to create a errorcode showing successful db connection
   	//require_once('../errorcodes.php');
   	require_once( dirname( __FILE__ ).'/../errorcodes.php');
-  	
+$DB_NAME = "";
+$DB_NAME = $_GET['db_name']; // Name of the database.
+
+
 // Local vars
 ////////////////////////////////////////////////////////////
 ///             START LOGGING CODE
@@ -64,14 +67,16 @@ $username = 'dbuser';
 //$username = 'fmuser';
 //$password = 'init123';
 $password = 'dbman';
-$DB_NAME =	"labs";
-
+//if ($DB_NAME = !"" ) {
+$DB_NAME = "labs";
+//}
 try{
-    $conn = new PDO('mysql:host=localhost;dbname=labs;charset=utf8mb4', $username, $password);
+    $conn = new PDO('mysql:host=localhost;dbname=' . $DB_NAME . ';charset=utf8mb4', $username, $password);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$errorcodesMSG= "Database Connection ".$errorcodes[200]." ".date('Y-m-d H:i:s')."\r";
 	} catch(PDOException $errorMessage) {
     $errorcodesMSG= "Database Connection ".$errorcodes[401]." ".date('Y-m-d H:i:s')."\r".$errorMessage->getMessage()."\r";
+    $conn = null;
 }
 ///*DEBUG*///
 //echo $errorcodesMSG;

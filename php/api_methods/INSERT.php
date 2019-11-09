@@ -4,24 +4,37 @@
  */
 
 /*******************************************************************************
-David Sutton
-Jun 21 2014
-
-Version: 1.0.2
-
-INSERT
-This code is an API for a EXT4 based app. Used to grab JSON data from a RESTful 
-URL, parse it and then prepare a SQL statement to be executed in mySQL db. 
-
-Version History:
-1.0.0 - Inital release
-1.0.1 - Added a url option to start and end at a particular column number. Added to keep consistent with UPDATE.php
-1.0.2 - Fixed an issue with the query not inserting because the column names were not part of the insert query
+* David Sutton
+* Jun 21 2014
+ *
+* Version: 1.0.2
+ *
+* INSERT
+* This code is an API for a EXT4 based app. Used to grab JSON data from a RESTful
+* URL, parse it and then prepare a SQL statement to be executed in mySQL db.
+ *
+* Version History:
+* 1.0.0 - Inital release
+* 1.0.1 - Added a url option to start and end at a particular column number. Added to keep consistent with UPDATE.php
+* 1.0.2 - Fixed an issue with the query not inserting because the column names were not part of the insert query
+ * 1.5 - re-purposed for Webix lot of logging now.
 *******************************************************************************/
 /******************************************************************************/
-require_once( dirname( __FILE__ ).'/../intercon/servercon.php');
+//require_once( dirname( __FILE__ ).'/../intercon/servercon.php');
 require_once( dirname( __FILE__ ).'/../errorcodes.php');
-require_once( dirname( __FILE__ ).'/../uuidautogen.php');
+require_once( dirname( __FILE__) . '/../uuidautogen.php');
+
+//////////////////////// Database Selection ////////////////////////
+$DB_NAME = $_GET['db_name']; // Name of the database which you want to connect too
+if ($DB_NAME === "labs") {
+    require_once(dirname(__FILE__) . '/../intercon/servercon.php'); //use the labs database
+} elseif ($DB_NAME === "LABSPRD") {
+    require_once(dirname(__FILE__) . '/../intercon/servercon1.php'); //user the LABSPRD database
+} else {
+    require_once(dirname(__FILE__) . '/../intercon/servercon.php'); //use the labs db as a last resort
+}
+file_put_contents($filename, "Connected to db: " . $DB_NAME . "\r", FILE_APPEND | LOCK_EX); // Just a little log as to what db your connecting to
+////////////////////////////////////////////////////////////////////
 
 // Local Vars
 	$row = 0;

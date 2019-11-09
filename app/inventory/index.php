@@ -12,8 +12,8 @@
 include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php';
 
 ?>
-<html>
-<body>
-<b><a href="inventoryIndex.php">Requisition Page:</a></b><i> Create/View/Approve Requisitions</i>
+<br \>
+<b><a href="inventoryIndex.php">Requisition Page:</a></b><i> Create/View/Approve Requisitions</i><br \>
+<b><a href="inventoryArchive.php">Inventory Archive Page:</a></b><i> Inventory Archives</i><br \>
 </body>
 </html>

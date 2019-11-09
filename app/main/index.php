@@ -146,6 +146,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
                                         value: "Requisition Forms",
                                         icon: "qrcode",
                                         iFrame: "../inventory/inventoryIndex.php"
+                                    },
+                                    {
+                                        value: "Archives",
+                                        icon: "qrcode",
+                                        iFrame: "../inventory/inventoryArchive.php"
                                     }
                                 ]
                             },
