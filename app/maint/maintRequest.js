@@ -18,11 +18,11 @@ d = d.getDate();
 var ymd = y + "-" + m + "-" + d;
 var theLineItemUUID = "";
 var theLineItemUUIDPast = "";
-var ztheData = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&operator=>&dataName=data&select=1");
-var ztheDataPast = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&dataName=data&select=1");
+var ztheData = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=maintRequest&columnNames=maintreq_UUID,maintreq_reqID,maintreq_reqName,maintreq_dept,maintreq_dateSubmit,maintreq_dateNeed,maintreq_ordered,maintreq_vendor,maintreq_orderNum,maintreq_manager,maintreq_authorization,maintreq_managerDate,maintreq_authorizationDate,maintreq_status&selectColumn=maintreq_status&selectData=0&operator=>&dataName=data&select=1");
+var ztheDataPast = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=maintRequest&columnNames=maintreq_UUID,maintreq_reqID,maintreq_reqName,maintreq_dept,maintreq_dateSubmit,maintreq_dateNeed,maintreq_ordered,maintreq_vendor,maintreq_orderNum,maintreq_manager,maintreq_authorization,maintreq_managerDate,maintreq_authorizationDate,maintreq_status&selectColumn=maintreq_status&selectData=0&dataName=data&select=1");
 var ztheUsers = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_displayName%20AS%20value&dataName=data&select=5");
 var ztheDeptments = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=vl_departments&columnNames=dept_name%20AS%20value&dataName=data&select=5");
-var ztheReqRowData = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=NULL&dataName=data&select=1");
+var ztheReqRowData = webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=maintRequestRows&columnNames=maintreqR_UUID,maintreqR_reqUUID,maintreqR_itemName,maintreqR_partNumber,maintreqR_unitQty,maintreqR_qty,maintreqR_costUnit,maintreqR_cost,maintreqR_orderType,maintreqR_reason,maintreqR_eta,maintreqR_status&selectColumn=maintreqR_reqUUID&selectData=NULL&dataName=data&select=1");
 webix.ajax().post("/labs2/php/api_methods/log.txt", {id: 100});
 
 
@@ -72,24 +72,30 @@ const activePanelView = {
                     id: "activeReqs",
                     visibleBatch: 10,
                     columns: [
-                        {id: "req_dateSubmit", header: "Date Submitted", sort: "date", adjust: "header"},
-                        {id: "req_reqID", header: "Requisition", sort: "string", adjust: "data"},
-                        {id: "req_reqName", header: "Requester", sort: "string", adjust: true},
-                        {id: "req_vendor", header: "Vendor", sort: "string", adjust: true, batch: 10},
-                        {id: "req_UUID", header: "UUID", sort: "string", adjust: "data", batch: 30},
-                        {id: "req_dept", header: "Dept", sort: "string", adjust: true, batch: 20},
-                        {id: "req_dateNeed", header: "Date Needed", sort: "string", adjust: true, batch: 20},
-                        {id: "req_ordered", header: "Order Date", sort: "string", adjust: true, batch: 20},
-                        {id: "req_orderNum", header: "Order #", sort: "string", adjust: true, batch: 20},
-                        {id: "req_manager", header: "Manager", sort: "string", adjust: true, batch: 20},
-                        {id: "req_authorization", header: "Authorization", sort: "string", adjust: true, batch: 20},
-                        {id: "req_managerDate", header: "MGR Date", sort: "date", adjust: true, batch: 20},
-                        {id: "req_authorizationDate", header: "AUTH Date", sort: "date", adjust: true, batch: 20},
-                        {id: "req_status", header: "Status", sort: "int", adjust: "header", batch: 30}
+                        {id: "maintreq_dateSubmit", header: "Date Submitted", sort: "date", adjust: "header"},
+                        {id: "maintreq_reqID", header: "Requisition", sort: "string", adjust: "data"},
+                        {id: "maintreq_reqName", header: "Requester", sort: "string", adjust: true},
+                        {id: "maintreq_vendor", header: "Vendor", sort: "string", adjust: true, batch: 10},
+                        {id: "maintreq_UUID", header: "UUID", sort: "string", adjust: "data", batch: 30},
+                        {id: "maintreq_dept", header: "Dept", sort: "string", adjust: true, batch: 20},
+                        {id: "maintreq_dateNeed", header: "Date Needed", sort: "string", adjust: true, batch: 20},
+                        {id: "maintreq_ordered", header: "Order Date", sort: "string", adjust: true, batch: 20},
+                        {id: "maintreq_orderNum", header: "Order #", sort: "string", adjust: true, batch: 20},
+                        {id: "maintreq_manager", header: "Manager", sort: "string", adjust: true, batch: 20},
+                        {
+                            id: "maintreq_authorization",
+                            header: "Authorization",
+                            sort: "string",
+                            adjust: true,
+                            batch: 20
+                        },
+                        {id: "maintreq_managerDate", header: "MGR Date", sort: "date", adjust: true, batch: 20},
+                        {id: "maintreq_authorizationDate", header: "AUTH Date", sort: "date", adjust: true, batch: 20},
+                        {id: "maintreq_status", header: "Status", sort: "int", adjust: "header", batch: 30}
                     ],
                     select: true,
                     data: ztheData,
-                    //url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&operator=>&dataName=data&select=1"
+                    //url: "/labs2/php/api_methods/SELECTz.php?tableName=maintRequest&columnNames=maintreq_UUID,maintreq_reqID,maintreq_reqName,maintreq_dept,maintreq_dateSubmit,maintreq_dateNeed,maintreq_ordered,maintreq_vendor,maintreq_orderNum,maintreq_manager,maintreq_authorization,maintreq_managerDate,maintreq_authorizationDate,maintreq_status&selectColumn=maintreq_status&selectData=0&operator=>&dataName=data&select=1"
                 }
             ]
         },
@@ -117,8 +123,8 @@ const activePanelView = {
                                                     css: {"font-weight": "bold"}
                                                 }, {
                                                     view: "label",
-                                                    value: "req_reID",
-                                                    id: "req_reqIDA"
+                                                    value: "maintreq_reID",
+                                                    id: "maintreq_reqIDA"
                                                 }, {
                                                     view: "button",
                                                     id: "reqEdit",
@@ -145,21 +151,21 @@ const activePanelView = {
                                                     css: {"font-weight": "bold"}
                                                 }, {
                                                     view: "label",
-                                                    value: "req_reqName",
-                                                    id: "req_reqNameA"
+                                                    value: "maintreq_reqName",
+                                                    id: "maintreq_reqNameA"
                                                 }, {
                                                     view: "combo",
-                                                    value: "req_reqName",
-                                                    name: "req_reqName",
-                                                    id: "req_reqNameA1",
+                                                    value: "maintreq_reqName",
+                                                    name: "maintreq_reqName",
+                                                    id: "maintreq_reqNameA1",
                                                     borderless: true,
                                                     hidden: true,
                                                     suggest: ztheUsers //"/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_displayName%20AS%20value&dataName=data&select=5"
                                                 }, {
                                                     view: "text",
-                                                    value: "req_UUID",
-                                                    name: "req_UUID",
-                                                    id: "req_UUIDA1",
+                                                    value: "maintreq_UUID",
+                                                    name: "maintreq_UUID",
+                                                    id: "maintreq_UUIDA1",
                                                     borderless: true,
                                                     hidden: true
                                                 }]
@@ -170,11 +176,11 @@ const activePanelView = {
                                                     label: "Dept:",
                                                     width: "150",
                                                     css: {"font-weight": "bold"}
-                                                }, {view: "label", value: "req_dept", id: "req_deptA"}, {
+                                                }, {view: "label", value: "maintreq_dept", id: "maintreq_deptA"}, {
                                                     view: "combo",
-                                                    value: "req_dept",
-                                                    name: "req_dept",
-                                                    id: "req_deptA1",
+                                                    value: "maintreq_dept",
+                                                    name: "maintreq_dept",
+                                                    id: "maintreq_deptA1",
                                                     borderless: true,
                                                     hidden: true,
                                                     suggest: ztheDeptments //"/labs2/php/api_methods/SELECTz.php?tableName=vl_departments&columnNames=dept_name%20AS%20value&dataName=data&select=5"
@@ -188,13 +194,13 @@ const activePanelView = {
                                                     css: {"font-weight": "bold"}
                                                 }, {
                                                     view: "label",
-                                                    value: "req_dateSubmit",
-                                                    id: "req_dateSubmitA"
+                                                    value: "maintreq_dateSubmit",
+                                                    id: "maintreq_dateSubmitA"
                                                 }, {
                                                     view: "datepicker",
-                                                    value: "req_dateSubmit",
-                                                    name: "req_dateSubmit",
-                                                    id: "req_dateSubmitA1",
+                                                    value: "maintreq_dateSubmit",
+                                                    name: "maintreq_dateSubmit",
+                                                    id: "maintreq_dateSubmitA1",
                                                     borderless: true,
                                                     hidden: true,
                                                     format: "%Y-%m-%d"
@@ -208,13 +214,13 @@ const activePanelView = {
                                                     css: {"font-weight": "bold"}
                                                 }, {
                                                     view: "label",
-                                                    value: "req_dateNeed",
-                                                    id: "req_dateNeedA"
+                                                    value: "maintreq_dateNeed",
+                                                    id: "maintreq_dateNeedA"
                                                 }, {
                                                     view: "datepicker",
-                                                    value: "req_dateNeed",
-                                                    name: "req_dateNeed",
-                                                    id: "req_dateNeedA1",
+                                                    value: "maintreq_dateNeed",
+                                                    name: "maintreq_dateNeed",
+                                                    id: "maintreq_dateNeedA1",
                                                     borderless: true,
                                                     hidden: true,
                                                     format: "%Y-%m-%d"
@@ -228,13 +234,13 @@ const activePanelView = {
                                                     css: {"font-weight": "bold"}
                                                 }, {
                                                     view: "label",
-                                                    value: "req_vendor",
-                                                    id: "req_vendorA"
+                                                    value: "maintreq_vendor",
+                                                    id: "maintreq_vendorA"
                                                 }, {
                                                     view: "text",
-                                                    value: "req_vendor",
-                                                    name: "req_vendor",
-                                                    id: "req_vendorA1",
+                                                    value: "maintreq_vendor",
+                                                    name: "maintreq_vendor",
+                                                    id: "maintreq_vendorA1",
                                                     borderless: true,
                                                     hidden: true
                                                 }]
@@ -247,13 +253,13 @@ const activePanelView = {
                                                     css: {"font-weight": "bold"}
                                                 }, {
                                                     view: "label",
-                                                    value: "req_orderNum",
-                                                    id: "req_orderNumA"
+                                                    value: "maintreq_orderNum",
+                                                    id: "maintreq_orderNumA"
                                                 }, {
                                                     view: "text",
-                                                    value: "req_orderNum",
-                                                    name: "req_orderNum",
-                                                    id: "req_orderNumA1",
+                                                    value: "maintreq_orderNum",
+                                                    name: "maintreq_orderNum",
+                                                    id: "maintreq_orderNumA1",
                                                     borderless: true,
                                                     hidden: true
                                                 }]
@@ -266,13 +272,13 @@ const activePanelView = {
                                                     css: {"font-weight": "bold"}
                                                 }, {
                                                     view: "label",
-                                                    value: "req_ordered",
-                                                    id: "req_orderedA"
+                                                    value: "maintreq_ordered",
+                                                    id: "maintreq_orderedA"
                                                 }, {
                                                     view: "datepicker",
-                                                    value: "req_ordered",
-                                                    name: "req_ordered",
-                                                    id: "req_orderedA1",
+                                                    value: "maintreq_ordered",
+                                                    name: "maintreq_ordered",
+                                                    id: "maintreq_orderedA1",
                                                     borderless: true,
                                                     hidden: true,
                                                     format: "%Y-%m-%d"
@@ -326,7 +332,7 @@ const activePanelView = {
                                                 id: "addNewReqRow",
                                                 width: 50,
                                                 type: "icon",
-                                                icon: "far fa-plus-square",
+                                                icon: "fas fa-plus-square",
                                                 tooltip: "Add a new item"
                                             },
                                             {
@@ -348,24 +354,24 @@ const activePanelView = {
                                                 visibleBatch: 100,
                                                 columns: [
                                                     {
-                                                        id: "reqR_itemName",
-                                                        name: "reqR_itemNameA",
+                                                        id: "maintreqR_itemName",
+                                                        name: "maintreqR_itemNameA",
                                                         header: "Item Disc.",
                                                         sort: "string",
                                                         adjust: true,
                                                         editor: "text"
                                                     },
                                                     {
-                                                        id: "reqR_partNumber",
-                                                        name: "reqR_partNumberA",
+                                                        id: "maintreqR_partNumber",
+                                                        name: "maintreqR_partNumberA",
                                                         header: "Part No.",
                                                         sort: "string",
                                                         adjust: true,
                                                         editor: "text"
                                                     },
                                                     {
-                                                        id: "reqR_unitQty",
-                                                        name: "reqR_unitQtyA",
+                                                        id: "maintreqR_unitQty",
+                                                        name: "maintreqR_unitQtyA",
                                                         header: "Unit Qty",
                                                         sort: "string",
                                                         adjust: true,
@@ -373,8 +379,8 @@ const activePanelView = {
                                                         batch: 100
                                                     },
                                                     {
-                                                        id: "reqR_qty",
-                                                        name: "reqR_qtyA",
+                                                        id: "maintreqR_qty",
+                                                        name: "maintreqR_qtyA",
                                                         header: "Qty",
                                                         sort: "string",
                                                         adjust: true,
@@ -382,8 +388,8 @@ const activePanelView = {
                                                         batch: 100
                                                     },
                                                     {
-                                                        id: "reqR_costUnit",
-                                                        name: "reqR_costUnitA",
+                                                        id: "maintreqR_costUnit",
+                                                        name: "maintreqR_costUnitA",
                                                         header: "Unit Cost",
                                                         sort: "string",
                                                         adjust: true,
@@ -391,8 +397,8 @@ const activePanelView = {
                                                         batch: 100
                                                     },
                                                     {
-                                                        id: "reqR_cost",
-                                                        name: "reqR_costA",
+                                                        id: "maintreqR_cost",
+                                                        name: "maintreqR_costA",
                                                         header: "Cost",
                                                         sort: "string",
                                                         adjust: true,
@@ -400,8 +406,8 @@ const activePanelView = {
                                                         batch: 100
                                                     },
                                                     {
-                                                        id: "reqR_orderType",
-                                                        name: "reqR_orderTypeA",
+                                                        id: "maintreqR_orderType",
+                                                        name: "maintreqR_orderTypeA",
                                                         header: "Order Type",
                                                         sort: "string",
                                                         adjust: true,
@@ -409,8 +415,8 @@ const activePanelView = {
                                                         batch: 100
                                                     },
                                                     {
-                                                        id: "reqR_reason",
-                                                        name: "reqR_reasonA",
+                                                        id: "maintreqR_reason",
+                                                        name: "maintreqR_reasonA",
                                                         header: "Reasons",
                                                         sort: "string",
                                                         adjust: true,
@@ -418,7 +424,7 @@ const activePanelView = {
                                                         batch: 100
                                                     },
                                                     {
-                                                        id: "reqR_UUID",
+                                                        id: "maintreqR_UUID",
                                                         header: "UUID",
                                                         sort: "string",
                                                         adjust: true,
@@ -448,7 +454,7 @@ const activePanelView = {
                                                 },
 
                                                 // Need to load a blank record set //
-                                                //url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=NULL&dataName=data&select=1"
+                                                //url: "/labs2/php/api_methods/SELECTz.php?tableName=maintRequestRows&columnNames=maintreqR_UUID,maintreqR_reqUUID,maintreqR_itemName,maintreqR_partNumber,maintreqR_unitQty,maintreqR_qty,maintreqR_costUnit,maintreqR_cost,maintreqR_orderType,maintreqR_reason,maintreqR_eta,maintreqR_status&selectColumn=maintreqR_reqUUID&selectData=NULL&dataName=data&select=1"
                                                 data: ztheReqRowData
                                             }
                                         ]
@@ -471,12 +477,12 @@ const activePanelView = {
                                             label: "Manager:",
                                             width: "150",
                                             css: {"font-weight": "bold"}
-                                        }, {view: "label", value: "req_manager", id: "req_managerA"}, {
+                                        }, {view: "label", value: "maintreq_manager", id: "maintreq_managerA"}, {
                                             view: "button",
                                             id: "reqManagerApproval",
                                             width: "50",
                                             type: "icon",
-                                            icon: "far fa-check",
+                                            icon: "fas fa-check",
                                             tooltip: "Manager Approval",
                                             hidden: true
                                         }]
@@ -487,7 +493,7 @@ const activePanelView = {
                                             label: "MGR Date:",
                                             width: "150",
                                             css: {"font-weight": "bold"}
-                                        }, {view: "label", value: "req_managerDate", id: "req_managerDateA"}]
+                                        }, {view: "label", value: "maintreq_managerDate", id: "maintreq_managerDateA"}]
                                     },
                                     {
                                         cols: [{
@@ -497,8 +503,8 @@ const activePanelView = {
                                             css: {"font-weight": "bold"}
                                         }, {
                                             view: "label",
-                                            value: "req_authorization",
-                                            id: "req_authorizationA"
+                                            value: "maintreq_authorization",
+                                            id: "maintreq_authorizationA"
                                         }, {
                                             view: "button",
                                             id: "reqAuthorizedApproval",
@@ -517,15 +523,15 @@ const activePanelView = {
                                             css: {"font-weight": "bold"}
                                         }, {
                                             view: "label",
-                                            value: "req_authorizationDate",
-                                            id: "req_authorizationDateA"
+                                            value: "maintreq_authorizationDate",
+                                            id: "maintreq_authorizationDateA"
                                         },
                                             {
                                                 view: "button",
                                                 id: "reqManagerDelete",
                                                 width: "50",
                                                 type: "icon",
-                                                icon: "far fa-trash",
+                                                icon: "fas fa-trash",
                                                 tooltip: "Manager Delete",
                                                 hidden: true
                                             }]
@@ -551,32 +557,32 @@ const activePanelView = {
                                         }, {
                                             view: "label",
                                             width: "15",
-                                            value: "req_status",
-                                            id: "req_statusA",
+                                            value: "maintreq_status",
+                                            id: "maintreq_statusA",
                                             hidden: true
                                         }, {
                                             view: "icon",
-                                            id: "req_statusIcon",
+                                            id: "maintreq_statusIcon",
                                             width: "50",
                                             type: "icon",
-                                            icon: "far fa-check-square",
+                                            icon: "fas fa-check-square",
                                             tooltip: "Status: OK",
                                             align: "left",
                                             css: {"background": "#00ff00"},
                                             hidden: true
                                         }, {
                                             view: "icon",
-                                            id: "req_statusIconWarning",
+                                            id: "maintreq_statusIconWarning",
                                             width: "50",
                                             type: "icon",
-                                            icon: "far fa-exclamation-triangle",
+                                            icon: "fas fa-exclamation-triangle",
                                             tooltip: "Status: Not Approved",
                                             align: "left",
                                             css: {"background": "#ffa500"},
                                             hidden: true
                                         }, {
                                             view: "icon",
-                                            id: "req_statusIconDone",
+                                            id: "maintreq_statusIconDone",
                                             width: "50",
                                             type: "icon",
                                             icon: "fas fa-award",
@@ -586,7 +592,7 @@ const activePanelView = {
                                             hidden: true
                                         }, {
                                             view: "icon",
-                                            id: "req_statusIconManager",
+                                            id: "maintreq_statusIconManager",
                                             type: "icon",
                                             icon: "fas fa-check-double",
                                             tooltop: "Manager Approved",
@@ -610,7 +616,7 @@ const activePanelView = {
                                             width: "150",
                                             css: {"font-weight": "bold"},
                                             hidden: true
-                                        }, {view: "label", value: "req_UUID", id: "req_UUIDA", hidden: true}]
+                                        }, {view: "label", value: "maintreq_UUID", id: "maintreq_UUIDA", hidden: true}]
                                     }
                                 ]
                             }
@@ -662,23 +668,29 @@ const pastPanelView = {
                     id: "pastReqs",
                     visibleBatch: 1,
                     columns: [
-                        {id: "req_dateSubmit", header: "Date Submitted", sort: "date", adjust: "header"},
-                        {id: "req_reqID", header: "Requisition", sort: "string", adjust: "data"},
-                        {id: "req_reqName", header: "Requester", sort: "string", adjust: true},
-                        {id: "req_vendor", header: "Vendor", sort: "string", adjust: true, batch: 100},
-                        {id: "req_UUID", header: "UUID", sort: "string", adjust: "data", batch: 300},
-                        {id: "req_dept", header: "Dept", sort: "string", adjust: true, batch: 200},
-                        {id: "req_dateNeed", header: "Date Needed", sort: "date", adjust: true, batch: 200},
-                        {id: "req_ordered", header: "Order Date", sort: "date", adjust: true, batch: 200},
-                        {id: "req_orderNum", header: "Order #", sort: "string", adjust: true, batch: 200},
-                        {id: "req_manager", header: "Manager", sort: "string", adjust: true, batch: 200},
-                        {id: "req_authorization", header: "Authorization", sort: "string", adjust: true, batch: 200},
-                        {id: "req_managerDate", header: "MGR Date", sort: "date", adjust: true, batch: 200},
-                        {id: "req_authorizationDate", header: "AUTH Date", sort: "date", adjust: true, batch: 200},
-                        {id: "req_status", header: "Status", sort: "int", adjust: "header", batch: 300}
+                        {id: "maintreq_dateSubmit", header: "Date Submitted", sort: "date", adjust: "header"},
+                        {id: "maintreq_reqID", header: "Requisition", sort: "string", adjust: "data"},
+                        {id: "maintreq_reqName", header: "Requester", sort: "string", adjust: true},
+                        {id: "maintreq_vendor", header: "Vendor", sort: "string", adjust: true, batch: 100},
+                        {id: "maintreq_UUID", header: "UUID", sort: "string", adjust: "data", batch: 300},
+                        {id: "maintreq_dept", header: "Dept", sort: "string", adjust: true, batch: 200},
+                        {id: "maintreq_dateNeed", header: "Date Needed", sort: "date", adjust: true, batch: 200},
+                        {id: "maintreq_ordered", header: "Order Date", sort: "date", adjust: true, batch: 200},
+                        {id: "maintreq_orderNum", header: "Order #", sort: "string", adjust: true, batch: 200},
+                        {id: "maintreq_manager", header: "Manager", sort: "string", adjust: true, batch: 200},
+                        {
+                            id: "maintreq_authorization",
+                            header: "Authorization",
+                            sort: "string",
+                            adjust: true,
+                            batch: 200
+                        },
+                        {id: "maintreq_managerDate", header: "MGR Date", sort: "date", adjust: true, batch: 200},
+                        {id: "maintreq_authorizationDate", header: "AUTH Date", sort: "date", adjust: true, batch: 200},
+                        {id: "maintreq_status", header: "Status", sort: "int", adjust: "header", batch: 300}
                     ],
                     select: true,
-                    //url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&dataName=data&select=1"
+                    //url: "/labs2/php/api_methods/SELECTz.php?tableName=maintRequest&columnNames=maintreq_UUID,maintreq_reqID,maintreq_reqName,maintreq_dept,maintreq_dateSubmit,maintreq_dateNeed,maintreq_ordered,maintreq_vendor,maintreq_orderNum,maintreq_manager,maintreq_authorization,maintreq_managerDate,maintreq_authorizationDate,maintreq_status&selectColumn=maintreq_status&selectData=0&dataName=data&select=1"
                     data: ztheDataPast
                 }
             ]
@@ -706,7 +718,7 @@ const pastPanelView = {
                                                 label: "Req Name:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_reID", id: "req_reqIDP"}]
+                                            }, {view: "label", value: "maintreq_reID", id: "maintreq_reqIDP"}]
                                         },
                                         {
                                             cols: [{
@@ -714,7 +726,7 @@ const pastPanelView = {
                                                 label: "Emp Name:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_reqName", id: "req_reqNameP"}]
+                                            }, {view: "label", value: "maintreq_reqName", id: "maintreq_reqNameP"}]
                                         },
                                         {
                                             cols: [{
@@ -722,7 +734,7 @@ const pastPanelView = {
                                                 label: "Dept:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_dept", id: "req_deptP"}]
+                                            }, {view: "label", value: "maintreq_dept", id: "maintreq_deptP"}]
                                         },
                                         {
                                             cols: [{
@@ -730,7 +742,11 @@ const pastPanelView = {
                                                 label: "Date Submitted:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_dateSubmit", id: "req_dateSubmitP"}]
+                                            }, {
+                                                view: "label",
+                                                value: "maintreq_dateSubmit",
+                                                id: "maintreq_dateSubmitP"
+                                            }]
                                         },
                                         {
                                             cols: [{
@@ -738,7 +754,7 @@ const pastPanelView = {
                                                 label: "Date Needed:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_dateNeed", id: "req_dateNeedP"}]
+                                            }, {view: "label", value: "maintreq_dateNeed", id: "maintreq_dateNeedP"}]
                                         },
                                         {
                                             cols: [{
@@ -746,7 +762,7 @@ const pastPanelView = {
                                                 label: "Vendor:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_vendor", id: "req_vendorP"}]
+                                            }, {view: "label", value: "maintreq_vendor", id: "maintreq_vendorP"}]
                                         },
                                         {
                                             cols: [{
@@ -754,7 +770,7 @@ const pastPanelView = {
                                                 label: "Order #:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_orderNum", id: "req_orderNumP"}]
+                                            }, {view: "label", value: "maintreq_orderNum", id: "maintreq_orderNumP"}]
                                         },
                                         {
                                             cols: [{
@@ -762,7 +778,7 @@ const pastPanelView = {
                                                 label: "Date Ordered:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_ordered", id: "req_orderedP"}]
+                                            }, {view: "label", value: "maintreq_ordered", id: "maintreq_orderedP"}]
                                         }
                                     ]
                                 }
@@ -783,35 +799,40 @@ const pastPanelView = {
                                             //scroll: true,
                                             columns: [
                                                 {
-                                                    id: "reqR_itemName",
+                                                    id: "maintreqR_itemName",
                                                     header: "Item Disc.",
                                                     sort: "string",
                                                     adjust: true
                                                 },
                                                 {
-                                                    id: "reqR_partNumber",
+                                                    id: "maintreqR_partNumber",
                                                     header: "Part No.",
                                                     sort: "string",
                                                     adjust: true
                                                 },
-                                                {id: "reqR_unitQty", header: "Unit Qty", sort: "string", adjust: true},
-                                                {id: "reqR_qty", header: "Qty", sort: "string", adjust: true},
                                                 {
-                                                    id: "reqR_costUnit",
+                                                    id: "maintreqR_unitQty",
+                                                    header: "Unit Qty",
+                                                    sort: "string",
+                                                    adjust: true
+                                                },
+                                                {id: "maintreqR_qty", header: "Qty", sort: "string", adjust: true},
+                                                {
+                                                    id: "maintreqR_costUnit",
                                                     header: "Unit Cost",
                                                     sort: "string",
                                                     adjust: true
                                                 },
-                                                {id: "reqR_cost", header: "Cost", sort: "string", adjust: true},
+                                                {id: "maintreqR_cost", header: "Cost", sort: "string", adjust: true},
                                                 {
-                                                    id: "reqR_orderType",
+                                                    id: "maintreqR_orderType",
                                                     header: "Order Type",
                                                     sort: "string",
                                                     adjust: true
                                                 },
-                                                {id: "reqR_reason", header: "Reason", sort: "string", adjust: true}
+                                                {id: "maintreqR_reason", header: "Reason", sort: "string", adjust: true}
                                             ],
-                                            //url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=NULL&dataName=data&select=1"
+                                            //url: "/labs2/php/api_methods/SELECTz.php?tableName=maintRequestRows&columnNames=maintreqR_UUID,maintreqR_reqUUID,maintreqR_itemName,maintreqR_partNumber,maintreqR_unitQty,maintreqR_qty,maintreqR_costUnit,maintreqR_cost,maintreqR_orderType,maintreqR_reason,maintreqR_eta,maintreqR_status&selectColumn=maintreqR_reqUUID&selectData=NULL&dataName=data&select=1"
                                             data: ztheReqRowData
                                         }
                                     ]
@@ -832,7 +853,7 @@ const pastPanelView = {
                                                 label: "Manager:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_manager", id: "req_managerP"}]
+                                            }, {view: "label", value: "maintreq_manager", id: "maintreq_managerP"}]
                                         },
                                         {
                                             cols: [{
@@ -840,7 +861,11 @@ const pastPanelView = {
                                                 label: "MGR Date:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_managerDate", id: "req_managerDateP"}]
+                                            }, {
+                                                view: "label",
+                                                value: "maintreq_managerDate",
+                                                id: "maintreq_managerDateP"
+                                            }]
                                         },
                                         {
                                             cols: [{
@@ -848,7 +873,11 @@ const pastPanelView = {
                                                 label: "Authorization:",
                                                 width: "150",
                                                 css: {"font-weight": "bold"}
-                                            }, {view: "label", value: "req_authorization", id: "req_authorizationP"}]
+                                            }, {
+                                                view: "label",
+                                                value: "maintreq_authorization",
+                                                id: "maintreq_authorizationP"
+                                            }]
                                         },
                                         {
                                             cols: [{
@@ -858,15 +887,15 @@ const pastPanelView = {
                                                 css: {"font-weight": "bold"}
                                             }, {
                                                 view: "label",
-                                                value: "req_authorizationDate",
-                                                id: "req_authorizationDateP"
+                                                value: "maintreq_authorizationDate",
+                                                id: "maintreq_authorizationDateP"
                                             },
                                                 {
                                                     view: "button",
                                                     id: "reqPastManagerDelete",
                                                     width: "50",
                                                     type: "icon",
-                                                    icon: "far fa-trash",
+                                                    icon: "fas fa-trash",
                                                     tooltip: "Manager Delete",
                                                     hidden: true
                                                 }]
@@ -891,35 +920,35 @@ const pastPanelView = {
                                                 css: {"font-weight": "bold"}
                                             }, {
                                                 view: "icon",
-                                                id: "req_statusIconDoneP",
+                                                id: "maintreq_statusIconDoneP",
                                                 width: "50",
                                                 type: "icon",
-                                                icon: "far fa-award",
+                                                icon: "fas fa-award",
                                                 tooltip: "Status: DONE",
                                                 align: "left",
                                                 css: {"background": "DodgerBlue"},
                                                 hidden: true
                                             }, {
                                                 view: "label",
-                                                value: "req_status",
-                                                id: "req_statusP",
+                                                value: "maintreq_status",
+                                                id: "maintreq_statusP",
                                                 hidden: true
                                             }, {
                                                 view: "icon",
-                                                id: "req_statusIconP",
+                                                id: "maintreq_statusIconP",
                                                 width: "50",
                                                 type: "icon",
-                                                icon: "far fa-thumbs-up",
+                                                icon: "fas fa-thumbs-up",
                                                 tooltip: "Status: OK",
                                                 align: "left",
                                                 css: {"background": "#00ff00"},
                                                 hidden: true
                                             }, {
                                                 view: "icon",
-                                                id: "req_statusIconWarningP",
+                                                id: "maintreq_statusIconWarningP",
                                                 width: "50",
                                                 type: "icon",
-                                                icon: "far fa-exclamation-triangle",
+                                                icon: "fas fa-exclamation-triangle",
                                                 tooltip: "Status: Not Approved",
                                                 align: "left",
                                                 css: {"background": "#ffa500"},
@@ -927,9 +956,9 @@ const pastPanelView = {
                                             },
                                                 {
                                                     view: "icon",
-                                                    id: "req_statusIconManagerP",
+                                                    id: "maintreq_statusIconManagerP",
                                                     type: "icon",
-                                                    icon: "far fa-check",
+                                                    icon: "fas fa-check",
                                                     tooltop: "Manager Approved",
                                                     align: "left",
                                                     css: {"background": "#00ff00"},
@@ -952,7 +981,12 @@ const pastPanelView = {
                                                 width: "150",
                                                 css: {"font-weight": "bold"},
                                                 hidden: true
-                                            }, {view: "label", value: "req_UUID", id: "req_UUIDP", hidden: true}]
+                                            }, {
+                                                view: "label",
+                                                value: "maintreq_UUID",
+                                                id: "maintreq_UUIDP",
+                                                hidden: true
+                                            }]
                                         }
                                     ]
                                 }
@@ -972,11 +1006,11 @@ const createPanelView = {
     id: "createReq", width: 1375,
     ///////////////
     rows: [
-        {view: "text", width: "400", id: "req_reqID", label: "Req Name", labelWidth: 150},
+        {view: "text", width: "400", id: "maintreq_reqID", label: "Req Name", labelWidth: 150},
         {
             view: "combo",
             width: "400",
-            id: "req_name",
+            id: "maintreq_name",
             label: "Requester's Name",
             labelWidth: 150,
             //suggest: ztheUsersCreate
@@ -985,18 +1019,18 @@ const createPanelView = {
         {
             view: "combo",
             width: "400",
-            id: "req_dept",
+            id: "maintreq_dept",
             label: "Department",
             labelWidth: 150,
             //suggest: ztheDeptmentsCreate
             suggest: "/labs2/php/api_methods/SELECTz.php?tableName=vl_departments&columnNames=dept_name%20AS%20value&dataName=data&select=5"
         },
-        {view: "text", width: "400", id: "req_vend", label: "Vendor", labelWidth: 150},
-        {view: "text", width: "400", id: "req_ordr", label: "Order Number", labelWidth: 150},
+        {view: "text", width: "400", id: "maintreq_vend", label: "Vendor", labelWidth: 150},
+        {view: "text", width: "400", id: "maintreq_ordr", label: "Order Number", labelWidth: 150},
         {
             view: "datepicker",
             width: "400",
-            id: "req_subm",
+            id: "maintreq_subm",
             format: "%Y-%m-%d",
             stringResult: true,
             label: "Date Submited",
@@ -1005,7 +1039,7 @@ const createPanelView = {
         {
             view: "datepicker",
             width: "400",
-            id: "req_need",
+            id: "maintreq_need",
             format: "%Y-%m-%d",
             stringResult: true,
             label: "Date Needed",
@@ -1013,10 +1047,10 @@ const createPanelView = {
         },
         {template: "", height: 38},
         {view: "text", width: "100", id: "invoice_UUID", hidden: true, value: reqUUID},
-        {view: "button", id: "req_save", label: "Save", align: 'left', width: "75", click: "saveTheInvoice"},
+        {view: "button", id: "maintreq_save", label: "Save", align: 'left', width: "75", click: "saveTheInvoice"},
         {
             view: "button",
-            id: "req_update",
+            id: "maintreq_update",
             label: "Update",
             align: 'left',
             width: "75",
@@ -1034,15 +1068,15 @@ const createPanelView = {
             editaction: "custom",
             columns:
                 [
-                    {id: "reqR_itemName", header: "Item Disc.", sort: "string", adjust: true},
-                    {id: "reqR_partNumber", header: "Part No.", sort: "string", adjust: true},
-                    {id: "reqR_unitQty", header: "Unit Qty", sort: "string", adjust: true},
-                    {id: "reqR_qty", header: "Qty", sort: "string", adjust: true},
-                    {id: "reqR_costUnit", header: "Unit Cost", sort: "string", adjust: true},
-                    {id: "reqR_cost", header: "Cost", sort: "string", adjust: true},
-                    {id: "reqR_orderType", header: "Order Type", sort: "string", adjust: true},
-                    {id: "reqR_reason", header: "Reason", sort: "string", adjust: true},
-                    {id: "reqR_UUID", header: "", hidden: true},
+                    {id: "maintreqR_itemName", header: "Item Disc.", sort: "string", adjust: true},
+                    {id: "maintreqR_partNumber", header: "Part No.", sort: "string", adjust: true},
+                    {id: "maintreqR_unitQty", header: "Unit Qty", sort: "string", adjust: true},
+                    {id: "maintreqR_qty", header: "Qty", sort: "string", adjust: true},
+                    {id: "maintreqR_costUnit", header: "Unit Cost", sort: "string", adjust: true},
+                    {id: "maintreqR_cost", header: "Cost", sort: "string", adjust: true},
+                    {id: "maintreqR_orderType", header: "Order Type", sort: "string", adjust: true},
+                    {id: "maintreqR_reason", header: "Reason", sort: "string", adjust: true},
+                    {id: "maintreqR_UUID", header: "", hidden: true},
                     {
                         id: "",
                         template: "<button class='des_BasicIconButton des_BasicIconButton1' onclick='saveEditedReqRow()'><i class='fas fa-save'></i></button>",
@@ -1055,7 +1089,7 @@ const createPanelView = {
                         css: "padding_less",
                         width: 70
                     }
-                    //{id: "reqR_deleteButton", header:"Delete", checkValue:'on', uncheckValue:'off', template:"{common.checkbox()}", width:65}
+                    //{id: "maintreqR_deleteButton", header:"Delete", checkValue:'on', uncheckValue:'off', template:"{common.checkbox()}", width:65}
                 ],
             on: {
                 "onItemClick": function (id) {
@@ -1063,18 +1097,18 @@ const createPanelView = {
                     this.focusEditor(id);
                 }
             },
-            //data: '[{"reqR_UUID":"1234567890","reqR_reqUUID":"068159d5-6b67-4e2a-ac74-31a0f284666f","reqR_itemName":"This is a Test","reqR_partNumber":"938ryqh9wuodqnoq 9qeh","reqR_unitQty":"2","reqR_qty":"1","reqR_costUnit":"999.99","reqR_cost":"9999.99","reqR_orderType":"","reqR_reason":"Because I really want it","reqR_eta":null,"reqR_status":"1"}]'
-            url: "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + reqUUID + "&dataName=data&select=1"
+            //data: '[{"maintreqR_UUID":"1234567890","maintreqR_reqUUID":"068159d5-6b67-4e2a-ac74-31a0f284666f","maintreqR_itemName":"This is a Test","maintreqR_partNumber":"938ryqh9wuodqnoq 9qeh","maintreqR_unitQty":"2","maintreqR_qty":"1","maintreqR_costUnit":"999.99","maintreqR_cost":"9999.99","maintreqR_orderType":"","maintreqR_reason":"Because I really want it","maintreqR_eta":null,"maintreqR_status":"1"}]'
+            url: "/labs2/php/api_methods/SELECTz.php?tableName=maintRequestRows&columnNames=maintreqR_UUID,maintreqR_reqUUID,maintreqR_itemName,maintreqR_partNumber,maintreqR_unitQty,maintreqR_qty,maintreqR_costUnit,maintreqR_cost,maintreqR_orderType,maintreqR_reason,maintreqR_eta,maintreqR_status&selectColumn=maintreqR_reqUUID&selectData=" + reqUUID + "&dataName=data&select=1"
         },
         {
             cols: [
-                {view: "text", placeholder: "Item Disc.", width: 150, id: "reqR_itemNameX"},
-                {view: "text", placeholder: "Part#", width: 150, id: "reqR_partNumberX"},
+                {view: "text", placeholder: "Item Disc.", width: 150, id: "maintreqR_itemNameX"},
+                {view: "text", placeholder: "Part#", width: 150, id: "maintreqR_partNumberX"},
                 {
                     view: "text",
                     placeholder: "1",
                     width: 40,
-                    id: "reqR_unitQtyX",
+                    id: "maintreqR_unitQtyX",
                     validate: webix.rules.isNumber,
                     required: true
                 },
@@ -1082,14 +1116,19 @@ const createPanelView = {
                     view: "text",
                     placeholder: "Qty",
                     width: 60,
-                    id: "reqR_qtyX",
+                    id: "maintreqR_qtyX",
                     validate: webix.rules.isNumber,
                     required: true
                 },
-                {view: "text", placeholder: "Unit Cost", width: 100, id: "reqR_costUnitX"},
-                {view: "text", placeholder: "Cost", width: 100, id: "reqR_costX"},
+                {view: "text", placeholder: "Unit Cost", width: 100, id: "maintreqR_costUnitX"},
+                {view: "text", placeholder: "Cost", width: 100, id: "maintreqR_costX"},
                 {
-                    view: "select", placeholder: "Order Type", width: 150, id: "reqR_orderTypeX", value: 0, options:
+                    view: "select",
+                    placeholder: "Order Type",
+                    width: 150,
+                    id: "maintreqR_orderTypeX",
+                    value: 0,
+                    options:
                         [{"id": "Supply", "value": "Supply"},
                             {"id": "Reagent", "value": "Reagent"},
                             {"id": "Standard", "value": "Standard"},
@@ -1097,7 +1136,7 @@ const createPanelView = {
                             {"id": "", "value": ""}
                         ]
                 },
-                {view: "text", placeholder: "Reason", width: 150, id: "reqR_reasonX"},
+                {view: "text", placeholder: "Reason", width: 150, id: "maintreqR_reasonX"},
                 {
                     view: "button",
                     placeholder: "Add",
@@ -1148,14 +1187,14 @@ webix.ui({
 ////// Function captures the form data and creates a URL to be sent to the insert.php api. ////////////////////////////////////////////////////////////////
 function saveTheInvoice() {
     var reqUUID = $$("invoice_UUID").getValue();
-    var reqreqID = $$("req_reqID").getValue();
-    var reqName = $$("req_name").getText();
-    var reqDept = $$("req_dept").getText();
-    var reqDateSubmit = $$("req_subm").getValue();       //this work only for the muultiselect element. I did not find it to work with the multicombo
-    var reqNeeded = $$("req_need").getValue();
+    var reqreqID = $$("maintreq_reqID").getValue();
+    var reqName = $$("maintreq_name").getText();
+    var reqDept = $$("maintreq_dept").getText();
+    var reqDateSubmit = $$("maintreq_subm").getValue();       //this work only for the muultiselect element. I did not find it to work with the multicombo
+    var reqNeeded = $$("maintreq_need").getValue();
     var reqOrder = "1970-01-01 00:00";
-    var reqVendor = $$("req_vend").getValue();  //getText gets the actual date formatted field contents
-    var reqOrderNum = $$("req_ordr").getValue();
+    var reqVendor = $$("maintreq_vend").getValue();  //getText gets the actual date formatted field contents
+    var reqOrderNum = $$("maintreq_ordr").getValue();
     var reqManager = "NULL";
     var reqAuthor = "NULL";
     var reqManagerDate = "1970-01-01 00:00";
@@ -1168,36 +1207,36 @@ function saveTheInvoice() {
 
 
 ////////////////// Form Submit to DB //////////////////
-    var theSubmitDataRAW = '{"success":true,"data":[{"req_UUID":"' + reqUUID + '", "req_reqID":"' + reqreqID + '", "req_reqName":"' + reqName + '", "req_dept":"' + reqDept + '", "req_dateSubmit":"' + reqDateSubmit + '", "req_dateNeed":"' + reqNeeded + '", "req_ordered":"' + reqOrder + '", "req_vendor":"' + reqVendor + '", "req_orderNum":"' + reqOrderNum + '", "req_manager":"' + reqManager + '", "req_authorization":"' + reqAuthor + '", "req_managerDate":"' + reqManagerDate + '", "req_authorizationDate":"' + reqAuthorDate + '", "req_status":"' + reqStatus + '"}]}';
-    //var theSubmitDataRAW = '{"success":true,"data":[{"req_UUID":"' + reqUUID + '", "req_reqID":"' + reqreqID + '"}]}';
+    var theSubmitDataRAW = '{"success":true,"data":[{"maintreq_UUID":"' + reqUUID + '", "maintreq_reqID":"' + reqreqID + '", "maintreq_reqName":"' + reqName + '", "maintreq_dept":"' + reqDept + '", "maintreq_dateSubmit":"' + reqDateSubmit + '", "maintreq_dateNeed":"' + reqNeeded + '", "maintreq_ordered":"' + reqOrder + '", "maintreq_vendor":"' + reqVendor + '", "maintreq_orderNum":"' + reqOrderNum + '", "maintreq_manager":"' + reqManager + '", "maintreq_authorization":"' + reqAuthor + '", "maintreq_managerDate":"' + reqManagerDate + '", "maintreq_authorizationDate":"' + reqAuthorDate + '", "maintreq_status":"' + reqStatus + '"}]}';
+    //var theSubmitDataRAW = '{"success":true,"data":[{"maintreq_UUID":"' + reqUUID + '", "maintreq_reqID":"' + reqreqID + '"}]}';
 
-    webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=requisitions&JSONdata=" + theSubmitDataRAW);
+    webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=maintRequest&JSONdata=" + theSubmitDataRAW);
     console.log("JSON DATA being sent to the server " + theSubmitDataRAW); //just a debug code
-    $$("req_update").show();
-    $$("req_save").hide();
+    $$("maintreq_update").show();
+    $$("maintreq_save").hide();
     webix.message({text: "Saved"}); //Optional UI to display that something happened
 }
 
 ////// Function captures the form data and creates a URL to be sent to the insert.php api. ////////////////////////////////////////////////////////////////
 function updateTheInvoice() {
     var reqUUID = $$("invoice_UUID").getValue();
-    var reqreqID = $$("req_reqID").getValue();
-    var reqName = $$("req_name").getText();
-    var reqDept = $$("req_dept").getText();
-    var reqDateSubmit = $$("req_subm").getValue();       //this work only for the muultiselect element. I did not find it to work with the multicombo
-    var reqNeeded = $$("req_need").getValue();
+    var reqreqID = $$("maintreq_reqID").getValue();
+    var reqName = $$("maintreq_name").getText();
+    var reqDept = $$("maintreq_dept").getText();
+    var reqDateSubmit = $$("maintreq_subm").getValue();       //this work only for the muultiselect element. I did not find it to work with the multicombo
+    var reqNeeded = $$("maintreq_need").getValue();
     var reqOrder = "1970-01-01 00:00";
-    var reqVendor = $$("req_vend").getValue();  //getText gets the actual date formatted field contents
-    var reqOrderNum = $$("req_ordr").getValue();
+    var reqVendor = $$("maintreq_vend").getValue();  //getText gets the actual date formatted field contents
+    var reqOrderNum = $$("maintreq_ordr").getValue();
 
     //var creationDat = webix.Date.dateToStr("%Y-%m-%d");     //these next two line create a date format to
     //var creationDate = creationDat(new Date());             //save in the db as to when the record was created.
 
 
 ////////////////// Form Submit to DB //////////////////
-    var theSubmitDataRAW = '{"req_reqID":"' + reqreqID + '", "req_reqName":"' + reqName + '", "req_dept":"' + reqDept + '", "req_dateSubmit":"' + reqDateSubmit + '", "req_dateNeed":"' + reqNeeded + '", "req_ordered":"' + reqOrder + '", "req_vendor":"' + reqVendor + '", "req_orderNum":"' + reqOrderNum + '"}';
+    var theSubmitDataRAW = '{"maintreq_reqID":"' + reqreqID + '", "maintreq_reqName":"' + reqName + '", "maintreq_dept":"' + reqDept + '", "maintreq_dateSubmit":"' + reqDateSubmit + '", "maintreq_dateNeed":"' + reqNeeded + '", "maintreq_ordered":"' + reqOrder + '", "maintreq_vendor":"' + reqVendor + '", "maintreq_orderNum":"' + reqOrderNum + '"}';
 
-    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataRAW + "&theWhereColumn=req_UUID&theUUID=" + reqUUID);
+    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=maintRequest&JSONdata=" + theSubmitDataRAW + "&theWhereColumn=maintreq_UUID&theUUID=" + reqUUID);
     console.log("JSON DATA being sent to the server for update " + theSubmitDataRAW); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
 }
@@ -1206,7 +1245,7 @@ function updateTheInvoice() {
 $$("list_input").attachEvent("onTimedKeyPress", function () {
     var value = this.getValue().toLowerCase();
     $$("activeReqs").filter(function (obj) {
-        return obj.req_reqName.toLowerCase().indexOf(value) === 0;
+        return obj.maintreq_reqName.toLowerCase().indexOf(value) === 0;
     })
 });
 
@@ -1215,7 +1254,7 @@ $$("list_input").attachEvent("onTimedKeyPress", function () {
 $$("past_list_input").attachEvent("onTimedKeyPress", function () {
     var value = this.getValue().toLowerCase();
     $$("pastReqs").filter(function (obj) {
-        return obj.req_reqName.toLowerCase().indexOf(value) === 0;
+        return obj.maintreq_reqName.toLowerCase().indexOf(value) === 0;
     })
 });
 ///////////////////////Test /////////////////////////////
@@ -1228,38 +1267,38 @@ form.bind(list);
 ////////////////// Click on Active Item //////////////////
 
 $$('activeReqs').attachEvent("onAfterSelect", function (id) {
-    var value = this.getItem(id).req_UUID;
-    $$("req_UUIDA").setValue(value);
+    var value = this.getItem(id).maintreq_UUID;
+    $$("maintreq_UUIDA").setValue(value);
     theLineItemUUID = value;
     //console.log(theLineItemUUID);
 
-    $$("req_reqIDA").setValue(this.getItem(id).req_reqID);
+    $$("maintreq_reqIDA").setValue(this.getItem(id).maintreq_reqID);
 
-    $$("req_reqNameA").setValue(this.getItem(id).req_reqName);
+    $$("maintreq_reqNameA").setValue(this.getItem(id).maintreq_reqName);
 
-    $$("req_deptA").setValue(this.getItem(id).req_dept);
+    $$("maintreq_deptA").setValue(this.getItem(id).maintreq_dept);
 
-    $$("req_dateSubmitA").setValue(this.getItem(id).req_dateSubmit);
+    $$("maintreq_dateSubmitA").setValue(this.getItem(id).maintreq_dateSubmit);
 
-    $$("req_dateNeedA").setValue(this.getItem(id).req_dateNeed);
+    $$("maintreq_dateNeedA").setValue(this.getItem(id).maintreq_dateNeed);
 
-    $$("req_orderedA").setValue(this.getItem(id).req_ordered);
+    $$("maintreq_orderedA").setValue(this.getItem(id).maintreq_ordered);
 
-    $$("req_vendorA").setValue(this.getItem(id).req_vendor);
+    $$("maintreq_vendorA").setValue(this.getItem(id).maintreq_vendor);
 
-    $$("req_orderNumA").setValue(this.getItem(id).req_orderNum);
+    $$("maintreq_orderNumA").setValue(this.getItem(id).maintreq_orderNum);
 
-    $$("req_managerA").setValue(this.getItem(id).req_manager);
+    $$("maintreq_managerA").setValue(this.getItem(id).maintreq_manager);
 
-    $$("req_authorizationA").setValue(this.getItem(id).req_authorization);
+    $$("maintreq_authorizationA").setValue(this.getItem(id).maintreq_authorization);
 
-    $$("req_managerDateA").setValue(this.getItem(id).req_managerDate);
+    $$("maintreq_managerDateA").setValue(this.getItem(id).maintreq_managerDate);
 
-    $$("req_authorizationDateA").setValue(this.getItem(id).req_authorizationDate);
+    $$("maintreq_authorizationDateA").setValue(this.getItem(id).maintreq_authorizationDate);
 
-    $$("req_statusA").setValue(this.getItem(id).req_status);
+    $$("maintreq_statusA").setValue(this.getItem(id).maintreq_status);
 
-    var showLineItems = "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + theLineItemUUID + "&dataName=data&select=1";
+    var showLineItems = "/labs2/php/api_methods/SELECTz.php?tableName=maintRequestRows&columnNames=maintreqR_UUID,maintreqR_reqUUID,maintreqR_itemName,maintreqR_partNumber,maintreqR_unitQty,maintreqR_qty,maintreqR_costUnit,maintreqR_cost,maintreqR_orderType,maintreqR_reason,maintreqR_eta,maintreqR_status&selectColumn=maintreqR_reqUUID&selectData=" + theLineItemUUID + "&dataName=data&select=1";
     $$("orderLineItems").clearAll();
     $$("orderLineItems").load(showLineItems);
 
@@ -1281,39 +1320,39 @@ function showActiveBatchRows(changeActiveView) {
 
 $$('pastReqs').attachEvent("onAfterSelect", function (id) {
 
-    var value = this.getItem(id).req_UUID;
-    $$("req_UUIDP").setValue(value);
+    var value = this.getItem(id).maintreq_UUID;
+    $$("maintreq_UUIDP").setValue(value);
     theLineItemUUIDPast = value;
 
 //    console.log(theLineItemUUIDPast);
 
-    $$("req_reqIDP").setValue(this.getItem(id).req_reqID);
+    $$("maintreq_reqIDP").setValue(this.getItem(id).maintreq_reqID);
 
-    $$("req_reqNameP").setValue(this.getItem(id).req_reqName);
+    $$("maintreq_reqNameP").setValue(this.getItem(id).maintreq_reqName);
 
-    $$("req_deptP").setValue(this.getItem(id).req_dept);
+    $$("maintreq_deptP").setValue(this.getItem(id).maintreq_dept);
 
-    $$("req_dateSubmitP").setValue(this.getItem(id).req_dateSubmit);
+    $$("maintreq_dateSubmitP").setValue(this.getItem(id).maintreq_dateSubmit);
 
-    $$("req_dateNeedP").setValue(this.getItem(id).req_dateNeed);
+    $$("maintreq_dateNeedP").setValue(this.getItem(id).maintreq_dateNeed);
 
-    $$("req_orderedP").setValue(this.getItem(id).req_ordered);
+    $$("maintreq_orderedP").setValue(this.getItem(id).maintreq_ordered);
 
-    $$("req_vendorP").setValue(this.getItem(id).req_vendor);
+    $$("maintreq_vendorP").setValue(this.getItem(id).maintreq_vendor);
 
-    $$("req_orderNumP").setValue(this.getItem(id).req_orderNum);
+    $$("maintreq_orderNumP").setValue(this.getItem(id).maintreq_orderNum);
 
-    $$("req_managerP").setValue(this.getItem(id).req_manager);
+    $$("maintreq_managerP").setValue(this.getItem(id).maintreq_manager);
 
-    $$("req_authorizationP").setValue(this.getItem(id).req_authorization);
+    $$("maintreq_authorizationP").setValue(this.getItem(id).maintreq_authorization);
 
-    $$("req_managerDateP").setValue(this.getItem(id).req_managerDate);
+    $$("maintreq_managerDateP").setValue(this.getItem(id).maintreq_managerDate);
 
-    $$("req_authorizationDateP").setValue(this.getItem(id).req_authorizationDate);
+    $$("maintreq_authorizationDateP").setValue(this.getItem(id).maintreq_authorizationDate);
 
-    $$("req_statusP").setValue(this.getItem(id).req_status);
+    $$("maintreq_statusP").setValue(this.getItem(id).maintreq_status);
 
-    var showLineItemsPast = "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + theLineItemUUIDPast + "&dataName=data&select=1";
+    var showLineItemsPast = "/labs2/php/api_methods/SELECTz.php?tableName=maintRequestRows&columnNames=maintreqR_UUID,maintreqR_reqUUID,maintreqR_itemName,maintreqR_partNumber,maintreqR_unitQty,maintreqR_qty,maintreqR_costUnit,maintreqR_cost,maintreqR_orderType,maintreqR_reason,maintreqR_eta,maintreqR_status&selectColumn=maintreqR_reqUUID&selectData=" + theLineItemUUIDPast + "&dataName=data&select=1";
     $$("orderLineItemsPast").clearAll();
     $$("orderLineItemsPast").load(showLineItemsPast);
 
@@ -1336,21 +1375,21 @@ $$("saveTheInvoiceLineButton").attachEvent("onItemClick", function () {
     });
 
     var bb = reqUUID;
-    var cc = $$("reqR_itemNameX").getValue();
-    var dd = $$("reqR_partNumberX").getValue();
-    var ee = $$("reqR_unitQtyX").getValue();
-    var ff = $$("reqR_qtyX").getValue();
-    var gg = $$("reqR_costUnitX").getValue();
-    var hh = $$("reqR_costX").getValue();
-    var ii = $$("reqR_orderTypeX").getValue();
-    var jj = $$("reqR_reasonX").getValue();
+    var cc = $$("maintreqR_itemNameX").getValue();
+    var dd = $$("maintreqR_partNumberX").getValue();
+    var ee = $$("maintreqR_unitQtyX").getValue();
+    var ff = $$("maintreqR_qtyX").getValue();
+    var gg = $$("maintreqR_costUnitX").getValue();
+    var hh = $$("maintreqR_costX").getValue();
+    var ii = $$("maintreqR_orderTypeX").getValue();
+    var jj = $$("maintreqR_reasonX").getValue();
     var kk = "NULL";
     var ll = 1;
 
     ////////////////// Form Submit to DB //////////////////
-    var theSubmitDataRAW2 = '{"success":true,"data":[{"reqR_UUID":"' + reqRUUID + '", "reqR_reqUUID":"' + bb + '", "reqR_itemName":"' + cc + '", "reqR_partNumber":"' + dd + '", "reqR_unitQty":"' + ee + '", "reqR_qty":"' + ff + '", "reqR_costUnit":"' + gg + '", "reqR_cost":"' + hh + '", "reqR_orderType":"' + ii + '", "reqR_reason":"' + jj + '", "reqR_eta":"' + kk + '", "reqR_status":"' + ll + '"}]}';
+    var theSubmitDataRAW2 = '{"success":true,"data":[{"maintreqR_UUID":"' + reqRUUID + '", "maintreqR_reqUUID":"' + bb + '", "maintreqR_itemName":"' + cc + '", "maintreqR_partNumber":"' + dd + '", "maintreqR_unitQty":"' + ee + '", "maintreqR_qty":"' + ff + '", "maintreqR_costUnit":"' + gg + '", "maintreqR_cost":"' + hh + '", "maintreqR_orderType":"' + ii + '", "maintreqR_reason":"' + jj + '", "maintreqR_eta":"' + kk + '", "maintreqR_status":"' + ll + '"}]}';
 
-    webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=requisitionRows&JSONdata=" + theSubmitDataRAW2);
+    webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=maintRequestRows&JSONdata=" + theSubmitDataRAW2);
     console.log("JSON DATA being sent to the server " + theSubmitDataRAW2); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
     window.setTimeout(refreshTheInvoiceLineButton, 1000);
@@ -1359,7 +1398,7 @@ $$("saveTheInvoiceLineButton").attachEvent("onItemClick", function () {
 });
 
 function refreshTheInvoiceLineButton() {
-    var loadLineItems = "/labs2/php/api_methods/SELECTz.php?tableName=requisitionRows&columnNames=reqR_UUID,reqR_reqUUID,reqR_itemName,reqR_partNumber,reqR_unitQty,reqR_qty,reqR_costUnit,reqR_cost,reqR_orderType,reqR_reason,reqR_eta,reqR_status&selectColumn=reqR_reqUUID&selectData=" + reqUUID + "&dataName=data&select=1";
+    var loadLineItems = "/labs2/php/api_methods/SELECTz.php?tableName=maintRequestRows&columnNames=maintreqR_UUID,maintreqR_reqUUID,maintreqR_itemName,maintreqR_partNumber,maintreqR_unitQty,maintreqR_qty,maintreqR_costUnit,maintreqR_cost,maintreqR_orderType,maintreqR_reason,maintreqR_eta,maintreqR_status&selectColumn=maintreqR_reqUUID&selectData=" + reqUUID + "&dataName=data&select=1";
     $$("lineItemList").clearAll();
     $$("lineItemList").load(loadLineItems);
     webix.message({text: "Loaded"});
@@ -1369,19 +1408,19 @@ function refreshTheInvoiceLineButton() {
 /////////////////// Editor script for  Editing Save //////////////////
 $$("reqEditSave").attachEvent("onItemClick", function () {
 
-    var reqUUIDL = $$("req_UUIDA1").getValue();
-    //var reqName = $$("req_reqNameA1").getText();
-    //var reqDept = $$("req_deptA1").getText();
-    var reqSubmitDate = $$("req_dateSubmitA1").getText();
-    var reqDateNeed = $$("req_dateNeedA1").getText();
-    var reqVendor = $$("req_vendorA1").getValue();
-    var reqOrderNum = $$("req_orderNumA1").getValue();
-    var reqOrderedDate = $$("req_orderedA1").getText();
+    var reqUUIDL = $$("maintreq_UUIDA1").getValue();
+    //var reqName = $$("maintreq_reqNameA1").getText();
+    //var reqDept = $$("maintreq_deptA1").getText();
+    var reqSubmitDate = $$("maintreq_dateSubmitA1").getText();
+    var reqDateNeed = $$("maintreq_dateNeedA1").getText();
+    var reqVendor = $$("maintreq_vendorA1").getValue();
+    var reqOrderNum = $$("maintreq_orderNumA1").getValue();
+    var reqOrderedDate = $$("maintreq_orderedA1").getText();
 
-    var updateReqForm = '{"req_dateSubmit":"' + reqSubmitDate + '","req_dateNeed":"' + reqDateNeed + '","req_vendor":"' + reqVendor + '","req_orderNum":"' + reqOrderNum + '","req_ordered":"' + reqOrderedDate + '"}';
+    var updateReqForm = '{"maintreq_dateSubmit":"' + reqSubmitDate + '","maintreq_dateNeed":"' + reqDateNeed + '","maintreq_vendor":"' + reqVendor + '","maintreq_orderNum":"' + reqOrderNum + '","maintreq_ordered":"' + reqOrderedDate + '"}';
 
-//    var updateReqForm = '{"req_reqName":"' + reqName +'","req_dept":"' + reqDept +'","req_dateSubmit":"' + reqSubmitDate +'","req_dateNeed":"' + reqDateNeed +'","req_vendor":"' + reqVendor  +'","req_orderNum":"' + reqOrderNum +'","req_ordered":"' + reqOrderedDate +'"}';
-    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + updateReqForm + "&theWhereColumn=req_UUID&theUUID=" + reqUUIDL);
+//    var updateReqForm = '{"maintreq_reqName":"' + reqName +'","maintreq_dept":"' + reqDept +'","maintreq_dateSubmit":"' + reqSubmitDate +'","maintreq_dateNeed":"' + reqDateNeed +'","maintreq_vendor":"' + reqVendor  +'","maintreq_orderNum":"' + reqOrderNum +'","maintreq_ordered":"' + reqOrderedDate +'"}';
+    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=maintRequest&JSONdata=" + updateReqForm + "&theWhereColumn=maintreq_UUID&theUUID=" + reqUUIDL);
     console.log("JSON DATA being sent to the server " + updateReqForm + " and this data to the db under this id " + reqUUID); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
     window.setTimeout(refreshPanel, 1000);
@@ -1396,9 +1435,9 @@ $$("reqManagerDelete").attachEvent("onItemClick", function () {
 
     //webix.message({text: $userId});
     webix.message({text: theLineItemUUID});
-    //var theSubmitDataManager = '{"req_manager":"' + $userId + '","req_managerDate":"' + ymd + '","req_status":"2"}';
-    webix.ajax("/labs2/php/api_methods/DELETE.php?tableName=requisitions&columnNames=req_UUID&id=" + theLineItemUUID);
-    webix.ajax("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&columnNames=reqR_reqUUID&id=" + theLineItemUUID);
+    //var theSubmitDataManager = '{"maintreq_manager":"' + $userId + '","maintreq_managerDate":"' + ymd + '","maintreq_status":"2"}';
+    webix.ajax("/labs2/php/api_methods/DELETE.php?tableName=maintRequest&columnNames=maintreq_UUID&id=" + theLineItemUUID);
+    webix.ajax("/labs2/php/api_methods/DELETE.php?tableName=maintRequestRows&columnNames=maintreqR_reqUUID&id=" + theLineItemUUID);
     console.log("This data is being DeleteD " + theLineItemUUID); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
     window.setTimeout(refreshPanel, 1000);
@@ -1411,8 +1450,8 @@ $$("reqManagerApproval").attachEvent("onItemClick", function () {
 
     //webix.message({text: $userId});
     //webix.message({text: theLineItemUUID});
-    var theSubmitDataManager = '{"req_manager":"' + $userId + '","req_managerDate":"' + ymd + '","req_status":"2"}';
-    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataManager + "&theWhereColumn=req_UUID&theUUID=" + theLineItemUUID);
+    var theSubmitDataManager = '{"maintreq_manager":"' + $userId + '","maintreq_managerDate":"' + ymd + '","maintreq_status":"2"}';
+    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=maintRequest&JSONdata=" + theSubmitDataManager + "&theWhereColumn=maintreq_UUID&theUUID=" + theLineItemUUID);
     console.log("JSON DATA being sent to the server " + theSubmitDataManager + " and this data to the db "); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
     window.setTimeout(refreshPanel, 1000);
@@ -1422,8 +1461,8 @@ $$("reqManagerApproval").attachEvent("onItemClick", function () {
 /////////////////// Checkbox script for Authorized Approval //////////////////
 $$("reqAuthorizedApproval").attachEvent("onItemClick", function () {
 
-    var theSubmitDataAuthor = '{"req_authorization":"' + $userId + '","req_authorizationDate":"' + ymd + '","req_status":"1"}';
-    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataAuthor + "&theWhereColumn=req_UUID&theUUID=" + theLineItemUUID);
+    var theSubmitDataAuthor = '{"maintreq_authorization":"' + $userId + '","maintreq_authorizationDate":"' + ymd + '","maintreq_status":"1"}';
+    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=maintRequest&JSONdata=" + theSubmitDataAuthor + "&theWhereColumn=maintreq_UUID&theUUID=" + theLineItemUUID);
     console.log("JSON DATA being sent to the server " + theSubmitDataAuthor + " and this data to the db "); //just a debug code
     window.setTimeout(refreshPanel, 1000);
 
@@ -1434,8 +1473,8 @@ $$("reqAuthorizedApproval").attachEvent("onItemClick", function () {
 /////////////////// Checkbox script for making past req active //////////////////
 $$("reqMakeActive").attachEvent("onItemClick", function () {
 
-    var theSubmitDataStatus1 = '{"req_authorization":"NULL","req_authorizationDate":"1970-01-01","req_status":"3"}';
-    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataStatus1 + "&theWhereColumn=req_UUID&theUUID=" + theLineItemUUIDPast);
+    var theSubmitDataStatus1 = '{"maintreq_authorization":"NULL","maintreq_authorizationDate":"1970-01-01","maintreq_status":"3"}';
+    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=maintRequest&JSONdata=" + theSubmitDataStatus1 + "&theWhereColumn=maintreq_UUID&theUUID=" + theLineItemUUIDPast);
     window.setTimeout(refreshPanel, 1000);
 
     webix.message({text: "Saved"}); //Optional UI to display that something happened
@@ -1444,9 +1483,9 @@ $$("reqMakeActive").attachEvent("onItemClick", function () {
 /////////////////// Checkbox script for making active req past //////////////////
 $$("reqMakePast").attachEvent("onItemClick", function () {
 
-    var theSubmitDataStatus0 = '{"req_status":"0"}';
-    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataStatus0 + "&theWhereColumn=req_UUID&theUUID=" + theLineItemUUID);
-    console.log("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataStatus0 + "&theWhereColumn=req_UUID&theUUID=" + theLineItemUUID);
+    var theSubmitDataStatus0 = '{"maintreq_status":"0"}';
+    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=maintRequest&JSONdata=" + theSubmitDataStatus0 + "&theWhereColumn=maintreq_UUID&theUUID=" + theLineItemUUID);
+    console.log("/labs2/php/api_methods/UPDATEz.php?tableName=maintRequest&JSONdata=" + theSubmitDataStatus0 + "&theWhereColumn=maintreq_UUID&theUUID=" + theLineItemUUID);
     window.setTimeout(refreshPanel, 1000);
 
     webix.message({text: "Saved"});
@@ -1465,7 +1504,8 @@ webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames
 });
 webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_authorized%20AS%20value&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1", function (text) {
     var authorizorLevel = JSON.stringify(text);
-    if (authorizorLevel.search("1") !== -1) {
+    console.log(authorizorLevel);
+    if (authorizorLevel.search("0") !== -1) {
         $$("reqAuthorizedApproval").show();
         $$("reqManagerDelete").show();
         $$("reqPastManagerDelete").show();
@@ -1475,31 +1515,31 @@ webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames
 
 ////////////// Status Icon Switcher Actives///////////////////////
 $$("activeReqs").attachEvent("onItemClick", function () {
-    var statusIcon = $$("req_statusA").getValue();
+    var statusIcon = $$("maintreq_statusA").getValue();
     // 1 is done
     if (statusIcon === "1") {
-        $$("req_statusIcon").show();
-        $$("req_statusIconWarning").hide();
-        $$("req_statusIconDone").hide();
-        $$("req_statusIconManager").hide();
+        $$("maintreq_statusIcon").show();
+        $$("maintreq_statusIconWarning").hide();
+        $$("maintreq_statusIconDone").hide();
+        $$("maintreq_statusIconManager").hide();
         // 3 is base status
         // 2 is Manager Done
     } else if (statusIcon === "2") {
-        $$("req_statusIcon").hide();
-        $$("req_statusIconWarning").show();
-        $$("req_statusIconDone").hide();
-        $$("req_statusIconManager").show();
+        $$("maintreq_statusIcon").hide();
+        $$("maintreq_statusIconWarning").show();
+        $$("maintreq_statusIconDone").hide();
+        $$("maintreq_statusIconManager").show();
     } else if (statusIcon === "3") {
-        $$("req_statusIcon").hide();
-        $$("req_statusIconWarning").show();
-        $$("req_statusIconDone").hide();
-        $$("req_statusIconManager").hide();
+        $$("maintreq_statusIcon").hide();
+        $$("maintreq_statusIconWarning").show();
+        $$("maintreq_statusIconDone").hide();
+        $$("maintreq_statusIconManager").hide();
         // 0 is past
     } else if (statusIcon === "0") {
-        $$("req_statusIcon").hide();
-        $$("req_statusIconWarning").hide();
-        $$("req_statusIconDone").show();
-        $$("req_statusIconManager").hide();
+        $$("maintreq_statusIcon").hide();
+        $$("maintreq_statusIconWarning").hide();
+        $$("maintreq_statusIconDone").show();
+        $$("maintreq_statusIconManager").hide();
     }
 
 
@@ -1507,27 +1547,27 @@ $$("activeReqs").attachEvent("onItemClick", function () {
 
 ////////////// Status Icon Switcher Past///////////////////////
 $$("pastReqs").attachEvent("onItemClick", function () {
-    var statusIcon = $$("req_statusP").getValue();
+    var statusIcon = $$("maintreq_statusP").getValue();
     if (statusIcon === "1") {
-        $$("req_statusIconP").show();
-        $$("req_statusIconWarningP").hide();
-        $$("req_statusIconDoneP").hide();
-        $$("req_statusIconManagerP").hide();
+        $$("maintreq_statusIconP").show();
+        $$("maintreq_statusIconWarningP").hide();
+        $$("maintreq_statusIconDoneP").hide();
+        $$("maintreq_statusIconManagerP").hide();
     } else if (statusIcon === "3") {
-        $$("req_statusIconP").hide();
-        $$("req_statusIconWarningP").show();
-        $$("req_statusIconDoneP").hide();
-        $$("req_statusIconManagerP").show();
+        $$("maintreq_statusIconP").hide();
+        $$("maintreq_statusIconWarningP").show();
+        $$("maintreq_statusIconDoneP").hide();
+        $$("maintreq_statusIconManagerP").show();
     } else if (statusIcon === "2") {
-        $$("req_statusIconP").hide();
-        $$("req_statusIconWarningP").show();
-        $$("req_statusIconDoneP").hide();
-        $$("req_statusIconManagerP").hide();
+        $$("maintreq_statusIconP").hide();
+        $$("maintreq_statusIconWarningP").show();
+        $$("maintreq_statusIconDoneP").hide();
+        $$("maintreq_statusIconManagerP").hide();
     } else if (statusIcon === "0") {
-        $$("req_statusIconP").hide();
-        $$("req_statusIconWarningP").hide();
-        $$("req_statusIconDoneP").show();
-        $$("req_statusIconManagerP").hide();
+        $$("maintreq_statusIconP").hide();
+        $$("maintreq_statusIconWarningP").hide();
+        $$("maintreq_statusIconDoneP").show();
+        $$("maintreq_statusIconManagerP").hide();
     }
 
 
@@ -1550,8 +1590,8 @@ $$("refreshPanelButtonPast").attachEvent("onItemClick", function () {
 
 //////////////////////////// Function that does the work to refresh the UI elements after db transactions ////////////////////////////////////
 function refreshPanel() {
-    var refresher = "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&operator=>&dataName=data&select=1";
-    var refresher0 = "/labs2/php/api_methods/SELECTz.php?tableName=requisitions&columnNames=req_UUID,req_reqID,req_reqName,req_dept,req_dateSubmit,req_dateNeed,req_ordered,req_vendor,req_orderNum,req_manager,req_authorization,req_managerDate,req_authorizationDate,req_status&selectColumn=req_status&selectData=0&dataName=data&select=1";
+    var refresher = "/labs2/php/api_methods/SELECTz.php?tableName=maintRequest&columnNames=maintreq_UUID,maintreq_reqID,maintreq_reqName,maintreq_dept,maintreq_dateSubmit,maintreq_dateNeed,maintreq_ordered,maintreq_vendor,maintreq_orderNum,maintreq_manager,maintreq_authorization,maintreq_managerDate,maintreq_authorizationDate,maintreq_status&selectColumn=maintreq_status&selectData=0&operator=>&dataName=data&select=1";
+    var refresher0 = "/labs2/php/api_methods/SELECTz.php?tableName=maintRequest&columnNames=maintreq_UUID,maintreq_reqID,maintreq_reqName,maintreq_dept,maintreq_dateSubmit,maintreq_dateNeed,maintreq_ordered,maintreq_vendor,maintreq_orderNum,maintreq_manager,maintreq_authorization,maintreq_managerDate,maintreq_authorizationDate,maintreq_status&selectColumn=maintreq_status&selectData=0&dataName=data&select=1";
     $$("activeReqs").clearAll();
     $$("pastReqs").clearAll();
     $$("activeReqs").load(refresher);
@@ -1568,21 +1608,21 @@ $$("reqEdit").attachEvent("onItemClick", function () {
     $$("reqEditOff").show();
     $$("reqEditSave").show();
 
-    //$$("req_reqNameA").hide();
-    //$$("req_deptA").hide();
-    $$("req_dateSubmitA").hide();
-    $$("req_dateNeedA").hide();
-    $$("req_vendorA").hide();
-    $$("req_orderNumA").hide();
-    $$("req_orderedA").hide();
+    //$$("maintreq_reqNameA").hide();
+    //$$("maintreq_deptA").hide();
+    $$("maintreq_dateSubmitA").hide();
+    $$("maintreq_dateNeedA").hide();
+    $$("maintreq_vendorA").hide();
+    $$("maintreq_orderNumA").hide();
+    $$("maintreq_orderedA").hide();
 
-    //$$("req_reqNameA1").show();
-    //$$("req_deptA1").show();
-    $$("req_dateSubmitA1").show();
-    $$("req_dateNeedA1").show();
-    $$("req_vendorA1").show();
-    $$("req_orderNumA1").show();
-    $$("req_orderedA1").show();
+    //$$("maintreq_reqNameA1").show();
+    //$$("maintreq_deptA1").show();
+    $$("maintreq_dateSubmitA1").show();
+    $$("maintreq_dateNeedA1").show();
+    $$("maintreq_vendorA1").show();
+    $$("maintreq_orderNumA1").show();
+    $$("maintreq_orderedA1").show();
 
     webix.message({text: "Editing ON"});
 });
@@ -1598,21 +1638,21 @@ function editModeOff() {
     $$("reqEditOff").hide();
     $$("reqEditSave").hide();
 
-    $$("req_reqNameA").show();
-    $$("req_deptA").show();
-    $$("req_dateSubmitA").show();
-    $$("req_dateNeedA").show();
-    $$("req_vendorA").show();
-    $$("req_orderNumA").show();
-    $$("req_orderedA").show();
+    $$("maintreq_reqNameA").show();
+    $$("maintreq_deptA").show();
+    $$("maintreq_dateSubmitA").show();
+    $$("maintreq_dateNeedA").show();
+    $$("maintreq_vendorA").show();
+    $$("maintreq_orderNumA").show();
+    $$("maintreq_orderedA").show();
 
-    $$("req_reqNameA1").hide();
-    $$("req_deptA1").hide();
-    $$("req_dateSubmitA1").hide();
-    $$("req_dateNeedA1").hide();
-    $$("req_vendorA1").hide();
-    $$("req_orderNumA1").hide();
-    $$("req_orderedA1").hide();
+    $$("maintreq_reqNameA1").hide();
+    $$("maintreq_deptA1").hide();
+    $$("maintreq_dateSubmitA1").hide();
+    $$("maintreq_dateNeedA1").hide();
+    $$("maintreq_vendorA1").hide();
+    $$("maintreq_orderNumA1").hide();
+    $$("maintreq_orderedA1").hide();
 }
 
 /////////////////////////// Delete a row in the ReqRow ///////////////////////////
@@ -1622,9 +1662,9 @@ function deleteReqRow() {
         return;
     }
     var lineSelector = $$("orderLineItems").getSelectedId();
-    var lineSelectedText = $$("orderLineItems").getText(lineSelector, "reqR_UUID");
+    var lineSelectedText = $$("orderLineItems").getText(lineSelector, "maintreqR_UUID");
     console.log("Deleted the ReqRow " + lineSelectedText);
-    webix.ajax().get("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&columnNames=reqR_UUID&id=" + lineSelectedText);
+    webix.ajax().get("/labs2/php/api_methods/DELETE.php?tableName=maintRequestRows&columnNames=maintreqR_UUID&id=" + lineSelectedText);
     webix.message("Row Deleted");
     $$("orderLineItems").remove($$("orderLineItems").getSelectedId());
 }
@@ -1636,21 +1676,21 @@ function deleteReqRow() {
 
 /////////////////////////// Add a new row ///////////////////////////
 $$("addNewReqRow").attachEvent("onItemClick", function () {
-    reqR_reqUUID = $$("req_UUIDA1").getValue();
+    maintreqR_reqUUID = $$("maintreq_UUIDA1").getValue();
 
     reqRowUUID = 'xxxxxxxx-xxxx-6xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16 | 0, v = c === 'x' ? r : r & 0x3 | 0x8;
         return v.toString(16);
     });
-    theSubmitDataRAW = '{"success":true,"data":[{"reqR_UUID":"' + reqRowUUID + '", "reqR_reqUUID":"' + reqR_reqUUID + '", "reqR_itemName":"NULL", "reqR_partNumber":"NULL", "reqR_unitQty":"0", "reqR_qty":"0", "reqR_costUnit":"0", "reqR_cost":"0", "reqR_orderType":"NULL", "reqR_reason":"NULL", "reqR_eta":"NULL", "reqR_status":"1"}]}';
-    webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=requisitionRows&JSONdata=" + theSubmitDataRAW);
-    $$("orderLineItems").add({reqR_UUID: reqRowUUID});
+    theSubmitDataRAW = '{"success":true,"data":[{"maintreqR_UUID":"' + reqRowUUID + '", "maintreqR_reqUUID":"' + maintreqR_reqUUID + '", "maintreqR_itemName":"NULL", "maintreqR_partNumber":"NULL", "maintreqR_unitQty":"0", "maintreqR_qty":"0", "maintreqR_costUnit":"0", "maintreqR_cost":"0", "maintreqR_orderType":"NULL", "maintreqR_reason":"NULL", "maintreqR_eta":"NULL", "maintreqR_status":"1"}]}';
+    webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=maintRequestRows&JSONdata=" + theSubmitDataRAW);
+    $$("orderLineItems").add({maintreqR_UUID: reqRowUUID});
 
 
-    theSubmitDataManager = '{"req_authorization":"NULL","req_authorizationDate":"1970-01-01","req_status":"2"}';
-    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=requisitions&JSONdata=" + theSubmitDataManager + "&theWhereColumn=req_UUID&theUUID=" + reqR_reqUUID);
+    theSubmitDataManager = '{"maintreq_authorization":"NULL","maintreq_authorizationDate":"1970-01-01","maintreq_status":"2"}';
+    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=maintRequest&JSONdata=" + theSubmitDataManager + "&theWhereColumn=maintreq_UUID&theUUID=" + maintreqR_reqUUID);
     window.setTimeout(refreshPanel, 1000);
-    console.log("The new row has an id of " + reqRowUUID + " parent id " + reqR_reqUUID);
+    console.log("The new row has an id of " + reqRowUUID + " parent id " + maintreqR_reqUUID);
     webix.message("New Row Added");
 });
 
@@ -1670,22 +1710,22 @@ function saveEditedReqRowMain() {
         return;
     }
     var lineSelector = $$("orderLineItems").getSelectedId();
-    var lineSelectedText = $$("orderLineItems").getText(lineSelector, "reqR_UUID");
-    var reqR_itemNameA = $$("orderLineItems").getText(lineSelector, "reqR_itemName");
-    var reqR_partNumberA = $$("orderLineItems").getText(lineSelector, "reqR_partNumber");
-    var reqR_unitQtyA = $$("orderLineItems").getText(lineSelector, "reqR_unitQty");
-    var reqR_qtyA = $$("orderLineItems").getText(lineSelector, "reqR_qty");
-    var reqR_costUnitA = $$("orderLineItems").getText(lineSelector, "reqR_costUnit");
-    var reqR_costA = $$("orderLineItems").getText(lineSelector, "reqR_cost");
-    var reqR_orderTypeA = $$("orderLineItems").getText(lineSelector, "reqR_orderType");
-    var reqR_reasonA = $$("orderLineItems").getText(lineSelector, "reqR_reason");
+    var lineSelectedText = $$("orderLineItems").getText(lineSelector, "maintreqR_UUID");
+    var maintreqR_itemNameA = $$("orderLineItems").getText(lineSelector, "maintreqR_itemName");
+    var maintreqR_partNumberA = $$("orderLineItems").getText(lineSelector, "maintreqR_partNumber");
+    var maintreqR_unitQtyA = $$("orderLineItems").getText(lineSelector, "maintreqR_unitQty");
+    var maintreqR_qtyA = $$("orderLineItems").getText(lineSelector, "maintreqR_qty");
+    var maintreqR_costUnitA = $$("orderLineItems").getText(lineSelector, "maintreqR_costUnit");
+    var maintreqR_costA = $$("orderLineItems").getText(lineSelector, "maintreqR_cost");
+    var maintreqR_orderTypeA = $$("orderLineItems").getText(lineSelector, "maintreqR_orderType");
+    var maintreqR_reasonA = $$("orderLineItems").getText(lineSelector, "maintreqR_reason");
 
-    var theSubmitDataRAW = '{"reqR_itemName":"' + reqR_itemNameA + '", "reqR_partNumber":"' + reqR_partNumberA + '", "reqR_unitQty":"' + reqR_unitQtyA + '", "reqR_qty":"' + reqR_qtyA + '", "reqR_costUnit":"' + reqR_costUnitA + '", "reqR_cost":"' + reqR_costA + '", "reqR_orderType":"' + reqR_orderTypeA + '", "reqR_reason":"' + reqR_reasonA + '"}';
+    var theSubmitDataRAW = '{"maintreqR_itemName":"' + maintreqR_itemNameA + '", "maintreqR_partNumber":"' + maintreqR_partNumberA + '", "maintreqR_unitQty":"' + maintreqR_unitQtyA + '", "maintreqR_qty":"' + maintreqR_qtyA + '", "maintreqR_costUnit":"' + maintreqR_costUnitA + '", "maintreqR_cost":"' + maintreqR_costA + '", "maintreqR_orderType":"' + maintreqR_orderTypeA + '", "maintreqR_reason":"' + maintreqR_reasonA + '"}';
 
     console.log("Saved the ReqRow " + lineSelectedText);
     console.log("Here is the changed row data " + theSubmitDataRAW);
 
-    webix.ajax().get("/labs2/php/api_methods/UPDATEz.php?tableName=requisitionRows&JSONdata=" + theSubmitDataRAW + "&theWhereColumn=reqR_UUID&theUUID=" + lineSelectedText);
+    webix.ajax().get("/labs2/php/api_methods/UPDATEz.php?tableName=maintRequestRows&JSONdata=" + theSubmitDataRAW + "&theWhereColumn=maintreqR_UUID&theUUID=" + lineSelectedText);
     webix.message("Saved");
 }
 
@@ -1696,9 +1736,9 @@ function removeRowData() {
         return;
     }
     var lineSelector = $$("lineItemList").getSelectedId();
-    var lineSelectedText = $$("lineItemList").getText(lineSelector, "reqR_UUID");
+    var lineSelectedText = $$("lineItemList").getText(lineSelector, "maintreqR_UUID");
     console.log("Here's what we deleted " + lineSelectedText);
-    webix.ajax().get("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&columnNames=reqR_UUID&id=" + lineSelectedText);
+    webix.ajax().get("/labs2/php/api_methods/DELETE.php?tableName=maintRequestRows&columnNames=maintreqR_UUID&id=" + lineSelectedText);
     webix.message("Data Deleted");
     $$("lineItemList").remove($$("lineItemList").getSelectedId());
 }
