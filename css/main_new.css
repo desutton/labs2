@@ -156,3 +156,36 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
 	box-sizing:border-box}
+
+.des_BasicIconButton1 {
+    background-color: rgba(255, 255, 255, 0);
+    color: white;
+    border: 2px soild #7684c5;
+}
+
+.des_BasicIconButton1:hover {
+    background-color: #7684c5;
+    color: black;
+}
+
+.des_BasicIconButton2 {
+    background-color: red;
+    color: white;
+    border: 2px soild pink;
+}
+
+.des_BasicIconButton2:hover {
+    background-color: pink;
+    color: gray;
+}
+
+.des_BasicIconButton3 {
+    background-color: green;
+    color: white;
+    border: 2px soild #00bb00;
+}
+
+.des_BasicIconButton3:hover {
+    background-color: lightgreen;
+    color: gray;
+}

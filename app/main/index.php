@@ -13,17 +13,15 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
 ?>
 <html>
 	<header>
-		<!-- -->
 		<title>
 		<?php echo($theAppVersion); ?>
 		</title>
-        <!--<link rel="stylesheet" href="http://localhost/webix/codebase/skins/clouds.css" type="text/css">-->
         <link rel="stylesheet" href="../../webix/codebase/skins/flat.min.css" type="text/css">
-        <!--<link rel="stylesheet" href="/labs2/webix/codebase/webix.css" type="text/css">-->
-        <link rel="stylesheet" href="../../css/font-awesome.css" type="text/css">
-        <link rel="stylesheet" href="../../css/main.css" type="text/css">
+        <link rel="stylesheet" href="/labs2/css/main_new.css" type="text/css">
+        <link href="/labs2/css/fontawesome.css" rel="stylesheet">
+        <link href="/labs2/css/brands.css" rel="stylesheet">
+        <link href="/labs2/css/solid.css" rel="stylesheet">
         <script src="../../webix/codebase/webix.js" type="text/javascript"></script>
-		<!--<script src="../supportjs/dscode.js" type="text/javascript"></script>-->
 	</header>
 	<body>
 		<div class="des_TitleBar"><?php echo($theAppVersion); ?></div>
@@ -46,35 +44,39 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
 					{
 						view: "menu", id: "mainMenu", subMenuPos: "right", layout: "x", subsign: true, height: 50,
 						data: [
-                            /*	{
-                                    id: 1, value: "ToDo", icon: "inbox", iFrame: "../tasks/today.php",
+                            {
+                                id: 1, value: "ToDo", icon: "fas fa-inbox", iFrame: "../main/welcome.php",
                                     submenu: [
                                         {
                                             value: "Home",
                                             iFrame: "../main/welcome.php",
-                                            icon: "clock-o",
+                                            id: "home",
+                                            icon: "fas fa-clock",
                                             css: "des_menuLink"
                                         },
                                         {
-                                            value: "Today",
+                                            value: "ToDo",
+                                            id: "todos",
                                             iFrame: "../tasks/today.php",
-                                            icon: "clock-o",
+                                            icon: "fas fa-list",
                                             css: "des_menuLink"
                                         },
                                         {
-                                            value: "Past Due",
-                                            iFrame: "../tasks/pastDue.php",
-                                            icon: "exclamation-circle",
+                                            value: "Maint Request",
+                                            id: "maintRequest",
+                                            iFrame: "../maint/maintRequest.php",
+                                            icon: "fas fa-exclamation-circle",
                                             css: "des_menuLink"
                                         },
                                         {
                                             value: "Scheduled",
+                                            id: "schedule",
                                             iFrame: "../tasks/scheduled.php",
-                                            icon: "calendar",
+                                            icon: "fas fa-calendar",
                                             css: "des_menuLink"
                                         }
                                     ]
-                                }, */
+                            },
                                 {
                                     id: 2,
                                     value: "Settings",
@@ -85,6 +87,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
                                     submenu: [
                                         {
                                             value: "User Prefs",
+                                            id: "userPrefs",
                                             icon: "fas fa-user-plus",
                                             iFrame: "../users/usersAccount.php"
                                         },
@@ -95,20 +98,40 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
                                             iFrame: "../users/usersList.php"
                                         }
                                     ]
-                                },/*
+                                },
 
                                 {
                                     id: 3, value: "Customers", icon: "users",
                                     submenu: [
-                                        {value: "Add Customer", icon: "user-plus", iFrame: "../customers/newCustomer.php"},
-                                        {value: "Customer List", icon: "list-alt", iFrame: "../customers/customerList.php"}
+                                        {
+                                            value: "Add Customer",
+                                            id: "addCustomer",
+                                            icon: "user-plus",
+                                            iFrame: "../customers/newCustomer.php"
+                                        },
+                                        {
+                                            value: "Customer List",
+                                            id: "customerList",
+                                            icon: "list-alt",
+                                            iFrame: "../customers/customerList.php"
+                                        }
                                     ]
-                                }, */
+                                },
                                 {
-                                    id: 4, value: "Invoices", icon: "money",
+                                    id: 4, value: "Invoices", icon: "fas fa-file-invoice-dollar",
                                     submenu: [
-                                        {value: "New Invoice", icon: "plus-circle", iFrame: "../invoices/newInvoices.php"},
-                                        {value: "Invoice List", icon: "bars", iFrame: "../invoices/invoiceList.php"}
+                                        {
+                                            value: "New Invoice",
+                                            id: "invoiceMaker",
+                                            icon: "fas fa-plus-circle",
+                                            iFrame: "../invoices/newInvoices.php"
+                                        },
+                                        {
+                                            value: "Invoice List",
+                                            id: "invoiceList",
+                                            icon: "fas fa-file-invoice",
+                                            iFrame: "../invoices/invoiceList.php"
+                                        }
                                     ]
                                 }, /*
                                 {
@@ -140,21 +163,23 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
                                     ]
                                 },
                             */    {
-                                id: 8, value: "Inventory", icon: "archive", iFrame: "../inventory/index.php",
+                                id: 8, value: "Inventory", icon: "fas fa-boxes", iFrame: "../inventory/index.php",
                                 submenu: [
                                     {
                                         value: "Requisition Forms",
-                                        icon: "qrcode",
+                                        id: "requestForms",
+                                        icon: "fas fa-truck-moving",
                                         iFrame: "../inventory/inventoryIndex.php"
                                     },
                                     {
                                         value: "Archives",
-                                        icon: "qrcode",
+                                        id: "archives",
+                                        icon: "fas fa-archive",
                                         iFrame: "../inventory/inventoryArchive.php"
                                     }
                                 ]
                             },
-                            {id: 9, value: "Logout", icon: "cogs", href: "../../php/logout.php"}
+                            {id: 9, value: "Logout", icon: "fas fa-cogs", href: "../../php/logout.php"}
 						],
 						on: {
 							onMenuItemClick: function (id) {
@@ -182,10 +207,42 @@ include $_SERVER['DOCUMENT_ROOT'] . '/php/resources/appVersion.php';
                 userAuthor = JSON.parse(userAuthor);
                 console.log("The User Access is: " + userAuthor.users_2accessLevel);
                 if (userAuthor.users_2accessLevel === "0") {
+                    $$("mainMenu").showItem(1);
+                    $$("mainMenu").showItem("home");
+                    $$("mainMenu").showItem("todos");
+                    $$("mainMenu").showItem("maintRequest");
+                    $$("mainMenu").showItem("schedule");
+                    $$("mainMenu").showItem("2");
+                    $$("mainMenu").showItem("userPrefs");
                     $$("mainMenu").showItem("userList");
+                    $$("mainMenu").showItem(3);
+                    $$("mainMenu").showItem("addCustomer");
+                    $$("mainMenu").showItem("customerList");
+                    $$("mainMenu").showItem(4);
+                    $$("mainMenu").showItem("invoiceMaker");
+                    $$("mainMenu").showItem("invoiceList");
+                    $$("mainMenu").showItem(8);
+                    $$("mainMenu").showItem("requestForms");
+                    $$("mainMenu").showItem("archives");
                      console.log("Super User");
                 } else {
+                    $$("mainMenu").showItem(1);
+                    $$("mainMenu").showItem("home");
+                    $$("mainMenu").hideItem("todos");
+                    $$("mainMenu").showItem("maintRequest");
+                    $$("mainMenu").hideItem("schedule");
+                    $$("mainMenu").showItem(2);
                     $$("mainMenu").hideItem("userList");
+                    $$("mainMenu").showItem("userPrefs");
+                    $$("mainMenu").hideItem(3);
+                    $$("mainMenu").hideItem("addCustomer");
+                    $$("mainMenu").hideItem("customerList");
+                    $$("mainMenu").hideItem(4);
+                    $$("mainMenu").hideItem("invoiceMaker");
+                    $$("mainMenu").hideItem("invoiceList");
+                    $$("mainMenu").showItem(8);
+                    $$("mainMenu").showItem("requestForms");
+                    $$("mainMenu").showItem("archives");
                      console.log("Normal");
                 }
             });

@@ -8,6 +8,8 @@ var $useruuid = 'xxxxxxxx-xxxx-5xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function
 });
 
 var $userId = JSON.parse(decodeURIComponent(document.cookie).substring(5))['UserName']; //Extract out the username from the cookie file
+//var $userId = "<?php echo $theUserName ?>";
+console.log($userId);
 
 
 var tabbar = {
@@ -121,13 +123,12 @@ webix.ui({
 /////////////////////////// Loads window with users data ///////////////////////////
 $$("userDetail").load("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_firstname,users_lastname,users_name,users_displayName,users_pass,users_employeeId,users_UUID&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1");
 
-/*////////////////////////// Loads window with users data ///////////////////////////
+/////////////////////////// Loads window with users data ///////////////////////////
 function delete_row() {
     console.log("close window");
     webix.message({text: "Deleted"}); //Optional UI to display that something happened
     window.setTimeout(refresh_row, 1000);
 }
-*/
 /////////////////////////// Updates database with users data ///////////////////////////
 function update_row() {
     var firstname = $$("users_firstname").getValue();

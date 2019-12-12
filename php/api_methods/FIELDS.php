@@ -55,7 +55,7 @@ $theFIELDS = ($theFieldsRows); //A string of unformatted Fields names
 $theFIELDSArray = $Fresult; // An array of Fields Names
 $theFIELDSMenu = ($FoptionTag . $FoptionTagData . "</select>"); // Popup menu list
 /**********************************************************************************/
-//print_r($theFIELDSMenu);
+print_r($theFIELDSMenu);
 
 if (ISSET($theTableName)) {
     $theTABLESMenu = "<input type='text' value='" . $theTableName . "'>";

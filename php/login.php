@@ -4,14 +4,14 @@
  */
 
 /*******************************************************************************
-David Sutton
-July 2015
-
-Protocode version 1
-Version: Alpha-Test 1
-
-This code is for the login panel that authenticates user info
-*******************************************************************************/ 
+* David Sutton
+* July 2015
+ *
+* Protocode version 1
+* Version: Alpha-Test 1
+ *
+* This code is for the login panel that authenticates user info
+ *******************************************************************************/
 
 require_once( dirname( __FILE__ ).'/intercon/servercon.php');
 require_once( dirname( __FILE__ ).'/errorcodes.php');
@@ -19,17 +19,20 @@ require_once( dirname( __FILE__ ).'/errorcodes.php');
 $theDataName = "data";
 $theFormUserName = $_GET['users_name'];
 $theFormUserPass = $_GET['users_pass'];
+$domain = null;
+$secure = null;
+$httponly = false;
 
 if(!isset($theFormUserName)){
 	echo("BLogin Fail");
-}else{
-// ----- Cookie Monster Code ----- //	
+} else {
+// ----- Cookie Monster Code ----- //
 // Create a cookie to store user name
 $theCookieName = "cial";
 // delete any exisiting cookies
 setcookie($theCookieName, "", time() -3600, "/");
 // set the new cookie
-setcookie($theCookieName, $theFormUserName, time() + 28800, "/"); //cookie is good for 8hrs to the "/" whole site
+    setcookie($theCookieName, $theFormUserName, time() + 28800, "/", $domain, $secure, $httponly); //cookie is good for 8hrs to the "/" whole site
 // ----- End of Cookie Monster Code ----- //
 
 // This section queries the database for the entered user name and password.
@@ -38,9 +41,9 @@ setcookie($theCookieName, $theFormUserName, time() + 28800, "/"); //cookie is go
 // If both user name and password are right returns to the UI Success
 //    $sql_query = "SELECT uname, passname,fname FROM users WHERE uname = '".$theFormUserName."'";
 
-    $sql_query = "SELECT users_name, users_pass,users_displayName FROM users WHERE users_name = '" . $theFormUserName . "'";
+    $sql_query = "SELECT users_name, users_pass,users_displayName, users_css FROM users WHERE users_name = '" . $theFormUserName . "'";
 
-// PDO prepare statement for the database
+    // PDO prepare statement for the database
 $stmt = $conn->prepare($sql_query);
 
 // Fire off the request to the db
@@ -56,15 +59,14 @@ if($result != "0"){
     $theUserName = $result->users_name;
     $theUserPass = $result->users_pass;
     $theUserDisplayName = $result->users_displayName;
+    $theUserCSS = $result->users_css;
     //$theUserCookieData = array('UserName'=>$theUserName,'UserDisplayName'=>$theUserDisplayName); //added to try some js out
-    $theUserCookieData = array('UserName' => $theUserName, 'UserDisplayName' => $theUserDisplayName );
-    setcookie($theCookieName, json_encode($theUserCookieData), time() + 28800, "/"); //cookie is good for 8hrs to the "/" whole site
+    $theUserCookieData = array('UserName' => $theUserName, 'UserDisplayName' => $theUserDisplayName, 'UserCSS' => $theUserCSS);
+    setcookie($theCookieName, json_encode($theUserCookieData), time() + 28800, "/", $domain, $secure, $httponly); //cookie is good for 8hrs to the "/" whole site
 }else{
 	die("Bad User Id");
 
 }
-
-
 
 
 //echo("here ".$theUserPass." is the password - ");

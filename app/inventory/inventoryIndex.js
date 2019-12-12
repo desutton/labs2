@@ -9,7 +9,8 @@ const reqUUID = 'xxxxxxxx-xxxx-5xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function
 
 //var reqUUIDtest = '8ac8638f-a521-4f47-903a-6ea881e849aa';
 
-var $userId = JSON.parse(decodeURIComponent(document.cookie).substring(5))['UserName']; //Extract out the username from the cookie file
+//var $userId = JSON.parse(decodeURIComponent(document.cookie).substring(5))['UserName']; //Extract out the username from the cookie file
+var $userId = "<?php echo $theUserName ?>";
 var d = new Date();
 var y = d.getFullYear();
 var m = d.getMonth();
@@ -333,10 +334,15 @@ const activePanelView = {
                                             {id: "reqR_orderType", name:"reqR_orderTypeA", header: "Order Type", sort: "string", adjust: true, editor: "text", batch: 100},
                                             {id: "reqR_reason", name:"reqR_reasonA", header: "Reasons", sort: "string", adjust: true, editor: "text", batch: 100},
                                             {id: "reqR_UUID", header: "UUID", sort: "string", adjust: true, batch: 101},
-                                            {id:"", template:"<button class='des_BasicIconButton des_BasicIconButton1' onclick='saveEditedReqRow()'><i class='fas fa-save'></i></button>", css:"padding_less", width:70 },
                                             {
                                                 id: "",
-                                                template: "<button class='des_BasicIconButton des_BasicIconButton2' onclick='devareReqRow()'><i class='fas fa-trash-alt'></i></button>",
+                                                template: "<button class='des_BasicIconButton3' onclick='saveEditedReqRow()'><i class='fas fa-archive'></i></button>",
+                                                css: "padding_less",
+                                                width: 70
+                                            },
+                                            {
+                                                id: "",
+                                                template: "<button class='des_BasicIconButton2' onclick='deleteReqRow()'><i class='fas fa-trash'></i></button>",
                                                 css: "padding_less",
                                                 width: 70
                                             }
@@ -425,11 +431,11 @@ const activePanelView = {
                                         },
                                             {
                                                 view: "button",
-                                                id: "reqManagerDevare",
+                                                id: "reqManagerDelete",
                                                 width: "50",
                                                 type: "icon",
                                                 icon: "far fa-trash",
-                                                tooltip: "Manager Devare",
+                                                tooltip: "Manager Delete",
                                                 hidden: true
                                             }]
                                     }
@@ -462,7 +468,7 @@ const activePanelView = {
                                             id: "req_statusIcon",
                                             width: "50",
                                             type: "icon",
-                                            icon: "far fa-thumbs-up",
+                                            icon: "far fa-check-square",
                                             tooltip: "Status: OK",
                                             align: "left",
                                             css: {"background": "#00ff00"},
@@ -482,7 +488,7 @@ const activePanelView = {
                                             id: "req_statusIconDone",
                                             width: "50",
                                             type: "icon",
-                                            icon: "far fa-award",
+                                            icon: "fas fa-award",
                                             tooltip: "Status: DONE",
                                             align: "left",
                                             css: {"background": "#0099ff"},
@@ -491,7 +497,7 @@ const activePanelView = {
                                             view: "icon",
                                             id: "req_statusIconManager",
                                             type: "icon",
-                                            icon: "far fa-check",
+                                            icon: "fas fa-check-double",
                                             tooltop: "Manager Approved",
                                             align: "left",
                                             css: {"background": "#00ff00"},
@@ -766,11 +772,11 @@ const pastPanelView = {
                                             },
                                                 {
                                                     view: "button",
-                                                    id: "reqPastManagerDevare",
+                                                    id: "reqPastManagerDelete",
                                                     width: "50",
                                                     type: "icon",
                                                     icon: "far fa-trash",
-                                                    tooltip: "Manager Devare",
+                                                    tooltip: "Manager Delete",
                                                     hidden: true
                                                 }]
                                         }
@@ -935,11 +941,11 @@ const createPanelView = {
                     {id:"", template:"<button class='des_BasicIconButton des_BasicIconButton1' onclick='saveEditedReqRow()'><i class='fas fa-save'></i></button>", css:"padding_less", width:70 },
                     {
                         id: "",
-                        template: "<button class='des_BasicIconButton des_BasicIconButton2' onclick='devareReqRow()'><i class='fas fa-trash-alt'></i></button>",
+                        template: "<button class='des_BasicIconButton des_BasicIconButton2' onclick='deleteReqRow()'><i class='fas fa-trash-alt'></i></button>",
                         css: "padding_less",
                         width: 70
                     }
-                    //{id: "reqR_devareButton", header:"Devare", checkValue:'on', uncheckValue:'off', template:"{common.checkbox()}", width:65}
+                    //{id: "reqR_deleteButton", header:"Delete", checkValue:'on', uncheckValue:'off', template:"{common.checkbox()}", width:65}
                 ],
             on:{
                 "onItemClick":function(id){
@@ -1274,15 +1280,15 @@ $$("reqEditSave").attachEvent("onItemClick", function () {
 });
 
 /////////////////// Checkbox script for Manager Approval //////////////////
-$$("reqManagerDevare").attachEvent("onItemClick", function () {
+$$("reqManagerDelete").attachEvent("onItemClick", function () {
 
 
     //webix.message({text: $userId});
     webix.message({text: theLineItemUUID});
     //var theSubmitDataManager = '{"req_manager":"' + $userId + '","req_managerDate":"' + ymd + '","req_status":"2"}';
-    webix.ajax("/labs2/php/api_methods/DEvarE.php?tableName=requisitions&columnNames=req_UUID&id=" + theLineItemUUID);
-    webix.ajax("/labs2/php/api_methods/DEvarE.php?tableName=requisitionRows&columnNames=reqR_reqUUID&id=" + theLineItemUUID);
-    console.log("This data is being DEvarED " + theLineItemUUID); //just a debug code
+    webix.ajax("/labs2/php/api_methods/DELETE.php?tableName=requisitions&columnNames=req_UUID&id=" + theLineItemUUID);
+    webix.ajax("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&columnNames=reqR_reqUUID&id=" + theLineItemUUID);
+    console.log("This data is being DeleteD " + theLineItemUUID); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
     window.setTimeout(refreshPanel, 1000);
     webix.message({text: "Reloading..."});
@@ -1341,8 +1347,8 @@ webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames
     console.log(managerLevel);
     if (managerLevel.search("1") !== -1) {
         $$("reqManagerApproval").show();
-        $$("reqManagerDevare").show();
-        $$("reqPastManagerDevare").show();
+        $$("reqManagerDelete").show();
+        $$("reqPastManagerDelete").show();
     }
 
 });
@@ -1350,8 +1356,8 @@ webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames
     var authorizorLevel = JSON.stringify(text);
     if (authorizorLevel.search("1") !== -1) {
         $$("reqAuthorizedApproval").show();
-        $$("reqManagerDevare").show();
-        $$("reqPastManagerDevare").show();
+        $$("reqManagerDelete").show();
+        $$("reqPastManagerDelete").show();
     }
 
 });
@@ -1498,17 +1504,17 @@ function editModeOff() {
     $$("req_orderedA1").hide();
 }
 
-/////////////////////////// Devare a row in the ReqRow ///////////////////////////
-function devareReqRow() {
+/////////////////////////// Delete a row in the ReqRow ///////////////////////////
+function deleteReqRow() {
     if(!$$("orderLineItems").getSelectedId()){
         webix.message("No item is selected!");
         return;
     }
     var lineSelector = $$("orderLineItems").getSelectedId();
     var lineSelectedText = $$("orderLineItems").getText(lineSelector, "reqR_UUID");
-    console.log("Devared the ReqRow " + lineSelectedText);
-    webix.ajax().get("/labs2/php/api_methods/DEvarE.php?tableName=requisitionRows&columnNames=reqR_UUID&id=" + lineSelectedText);
-    webix.message("Row Devared");
+    console.log("Deleted the ReqRow " + lineSelectedText);
+    webix.ajax().get("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&columnNames=reqR_UUID&id=" + lineSelectedText);
+    webix.message("Row Deleted");
     $$("orderLineItems").remove($$("orderLineItems").getSelectedId());
 }
 /////////////////////////// *******  REQ ROW SCRIPTS  ******* ///////////////////////////
@@ -1574,7 +1580,7 @@ function saveEditedReqRowMain() {
     webix.message("Saved");
 }
 
-/////////////////////////// Devare a row on the create datatable ///////////////////////////
+/////////////////////////// delete a row on the create datatable ///////////////////////////
 function removeRowData(){
 if(!$$("lineItemList").getSelectedId()){
     webix.message("No item is selected!");
@@ -1582,9 +1588,9 @@ if(!$$("lineItemList").getSelectedId()){
 }
     var lineSelector = $$("lineItemList").getSelectedId();
     var lineSelectedText = $$("lineItemList").getText(lineSelector, "reqR_UUID");
-    console.log("Here's what we devared " + lineSelectedText);
-    webix.ajax().get("/labs2/php/api_methods/DEvarE.php?tableName=requisitionRows&columnNames=reqR_UUID&id=" + lineSelectedText);
-    webix.message("Data Devared");
+    console.log("Here's what we deleted " + lineSelectedText);
+    webix.ajax().get("/labs2/php/api_methods/DELETE.php?tableName=requisitionRows&columnNames=reqR_UUID&id=" + lineSelectedText);
+    webix.message("Data Deleted");
 $$("lineItemList").remove($$("lineItemList").getSelectedId());
 }
 

@@ -10,8 +10,8 @@
  * Time: 2:08 PM
  */
 
-include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php'; ?>
-
+include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/cookieMonster.php'; ?>
 Requisition Page
 <script src="inventoryIndex.js" type="text/javascript"></script>
 

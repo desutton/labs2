@@ -77,6 +77,11 @@
         style="color: rgb(226,226,226)">Invoiceing</a></div>
 <br/>
 <div class="labeler"><a href="api_methods/index.php" style="color: rgb(226,226,226)">API Methods</a></div>
+<br/>
+<div class="labeler">
+    <a href="/labs2/php/api_methods/SELECTz.php?columnNames=Items.id,Items.partNumber,Items.storage_temperature_id,JobLines.qaApprovedDate,ActiveIngredients.name,ActiveIngredients.hazardousMaterial,ActiveIngredients.controlledSubstance,JobLines.status_id,JobLines.id%20AS%20JobLine_id&tableName=JobLines%20JOIN%20Items%20ON%20JobLines.item_id%20%3D%20Items.id%20%20JOIN%20JobLineTests%20ON%20JobLineTests.job_line_id%20%3D%20JobLines.id%20%20JOIN%20ActiveIngredients%20ON%20JobLineTests.active_ingredient_id%20%3D%20ActiveIngredients.id%20WHERE%20LABSPRD.JobLines.status_id%3D%204%20or%20LABSPRD.JobLines.status_id%3D%205%20or%20LABSPRD.JobLines.status_id%3D%206%20or%20LABSPRD.JobLines.status_id%3D%208%20or%20LABSPRD.JobLines.status_id%3D%2010%20or%20LABSPRD.JobLines.status_id%3D%2014%20or%20LABSPRD.JobLines.status_id%3D%2016%20or%20LABSPRD.JobLines.status_id%3D%2017%20%20%20%20ORDER%20BY%20Items.partNumber%20ASC&limit=3000&db_name=LABSPRD&dataName=data&select=3"
+       style="color: rgb(226,226,226)">Archive</a></div>
+<br/>
 <div class="logoWrapper"><span class="logo">&lt;ds-code&gt; &copy;2014</span></div>
 </body>
 </html>

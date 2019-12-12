@@ -11,7 +11,8 @@
  */
 
 
-include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php'; ?>
+include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/cookieMonster.php'; ?>
 
 New Users Page
 <script src="usersAccount.js" type="text/javascript"></script>

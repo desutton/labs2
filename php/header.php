@@ -20,6 +20,7 @@ if (!isset($_COOKIE['cial'])) {
     $theCookieData = json_decode($_COOKIE['cial']);
     $theUserName = $theCookieData->UserName;
     $theDisplayName = $theCookieData->UserDisplayName;
+    $theUserCSS = $theCookieData->UserCSS;
 }
 include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/appVersion.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/mode.php';
@@ -31,17 +32,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/accessApp.php'
 ?>
 <html>
 <head>
-    <link rel="stylesheet" href="/labs2/webix/codebase/skins/flat.min.css" type="text/css">
-    -->
-    <!--<link rel="stylesheet" href="/labs2/webix/codebase/webix.css" type="text/css">-->
-    <!--<link rel="stylesheet" href="/labs2/webix/codebase/skins/clouds.css" type="text/css">-->
-    <link rel="stylesheet" href="/labs2/css/font-awesome.css" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="stylesheet" href="/labs2/css/w3.css" type="text/css">
+    <link rel="shortcut icon" href="/labs2/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="/labs2/webix/codebase/skins/<?php echo($theUserCSS); ?>" type="text/css">
+    <link rel="stylesheet" href="/labs2/css/main_new.css" type="text/css">
+    <link href="/labs2/css/fontawesome.css" rel="stylesheet">
+    <link href="/labs2/css/brands.css" rel="stylesheet">
+    <link href="/labs2/css/solid.css" rel="stylesheet">
     <script src="/labs2/webix/codebase/webix.js" type="text/javascript"></script>
-    <!--<script src="/labs2/webix/codebase/skins/skin.js" type="text/javascript"></script>
-    <!--<script src="../../supportjs/dscode.js" type="text/javascript"></script>-->
-    <link rel="stylesheet" href="/labs2/css/main.css" type="text/css">
     <meta charset="UTF-8">
 </head>
 <body class="des_DesktopBackground">
