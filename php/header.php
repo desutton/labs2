@@ -51,7 +51,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/accessApp.php'
 <div class="des_DesktopInfo">
     <br/>Hello: <b><?php echo($theDisplayName); ?></b>
     <br/>You are logged in as: <b><?php echo($theUserName); ?></b>
-    <br/>Your access level is: <b><?php echo($USER_ACCESS_LEVEL); ?></b>
+    <br/>Your access level is: <b><?php echo($USER_ACCESS_NAME); ?></b>
     <br/>The version is: <b><?php echo($theAppVersion); ?></b>
     <br/>The server is in: <b><?php echo($sysmode); ?></b> mode
     <br/>Server name is: <b><?php echo $_SERVER['SERVER_NAME']; ?></b>

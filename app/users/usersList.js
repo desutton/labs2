@@ -8,10 +8,13 @@ var userGroups = [{id: "0", value: "Admin"}, {id: "1", value: "Potency"}, {id: "
     id: "3",
     value: "Tech"
 }, {id: "4", value: "Office"}];
-var userAccess = [{id: "0", value: "Admin"}, {id: "1", value: "Manager"}, {id: "2", value: "Power User"}, {
+var userAccess = [{id: "0", value: "Admin"}, {id: "1", value: "Executive"}, {id: "2", value: "Authorities"}, {
     id: "3",
-    value: "User"
-}, {id: "4", value: "Guest"}];
+    value: "Managers"
+}, {id: "4", value: "HR"}, {id: "5", value: "Accounting"}, {id: "6", value: "Staff"}, {
+    id: "7",
+    value: "Potency"
+}, {id: "8", value: "MicroBiology"}, {id: "9", value: "Special Chemistry"}, {id: "10", value: "IT"}];
 var userManager = [{id: "1", value: "Ron"}, {id: "2", value: "Nancy"}, {id: "3", value: "Marc"}, {
     id: "4",
     value: "David"
