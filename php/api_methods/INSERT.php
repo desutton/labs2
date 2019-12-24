@@ -33,7 +33,7 @@ if ($DB_NAME === "labs") {
 } else {
     require_once(dirname(__FILE__) . '/../intercon/servercon.php'); //use the labs db as a last resort
 }
-file_put_contents($filename, "Connected to db: " . $DB_NAME . "\r", FILE_APPEND | LOCK_EX); // Just a little log as to what db your connecting to
+file_put_contents($filename, "                     Connected to db: " . $DB_NAME . "\r", FILE_APPEND | LOCK_EX); // Just a little log as to what db your connecting to
 ////////////////////////////////////////////////////////////////////
 
 // Local Vars

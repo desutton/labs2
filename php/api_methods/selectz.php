@@ -33,7 +33,7 @@ if ($DB_NAME === "labs") {
 } else {
     require_once(dirname(__FILE__) . '/../intercon/servercon.php'); //use the labs db as a last resort
 }
-file_put_contents($filename, "Connected to db: " . $DB_NAME . "\r", FILE_APPEND | LOCK_EX); // Just a little log as to what db your connecting to
+file_put_contents($filename, "                     Connected to db: " . $DB_NAME . "\r", FILE_APPEND | LOCK_EX); // Just a little log as to what db your connecting to
 ////////////////////////////////////////////////////////////////////
 
 $filename = 'log.txt'; // log file for every transaction
@@ -142,7 +142,7 @@ try {
 // perform the JSON encode in the EXTJS format
     $JSON_RESULTS = json_encode($results);
     echo($JSON_RESULTS); //Send back to JS the results from the db and server
-
+//    file_put_contents($filename, $JSON_RESULTS . "\r", FILE_APPEND | LOCK_EX);
 }
 // Out put the error to the file
 catch (PDOException $errorMess){

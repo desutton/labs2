@@ -98,6 +98,20 @@ var editor = {
             labelWidth: "100",
             width: "220",
             type: "password"
+        },
+        {
+            view: "select",
+            name: "users_css",
+            id: "users_css",
+            label: "CSS",
+            labelPosition: "top",
+            labelWidth: "100",
+            width: "220",
+            options: [
+                {id: "flat.min.css", value: "Basic"},
+                {id: "metro.css", value: "Modern"},
+                {id: "contrast.css", value: "ADA"}
+            ]
         }
     ]
 };
@@ -121,7 +135,7 @@ webix.ui({
 }).show();
 
 /////////////////////////// Loads window with users data ///////////////////////////
-$$("userDetail").load("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_firstname,users_lastname,users_name,users_displayName,users_pass,users_employeeId,users_UUID&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1");
+$$("userDetail").load("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_firstname,users_lastname,users_name,users_displayName,users_pass,users_employeeId,users_UUID,users_css&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1");
 
 /////////////////////////// Loads window with users data ///////////////////////////
 function delete_row() {
@@ -138,7 +152,8 @@ function update_row() {
     var employeeid = $$("users_employeeId").getValue();
     var userpass = $$("users_pass").getValue();
     var useruuid = $$("users_UUID").getValue();
-    var dataSumit2Users = '{"users_firstname":"' + firstname + '", "users_lastname":"' + lastname + '", "users_name":"' + username + '", "users_displayName":"' + displayname + '", "users_employeeId":"' + employeeid + '", "users_pass":"' + userpass + '"}';
+    var usercss = $$("users_css").getValue();
+    var dataSumit2Users = '{"users_firstname":"' + firstname + '", "users_lastname":"' + lastname + '", "users_name":"' + username + '", "users_displayName":"' + displayname + '", "users_employeeId":"' + employeeid + '","users_css":"' + usercss + '", "users_pass":"' + userpass + '"}';
     webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=users&JSONdata=" + dataSumit2Users + "&theWhereColumn=users_UUID&theUUID=" + useruuid);
 //    console.log("JSON DATA being sent to the server " + theSubmitDataRAW2); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
@@ -149,7 +164,7 @@ function update_row() {
 function refresh_row() {
     //console.log("hello");
     webix.message({text: "Reloading..."});
-    webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_firstname,users_lastname,users_name,users_displayName,users_pass,users_employeeID,users_UUID&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1", function (text, data) {
+    webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_firstname,users_lastname,users_name,users_displayName,users_pass,users_employeeID,users_UUID,users_css&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1", function (text, data) {
         var userAuthor = text;
         userAuthor = userAuthor.replace('[', "");
         userAuthor = userAuthor.replace(']', "");
@@ -161,6 +176,7 @@ function refresh_row() {
         $$('users_employeeId').setValue(userAuthor.users_employeeID);
         $$('users_pass').setValue(userAuthor.users_pass);
         $$('users_UUID').setValue(userAuthor.users_UUID);
+        $$('users_css').setValue(userAuthor.users_css);
     });
 }
 
