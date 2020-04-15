@@ -1,5 +1,5 @@
 /*
- * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ * <dsCode> Inc. (c) 2020. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
 
 const Datastore = require("nedb");
@@ -22,27 +22,22 @@ function fixID(a) {
 
 module.exports = function (app, root) {
 
-    app.get(root + "/countries", async(req, res, next) = > {
+    app.get(root + "/countries", async (req, res, next) => {
         try {
             let docs;
-    if (req.query.filter) {
-        // math by text
-        docs = await
-        countries.find({
-            value: {$regex: new RegExp("^" + req.query.filter.value, "i")}
-        }).limit(10).execAsync();
-    } else {
-        // return all
-        docs = await
-        countries.findAsync({});
-    }
-    res.send(docs.map(fixID));
-} catch
-    (e)
-    {
-        next(e);
-    }
-})
-    ;
+            if (req.query.filter) {
+                // math by text
+                docs = await countries.find({
+                    value: {$regex: new RegExp("^" + req.query.filter.value, "i")}
+                }).sort({value: 1}).limit(10).execAsync();
+            } else {
+                // return all
+                docs = await countries.find({}).sort({value: 1}).execAsync();
+            }
+            res.send(docs.map(fixID));
+        } catch (e) {
+            next(e);
+        }
+    });
 
 };

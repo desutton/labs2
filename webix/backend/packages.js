@@ -1,5 +1,5 @@
 /*
- * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ * <dsCode> Inc. (c) 2020. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
 
 const Datastore = require("nedb");
@@ -22,87 +22,80 @@ function fixID(a) {
 
 module.exports = function (app, root) {
 
-    app.get(root + "/packages", async(req, res, next) = > {
+    app.get(root + "/packages", async (req, res, next) => {
         try {
             const docs = await packages.findAsync({});
-    res.send(docs.map(fixID));
-} catch
-    (e)
-    {
-        next(e);
-    }
-})
-    ;
+            res.send(docs.map(fixID));
+        } catch (e) {
+            next(e);
+        }
+    });
 
-    app.get(root + "/packages_part", async(req, res, next) = > {
+    app.get(root + "/packages_part", async (req, res, next) => {
         try {
             let docs = packages.find({});
-    if (req.query.start) docs = docs.skip(req.query.start);
-    if (req.query.count) docs = docs.limit(req.query.count);
-    docs = await
-    docs.execAsync();
+            if (req.query.start) docs = docs.skip(req.query.start);
+            if (req.query.count) docs = docs.limit(req.query.count);
+            docs = await docs.execAsync();
 
-    res.send(docs.map(fixID));
-} catch
-    (e)
-    {
-        next(e);
-    }
-})
-    ;
-
-    app.get(root + "/packages_dynamic", async(req, res, next) = > {
-        const start = req.query.start || 0;
-    const count = req.query.count || 50;
-
-    try {
-        const docsCount = await
-        packages.countAsync({});
-        const docs = await
-        packages.find({}).skip(start).limit(count).execAsync();
-
-        const data = {
-            pos: start,
-            total_count: docsCount,
-            data: docs.map(fixID)
-        };
-        res.send(data);
-    } catch (e) {
-        next(e);
-    }
-})
-    ;
-
-    app.get(root + "/packages_full", async(req, res, next) = > {
-        const start = req.query.start || 0;
-    const count = req.query.count || 50;
-
-    try {
-        const docsCount = await
-        packages.countAsync({});
-        let docs = await
-        packages.find({}).skip(start).limit(count)
-
-        if (req.query.sort) {
-            const sort = req.query.sort;
-            for (var key in sort)
-                sort[key] = sort[key] === "asc" ? 1 : -1;
-            docs = docs.sort(sort);
+            res.send(docs.map(fixID));
+        } catch (e) {
+            next(e);
         }
+    });
 
-        docs = await
-        docs.execAsync();
+    app.get(root + "/packages_dynamic", async (req, res, next) => {
+        const start = req.query.start || 0;
+        const count = req.query.count || 50;
 
-        const data = {
-            pos: start,
-            total_count: docsCount,
-            data: docs.map(fixID)
-        };
-        res.send(data);
-    } catch (e) {
-        next(e);
-    }
-})
-    ;
+        try {
+            const docsCount = await packages.countAsync({});
+            const docs = await packages.find({}).skip(start).limit(count).execAsync();
+
+            const data = {
+                pos: start,
+                total_count: docsCount,
+                data: docs.map(fixID)
+            };
+            res.send(data);
+        } catch (e) {
+            next(e);
+        }
+    });
+
+    app.get(root + "/packages_full", async (req, res, next) => {
+        const start = req.query.start || 0;
+        const count = req.query.count || 50;
+        const filter = req.query.filter;
+        const sort = req.query.sort;
+
+        try {
+
+
+            let where = {};
+            if (filter && filter.package)
+                where.package = {$regex: new RegExp(`^${filter.package}`, "i")};
+
+            let docs = await packages.find(where);
+            let docsCount = await docs.execAsync();
+
+            if (sort) {
+                for (var key in sort)
+                    sort[key] = sort[key] === "asc" ? 1 : -1;
+                docs = docs.sort(sort);
+            }
+
+            docs = await docs.skip(start).limit(count).execAsync();
+
+            const data = {
+                pos: start,
+                total_count: docsCount.length,
+                data: docs.map(fixID)
+            };
+            res.send(data);
+        } catch (e) {
+            next(e);
+        }
+    });
 
 };

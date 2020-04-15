@@ -1,5 +1,5 @@
 /*
- * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ * <dsCode> Inc. (c) 2020. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
 
 const Datastore = require("nedb");
@@ -20,15 +20,11 @@ function fixID(a) {
     return a;
 }
 
-async
-
-function getPagesLevel(parent, kids) {
-    const docs = await
-    pages.find({parent}).sort({title: 1}).execAsync();
+async function getPagesLevel(parent, kids) {
+    const docs = await pages.find({parent}).sort({title: 1}).execAsync();
     if (kids) {
         for (const doc of docs) {
-            const sub = await
-            getPagesLevel(doc._id, kids);
+            const sub = await getPagesLevel(doc._id, kids);
             if (sub)
                 doc.data = sub;
         }
@@ -39,63 +35,52 @@ function getPagesLevel(parent, kids) {
 
 module.exports = function (app, root) {
 
-    app.get(root + "/pages", async(req, res, next) = > {
+    app.get(root + "/pages", async (req, res, next) => {
         try {
             // return all
-            const docs = await getPagesLevel("0", true
-)
-    ;
-    res.send({
-        parent: "0",
-        data: docs
+            const docs = await getPagesLevel("0", true);
+            res.send({
+                parent: "0",
+                data: docs
+            });
+        } catch (e) {
+            next(e);
+        }
     });
-} catch
-    (e)
-    {
-        next(e);
-    }
-})
-    ;
 
 
-    app.post(root + "/pages", async(req, res, next) = > {
+    app.post(root + "/pages", async (req, res, next) => {
         const title = req.body.title;
-    const parent = req.body.parent;
-    try {
-        const doc = await
-        pages.insertAsync({parent, title});
-        res.send({id: doc._id});
-    } catch (e) {
-        next(e);
-    }
-})
-    ;
+        const parent = req.body.parent;
+        try {
+            const doc = await pages.insertAsync({parent, title});
+            res.send({id: doc._id});
+        } catch (e) {
+            next(e);
+        }
+    });
 
-    app.put(root + "/pages/:id", async(req, res, next) = > {
+    app.put(root + "/pages/:id", async (req, res, next) => {
         const id = req.params.id;
-    const title = req.body.title;
-    const parent = req.body.parent;
+        const title = req.body.title;
+        const parent = req.body.parent;
 
-    try {
-        await
-        pages.updateAsync({_id: id}, {$set: {parent, title}});
-        res.send({});
-    } catch (e) {
-        next(e);
-    }
-})
-    ;
+        try {
+            await pages.updateAsync({_id: id}, {$set: {parent, title}});
+            res.send({});
+        } catch (e) {
+            next(e);
+        }
+    });
 
-    app.delete(root + "/pages/:id", async(req, res, next) = > {
+    app.delete(root + "/pages/:id", async (req, res, next) => {
         const id = req.params.id;
-    try {
-        await
-        pages.removeAsync({_id: id});
-        res.send({});
-    } catch (e) {
-        next(e);
-    }
-})
-    ;
+        try {
+            await pages.removeAsync({_id: id});
+            res.send({});
+        } catch (e) {
+            next(e);
+        }
+    });
 
 };

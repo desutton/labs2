@@ -1,8 +1,8 @@
 /*
- * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ * <dsCode> Inc. (c) 2020. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
 
-// Type definitions for Webix UI 6.0.0
+// Type definitions for Webix UI 7.0
 // Project: https://webix.com
 
 type WebixTemplate = (...args: any[]) => string;
@@ -11,272 +11,274 @@ type EventHash = { [id: string]: WebixCallback };
 type SizeInfo = { width: number, height: number };
 
 
-export function ajax(): webix._ajax;
+export function ajax(url?: string, params?: any): webix.Ajax | Promise<any>;
 
 export function $$(id: string | Event | HTMLElement): webix.ui.baseview;
 
 
-interface _ajax {
-    bind(master: any): webix._ajax;
+interface Ajax {
+	bind(master: any): Ajax;
 
-    del(url: string, params?: any, callback?: WebixCallback): Promise<any>;
+	del(url: string, params?: any, callback?: WebixCallback): Promise<any>;
 
-    get(url: string, params?: any, callback?: WebixCallback): Promise<any>;
+	get(url: string, params?: any, callback?: WebixCallback): Promise<any>;
 
-    getXHR(): any;
+	getXHR(): any;
 
-    headers(values: any): webix._ajax;
+	headers(values: any): Ajax;
 
-    post(url: string, params?: any, callback?: WebixCallback): Promise<any>;
+	post(url: string, params?: any, callback?: WebixCallback): Promise<any>;
 
-    put(url: string, params?: any, callback?: WebixCallback): Promise<any>;
+	put(url: string, params?: any, callback?: WebixCallback): Promise<any>;
 
-    response(type: string): webix._ajax;
+	response(type: string): Ajax;
 
-    stringify(data: any): string;
+	stringify(data: any): string;
 
-    sync(): webix._ajax;
+	sync(): Ajax;
 
-    master: any;
+	master: any;
 }
 
 interface clipbuffer {
-    destructor(): void;
+	destructor(): void;
 
-    focus(): void;
+	focus(): void;
 
-    init(): void;
+	init(): void;
 
-    set(text: string): void;
+	set(text: string): void;
 }
 
 interface color {
-    hexToDec(hex: string): number;
+	hexToDec(hex: string): number;
 
-    hsvToRgb(h: number, s: number, v: number): any[];
+	hsvToRgb(h: number, s: number, v: number): any[];
 
-    rgbToHsv(r: number, g: number, b: number): any[];
+	rgbToHsv(r: number, g: number, b: number): any[];
 
-    toHex(number: number, length?: number): string;
+	toHex(number: number, length?: number): string;
 
-    toRgb(rgb: string): any[];
+	toRgb(rgb: string): any[];
 }
 
 interface csv {
-    parse(text: string, delimiter?: any): any[];
+	parse(text: string, delimiter?: any): any[];
 
-    stringify(data: any[], delimiter?: any): string;
+	stringify(data: any[], delimiter?: any): string;
 
-    delimiter: any;
-    escape: boolean;
+	delimiter: any;
+	escape: boolean;
 }
 
 interface editors {
-    $popup: any;
-    checkbox: string;
-    color: string;
-    combo: string;
-    date: string;
-    "inline-checkbox": string;
-    "inline-text": string;
-    multiselect: string;
-    password: string;
-    popup: string;
-    richselect: string;
-    select: string;
-    text: string;
+	$popup: any;
+	checkbox: string;
+	color: string;
+	combo: string;
+	date: string;
+	"inline-checkbox": string;
+	"inline-text": string;
+	multiselect: string;
+	password: string;
+	popup: string;
+	richselect: string;
+	select: string;
+	text: string;
 }
 
 interface env {
-    cssPrefix: string;
-    isFF: boolean;
-    isIE: boolean;
-    isSafari: boolean;
-    isWebKit: boolean;
-    jsPrefix: string;
-    mouse: any;
-    strict: boolean;
-    svg: boolean;
-    transform: boolean;
-    transition: boolean;
-    transitionDuration: string;
-    transitionEnd: string;
-    translate: string;
+	cssPrefix: string;
+	isFF: boolean;
+	isIE: boolean;
+	isSafari: boolean;
+	isWebKit: boolean;
+	jsPrefix: string;
+	mouse: any;
+	strict: boolean;
+	svg: boolean;
+	transform: boolean;
+	transition: boolean;
+	transitionDuration: string;
+	transitionEnd: string;
+	translate: string;
 }
 
 interface history {
-    push(view: string, url: string, value: any): void;
+	push(view: string, url: string, value: any): void;
 
-    track(view: string, url: string): void;
+	track(view: string, url: string): void;
 }
 
 interface html {
-    addCss(node: HTMLElement, name: string): void;
+	addCss(node: HTMLElement, name: string): void;
 
-    addMeta(name: string, value: string): void;
+	addMeta(name: string, value: string): void;
 
-    addStyle(css: string): void;
+	addStyle(css: string): void;
 
-    allowSelect(): void;
+	allowSelect(): void;
 
-    create(name: string, attrs: any, html?: string): HTMLElement;
+	create(name: string, attrs: any, html?: string): HTMLElement;
 
-    createCss(data: any): string;
+	createCss(data: any): string;
 
-    denySelect(): void;
+	denySelect(): void;
 
-    getValue(node: HTMLElement): string;
+	getValue(node: HTMLElement): string;
 
-    index(node: HTMLElement): number;
+	index(node: HTMLElement): number;
 
-    insertBefore(node: HTMLElement, before: HTMLElement, rescue?: HTMLElement): void;
+	insertBefore(node: HTMLElement, before: HTMLElement, rescue?: HTMLElement): void;
 
-    locate(ev: Event | HTMLElement, name: string): string;
+	locate(ev: Event | HTMLElement, name: string): string;
 
-    offset(node: HTMLElement): any;
+	offset(node: HTMLElement): any;
 
-    pos(ev: Event): any;
+	pos(ev: Event): any;
 
-    posRelative(ev: Event): any;
+	posRelative(ev: Event): any;
 
-    preventEvent(ev: Event): boolean;
+	preventEvent(ev: Event): boolean;
 
-    remove(node: HTMLElement | HTMLElement[]): void;
+	remove(node: HTMLElement | HTMLElement[]): void;
 
-    removeCss(node: HTMLElement, name: string): void;
+	removeCss(node: HTMLElement, name: string): void;
 
-    stopEvent(ev: Event): boolean;
+	stopEvent(ev: Event): boolean;
 
-    getTextSize(text: (string | string[]), css?: string, width?: number): SizeInfo;
+	getTextSize(text: (string | string[]), css?: string, width?: number): SizeInfo;
+
+	triggerEvent(node: HTMLElement, type: string, name: string): void;
 }
 
 interface i18n {
-    dateFormatDate(date: string): any;
+	dateFormatDate(date: string): any;
 
-    dateFormatStr(date: any): string;
+	dateFormatStr(date: any): string;
 
-    fullDateFormatDate(date: string): any;
+	fullDateFormatDate(date: string): any;
 
-    fullDateFormatStr(date: Date): string;
+	fullDateFormatStr(date: Date): string;
 
-    intFormat(num: number): string;
+	intFormat(num: number): string;
 
-    longDateFormatDate(date: string): any;
+	longDateFormatDate(date: string): any;
 
-    longDateFormatStr(date: any): string;
+	longDateFormatStr(date: any): string;
 
-    numberFormat(number: number): string;
+	numberFormat(number: number): string;
 
-    parseFormatDate(date: string): any;
+	parseFormatDate(date: string): any;
 
-    parseFormatStr(date: any): string;
+	parseFormatStr(date: any): string;
 
-    parseTimeFormatDate(date: string): any;
+	parseTimeFormatDate(date: string): any;
 
-    parseTimeFormatStr(date: any): string;
+	parseTimeFormatStr(date: any): string;
 
-    priceFormat(number: number): string;
+	priceFormat(number: number): string;
 
-    setLocale(name: string): void;
+	setLocale(name: string): void;
 
-    timeFormatDate(time: string): any;
+	timeFormatDate(time: string): any;
 
-    timeFormatStr(date: any): string;
+	timeFormatStr(date: any): string;
 
-    calendar: any;
-    controls: any;
-    dateFormat: string;
-    decimalDelimiter: string;
-    decimalSize: number;
-    fileSize: any[];
-    fullDateFormat: string;
-    groupDelimiter: string;
-    groupSize: number;
-    locales: any;
-    longDateFormat: string;
-    parseFormat: string;
-    parseTimeFormat: string;
-    price: string;
-    priceSettings: any;
-    timeFormat: string;
+	calendar: any;
+	controls: any;
+	dateFormat: string;
+	decimalDelimiter: string;
+	decimalSize: number;
+	fileSize: any[];
+	fullDateFormat: string;
+	groupDelimiter: string;
+	groupSize: number;
+	locales: any;
+	longDateFormat: string;
+	parseFormat: string;
+	parseTimeFormat: string;
+	price: string;
+	priceSettings: any;
+	timeFormat: string;
 }
 
 interface locale {
-    pager: any;
+	pager: any;
 }
 
 interface markup {
-    init(node: string, target: string): webix.ui.baseview;
+	init(node: string, target: string): webix.ui.baseview;
 
-    parse(data: any, datatype: string): void;
+	parse(data: any, datatype: string): void;
 
-    attribute: any;
-    dataTag: any;
-    namespace: any;
+	attribute: any;
+	dataTag: any;
+	namespace: any;
 }
 
 interface promise {
-    new(executor: (resolve: (value?: any) => void, reject: (reason?: any) => void) => void): Promise<any>;
+	new(executor: (resolve: (value?: any) => void, reject: (reason?: any) => void) => void): Promise<any>;
 
-    all(promises: Promise<any>[]): Promise<any>;
+	all(promises: Promise<any>[]): Promise<any>;
 
-    race(promises: Promise<any>[]): Promise<any>;
+	race(promises: Promise<any>[]): Promise<any>;
 
-    defer(): Promise<any>;
+	defer(): Promise<any>;
 
-    resolve(value: any): Promise<any>;
+	resolve(value: any): Promise<any>;
 
-    reject(value: any): Promise<any>;
+	reject(value: any): Promise<any>;
 
 }
 
 interface rules {
-    isChecked(): boolean;
+	isChecked(): boolean;
 
-    isEmail(): boolean;
+	isEmail(): boolean;
 
-    isNotEmpty(): boolean;
+	isNotEmpty(): boolean;
 
-    isNumber(): boolean;
+	isNumber(): boolean;
 }
 
 interface cookie {
-    clear(): void;
+	clear(): void;
 
-    get(name: string): any;
+	get(name: string): any;
 
-    put(name: string, value: any): void;
+	put(name: string, value: any): void;
 
-    remove(name: string): void;
+	remove(name: string): void;
 }
 
 interface local {
-    clear(): void;
+	clear(): void;
 
-    get(name: string): any;
+	get(name: string): any;
 
-    put(name: string, value: any): void;
+	put(name: string, value: any): void;
 
-    remove(name: string): void;
+	remove(name: string): void;
 }
 
 interface session {
-    clear(): void;
+	clear(): void;
 
-    get(name: string): any;
+	get(name: string): any;
 
-    put(name: string, value: any): void;
+	put(name: string, value: any): void;
 
-    remove(name: string): void;
+	remove(name: string): void;
 }
 
 interface storage {
-    cookie: webix.cookie;
-    local: webix.local;
-    session: webix.session;
+	cookie: webix.cookie;
+	local: webix.local;
+	session: webix.session;
 }
 
-export function alert(text: any, type?: string | WebixCallback, callback?: WebixCallback): HTMLElement;
+export function alert(text: any, type?: string | WebixCallback, callback?: WebixCallback): Promise<any>;
 
 export function animate(html_element: HTMLElement, animation: any): void;
 
@@ -290,7 +292,7 @@ export function callEvent(name: string, params: any[]): boolean;
 
 export function clone(source: any): any;
 
-export function confirm(text: any, type?: string | WebixCallback, callback?: WebixCallback): HTMLElement;
+export function confirm(text: any, type?: string | WebixCallback, callback?: WebixCallback): Promise<any>;
 
 export function copy(source: any): any;
 
@@ -298,7 +300,7 @@ export function delay(code: WebixCallback, owner?: any, params?: any[], delay?: 
 
 export function detachEvent(id: string): void;
 
-export function dp(name: string): any;
+export function dp(name: any): any;
 
 export function editStop(): void;
 
@@ -318,13 +320,11 @@ export function isDate(check: any): boolean;
 
 export function isUndefined(check: any): boolean;
 
-export function jsonp(url: string, params?: any, callback?: WebixCallback, master?: any): void;
-
 export function mapEvent(map: any): void;
 
-export function message(content: any, type?: string, expire?: number, id?: string | number): void;
+export function message(content: any, type?: string, expire?: number, id?: string | number): string;
 
-export function modalbox(text: any, type?: string | WebixCallback, callback?: WebixCallback): HTMLElement;
+export function modalbox(text: any, type?: string | WebixCallback, callback?: WebixCallback): Promise<any>;
 
 export function once(code: WebixCallback): void;
 
@@ -349,8 +349,6 @@ export function single(source: WebixCallback): WebixCallback;
 export function stringify(obj: any): string;
 
 export function template(template: string): WebixCallback;
-
-export function toArray(array: any[]): any[];
 
 export function toCSV(id: any, options?: any): any;
 
@@ -392,26 +390,21 @@ export var rules: webix.rules;
 export var storage: webix.storage;
 
 export namespace message {
-    function hide(content: any): void;
+	function hide(content: any): void;
 }
-
-interface ActiveContent {
-}
-
-export var ActiveContent: ActiveContent;
 
 interface AtomDataLoader {
-    load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+	load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-    parse(data: any, type: string): void;
+	parse(data: any, type: string): void;
 }
 
 export var AtomDataLoader: AtomDataLoader;
 
 interface AtomRender {
-    render(id: string | number, data: any, type: string): void;
+	render(id: string | number, data: any, type: string): void;
 
-    sync(source: any, filter: WebixCallback, silent: boolean): void;
+	sync(source: any, filter: WebixCallback, silent: boolean): void;
 }
 
 export var AtomRender: AtomRender;
@@ -422,74 +415,79 @@ interface AutoScroll {
 export var AutoScroll: AutoScroll;
 
 interface AutoTooltip {
+	$tooltipIn(node: HTMLElement): HTMLElement;
+
+	$tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+	$tooltipOut: void;
 }
 
 export var AutoTooltip: AutoTooltip;
 
 interface BaseBind {
-    bind(target: any, rule?: WebixCallback, format?: string): void;
+	bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    unbind(): void;
+	unbind(): void;
 }
 
 export var BaseBind: BaseBind;
 
 interface BindSource {
-    addBind(source: any, rule: string, format: string): void;
+	addBind(source: any, rule: string, format: string): void;
 
-    getBindData(key: string | number, update: boolean): void;
+	getBindData(key: string | number, update: boolean): void;
 
-    removeBind(source: any): void;
+	removeBind(source: any): void;
 
-    saveBatch(handler: WebixCallback): void;
+	saveBatch(handler: WebixCallback): void;
 
-    setBindData(data: any, key: string | number): void;
+	setBindData(data: any, key: string | number): void;
 }
 
 export var BindSource: BindSource;
 
 interface Canvas {
-    clearCanvas(): void;
+	clearCanvas(): void;
 
-    getCanvas(context: string): any;
+	getCanvas(context: string): any;
 
-    hideCanvas(): void;
+	hideCanvas(): void;
 
-    renderText(x: number, y: number, text: string, css: string, w: number): void;
+	renderText(x: number, y: number, text: string, css: string, w: number): void;
 
-    renderTextAt(valign: string, align: string, x: number, y: number, t: string, c: string, w: number): void;
+	renderTextAt(valign: string, align: string, x: number, y: number, t: string, c: string, w: number): void;
 
-    showCanvas(): void;
+	showCanvas(): void;
 
-    toggleCanvas(): void;
+	toggleCanvas(): void;
 }
 
 export var Canvas: Canvas;
 
 interface CodeParser {
-    collapseNames(obj: any): { [key: string]: any; };
+	collapseNames(obj: any): { [key: string]: any; };
 
-    expandNames(obj: { [key: string]: any; }): any;
+	expandNames(obj: { [key: string]: any; }): any;
 }
 
 export var CodeParser: CodeParser;
 
 interface CollectionBind {
-    getCursor(): number;
+	getCursor(): number;
 
-    refreshCursor(): void;
+	refreshCursor(): void;
 
-    setCursor(cursor: string | number): void;
+	setCursor(cursor: string | number): void;
 }
 
 export var CollectionBind: CollectionBind;
 
 interface ContextHelper {
-    attachTo(view: any): void;
+	attachTo(view: any): void;
 
-    getContext(): any;
+	getContext(): any;
 
-    setContext(context: any): void;
+	setContext(context: any): void;
 }
 
 export var ContextHelper: ContextHelper;
@@ -500,731 +498,779 @@ interface CopyPaste {
 export var CopyPaste: CopyPaste;
 
 interface CustomPrint {
-    $customPrint: WebixCallback;
+	$customPrint: WebixCallback;
 }
 
 export var CustomPrint: CustomPrint;
 
 interface CustomScroll {
-    enable(html_node: HTMLElement | webix.ui.baseview): void;
+	enable(html_node: HTMLElement | webix.ui.baseview): void;
 
-    init(): void;
+	init(): void;
 
-    resize(): void;
+	resize(): void;
 
-    scrollStep: number;
+	scrollStep: number;
 }
 
 export var CustomScroll: CustomScroll;
 
 interface DataCollection {
-    add(obj: any, index?: number): string | number;
+	add(obj: any, index?: number): string | number;
 
-    addBind(source: any, rule: string, format: string): void;
+	addBind(source: any, rule: string, format: string): void;
 
-    attachEvent(type: DataCollectionEventName, functor: WebixCallback, id?: string): string | number;
+	attachEvent(type: DataCollectionEventName, functor: WebixCallback, id?: string): string | number;
 
-    bind(target: any, rule?: WebixCallback, format?: string): void;
+	bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    blockEvent(): void;
+	blockEvent(): void;
 
-    callEvent(name: string, params: any[]): boolean;
+	callEvent(name: string, params: any[]): boolean;
 
-    clearAll(soft?: boolean): void;
+	clearAll(soft?: boolean): void;
 
-    clearValidation(): void;
+	clearValidation(): void;
 
-    copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+	copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-    count(): number;
+	count(): number;
 
-    define(property: string, value: any): void;
+	define(property: string, value: any): void;
 
-    destructor(): void;
+	destructor(): void;
 
-    detachEvent(id: string): void;
+	detachEvent(id: string): void;
 
-    exists(id: string | number): boolean;
+	exists(id: number | string): boolean;
 
-    filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+	filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-    find(criterion: WebixCallback, first?: boolean): any;
+	find(criterion: WebixCallback, first?: boolean): any;
 
-    getBindData(key: string | number, update: boolean): void;
+	getBindData(key: string | number, update: boolean): void;
 
-    getCursor(): number;
+	getCursor(): number;
 
-    getFirstId(): string | number;
+	getFirstId(): number | string;
 
-    getIdByIndex(index: number): string | number;
+	getIdByIndex(index: number | string): string | number;
 
-    getIndexById(id: string | number): number;
+	getIndexById(id: number | string): number;
 
-    getItem(id: string | number): any;
+	getItem(id: number | string): any;
 
-    getLastId(): string | number;
+	getLastId(): number | string;
 
-    getNextId(id: string | number, step: number): string | number;
+	getNextId(id: number | string, step: number): string | number;
 
-    getPrevId(id: string | number, step: number): string | number;
+	getPrevId(id: number | string, step: number): string | number;
 
-    hasEvent(name: string): boolean;
+	hasEvent(name: string): boolean;
 
-    isVisible(): boolean;
+	isVisible(): boolean;
 
-    load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+	load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-    loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+	loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-    mapEvent(map: any): void;
+	mapEvent(map: any): void;
 
-    move(sid: string, tindex: number, tobj?: any, details?: any): string;
+	move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-    moveBottom(id: string | number): void;
+	moveBottom(id: string | number): void;
 
-    moveDown(id: string | number, step: number): void;
+	moveDown(id: string | number, step: number): void;
 
-    moveTop(id: string | number): void;
+	moveTop(id: string | number): void;
 
-    moveUp(id: string | number, step: number): void;
+	moveUp(id: string | number, step: number): void;
 
-    parse(data: any, type: string): void;
+	parse(data: any, type: string): void;
 
-    refresh(id?: string | number): void;
+	refresh(id?: number | string): void;
 
-    refreshCursor(): void;
+	refreshCursor(): void;
 
-    remove(id: string | number): void;
+	remove(id: string | number | any[]): void;
 
-    removeBind(source: any): void;
+	removeBind(source: any): void;
 
-    saveBatch(handler: WebixCallback): void;
+	saveBatch(handler: WebixCallback): void;
 
-    serialize(): any[];
+	serialize(all?: boolean): any[];
 
-    setBindData(data: any, key: string | number): void;
+	setBindData(data: any, key: string | number): void;
 
-    setCursor(cursor: string | number): void;
+	setCursor(cursor: string | number): void;
 
-    sort(by: string, dir?: string, as?: string): void;
+	sort(by: string, dir?: string, as?: string): void;
 
-    sync(source: any, filter: WebixCallback, silent: boolean): void;
+	sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-    unbind(): void;
+	unbind(): void;
 
-    unblockEvent(): void;
+	unblockEvent(): void;
 
-    updateItem(id: string | number, data: any): void;
+	updateItem(id: number | string, data: any): void;
 
-    validate(id?: string): boolean;
+	validate(id?: string): boolean;
 
-    config: DataCollectionConfig;
-    data: DataStore;
-    name: string;
-    waitData: Promise<any>;
+	waitSave(handler: WebixCallback): Promise<any>;
+
+	config: DataCollectionConfig;
+	data: DataStore;
+	name: string;
+	waitData: Promise<any>;
 }
 
 interface DataCollectionConfig {
-    view?: string;
-    data?: string | any[];
-    dataFeed?: string | WebixCallback;
-    datathrottle?: number;
-    datatype?: string;
-    defaultData?: any;
-    externalData?: WebixCallback;
-    id?: string | number;
-    map?: any;
-    on?: EventHash;
-    ready?: WebixCallback;
-    removeMissed?: boolean;
-    rules?: any;
-    save?: string;
-    scheme?: any;
-    url?: any;
+	view?: string;
+	data?: string | any[];
+	dataFeed?: string | WebixCallback;
+	datathrottle?: number;
+	datatype?: string;
+	defaultData?: any;
+	externalData?: WebixCallback;
+	id?: string | number;
+	map?: any;
+	on?: EventHash;
+	ready?: WebixCallback;
+	removeMissed?: boolean;
+	rules?: any;
+	save?: any;
+	scheme?: any;
+	url?: any;
 }
 
 type DataCollectionEventName =
-    'onAfterAdd'
-    | 'onAfterCursorChange'
-    | 'onAfterDelete'
-    | 'onAfterLoad'
-    | 'onAfterSort'
-    | 'onBeforeAdd'
-    | 'onBeforeCursorChange'
-    | 'onBeforeDelete'
-    | 'onBeforeLoad'
-    | 'onBeforeSort'
-    | 'onBindRequest'
-    | 'onBindUpdate'
-    | 'onDataRequest'
-    | 'onDataUpdate'
-    | 'onDestruct'
-    | 'onLoadError'
-    | 'onValidationError'
-    | 'onValidationSuccess';
-
+	'onAfterAdd'
+	| 'onAfterCursorChange'
+	| 'onAfterDelete'
+	| 'onAfterLoad'
+	| 'onAfterSort'
+	| 'onBeforeAdd'
+	| 'onBeforeCursorChange'
+	| 'onBeforeDelete'
+	| 'onBeforeLoad'
+	| 'onBeforeSort'
+	| 'onBindRequest'
+	| 'onBindUpdate'
+	| 'onDataRequest'
+	| 'onDataUpdate'
+	| 'onDestruct'
+	| 'onLoadError'
+	| 'onValidationError'
+	| 'onValidationSuccess';
 interface DataCollectionFactory {
-    new(config?: DataCollectionConfig): DataCollection;
+	new(config?: DataCollectionConfig): DataCollection;
 }
 
 export var DataCollection: DataCollectionFactory;
 
 interface DataDriver {
-    csv: any;
-    excel: string;
-    html: any;
-    htmltable: any;
-    jsarray: any;
-    json: any;
-    xml: any;
+	csv: any;
+	excel: string;
+	html: any;
+	htmltable: any;
+	jsarray: any;
+	json: any;
+	xml: any;
 }
 
 export var DataDriver: DataDriver;
 
 interface DataLoader {
-    add(obj: any, index?: number): string | number;
+	add(obj: any, index?: number): string | number;
 
-    clearAll(soft?: boolean): void;
+	clearAll(soft?: boolean): void;
 
-    count(): number;
+	count(): number;
 
-    exists(id: string | number): boolean;
+	exists(id: number | string): boolean;
 
-    filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+	filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-    find(criterion: WebixCallback, first?: boolean): any;
+	find(criterion: WebixCallback, first?: boolean): any;
 
-    getFirstId(): string | number;
+	getFirstId(): number | string;
 
-    getIdByIndex(index: number): string | number;
+	getIdByIndex(index: number | string): string | number;
 
-    getIndexById(id: string | number): number;
+	getIndexById(id: number | string): number;
 
-    getItem(id: string | number): any;
+	getItem(id: number | string): any;
 
-    getLastId(): string | number;
+	getLastId(): number | string;
 
-    getNextId(id: string | number, step: number): string | number;
+	getNextId(id: number | string, step: number): string | number;
 
-    getPrevId(id: string | number, step: number): string | number;
+	getPrevId(id: number | string, step: number): string | number;
 
-    load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+	load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-    loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+	loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-    parse(data: any, type: string): void;
+	parse(data: any, type: string): void;
 
-    refresh(id?: string | number): void;
+	refresh(id?: number | string): void;
 
-    remove(id: string | number): void;
+	remove(id: string | number | any[]): void;
 
-    serialize(): any[];
+	serialize(all?: boolean): any[];
 
-    sort(by: string, dir?: string, as?: string): void;
+	sort(by: string, dir?: string, as?: string): void;
 
-    sync(source: any, filter: WebixCallback, silent: boolean): void;
+	sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-    updateItem(id: string | number, data: any): void;
+	updateItem(id: number | string, data: any): void;
 
-    data: DataStore;
-    waitData: Promise<any>;
+	waitSave(handler: WebixCallback): Promise<any>;
+
+	data: DataStore;
+	waitData: Promise<any>;
 }
 
 export var DataLoader: DataLoader;
 
 interface DataMarks {
-    addCss(id: string | number, css: string, silent?: boolean): void;
+	addCss(id: string | number, css: string, silent?: boolean): void;
 
-    clearCss(css: string, silent?: boolean): void;
+	clearCss(css: string, silent?: boolean): void;
 
-    hasCss(id: string | number, css: string): boolean;
+	hasCss(id: string | number, css: string): boolean;
 
-    removeCss(id: string | number, css: string, silent?: boolean): void;
+	removeCss(id: string | number, css: string, silent?: boolean): void;
 }
 
 export var DataMarks: DataMarks;
 
 interface DataMove {
-    copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+	copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-    move(sid: string, tindex: number, tobj?: any, details?: any): string;
+	move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-    moveBottom(id: string | number): void;
+	moveBottom(id: string | number): void;
 
-    moveDown(id: string | number, step: number): void;
+	moveDown(id: string | number, step: number): void;
 
-    moveTop(id: string | number): void;
+	moveTop(id: string | number): void;
 
-    moveUp(id: string | number, step: number): void;
+	moveUp(id: string | number, step: number): void;
 }
 
 export var DataMove: DataMove;
 
 interface DataProcessor {
-    attachEvent(type: string, functor: WebixCallback, id?: string): string | number;
+	attachEvent(type: string, functor: WebixCallback, id?: string): string | number;
 
-    attachProgress(start: WebixCallback, end: WebixCallback, error: WebixCallback): void;
+	attachProgress(start: WebixCallback, end: WebixCallback, error: WebixCallback): void;
 
-    blockEvent(): void;
+	blockEvent(): void;
 
-    callEvent(name: string, params: any[]): boolean;
+	callEvent(name: string, params: any[]): boolean;
 
-    clearValidation(): void;
+	clearValidation(): void;
 
-    define(property: string, value: any): void;
+	define(property: string, value: any): void;
 
-    detachEvent(id: string): void;
+	detachEvent(id: string): void;
 
-    escape(value: string): string;
+	escape(value: string): string;
 
-    getItemState(itemId: string | number): any;
+	getItemState(itemId: string | number): any;
 
-    getState(): string | boolean;
+	getState(): string | boolean;
 
-    hasEvent(name: string): boolean;
+	hasEvent(name: string): boolean;
 
-    ignore(code: WebixCallback, master: any): void;
+	ignore(code: WebixCallback, master: any): void;
 
-    mapEvent(map: any): void;
+	mapEvent(map: any): void;
 
-    off(): void;
+	off(): void;
 
-    on(): void;
+	on(): void;
 
-    processResult(data: any): void;
+	processResult(data: any): void;
 
-    reset(): void;
+	reset(): void;
 
-    save(id: string | number, operation: string): void;
+	save(id: string | number, operation?: string, obj?: any): Promise<any>;
 
-    send(): void;
+	send(): Promise<any>;
 
-    setItemState(itemId: string | number, state: boolean): void;
+	setItemState(itemId: string | number, state: boolean): void;
 
-    unblockEvent(): void;
+	unblockEvent(): void;
 
-    validate(mode?: any): boolean;
+	validate(mode?: any): boolean;
 
-    config: { [key: string]: any; };
-    name: string;
+	config: { [key: string]: any; };
+	name: string;
 }
 
 export var DataProcessor: DataProcessor;
 
 interface DataRecord {
-    attachEvent(type: string, functor: WebixCallback, id?: string): string | number;
+	attachEvent(type: string, functor: WebixCallback, id?: string): string | number;
 
-    bind(target: any, rule?: WebixCallback, format?: string): void;
+	bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    blockEvent(): void;
+	blockEvent(): void;
 
-    callEvent(name: string, params: any[]): boolean;
+	callEvent(name: string, params: any[]): boolean;
 
-    define(property: string, value: any): void;
+	define(property: string, value: any): void;
 
-    detachEvent(id: string): void;
+	detachEvent(id: string): void;
 
-    getValues(): any;
+	getValues(): any;
 
-    hasEvent(name: string): boolean;
+	hasEvent(name: string): boolean;
 
-    isVisible(): boolean;
+	isVisible(): boolean;
 
-    load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+	load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-    mapEvent(map: any): void;
+	mapEvent(map: any): void;
 
-    parse(data: any, type: string): void;
+	parse(data: any, type: string): void;
 
-    refresh(id?: string | number): void;
+	refresh(id?: string | number): void;
 
-    setValues(values: any, update?: boolean): void;
+	setValues(values: any, update?: boolean): void;
 
-    unbind(): void;
+	unbind(): void;
 
-    unblockEvent(): void;
+	unblockEvent(): void;
 
-    config: { [key: string]: any; };
-    name: string;
+	config: { [key: string]: any; };
+	name: string;
 }
 
+interface DataRecordConfig {
+	view?: string;
+	data?: string | any[];
+	dataFeed?: string | WebixCallback;
+	datatype?: string;
+	id?: string | number;
+	on?: EventHash;
+	url?: any;
+}
+
+type DataRecordEventName = 'onAfterLoad' | 'onBeforeLoad' | 'onBindRequest' | 'onChange' | 'onLoadError';
+
 interface DataRecordFactory {
-    new(config?: any): DataRecord;
+	new(config?: DataRecordConfig): DataRecord;
 }
 
 export var DataRecord: DataRecordFactory;
 
 interface DataState {
-    getState(): any;
+	getState(): any;
 
-    setState(state: any): void;
+	setState(state: any): void;
 }
 
 export var DataState: DataState;
 
 interface DataStore {
-    add(obj: any, index?: number): string | number;
+	add(obj: any, index?: number): string | number;
 
-    addMark(id: string, name: string, css?: boolean, value?: any): any;
+	addMark(id: string, name: string, css?: boolean, value?: any): any;
 
-    attachEvent(type: string, functor: WebixCallback, id?: string): string | number;
+	attachEvent(type: string, functor: WebixCallback, id?: string): string | number;
 
-    blockEvent(): void;
+	blockEvent(): void;
 
-    callEvent(name: string, params: any[]): boolean;
+	callEvent(name: string, params: any[]): boolean;
 
-    changeId(old: string | number, newid: string | number): void;
+	changeId(old: string | number, newid: string | number): void;
 
-    clearAll(soft?: boolean): void;
+	clearAll(soft?: boolean): void;
 
-    clearMark(name: string): void;
+	clearMark(name: string): void;
 
-    count(): number;
+	count(): number;
 
-    destructor(): void;
+	destructor(): void;
 
-    detachEvent(id: string): void;
+	detachEvent(id: string): void;
 
-    each(method: WebixCallback, master?: any, all?: boolean): void;
+	each(method: WebixCallback, master?: any, all?: boolean): void;
 
-    exists(id: string | number): boolean;
+	exists(id: number | string): boolean;
 
-    filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+	filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-    find(criterion: WebixCallback, first?: boolean): any;
+	find(criterion: WebixCallback, first?: boolean): any;
 
-    getFirstId(): string | number;
+	getFirstId(): number | string;
 
-    getIdByIndex(index: number): string | number;
+	getIdByIndex(index: number | string): string | number;
 
-    getIndexById(id: string | number): number;
+	getIndexById(id: number | string): number;
 
-    getIndexRange(from: string | number, to: string | number): any[];
+	getIndexRange(from: string | number, to: string | number): any[];
 
-    getItem(id: string | number): any;
+	getItem(id: number | string): any;
 
-    getLastId(): string | number;
+	getLastId(): number | string;
 
-    getMark(id: string, mark_name: string): any;
+	getMark(id: number | string, mark_name: string): any;
 
-    getNextId(id: string | number, step: number): string | number;
+	getNextId(id: number | string, step: number): string | number;
 
-    getPrevId(id: string | number, step: number): string | number;
+	getPrevId(id: number | string, step: number): string | number;
 
-    getRange(from: string | number, to: string | number): any[];
+	getRange(from: number | string, to: string | number): any[];
 
-    hasEvent(name: string): boolean;
+	hasEvent(name: string): boolean;
 
-    id(item: any): string | number;
+	id(item: any): number | string;
 
-    importData(source: webix.ui.baseview): void;
+	importData(source: webix.ui.baseview): void;
 
-    mapEvent(map: any): void;
+	mapEvent(map: any): void;
 
-    move(sid: string, tindex: number, tobj?: any, details?: any): string;
+	move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-    provideApi(target: any, eventable: boolean): void;
+	provideApi(target: any, eventable: boolean): void;
 
-    refresh(id?: string | number): void;
+	refresh(id?: number | string): void;
 
-    remove(id: string | number): void;
+	remove(id: string | number | any[]): void;
 
-    removeMark(id: string, name: string, css: boolean): void;
+	removeMark(id: number | string, name: string, css: boolean): void;
 
-    scheme(config: any): void;
+	scheme(config: any): void;
 
-    serialize(): any[];
+	serialize(all?: boolean): any[];
 
-    setDriver(type: string): void;
+	setDriver(type: string): void;
 
-    silent(code: WebixCallback): void;
+	silent(code: WebixCallback): void;
 
-    sort(by: string, dir?: string, as?: string): void;
+	sort(by: string, dir?: string, as?: string): void;
 
-    sync(source: any, filter: WebixCallback, silent: boolean): void;
+	sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-    unblockEvent(): void;
+	unblockEvent(): void;
 
-    unsync(): void;
+	unsync(): void;
 
-    updateItem(id: string | number, data: any): void;
+	updateItem(id: number | string, data: any): void;
 
-    driver: any;
-    name: string;
-    order: any[];
-    pull: any;
-    sorting: any;
+	driver: any;
+	name: string;
+	order: any[];
+	pull: any;
+	sorting: any;
 }
 
 export var DataStore: DataStore;
 
 interface DataValue {
-    attachEvent(type: string, functor: WebixCallback, id?: string): string | number;
+	attachEvent(type: string, functor: WebixCallback, id?: string): string | number;
 
-    bind(target: any, rule?: WebixCallback, format?: string): void;
+	bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    blockEvent(): void;
+	blockEvent(): void;
 
-    callEvent(name: string, params: any[]): boolean;
+	callEvent(name: string, params: any[]): boolean;
 
-    detachEvent(id: string): void;
+	detachEvent(id: string): void;
 
-    getValue(): string;
+	getValue(): string;
 
-    hasEvent(name: string): boolean;
+	hasEvent(name: string): boolean;
 
-    isVisible(): boolean;
+	isVisible(): boolean;
 
-    mapEvent(map: any): void;
+	mapEvent(map: any): void;
 
-    refresh(): void;
+	refresh(): void;
 
-    setValue(value: string): void;
+	setValue(value: string): void;
 
-    unbind(): void;
+	unbind(): void;
 
-    unblockEvent(): void;
+	unblockEvent(): void;
 
-    name: string;
+	name: string;
 }
 
+interface DataValueConfig {
+	view?: string;
+	id?: string | number;
+	on?: EventHash;
+	value?: string | number;
+}
+
+type DataValueEventName = 'onBindRequest' | 'onChange';
+
 interface DataValueFactory {
-    new(config?: any): DataValue;
+	new(config?: DataValueConfig): DataValue;
 }
 
 export var DataValue: DataValueFactory;
 
 interface Date {
-    add(date: any, inc: number, mode: string, copy: boolean): any;
+	add(date: any, inc: number, mode: string, copy: boolean): any;
 
-    copy(date: any): any;
+	copy(date: any): any;
 
-    datePart(date: any, copy: boolean): any;
+	datePart(date: any, copy: boolean): any;
 
-    dateToStr(format: string, utc: boolean): WebixCallback;
+	dateToStr(format: string, utc: boolean): WebixCallback;
 
-    dayStart(date: any): any;
+	dayStart(date: any): any;
 
-    equal(datea: any, dateb: any): boolean;
+	equal(datea: any, dateb: any): boolean;
 
-    getISOWeek(date: any): number;
+	getISOWeek(date: any): number;
 
-    getUTCISOWeek(date: any): number;
+	getUTCISOWeek(date: any): number;
 
-    isHoliday(date: any): boolean;
+	isHoliday(date: any): boolean;
 
-    monthStart(date: any): any;
+	monthStart(date: any): any;
 
-    strToDate(format: string, utc: boolean): WebixCallback;
+	strToDate(format: string, utc: boolean): WebixCallback;
 
-    timePart(date: any): number;
+	timePart(date: any): number;
 
-    toFixed(num: number): number;
+	toFixed(num: number | string): number | string;
 
-    weekStart(date: any): any;
+	weekStart(date: any): any;
 
-    yearStart(date: any): any;
+	yearStart(date: any): any;
 
-    startOnMonday: boolean;
+	startOnMonday: boolean;
 }
 
 export var Date: Date;
 
 interface Destruction {
-    destructor(): void;
+	destructor(): void;
 }
 
 export var Destruction: Destruction;
 
 interface DragControl {
-    addDrag(node: string | number | HTMLElement, ctrl: any): void;
+	addDrag(node: string | number | HTMLElement, ctrl: any): void;
 
-    addDrop(node: string | number | HTMLElement, ctrl: any, master_mode?: boolean): void;
+	addDrop(node: string | number | HTMLElement, ctrl: any, master_mode?: boolean): void;
 
-    createDrag(event: Event): void;
+	createDrag(event: Event): void;
 
-    destroyDrag(): void;
+	destroyDrag(): void;
 
-    getContext(): any;
+	getContext(): any;
 
-    getMaster(target: any): any;
+	getMaster(target: any): any;
 
-    getNode(): HTMLElement;
+	getNode(): HTMLElement;
 
-    sendSignal(signal: string): void;
+	sendSignal(signal: string): void;
 
-    $drag(source: HTMLElement, ev: Event): HTMLElement;
+	$drag(source: HTMLElement, ev: Event): HTMLElement;
 
-    $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): void;
+	$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-    $dragOut(source: HTMLElement, target: HTMLElement, drop: HTMLElement, event: Event): void;
+	$dragOut(source: HTMLElement, target: HTMLElement, drop: HTMLElement, event: Event): void;
 
-    $dragPos: WebixCallback;
+	$dragPos: WebixCallback;
 
-    $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+	$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-    left: number;
-    top: number;
+	left: number;
+	top: number;
 }
 
 export var DragControl: DragControl;
 
 interface DragItem {
-    $drag(source: HTMLElement, ev: Event): string;
+	$drag(source: HTMLElement, ev: Event): string;
 
-    $dragHTML: WebixCallback;
+	$dragHTML: WebixCallback;
 
-    $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+	$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-    $dragMark(context: any, ev: Event): boolean;
+	$dragMark(context: any, ev: Event): boolean;
 
-    $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+	$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-    $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+	$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-    $dropAllow: WebixCallback;
+	$dropAllow: WebixCallback;
+	$dropHTML: WebixCallback;
 }
 
 export var DragItem: DragItem;
 
 interface DragOrder {
-    $drag(source: HTMLElement, ev: Event): string;
+	$drag(source: HTMLElement, ev: Event): string;
 
-    $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+	$dragDestroy: void;
 
-    $dragPos: WebixCallback;
+	$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-    $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+	$dragMark: boolean;
+
+	$dragOut(source: HTMLElement, target: HTMLElement, drop: HTMLElement): void;
+
+	$dragPos: WebixCallback;
+
+	$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 }
 
 export var DragOrder: DragOrder;
 
 interface EditAbility {
-    edit(id: any): void;
+	edit(id: any): void;
 
-    editCancel(): void;
+	editCancel(): void;
 
-    editNext(): void;
+	editNext(): void;
 
-    editStop(): void;
+	editStop(): void;
 
-    focusEditor(id: any): void;
+	focusEditor(id: any): void;
 
-    getEditState(): any;
+	getEditState(): any;
 
-    getEditor(id?: string): any;
+	getEditor(id?: string): any;
 
-    getEditorValue(): string;
+	getEditorValue(): string;
 
-    validateEditor(id?: string | number): boolean;
+	validateEditor(id?: string | number): boolean;
 }
 
 export var EditAbility: EditAbility;
 
 interface EventSystem {
-    attachEvent(type: string, functor: WebixCallback, id?: string): string | number;
+	attachEvent(type: string, functor: WebixCallback, id?: string): string | number;
 
-    blockEvent(): void;
+	blockEvent(): void;
 
-    callEvent(name: string, params: any[]): boolean;
+	callEvent(name: string, params: any[]): boolean;
 
-    detachEvent(id: string): void;
+	detachEvent(id: string): void;
 
-    hasEvent(name: string): boolean;
+	hasEvent(name: string): boolean;
 
-    mapEvent(map: any): void;
+	mapEvent(map: any): void;
 
-    unblockEvent(): void;
+	unblockEvent(): void;
 }
 
 export var EventSystem: EventSystem;
 
 interface FlexLayout {
-    $getSize: any[];
+	render(): void;
+
+	$getSize: any[];
 }
 
 export var FlexLayout: FlexLayout;
 
 interface Group {
-    group(config: any, mode: boolean): void;
+	group(config: any, target?: string | number): void;
 
-    ungroup(mode: boolean): void;
+	ungroup(mode: boolean): void;
 }
 
 export var Group: Group;
 
 interface GroupMethods {
-    any(property: string, data: any): void;
+	any(property: string, data: any): void;
 
-    count(property: string, data: any): void;
+	count(property: string, data: any): void;
 
-    max(property: string, data: any): void;
+	max(property: string, data: any): void;
 
-    min(property: string, data: any): void;
+	min(property: string, data: any): void;
 
-    string(property: string, data: any): void;
+	string(property: string, data: any): void;
 
-    sum(property: string, data: any): void;
+	sum(property: string, data: any): void;
 }
 
 export var GroupMethods: GroupMethods;
 
 interface GroupStore {
-    group(stats: any): void;
+	group(config: any, target?: string): void;
 
-    ungroup(): void;
+	ungroup(): void;
 }
 
 export var GroupStore: GroupStore;
 
 interface HTMLOptions {
+	addOption(id: string | number, value: any, show?: boolean, index?: number): void;
+
+	disableOption(id: string | number): void;
+
+	enableOption(id: string | number): void;
+
+	getOption(id: string | number): any;
+
+	hideOption(id: string | number): void;
+
+	optionIndex(ID: string | number): number;
+
+	removeOption(id: string | number): void;
+
+	showOption(id: string | number): void;
 }
 
 export var HTMLOptions: HTMLOptions;
 
 interface HtmlMap {
-    addPoly(id: string | number, points: any[], userdata?: string): void;
+	addPoly(id: string | number, points: any[], userdata?: string): void;
 
-    addRect(id: string | number, points: any[], userdata?: string): void;
+	addRect(id: string | number, points: any[], userdata?: string): void;
 
-    addSector(id: string | number, aplha0: number, aplha1: number, x: number, y: number, R: number, ky: number, userdata?: string): void;
+	addSector(id: string | number, aplha0: number, aplha1: number, x: number, y: number, R: number, ky: number, userdata?: string): void;
 
-    hide(html: HTMLElement, userdata: string, mode: boolean): void;
+	hide(html: HTMLElement, userdata: string, mode: boolean): void;
 
-    render(html: HTMLElement): void;
+	render(html: HTMLElement): void;
 }
 
 export var HtmlMap: HtmlMap;
 
 interface IdSpace {
-    innerId(id: number | string): number | string;
+	innerId(id: number | string): number | string;
 
-    ui(view: any): webix.ui.baseview;
+	ui(view: any): webix.ui.baseview;
 
-    $$: any;
+	$$: any;
 }
 
 export var IdSpace: IdSpace;
 
 interface KanbanView {
-    eachOtherList(): void;
+	eachOtherList(code: WebixCallback): void;
 
-    getKanban(): any;
+	getKanban(): any;
 
-    move(sid: string, tindex: number, tobj?: any, details?: any): string;
+	move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-    $dragCreate(source: HTMLElement, event: Event): HTMLElement;
+	$dragCreate(source: HTMLElement, event: Event): HTMLElement;
 
-    $dragPos: WebixCallback;
-    $kanban: boolean;
-    $skin: WebixCallback;
-    on_context: { [key: string]: any; };
+	$dragPos: WebixCallback;
+	$dropHTML: WebixCallback;
+	$skin: WebixCallback;
+	on_context: { [key: string]: any; };
 }
 
 export var KanbanView: KanbanView;
 
 interface KeysNavigation {
-    moveSelection(direction: string): void;
+	moveSelection(direction: string): void;
 }
 
 export var KeysNavigation: KeysNavigation;
@@ -1240,10 +1286,10 @@ interface Modality {
 export var Modality: Modality;
 
 interface MouseEvents {
-    on_click: WebixCallback;
-    on_context: { [key: string]: any; };
-    on_dblclick: WebixCallback;
-    on_mouse_move: WebixCallback;
+	on_click: WebixCallback;
+	on_context: { [key: string]: any; };
+	on_dblclick: WebixCallback;
+	on_mouse_move: WebixCallback;
 }
 
 export var MouseEvents: MouseEvents;
@@ -1259,57 +1305,39 @@ interface NavigationButtons {
 export var NavigationButtons: NavigationButtons;
 
 interface Number {
-    format(value: number, config: any): string;
+	format(value: number, config: any): string;
 
-    getConfig(format: string): any;
+	getConfig(format: string): any;
 
-    numToStr(config: any): WebixCallback;
+	numToStr(config: any): WebixCallback;
 
-    parse(value: string, config: any): number;
+	parse(value: string, config: any): number;
 }
 
 export var Number: Number;
 
 interface OverlayBox {
-    hideOverlay(): void;
+	hideOverlay(): void;
 
-    showOverlay(): void;
+	showOverlay(): void;
 }
 
 export var OverlayBox: OverlayBox;
 
 interface PagingAbility {
-    getPage(): number;
+	getPage(): number;
 
-    getPager(): any;
+	getPager(): any;
 
-    setPage(page: number): void;
+	setPage(page: number): void;
 }
 
 export var PagingAbility: PagingAbility;
 
-interface PowerArray {
-    each(functor: WebixCallback, master?: any): void;
-
-    filter(functor: WebixCallback, master: any): any[];
-
-    find(data: any): number;
-
-    insertAt(data: any, pos: number): void;
-
-    map(functor: WebixCallback, master: any): any[];
-
-    remove(value: any): void;
-
-    removeAt(pos: number, len: number): void;
-}
-
-export var PowerArray: PowerArray;
-
 interface ProgressBar {
-    hideProgress(): void;
+	hideProgress(): void;
 
-    showProgress(config?: any): void;
+	showProgress(config?: any): void;
 }
 
 export var ProgressBar: ProgressBar;
@@ -1320,18 +1348,18 @@ interface RecordBind {
 export var RecordBind: RecordBind;
 
 interface RenderStack {
-    customize(obj: any): void;
+	customize(obj: any): void;
 
-    getItemNode(id: string | number): HTMLElement;
+	getItemNode(id: string | number): HTMLElement;
 
-    locate(e: Event): string | number;
+	locate(e: Event): string | number;
 
-    render(id: string | number, data: any, type: string): void;
+	render(id: string | number, data: any, type: string): void;
 
-    showItem(id: string | number): void;
+	showItem(id: string | number): void;
 
-    type: { [key: string]: any; };
-    types: { [key: string]: any; };
+	type: { [key: string]: any; };
+	types: { [key: string]: any; };
 }
 
 export var RenderStack: RenderStack;
@@ -1342,58 +1370,58 @@ interface ResizeArea {
 export var ResizeArea: ResizeArea;
 
 interface Scrollable {
-    getScrollState(): any;
+	getScrollState(): any;
 
-    scrollTo(x: number, y: number): void;
+	scrollTo(x: number, y: number): void;
 }
 
 export var Scrollable: Scrollable;
 
 interface SelectionModel {
-    getSelectedId(as_array: boolean): string | any[];
+	getSelectedId(as_array: boolean): string | any[];
 
-    getSelectedItem(as_array: boolean): any;
+	getSelectedItem(as_array: boolean): any;
 
-    isSelected(id: string | number): boolean;
+	isSelected(id: string | number): boolean;
 
-    select(id: string | any[], preserve: boolean): void;
+	select(id: string | any[], preserve: boolean): void;
 
-    selectAll(from?: string, to?: string): void;
+	selectAll(from?: string, to?: string): void;
 
-    unselect(id?: string): void;
+	unselect(id?: string): void;
 
-    unselectAll(): void;
+	unselectAll(): void;
 }
 
 export var SelectionModel: SelectionModel;
 
 interface Settings {
-    define(property: string, value: any): void;
+	define(property: string, value: any): void;
 
-    config: { [key: string]: any; };
-    name: string;
+	config: { [key: string]: any; };
+	name: string;
 }
 
 export var Settings: Settings;
 
 interface SingleRender {
-    customize(obj: any): void;
+	customize(obj: any): void;
 
-    render(id: string | number, data: any, type: string): void;
+	render(id: string | number, data: any, type: string): void;
 
-    sync(source: any, filter: WebixCallback, silent: boolean): void;
+	sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-    type: { [key: string]: any; };
+	type: { [key: string]: any; };
 }
 
 export var SingleRender: SingleRender;
 
 interface Sparklines {
-    template(item: any, common: string, data: any[], column: any, index: number): string;
+	template(item: any, common: string, data: any[], column: any, index: number): string;
 
-    paddingX: number;
-    paddingY: number;
-    radius: number;
+	paddingX: number;
+	paddingY: number;
+	radius: number;
 }
 
 export var Sparklines: Sparklines;
@@ -1403,387 +1431,408 @@ interface TablePaste {
 
 export var TablePaste: TablePaste;
 
+interface TooltipControl {
+	addTooltip(target: string | HTMLElement, config: any): void;
+
+	getMaster(target: HTMLElement): any;
+
+	getTooltip(): webix.ui.baseview;
+
+	removeTooltip(target: string | HTMLElement): void;
+
+	$tooltipIn(target: HTMLElement, event: Event): void;
+
+	$tooltipMove(target: HTMLElement, event: Event, text: string): void;
+
+	$tooltipOut(previousTarget: HTMLElement, target: HTMLElement, event: Event): void;
+
+	delay: number;
+}
+
+export var TooltipControl: TooltipControl;
+
 interface Touch {
-    disable(): void;
+	disable(): void;
 
-    enable(): void;
+	enable(): void;
 
-    limit(mode: boolean): void;
+	limit(mode: boolean): void;
 
-    scrollTo(node: HTMLElement, x: number, y: number, speed: string): void;
+	scrollTo(node: HTMLElement, x: number, y: number, speed: string): void;
 
-    config: any;
+	config: any;
 }
 
 export var Touch: Touch;
 
 interface TreeAPI {
-    close(id: string | number): void;
+	close(id: string | number): void;
 
-    closeAll(): void;
+	closeAll(): void;
 
-    getOpenItems(): any[];
+	getOpenItems(): any[];
 
-    getState(): any;
+	getState(): any;
 
-    isBranchOpen(id: string | number): boolean;
+	isBranchOpen(id: string | number): boolean;
 
-    open(id: string | number, show?: boolean): void;
+	open(id: string | number, show?: boolean): void;
 
-    openAll(): void;
+	openAll(): void;
 
-    setState(state: any): void;
+	setState(state: any): void;
 }
 
 export var TreeAPI: TreeAPI;
 
 interface TreeClick {
-    webix_tree_checkbox(obj: any, common: { [key: string]: any; }): string;
+	webix_tree_checkbox(obj: any, common: { [key: string]: any; }): string;
 
-    webix_tree_close(obj: any, common: { [key: string]: any; }): string;
+	webix_tree_close(obj: any, common: { [key: string]: any; }): string;
 
-    webix_tree_open(obj: any, common: { [key: string]: any; }): string;
+	webix_tree_open(obj: any, common: { [key: string]: any; }): string;
 }
 
 export var TreeClick: TreeClick;
 
 interface TreeCollection {
-    add(obj: any, index?: number, parentId?: string): string;
+	add(obj: any, index?: number, parentId?: string): string;
 
-    addBind(source: any, rule: string, format: string): void;
+	addBind(source: any, rule: string, format: string): void;
 
-    attachEvent(type: TreeCollectionEventName, functor: WebixCallback, id?: string): string | number;
+	attachEvent(type: TreeCollectionEventName, functor: WebixCallback, id?: string): string | number;
 
-    bind(target: any, rule?: WebixCallback, format?: string): void;
+	bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    blockEvent(): void;
+	blockEvent(): void;
 
-    callEvent(name: string, params: any[]): boolean;
+	callEvent(name: string, params: any[]): boolean;
 
-    clearAll(soft?: boolean): void;
+	clearAll(soft?: boolean): void;
 
-    clearValidation(): void;
+	clearValidation(): void;
 
-    copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+	copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-    count(): number;
+	count(): number;
 
-    define(property: string, value: any): void;
+	define(property: string, value: any): void;
 
-    destructor(): void;
+	destructor(): void;
 
-    detachEvent(id: string): void;
+	detachEvent(id: string): void;
 
-    exists(id: string | number): boolean;
+	exists(id: number | string): boolean;
 
-    filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+	filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-    find(criterion: WebixCallback, first?: boolean): any;
+	find(criterion: WebixCallback, first?: boolean): any;
 
-    getBindData(key: string | number, update: boolean): void;
+	getBindData(key: string | number, update: boolean): void;
 
-    getBranchIndex(id: string | number, parent?: string | number): number;
+	getBranchIndex(id: string | number, parent?: string | number): number;
 
-    getCursor(): number;
+	getCursor(): number;
 
-    getFirstChildId(id: string | number): string;
+	getFirstChildId(id: string | number): string;
 
-    getFirstId(): string | number;
+	getFirstId(): number | string;
 
-    getIdByIndex(index: number): string | number;
+	getIdByIndex(index: number | string): string | number;
 
-    getIndexById(id: string | number): number;
+	getIndexById(id: number | string): number;
 
-    getItem(id: string | number): any;
+	getItem(id: number | string): any;
 
-    getLastId(): string | number;
+	getLastId(): number | string;
 
-    getNextId(id: string | number, step: number): string | number;
+	getNextId(id: number | string, step: number): string | number;
 
-    getNextSiblingId(id: string | number): string | number;
+	getNextSiblingId(id: string | number): string | number;
 
-    getParentId(id: string | number): string | number;
+	getParentId(id: string | number): string | number;
 
-    getPrevId(id: string | number, step: number): string | number;
+	getPrevId(id: number | string, step: number): string | number;
 
-    getPrevSiblingId(id: string | number): string | number;
+	getPrevSiblingId(id: string | number): string | number;
 
-    hasEvent(name: string): boolean;
+	hasEvent(name: string): boolean;
 
-    isBranch(id: string | number): boolean;
+	isBranch(id: string | number): boolean;
 
-    isVisible(): boolean;
+	isVisible(): boolean;
 
-    load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+	load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-    loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+	loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-    loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+	loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-    mapEvent(map: any): void;
+	mapEvent(map: any): void;
 
-    move(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): string | number;
+	move(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): string | number;
 
-    moveBottom(id: string | number): void;
+	moveBottom(id: string | number): void;
 
-    moveTop(id: string | number): void;
+	moveTop(id: string | number): void;
 
-    parse(data: any, type: string): void;
+	parse(data: any, type: string): void;
 
-    refresh(id?: string | number): void;
+	refresh(id?: number | string): void;
 
-    refreshCursor(): void;
+	refreshCursor(): void;
 
-    remove(id: string | number): void;
+	remove(id: string | number | any[]): void;
 
-    removeBind(source: any): void;
+	removeBind(source: any): void;
 
-    saveBatch(handler: WebixCallback): void;
+	saveBatch(handler: WebixCallback): void;
 
-    serialize(): any[];
+	serialize(all?: boolean): any[];
 
-    setBindData(data: any, key: string | number): void;
+	setBindData(data: any, key: string | number): void;
 
-    setCursor(cursor: string | number): void;
+	setCursor(cursor: string | number): void;
 
-    sort(by: string, dir?: string, as?: string): void;
+	sort(by: string, dir?: string, as?: string): void;
 
-    sync(source: any, filter: WebixCallback, silent: boolean): void;
+	sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-    unbind(): void;
+	unbind(): void;
 
-    unblockEvent(): void;
+	unblockEvent(): void;
 
-    updateItem(id: string | number, data: any): void;
+	updateItem(id: number | string, data: any): void;
 
-    validate(id?: string): boolean;
+	validate(id?: string): boolean;
 
-    config: TreeCollectionConfig;
-    data: DataStore;
-    name: string;
-    waitData: Promise<any>;
+	waitSave(handler: WebixCallback): Promise<any>;
+
+	config: TreeCollectionConfig;
+	data: DataStore;
+	name: string;
+	waitData: Promise<any>;
 }
 
 interface TreeCollectionConfig {
-    view?: string;
-    data?: string | any[];
-    datathrottle?: number;
-    datatype?: string;
-    defaultData?: any;
-    externalData?: WebixCallback;
-    filterMode?: any;
-    id?: string | number;
-    map?: any;
-    on?: EventHash;
-    ready?: WebixCallback;
-    removeMissed?: boolean;
-    rules?: any;
-    save?: string;
-    scheme?: any;
-    url?: any;
+	view?: string;
+	data?: string | any[];
+	datathrottle?: number;
+	datatype?: string;
+	defaultData?: any;
+	externalData?: WebixCallback;
+	filterMode?: any;
+	id?: string | number;
+	map?: any;
+	on?: EventHash;
+	ready?: WebixCallback;
+	removeMissed?: boolean;
+	rules?: any;
+	save?: any;
+	scheme?: any;
+	url?: any;
 }
 
 type TreeCollectionEventName =
-    'onAfterAdd'
-    | 'onAfterCursorChange'
-    | 'onAfterDelete'
-    | 'onAfterLoad'
-    | 'onAfterSort'
-    | 'onBeforeAdd'
-    | 'onBeforeCursorChange'
-    | 'onBeforeDelete'
-    | 'onBeforeLoad'
-    | 'onBeforeSort'
-    | 'onBindRequest'
-    | 'onBindUpdate'
-    | 'onDataRequest'
-    | 'onDataUpdate'
-    | 'onDestruct'
-    | 'onLoadError'
-    | 'onValidationError'
-    | 'onValidationSuccess';
+	'onAfterAdd'
+	| 'onAfterCursorChange'
+	| 'onAfterDelete'
+	| 'onAfterLoad'
+	| 'onAfterSort'
+	| 'onBeforeAdd'
+	| 'onBeforeCursorChange'
+	| 'onBeforeDelete'
+	| 'onBeforeLoad'
+	| 'onBeforeSort'
+	| 'onBindRequest'
+	| 'onBindUpdate'
+	| 'onDataRequest'
+	| 'onDataUpdate'
+	| 'onDestruct'
+	| 'onLoadError'
+	| 'onValidationError'
+	| 'onValidationSuccess';
 
 interface TreeCollectionFactory {
-    new(config?: TreeCollectionConfig): TreeCollection;
+	new(config?: TreeCollectionConfig): TreeCollection;
 }
 
 export var TreeCollection: TreeCollectionFactory;
 
 interface TreeDataLoader {
-    loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+	loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 }
 
 export var TreeDataLoader: TreeDataLoader;
 
 interface TreeDataMove {
-    copy(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): number;
+	copy(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): number;
 
-    move(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): string | number;
+	move(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): string | number;
 
-    $dropAllow: WebixCallback;
+	$dropAllow: WebixCallback;
 }
 
 export var TreeDataMove: TreeDataMove;
 
 interface TreeRenderStack {
-    getItemNode(id: string | number): HTMLElement;
+	getItemNode(id: string | number): HTMLElement;
 
-    render(id: string | number, data: any, type: string): void;
+	render(id: string | number, data: any, type: string): void;
 }
 
 export var TreeRenderStack: TreeRenderStack;
 
 interface TreeStateCheckbox {
-    checkAll(id?: string | number): void;
+	checkAll(id?: string | number): void;
 
-    checkItem(id: string): void;
+	checkItem(id: string): void;
 
-    getChecked(): any[];
+	getChecked(): any[];
 
-    isChecked(id: string | number): boolean;
+	isChecked(id: string | number): boolean;
 
-    uncheckAll(id?: string | number): void;
+	uncheckAll(id?: string | number): void;
 
-    uncheckItem(id: string): void;
+	uncheckItem(id: string): void;
 }
 
 export var TreeStateCheckbox: TreeStateCheckbox;
 
 interface TreeStore {
-    add(obj: any, index?: number, parentId?: string): string;
+	add(obj: any, index?: number, parentId?: string): string;
 
-    changeId(old: string | number, newid: string | number): void;
+	changeId(old: string | number, newid: string | number): void;
 
-    clearAll(soft?: boolean): void;
+	clearAll(soft?: boolean): void;
 
-    count(): number;
+	count(): number;
 
-    each(code: WebixCallback, master: any, all: boolean, pid: string): void;
+	each(code: WebixCallback, master: any, all: boolean, pid: string): void;
 
-    eachChild(pid: string, code: WebixCallback, master?: any, all?: boolean): void;
+	eachChild(pid: string, code: WebixCallback, master?: any, all?: boolean): void;
 
-    eachLeaf(pid: string, code: WebixCallback): void;
+	eachLeaf(pid: string, code: WebixCallback): void;
 
-    eachOpen(code: WebixCallback, master?: any, pid?: string): void;
+	eachOpen(code: WebixCallback, master?: any, pid?: string): void;
 
-    eachSubItem(pid: string, code: WebixCallback): void;
+	eachSubItem(pid: string, code: WebixCallback): void;
 
-    getBranch(id: string): any[];
+	getBranch(id: string): any[];
 
-    getBranchIndex(id: string | number, parent?: string | number): number;
+	getBranchIndex(id: string | number, parent?: string | number): number;
 
-    getFirstChildId(id: string | number): string;
+	getFirstChildId(id: string | number): string;
 
-    getNextSiblingId(id: string | number): string | number;
+	getNextSiblingId(id: string | number): string | number;
 
-    getParentId(id: string | number): string | number;
+	getParentId(id: string | number): string | number;
 
-    getPrevSiblingId(id: string | number): string | number;
+	getPrevSiblingId(id: string | number): string | number;
 
-    getTopRange(): any[];
+	getTopRange(): any[];
 
-    isBranch(id: string | number): boolean;
+	isBranch(id: string | number): boolean;
 
-    provideApi(target: any, eventable: boolean): void;
+	provideApi(target: any, eventable: boolean): void;
 
-    remove(id: string | number): void;
+	remove(id: string | number | any[]): void;
 
-    serialize(): any[];
+	serialize(all?: boolean): any[];
 
-    name: string;
+	name: string;
 }
 
 export var TreeStore: TreeStore;
 
 interface TreeTablePaste {
-    insert(data: any[]): void;
+	insert(data: any[]): void;
 }
 
 export var TreeTablePaste: TreeTablePaste;
 
 interface TreeType {
-    checkbox(obj: any, common: any): string;
+	checkbox(obj: any, common: any): string;
 
-    folder(obj: any, common: any): string;
+	folder(obj: any, common: any): string;
 
-    icon(obj: any, common: any): string;
+	icon(obj: any, common: any): string;
 
-    space(obj: any, common: any): string;
+	space(obj: any, common: any): string;
 }
 
 export var TreeType: TreeType;
 
 interface UIManager {
-    addHotKey(key: string, handler: WebixCallback, obj?: any): void;
+	addHotKey(key: string, handler: WebixCallback, obj?: any): void;
 
-    applyChanges(): void;
+	applyChanges(): void;
 
-    canFocus(id: string | number): boolean;
+	canFocus(id: string | number): boolean;
 
-    destructor(): void;
+	destructor(): void;
 
-    getFocus(): webix.ui.baseview;
+	getFocus(): webix.ui.baseview;
 
-    getNext(view: any): any;
+	getNext(view: any): any;
 
-    getPrev(view: any): any;
+	getPrev(view: any): any;
 
-    getState(id: string, childs: boolean): any;
+	getState(id: string, children: boolean): any;
 
-    getTop(id: string | number): any;
+	getTop(id: string | number): any;
 
-    hasFocus(id: string | number): boolean;
+	hasFocus(id: string | number): boolean;
 
-    removeHotKey(key: string, handler?: WebixCallback, obj?: any): void;
+	removeHotKey(key: string, handler?: WebixCallback, obj?: any): void;
 
-    setFocus(id: string | number): void;
+	setFocus(id: string | number): void;
 
-    setState(state: any): void;
+	setState(state: any): void;
 }
 
 export var UIManager: UIManager;
 
 interface Undo {
-    ignoreUndo(functor: WebixCallback): void;
+	ignoreUndo(functor: WebixCallback): void;
 
-    removeUndo(id: string): void;
+	removeUndo(id: string): void;
 
-    undo(id: string): void;
+	undo(id: string): void;
 }
 
 export var Undo: Undo;
 
 interface UploadDriver {
-    flash: any;
-    html5: any;
+	html5: any;
 }
 
 export var UploadDriver: UploadDriver;
 
 interface VRenderStack {
-    getItemNode(id: string | number): HTMLElement;
+	getItemNode(id: string | number): HTMLElement;
 
-    render(id: string | number, data: any, type: string): void;
+	render(id: string | number, data: any, type: string): void;
 
-    showItem(id: string | number): void;
+	showItem(id: string | number): void;
 
-    $setSize(x: number, y: number): boolean;
+	$setSize(x: number, y: number): boolean;
 }
 
 export var VRenderStack: VRenderStack;
 
 interface ValidateCollection {
-    clearValidation(): void;
+	clearValidation(): void;
 
-    validate(id?: string): boolean;
+	validate(id?: string): boolean;
 }
 
 export var ValidateCollection: ValidateCollection;
 
 interface ValidateData {
-    clearValidation(): void;
+	clearValidation(): void;
 
-    validate(mode?: any): boolean;
+	validate(mode?: any): boolean;
 }
 
 export var ValidateData: ValidateData;
@@ -1794,33 +1843,33 @@ interface ValueBind {
 export var ValueBind: ValueBind;
 
 interface Values {
-    clear(): void;
+	clear(): void;
 
-    focus(item: string): void;
+	focus(item: string): void;
 
-    getCleanValues(): any;
+	getCleanValues(): any;
 
-    getDirtyValues(): any;
+	getDirtyValues(): any;
 
-    getValues(details?: any): any;
+	getValues(details?: any): any;
 
-    isDirty(): boolean;
+	isDirty(): boolean;
 
-    markInvalid(name: string, state?: boolean | string): void;
+	markInvalid(name: string, state?: boolean | string): void;
 
-    setDirty(mark?: boolean): void;
+	setDirty(mark?: boolean): void;
 
-    setValues(values: any, update?: boolean): void;
+	setValues(values: any, update?: boolean): void;
 }
 
 export var Values: Values;
 
 interface VirtualRenderStack {
-    getItemNode(id: string | number): HTMLElement;
+	getItemNode(id: string | number): HTMLElement;
 
-    render(id: string | number, data: any, type: string): void;
+	render(id: string | number, data: any, type: string): void;
 
-    showItem(id: string | number): void;
+	showItem(id: string | number): void;
 }
 
 export var VirtualRenderStack: VirtualRenderStack;
@@ -1828,18154 +1877,19323 @@ export var VirtualRenderStack: VirtualRenderStack;
 
 export namespace ui {
 
-    interface WebixFilter {
-        getValue(node: HTMLElement): any;
+	interface WebixFilter {
+		getValue(node: HTMLElement): any;
 
-        setValue(node: HTMLElement, value: any): any;
+		setValue(node: HTMLElement, value: any): any;
 
-        refresh(master: webix.ui.baseview, node: HTMLElement, value: any): void;
+		refresh(master: webix.ui.baseview, node: HTMLElement, value: any): void;
 
-        render(master: webix.ui.baseview, config: { [name: string]: any }): string;
-    }
+		render(master: webix.ui.baseview, config: { [name: string]: any }): string;
+	}
 
-    namespace datafilter {
-        class textFilter implements WebixFilter {
-            getValue(node: HTMLElement): any;
+	namespace datafilter {
+		class textFilter implements WebixFilter {
+			getValue(node: HTMLElement): any;
 
-            setValue(node: HTMLElement, value: any): any;
+			setValue(node: HTMLElement, value: any): any;
 
-            refresh(master: webix.ui.baseview, node: HTMLElement, value: any): void;
+			refresh(master: webix.ui.baseview, node: HTMLElement, value: any): void;
 
-            render(master: webix.ui.baseview, config: { [name: string]: any }): string;
+			render(master: webix.ui.baseview, config: { [name: string]: any }): string;
 
-            getInputNode(node: HTMLElement): HTMLElement;
-        }
+			getInputNode(node: HTMLElement): HTMLElement;
+		}
 
-        class selectFilter extends textFilter {
-        }
+		class selectFilter extends textFilter {
+		}
 
-        class serverFilter extends textFilter {
-        }
+		class serverFilter extends textFilter {
+		}
 
-        class serverSelectFilter extends textFilter {
-        }
+		class serverSelectFilter extends textFilter {
+		}
 
-        class numberFilter extends textFilter {
-        }
+		class numberFilter extends textFilter {
+		}
 
-        class dateFilter extends textFilter {
-        }
+		class dateFilter extends textFilter {
+		}
 
-        class multiSelectFilter extends textFilter {
-        }
+		class multiSelectFilter extends textFilter {
+		}
 
-        class serverMultiSelectFilter extends textFilter {
-        }
+		class serverMultiSelectFilter extends textFilter {
+		}
 
-        class multiComboFilter extends textFilter {
-        }
+		class multiComboFilter extends textFilter {
+		}
 
-        class datepickerFilter extends textFilter {
-        }
+		class datepickerFilter extends textFilter {
+		}
 
-        class dateRangeFilter extends textFilter {
-        }
+		class dateRangeFilter extends textFilter {
+		}
 
-        class summColumn extends textFilter {
-        }
+		class summColumn extends textFilter {
+		}
 
-        class masterCheckbox extends textFilter {
-        }
+		class masterCheckbox extends textFilter {
+		}
 
-        class columnGroup extends textFilter {
-        }
-    }
+		class columnGroup extends textFilter {
+		}
+	}
 
-    function delay(config: any): void;
+	function delay(config: any): void;
 
-    function fullScreen(): void;
+	function fullScreen(): void;
 
-    function hasMethod(name: string, method_name: string): boolean;
+	function hasMethod(name: string, method_name: string): boolean;
 
-    function resize(): void;
+	function resize(): void;
 
-    function zIndex(): number;
+	function zIndex(): number;
 
-    var scrollSize: number;
-    var zIndexBase: number;
+	var scrollSize: number;
+	var zIndexBase: number;
 
-    interface baselayoutConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        responsive?: string;
-        rows?: any[];
-        visibleBatch?: string;
-        width?: number;
-    }
+	interface baselayoutConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		responsive?: string;
+		rows?: any[];
+		visibleBatch?: string;
+		width?: number;
+	}
 
-    type baselayoutEventName = 'onBindRequest' | 'onDestruct';
+	type baselayoutEventName = 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
-    class baselayout implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+	export class baselayout implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        adjust(): void;
+		adjust(): void;
 
-        attachEvent(type: baselayoutEventName, functor: WebixCallback, id?: string): string | number;
+		attachEvent(type: baselayoutEventName, functor: WebixCallback, id?: string): string | number;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        blockEvent(): void;
+		blockEvent(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		callEvent(name: string, params: any[]): boolean;
 
-        define(property: string, value: any): void;
+		define(property: string, value: any): void;
 
-        destructor(): void;
+		destructor(): void;
 
-        detachEvent(id: string): void;
+		detachEvent(id: string): void;
 
-        disable(): void;
+		disable(): void;
 
-        enable(): void;
+		enable(): void;
 
-        getChildViews(): any[];
+		getChildViews(): any[];
 
-        getFormView(): webix.ui.baseview;
+		getFormView(): webix.ui.baseview;
 
-        getNode(): any;
+		getNode(): any;
 
-        getParentView(): any;
+		getParentView(): any;
 
-        getTopParentView(): webix.ui.baseview;
+		getTopParentView(): webix.ui.baseview;
 
-        hasEvent(name: string): boolean;
+		hasEvent(name: string): boolean;
 
-        hide(): void;
+		hide(): void;
 
-        index(obj: any): number;
+		index(obj: any): number;
 
-        isEnabled(): boolean;
+		isEnabled(): boolean;
 
-        isVisible(): boolean;
+		isVisible(): boolean;
 
-        mapEvent(map: any): void;
+		mapEvent(map: any): void;
 
-        queryView(config: any, mode?: string): any;
+		queryView(config: any, mode?: string): any;
 
-        reconstruct(): void;
+		reconstruct(): void;
 
-        removeView(id: any): void;
+		removeView(id: any): void;
 
-        resize(): void;
+		resize(): void;
 
-        resizeChildren(): void;
+		resizeChildren(): void;
 
-        restore(state: any, factory?: WebixCallback): void;
+		restore(state: any, factory?: WebixCallback): void;
 
-        serialize(serializer?: WebixCallback): any;
+		serialize(serializer?: WebixCallback): any;
 
-        show(force?: boolean, animation?: boolean): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        showBatch(name: string, mode?: boolean): void;
+		showBatch(name: string, mode?: boolean): void;
 
-        unbind(): void;
+		unbind(): void;
 
-        unblockEvent(): void;
+		unblockEvent(): void;
 
-        $getSize(): any[];
+		$getSize(): any[];
 
-        $height: number;
+		$height: number;
 
-        $setSize(x: number, y: number): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: baselayoutConfig;
-        name: string;
-    }
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: baselayoutConfig;
+		name: string;
+	}
 
-    interface baseviewConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        width?: number;
-    }
+	interface baseviewConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		width?: number;
+	}
 
-    type baseviewEventName = 'onBindRequest' | 'onDestruct';
+	type baseviewEventName = 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
-    interface baseview {
-        adjust(): void;
+	export interface baseview {
+		adjust(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        define(property: string, value: any): void;
+		define(property: string, value: any): void;
 
-        destructor(): void;
+		destructor(): void;
 
-        disable(): void;
+		disable(): void;
 
-        enable(): void;
+		enable(): void;
 
-        getChildViews(): any[];
+		getChildViews(): any[];
 
-        getFormView(): webix.ui.baseview;
+		getFormView(): webix.ui.baseview;
 
-        getNode(): any;
+		getNode(): any;
 
-        getParentView(): any;
+		getParentView(): any;
 
-        getTopParentView(): webix.ui.baseview;
+		getTopParentView(): webix.ui.baseview;
 
-        hide(): void;
+		hide(): void;
 
-        isEnabled(): boolean;
+		isEnabled(): boolean;
 
-        isVisible(): boolean;
+		isVisible(): boolean;
 
-        queryView(config: any, mode?: string): any;
+		queryView(config: any, mode?: string): any;
 
-        resize(): void;
+		resize(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        unbind(): void;
+		unbind(): void;
 
-        $getSize(): any[];
+		$getSize(): any[];
 
-        $height: number;
+		$height: number;
 
-        $setSize(x: number, y: number): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: baseviewConfig;
-        name: string;
-    }
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: baseviewConfig;
+		name: string;
+	}
 
-    interface protoConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        pager?: any;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        template?: string | WebixCallback;
-        tooltip?: string | boolean;
-        type?: any;
-        url?: any;
-        width?: number;
-    }
+	interface protoConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		pager?: any;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		template?: string | WebixCallback;
+		tooltip?: any;
+		type?: any;
+		url?: any;
+		width?: number;
+	}
 
-    type protoEventName =
-        'onAfterAdd'
-        | 'onAfterDelete'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeDelete'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+	type protoEventName =
+		'onAfterAdd'
+		| 'onAfterDelete'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeDelete'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
 
-    class proto implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+	export class proto implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        adjust(): void;
+		adjust(): void;
 
-        attachEvent(type: protoEventName, functor: WebixCallback, id?: string): string | number;
+		attachEvent(type: protoEventName, functor: WebixCallback, id?: string): string | number;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        blockEvent(): void;
+		blockEvent(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		callEvent(name: string, params: any[]): boolean;
 
-        clearAll(soft?: boolean): void;
+		clearAll(soft?: boolean): void;
 
-        clearCss(css: string, silent?: boolean): void;
+		clearCss(css: string, silent?: boolean): void;
 
-        clearValidation(): void;
+		clearValidation(): void;
 
-        count(): number;
+		count(): number;
 
-        customize(obj: any): void;
+		customize(obj: any): void;
 
-        define(property: string, value: any): void;
+		define(property: string, value: any): void;
 
-        destructor(): void;
+		destructor(): void;
 
-        detachEvent(id: string): void;
+		detachEvent(id: string): void;
 
-        disable(): void;
+		disable(): void;
 
-        enable(): void;
+		enable(): void;
 
-        exists(id: string | number): boolean;
+		exists(id: number | string): boolean;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        getChildViews(): any[];
+		getChildViews(): any[];
 
-        getFirstId(): string | number;
+		getFirstId(): number | string;
 
-        getFormView(): webix.ui.baseview;
+		getFormView(): webix.ui.baseview;
 
-        getIdByIndex(index: number): string | number;
+		getIdByIndex(index: number | string): string | number;
 
-        getIndexById(id: string | number): number;
+		getIndexById(id: number | string): number;
 
-        getItem(id: string | number): any;
+		getItem(id: number | string): any;
 
-        getItemNode(id: string | number): HTMLElement;
+		getItemNode(id: string | number): HTMLElement;
 
-        getLastId(): string | number;
+		getLastId(): number | string;
 
-        getNextId(id: string | number, step: number): string | number;
+		getNextId(id: number | string, step: number): string | number;
 
-        getNode(): any;
+		getNode(): any;
 
-        getPage(): number;
+		getPage(): number;
 
-        getPager(): any;
+		getPager(): any;
 
-        getParentView(): any;
+		getParentView(): any;
 
-        getPrevId(id: string | number, step: number): string | number;
+		getPrevId(id: number | string, step: number): string | number;
 
-        getTopParentView(): webix.ui.baseview;
+		getTopParentView(): webix.ui.baseview;
 
-        hasCss(id: string | number, css: string): boolean;
+		hasCss(id: string | number, css: string): boolean;
 
-        hasEvent(name: string): boolean;
+		hasEvent(name: string): boolean;
 
-        hide(): void;
+		hide(): void;
 
-        isEnabled(): boolean;
+		isEnabled(): boolean;
 
-        isVisible(): boolean;
+		isVisible(): boolean;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        locate(e: Event): string | number;
+		locate(e: Event): string | number;
 
-        mapEvent(map: any): void;
+		mapEvent(map: any): void;
 
-        parse(data: any, type: string): void;
+		parse(data: any, type: string): void;
 
-        queryView(config: any, mode?: string): any;
+		queryView(config: any, mode?: string): any;
 
-        refresh(id?: string | number): void;
+		refresh(id?: number | string): void;
 
-        remove(id: string | number): void;
+		remove(id: string | number | any[]): void;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        render(id: string | number, data: any, type: string): void;
+		render(id: string | number, data: any, type: string): void;
 
-        resize(): void;
+		resize(): void;
 
-        serialize(): any[];
+		serialize(all?: boolean): any[];
 
-        setPage(page: number): void;
+		setPage(page: number): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        showItem(id: string | number): void;
+		showItem(id: string | number): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        unbind(): void;
+		unbind(): void;
 
-        unblockEvent(): void;
+		unblockEvent(): void;
 
-        updateItem(id: string | number, data: any): void;
+		updateItem(id: number | string, data: any): void;
 
-        validate(id?: string): boolean;
+		validate(id?: string): boolean;
 
-        $getSize(): any[];
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        $height: number;
-        $scope: any;
+		$getSize(): any[];
 
-        $setSize(x: number, y: number): boolean;
+		$height: number;
+		$scope: any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: protoConfig;
-        data: DataStore;
-        name: string;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		$setSize(x: number, y: number): boolean;
 
-    interface resizeareaConfig {
-        view?: string;
-        border?: boolean;
-        container?: string | HTMLElement;
-        cursor?: string;
-        dir?: string;
-        eventPos?: number;
-        height?: number;
-        id?: string | number;
-        on?: EventHash;
-        start?: number;
-        width?: number;
-    }
+		$skin: WebixCallback;
 
-    type resizeareaEventName = 'onResize' | 'onResizeEnd';
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-    interface resizearea {
-        attachEvent(type: resizeareaEventName, functor: WebixCallback, id?: string): string | number;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        blockEvent(): void;
+		$tooltipOut(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		$view: HTMLElement;
+		$width: number;
+		config: protoConfig;
+		data: DataStore;
+		name: string;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        define(property: string, value: any): void;
+	interface resizeareaConfig {
+		view?: string;
+		border?: boolean;
+		container?: string | HTMLElement;
+		cursor?: string;
+		dir?: string;
+		eventPos?: number;
+		height?: number;
+		id?: string | number;
+		on?: EventHash;
+		start?: number;
+		width?: number;
+	}
 
-        detachEvent(id: string): void;
+	type resizeareaEventName = 'onResize' | 'onResizeEnd';
 
-        hasEvent(name: string): boolean;
+	export interface resizearea {
+		attachEvent(type: resizeareaEventName, functor: WebixCallback, id?: string): string | number;
 
-        mapEvent(map: any): void;
+		blockEvent(): void;
 
-        unblockEvent(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        config: resizeareaConfig;
-        name: string;
-    }
+		define(property: string, value: any): void;
 
-    interface viewConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        width?: number;
-    }
+		detachEvent(id: string): void;
 
-    type viewEventName =
-        'onAfterScroll'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		hasEvent(name: string): boolean;
 
-    class view implements webix.ui.baseview {
-        adjust(): void;
+		mapEvent(map: any): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		unblockEvent(): void;
 
-        define(property: string, value: any): void;
+		config: resizeareaConfig;
+		name: string;
+	}
 
-        destructor(): void;
+	interface viewConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		width?: number;
+	}
 
-        disable(): void;
+	type viewEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        enable(): void;
+	export class view implements webix.ui.baseview {
+		adjust(): void;
 
-        getChildViews(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getFormView(): webix.ui.baseview;
+		define(property: string, value: any): void;
 
-        getNode(): any;
+		destructor(): void;
 
-        getParentView(): any;
+		disable(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		enable(): void;
 
-        hide(): void;
+		getChildViews(): any[];
 
-        isEnabled(): boolean;
+		getFormView(): webix.ui.baseview;
 
-        isVisible(): boolean;
+		getNode(): any;
 
-        queryView(config: any, mode?: string): any;
+		getParentView(): any;
 
-        resize(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        show(force?: boolean, animation?: boolean): void;
+		hide(): void;
 
-        unbind(): void;
+		isEnabled(): boolean;
 
-        $getSize(): any[];
+		isVisible(): boolean;
 
-        $height: number;
-        $scope: any;
+		queryView(config: any, mode?: string): any;
 
-        $setSize(x: number, y: number): boolean;
+		resize(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: viewConfig;
-        name: string;
-    }
+		show(force?: boolean, animation?: boolean): void;
 
-    interface vscrollConfig {
-        view?: string;
-        container?: string | HTMLElement;
-        id?: string | number;
-        on?: EventHash;
-        scroll?: string;
-        scrollHeight?: number;
-        scrollPos?: number;
-        scrollSize?: number;
-        scrollStep?: number;
-        scrollVisible?: boolean;
-        scrollWidth?: number;
-        zoom?: number;
-    }
+		unbind(): void;
 
-    type vscrollEventName = 'onScroll';
+		$getSize(): any[];
 
-    interface vscroll {
-        activeArea(node: HTMLElement): void;
+		$height: number;
+		$scope: any;
 
-        attachEvent(type: vscrollEventName, functor: WebixCallback, id?: string): string | number;
+		$setSize(x: number, y: number): boolean;
 
-        blockEvent(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: viewConfig;
+		name: string;
+	}
 
-        callEvent(name: string, params: any[]): boolean;
+	interface vscrollConfig {
+		view?: string;
+		container?: string | HTMLElement;
+		id?: string | number;
+		on?: EventHash;
+		scroll?: string;
+		scrollHeight?: number;
+		scrollPos?: number;
+		scrollSize?: number;
+		scrollStep?: number;
+		scrollVisible?: boolean;
+		scrollWidth?: number;
+		zoom?: number;
+	}
 
-        define(property: string, value: any): void;
+	type vscrollEventName = 'onScroll';
 
-        detachEvent(id: string): void;
+	export interface vscroll {
+		activeArea(node: HTMLElement): void;
 
-        getScroll(): number;
+		attachEvent(type: vscrollEventName, functor: WebixCallback, id?: string): string | number;
 
-        getSize(): number;
+		blockEvent(): void;
 
-        hasEvent(name: string): boolean;
+		callEvent(name: string, params: any[]): boolean;
 
-        mapEvent(map: any): void;
+		define(property: string, value: any): void;
 
-        reset(): void;
+		detachEvent(id: string): void;
 
-        scrollTo(pos: number): void;
+		getScroll(): number;
 
-        sizeTo(size: number): void;
+		getSize(): number;
 
-        unblockEvent(): void;
+		hasEvent(name: string): boolean;
 
-        config: vscrollConfig;
-        name: string;
-    }
+		mapEvent(map: any): void;
 
-    interface abslayoutConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cells?: any[];
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        responsive?: string;
-        rows?: any[];
-        visibleBatch?: string;
-        width?: number;
-    }
+		reset(): void;
 
-    type abslayoutEventName = 'onBindRequest' | 'onDestruct';
+		scrollTo(pos: number): void;
 
-    class abslayout implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		sizeTo(size: number): void;
 
-        adjust(): void;
+		unblockEvent(): void;
 
-        attachEvent(type: abslayoutEventName, functor: WebixCallback, id?: string): string | number;
+		config: vscrollConfig;
+		name: string;
+	}
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+	interface abslayoutConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		cells?: any[];
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		responsive?: string;
+		rows?: any[];
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        blockEvent(): void;
+	type abslayoutEventName = 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
-        callEvent(name: string, params: any[]): boolean;
+	export class abslayout implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        define(property: string, value: any): void;
+		adjust(): void;
 
-        destructor(): void;
+		attachEvent(type: abslayoutEventName, functor: WebixCallback, id?: string): string | number;
 
-        detachEvent(id: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        disable(): void;
+		blockEvent(): void;
 
-        enable(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        getChildViews(): any[];
+		define(property: string, value: any): void;
 
-        getFormView(): webix.ui.baseview;
+		destructor(): void;
 
-        getNode(): any;
+		detachEvent(id: string): void;
 
-        getParentView(): any;
+		disable(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		enable(): void;
 
-        hasEvent(name: string): boolean;
+		getChildViews(): any[];
 
-        hide(): void;
+		getFormView(): webix.ui.baseview;
 
-        index(obj: any): number;
+		getNode(): any;
 
-        isEnabled(): boolean;
+		getParentView(): any;
 
-        isVisible(): boolean;
+		getTopParentView(): webix.ui.baseview;
 
-        mapEvent(map: any): void;
+		hasEvent(name: string): boolean;
 
-        queryView(config: any, mode?: string): any;
+		hide(): void;
 
-        reconstruct(): void;
+		index(obj: any): number;
 
-        removeView(id: any): void;
+		isEnabled(): boolean;
 
-        resize(): void;
+		isVisible(): boolean;
 
-        resizeChildren(): void;
+		mapEvent(map: any): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		queryView(config: any, mode?: string): any;
 
-        showBatch(name: string, mode?: boolean): void;
+		reconstruct(): void;
 
-        unbind(): void;
+		removeView(id: any): void;
 
-        unblockEvent(): void;
+		resize(): void;
 
-        $getSize(): any[];
+		resizeChildren(): void;
 
-        $height: number;
+		show(force?: boolean, animation?: boolean): void;
 
-        $setSize(x: number, y: number): boolean;
+		showBatch(name: string, mode?: boolean): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: abslayoutConfig;
-        name: string;
-    }
+		unbind(): void;
 
-    interface accordionConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        collapsed?: boolean;
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        isolate?: boolean;
-        margin?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        multi?: boolean | string;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        panelClass?: string;
-        responsive?: string;
-        rows?: any[];
-        type?: string;
-        visibleBatch?: string;
-        width?: number;
-    }
+		unblockEvent(): void;
 
-    type accordionEventName = 'onAfterCollapse' | 'onAfterExpand' | 'onBindRequest' | 'onDestruct';
+		$getSize(): any[];
 
-    class accordion implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		$height: number;
 
-        adjust(): void;
+		$setSize(x: number, y: number): boolean;
 
-        attachEvent(type: accordionEventName, functor: WebixCallback, id?: string): string | number;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: abslayoutConfig;
+		name: string;
+	}
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+	interface accordionConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		collapsed?: boolean;
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		isolate?: boolean;
+		margin?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		multi?: boolean | string;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		panelClass?: string;
+		responsive?: string;
+		rows?: any[];
+		type?: string;
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        blockEvent(): void;
+	type accordionEventName = 'onAfterCollapse' | 'onAfterExpand' | 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
-        callEvent(name: string, params: any[]): boolean;
+	export class accordion implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        define(property: string, value: any): void;
+		adjust(): void;
 
-        destructor(): void;
+		attachEvent(type: accordionEventName, functor: WebixCallback, id?: string): string | number;
 
-        detachEvent(id: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        disable(): void;
+		blockEvent(): void;
 
-        enable(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        getChildViews(): any[];
+		define(property: string, value: any): void;
 
-        getFormView(): webix.ui.baseview;
+		destructor(): void;
 
-        getNode(): any;
+		detachEvent(id: string): void;
 
-        getParentView(): any;
+		disable(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		enable(): void;
 
-        hasEvent(name: string): boolean;
+		getChildViews(): any[];
 
-        hide(): void;
+		getFormView(): webix.ui.baseview;
 
-        index(obj: any): number;
+		getNode(): any;
 
-        isEnabled(): boolean;
+		getParentView(): any;
 
-        isVisible(): boolean;
+		getTopParentView(): webix.ui.baseview;
 
-        mapEvent(map: any): void;
+		hasEvent(name: string): boolean;
 
-        queryView(config: any, mode?: string): any;
+		hide(): void;
 
-        reconstruct(): void;
+		index(obj: any): number;
 
-        removeView(id: any): void;
+		isEnabled(): boolean;
 
-        resize(): void;
+		isVisible(): boolean;
 
-        resizeChildren(): void;
+		mapEvent(map: any): void;
 
-        restore(state: any, factory?: WebixCallback): void;
+		queryView(config: any, mode?: string): any;
 
-        serialize(serializer?: WebixCallback): any;
+		reconstruct(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		removeView(id: any): void;
 
-        showBatch(name: string, mode?: boolean): void;
+		resize(): void;
 
-        unbind(): void;
+		resizeChildren(): void;
 
-        unblockEvent(): void;
+		restore(state: any, factory?: WebixCallback): void;
 
-        $getSize(): any[];
+		serialize(serializer?: WebixCallback): any;
 
-        $height: number;
+		show(force?: boolean, animation?: boolean): void;
 
-        $setSize(x: number, y: number): boolean;
+		showBatch(name: string, mode?: boolean): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: accordionConfig;
-        name: string;
-    }
+		unbind(): void;
 
-    interface accordionitemConfig {
-        view?: string;
-        animate?: any;
-        body?: any;
-        borderless?: boolean;
-        collapsed?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        header?: boolean | string | WebixCallback;
-        headerAlt?: string | WebixCallback;
-        headerAltHeight?: number;
-        headerHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        width?: number;
-    }
+		unblockEvent(): void;
 
-    type accordionitemEventName =
-        'onAfterContextMenu'
-        | 'onAfterScroll'
-        | 'onBeforeContextMenu'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		$getSize(): any[];
 
-    class accordionitem implements webix.ui.baseview {
-        adjust(): void;
+		$height: number;
 
-        attachEvent(type: accordionitemEventName, functor: WebixCallback, id?: string): string | number;
+		$setSize(x: number, y: number): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: accordionConfig;
+		name: string;
+	}
 
-        blockEvent(): void;
+	interface accordionitemConfig {
+		view?: string;
+		animate?: any;
+		body?: any;
+		borderless?: boolean;
+		collapsed?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		header?: boolean | string | WebixCallback;
+		headerAlt?: string | WebixCallback;
+		headerAltHeight?: number;
+		headerHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		width?: number;
+	}
 
-        callEvent(name: string, params: any[]): boolean;
+	type accordionitemEventName =
+		'onAfterContextMenu'
+		| 'onAfterScroll'
+		| 'onBeforeContextMenu'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        collapse(): void;
+	export class accordionitem implements webix.ui.baseview {
+		adjust(): void;
 
-        define(property: string, value: any): void;
+		attachEvent(type: accordionitemEventName, functor: WebixCallback, id?: string): string | number;
 
-        destructor(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        detachEvent(id: string): void;
+		blockEvent(): void;
 
-        disable(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        enable(): void;
+		collapse(): void;
 
-        expand(): void;
+		define(property: string, value: any): void;
 
-        getChildViews(): any[];
+		destructor(): void;
 
-        getFormView(): webix.ui.baseview;
+		detachEvent(id: string): void;
 
-        getNode(): any;
+		disable(): void;
 
-        getParentView(): any;
+		enable(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		expand(): void;
 
-        hasEvent(name: string): boolean;
+		getChildViews(): any[];
 
-        hide(): void;
+		getFormView(): webix.ui.baseview;
 
-        isEnabled(): boolean;
+		getNode(): any;
 
-        isVisible(): boolean;
+		getParentView(): any;
 
-        mapEvent(map: any): void;
+		getTopParentView(): webix.ui.baseview;
 
-        queryView(config: any, mode?: string): any;
+		hasEvent(name: string): boolean;
 
-        refresh(): void;
+		hide(): void;
 
-        resize(): void;
+		isEnabled(): boolean;
 
-        show(force?: boolean, animation?: boolean): void;
+		isVisible(): boolean;
 
-        unbind(): void;
+		mapEvent(map: any): void;
 
-        unblockEvent(): void;
+		queryView(config: any, mode?: string): any;
 
-        $getSize(): any[];
+		refresh(): void;
 
-        $height: number;
-        $scope: any;
+		resize(): void;
 
-        $setSize(x: number, y: number): boolean;
+		show(force?: boolean, animation?: boolean): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: accordionitemConfig;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-    }
+		unbind(): void;
 
-    interface barcodeConfig {
-        view?: string;
-        animate?: any;
-        ariaLabel?: string;
-        borderless?: boolean;
-        color?: string;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        paddingX?: number;
-        paddingY?: number;
-        textHeight?: number;
-        type?: string;
-        value?: string;
-        width?: number;
-    }
+		unblockEvent(): void;
 
-    type barcodeEventName =
-        'onAfterScroll'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		$getSize(): any[];
 
-    class barcode implements webix.ui.baseview {
-        adjust(): void;
+		$height: number;
+		$scope: any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        define(property: string, value: any): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: accordionitemConfig;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+	}
 
-        destructor(): void;
+	interface alignConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		body?: any;
+		borderless?: boolean;
+		bottom?: number;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		left?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		right?: number;
+		top?: number;
+		width?: number;
+	}
 
-        disable(): void;
+	type alignEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        enable(): void;
+	export class align implements webix.ui.baseview {
+		adjust(): void;
 
-        getChildViews(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getFormView(): webix.ui.baseview;
+		define(property: string, value: any): void;
 
-        getNode(): any;
+		destructor(): void;
 
-        getParentView(): any;
+		disable(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		enable(): void;
 
-        getValue(): string;
+		getBody(): webix.ui.baseview;
 
-        hide(): void;
+		getChildViews(): any[];
 
-        isEnabled(): boolean;
+		getFormView(): webix.ui.baseview;
 
-        isVisible(): boolean;
+		getNode(): any;
 
-        queryView(config: any, mode?: string): any;
+		getParentView(): any;
 
-        render(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        resize(): void;
+		hide(): void;
 
-        setValue(value: string): void;
+		isEnabled(): boolean;
 
-        show(force?: boolean, animation?: boolean): void;
+		isVisible(): boolean;
 
-        unbind(): void;
+		queryView(config: any, mode?: string): any;
 
-        $getSize(): any[];
+		resize(): void;
 
-        $height: number;
-        $scope: any;
+		show(force?: boolean, animation?: boolean): void;
 
-        $setSize(x: number, y: number): boolean;
+		unbind(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: barcodeConfig;
-        name: string;
-        types: any[];
-    }
+		$getSize(): any[];
 
-    interface bulletConfig {
-        view?: string;
-        animate?: any;
-        bands?: any[];
-        barWidth?: number;
-        borderless?: boolean;
-        color?: string | WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        flowTime?: number;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        label?: string;
-        labelHeight?: number;
-        labelWidth?: number;
-        layout?: string;
-        marker?: number | boolean;
-        maxHeight?: number;
-        maxRange?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minRange?: number;
-        minWidth?: number;
-        on?: EventHash;
-        placeholder?: string;
-        scale?: any;
-        smoothFlow?: boolean;
-        stroke?: number;
-        value?: number;
-        width?: number;
-    }
+		$height: number;
+		$scope: any;
 
-    type bulletEventName =
-        'onAfterScroll'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		$setSize(x: number, y: number): boolean;
 
-    class bullet implements webix.ui.baseview {
-        adjust(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: alignConfig;
+		name: string;
+	}
 
-        attachEvent(type: bulletEventName, functor: WebixCallback, id?: string): string | number;
+	interface barcodeConfig {
+		view?: string;
+		animate?: any;
+		ariaLabel?: string;
+		borderless?: boolean;
+		color?: string;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		paddingX?: number;
+		paddingY?: number;
+		textHeight?: number;
+		type?: string;
+		value?: string;
+		width?: number;
+	}
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+	type barcodeEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        blockEvent(): void;
+	export class barcode implements webix.ui.baseview {
+		adjust(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        define(property: string, value: any): void;
+		define(property: string, value: any): void;
 
-        destructor(): void;
+		destructor(): void;
 
-        detachEvent(id: string): void;
+		disable(): void;
 
-        disable(): void;
+		enable(): void;
 
-        enable(): void;
+		getChildViews(): any[];
 
-        getChildViews(): any[];
+		getFormView(): webix.ui.baseview;
 
-        getFormView(): webix.ui.baseview;
+		getNode(): any;
 
-        getNode(): any;
+		getParentView(): any;
 
-        getParentView(): any;
+		getTopParentView(): webix.ui.baseview;
 
-        getTopParentView(): webix.ui.baseview;
+		getValue(): string;
 
-        getValue(): number;
+		hide(): void;
 
-        hasEvent(name: string): boolean;
+		isEnabled(): boolean;
 
-        hide(): void;
+		isVisible(): boolean;
 
-        isEnabled(): boolean;
+		queryView(config: any, mode?: string): any;
 
-        isVisible(): boolean;
+		render(): void;
 
-        mapEvent(map: any): void;
+		resize(): void;
 
-        queryView(config: any, mode?: string): any;
+		setValue(value: string): void;
 
-        resize(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        setValue(new_value: number): void;
+		unbind(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		$getSize(): any[];
 
-        unbind(): void;
+		$height: number;
+		$scope: any;
 
-        unblockEvent(): void;
+		$setSize(x: number, y: number): boolean;
 
-        $getSize(): any[];
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: barcodeConfig;
+		name: string;
+		types: any[];
+	}
 
-        $height: number;
-        $scope: any;
+	interface bulletConfig {
+		view?: string;
+		animate?: any;
+		bands?: any[];
+		barWidth?: number;
+		borderless?: boolean;
+		color?: string | WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		flowTime?: number;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		label?: string;
+		labelHeight?: number;
+		labelWidth?: number;
+		layout?: string;
+		marker?: number | boolean;
+		maxHeight?: number;
+		maxRange?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minRange?: number;
+		minWidth?: number;
+		placeholder?: any;
+		scale?: any;
+		smoothFlow?: boolean;
+		stroke?: number;
+		tickSize?: number;
+		value?: number;
+		width?: number;
+	}
 
-        $setSize(x: number, y: number): boolean;
+	type bulletEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: bulletConfig;
-        name: string;
-    }
+	export class bullet implements webix.ui.baseview {
+		adjust(): void;
 
-    interface buttonConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        autowidth?: boolean;
-        badge?: number | string;
-        borderless?: boolean;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        image?: string;
-        inputHeight?: number;
-        inputWidth?: number;
-        label?: string;
-        labelPosition?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        placeholder?: string;
-        popup?: string;
-        tooltip?: string;
-        type?: string;
-        value?: string | number;
-        width?: number;
-    }
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    type buttonEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		define(property: string, value: any): void;
 
-    class button implements webix.ui.baseview {
-        adjust(): void;
+		destructor(): void;
 
-        attachEvent(type: buttonEventName, functor: WebixCallback, id?: string): string | number;
+		disable(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		enable(): void;
 
-        blockEvent(): void;
+		getChildViews(): any[];
 
-        blur(): void;
+		getFormView(): webix.ui.baseview;
 
-        callEvent(name: string, params: any[]): boolean;
+		getNode(): any;
 
-        define(property: string, value: any): void;
+		getParentView(): any;
 
-        destructor(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        detachEvent(id: string): void;
+		getValue(bullet_value: number): void;
 
-        disable(): void;
+		hide(): void;
 
-        enable(): void;
+		isEnabled(): boolean;
 
-        focus(): void;
+		isVisible(): boolean;
 
-        getChildViews(): any[];
+		queryView(config: any, mode?: string): any;
 
-        getFormView(): webix.ui.baseview;
+		refresh(): void;
 
-        getInputNode(): HTMLElement;
+		resize(): void;
 
-        getNode(): any;
+		setValue(new_value: number): void;
 
-        getParentView(): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getTopParentView(): webix.ui.baseview;
+		unbind(): void;
 
-        getValue(): string;
+		$getSize(): any[];
 
-        hasEvent(name: string): boolean;
+		$height: number;
+		$scope: any;
 
-        hide(): void;
+		$setSize(x: number, y: number): boolean;
 
-        isEnabled(): boolean;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: bulletConfig;
+		name: string;
+	}
 
-        isVisible(): boolean;
+	interface buttonConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		autowidth?: boolean;
+		badge?: number | string;
+		borderless?: boolean;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		image?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		keyPressTimeout?: number;
+		label?: string;
+		labelPosition?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		placeholder?: string;
+		popup?: string;
+		tooltip?: any;
+		type?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        mapEvent(map: any): void;
+	type buttonEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        queryView(config: any, mode?: string): any;
+	export class button implements webix.ui.baseview {
+		adjust(): void;
 
-        refresh(): void;
+		attachEvent(type: buttonEventName, functor: WebixCallback, id?: string): string | number;
 
-        render(id: string | number, data: any, type: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        resize(): void;
+		blockEvent(): void;
 
-        setValue(value: string): void;
+		blur(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		define(property: string, value: any): void;
 
-        unbind(): void;
+		destructor(): void;
 
-        unblockEvent(): void;
+		detachEvent(id: string): void;
 
-        $compareValue: WebixCallback;
+		disable(): void;
 
-        $getSize(): any[];
+		enable(): void;
 
-        $getValue(): string;
+		focus(): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
+		getChildViews(): any[];
 
-        $renderInput(config: any): HTMLElement;
+		getFormView(): webix.ui.baseview;
 
-        $scope: any;
+		getInputNode(): HTMLElement;
 
-        $setSize(x: number, y: number): boolean;
+		getNode(): any;
 
-        $setValue(value: string): void;
+		getParentView(): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: buttonConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		getTopParentView(): webix.ui.baseview;
 
-    interface calendarConfig {
-        view?: string;
-        animate?: any;
-        blockDates?: WebixCallback;
-        borderless?: boolean;
-        calendarHeader?: string;
-        calendarTime?: string;
-        calendarWeekHeader?: string;
-        cellHeight?: number | string;
-        container?: string | HTMLElement;
-        css?: any;
-        date?: Date | string;
-        dayTemplate?: WebixCallback;
-        disabled?: boolean;
-        events?: WebixCallback;
-        gravity?: number;
-        headerHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        icons?: any;
-        id?: string | number;
-        maxDate?: Date | string;
-        maxHeight?: number;
-        maxTime?: string;
-        maxWidth?: number;
-        minDate?: Date | string;
-        minHeight?: number;
-        minTime?: string;
-        minWidth?: number;
-        minuteStep?: number;
-        monthSelect?: boolean;
-        mouseEventDelay?: number;
-        multiselect?: boolean | string;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        select?: boolean;
-        skipEmptyWeeks?: boolean;
-        timepicker?: boolean;
-        timepickerHeight?: number;
-        type?: string;
-        weekHeader?: boolean;
-        weekNumber?: boolean;
-        width?: number;
-    }
+		getValue(): string;
 
-    type calendarEventName =
-        'onAfterContextMenu'
-        | 'onAfterDateSelect'
-        | 'onAfterMonthChange'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterZoom'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDateSelect'
-        | 'onBeforeMonthChange'
-        | 'onBeforeRender'
-        | 'onBeforeZoom'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDateClear'
-        | 'onDateSelect'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTodaySet'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		hasEvent(name: string): boolean;
 
-    class calendar implements webix.ui.baseview {
-        adjust(): void;
+		hide(): void;
 
-        attachEvent(type: calendarEventName, functor: WebixCallback, id?: string): string | number;
+		isEnabled(): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		isVisible(): boolean;
 
-        blockEvent(): void;
+		mapEvent(map: any): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		queryView(config: any, mode?: string): any;
 
-        define(property: string, value: any): void;
+		refresh(): void;
 
-        destructor(): void;
+		render(id: string | number, data: any, type: string): void;
 
-        detachEvent(id: string): void;
+		resize(): void;
 
-        disable(): void;
+		setValue(value: string): void;
 
-        enable(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        getChildViews(): any[];
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getFormView(): webix.ui.baseview;
+		unbind(): void;
 
-        getNode(): any;
+		unblockEvent(): void;
 
-        getParentView(): any;
+		$compareValue: WebixCallback;
 
-        getSelectedDate(): any;
+		$getSize(): any[];
 
-        getTopParentView(): webix.ui.baseview;
+		$getValue(): string;
 
-        getValue(): any;
+		$height: number;
+		$prepareValue: WebixCallback;
 
-        getVisibleDate(): any;
+		$renderInput(config: any): HTMLElement;
 
-        hasEvent(name: string): boolean;
+		$scope: any;
 
-        hide(): void;
+		$setSize(x: number, y: number): boolean;
 
-        isEnabled(): boolean;
+		$setValue(value: string): void;
 
-        isVisible(): boolean;
+		$skin: WebixCallback;
 
-        locate(e: Event): string | number;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        mapEvent(map: any): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        moveSelection(direction: string): void;
+		$tooltipOut(): void;
 
-        queryView(config: any, mode?: string): any;
+		$view: HTMLElement;
+		$width: number;
+		config: buttonConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        refresh(): void;
+	interface calendarConfig {
+		view?: string;
+		animate?: any;
+		blockDates?: WebixCallback;
+		blockTime?: WebixCallback;
+		borderless?: boolean;
+		calendarHeader?: string;
+		calendarTime?: string;
+		calendarWeekHeader?: string;
+		cellHeight?: number | string;
+		container?: string | HTMLElement;
+		css?: any;
+		date?: Date | string;
+		dayTemplate?: WebixCallback;
+		disabled?: boolean;
+		events?: WebixCallback;
+		gravity?: number;
+		headerHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		icons?: any;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxDate?: Date | string;
+		maxHeight?: number;
+		maxTime?: string;
+		maxWidth?: number;
+		minDate?: Date | string;
+		minHeight?: number;
+		minTime?: string;
+		minWidth?: number;
+		minuteStep?: number;
+		monthHeader?: boolean;
+		monthSelect?: boolean;
+		mouseEventDelay?: number;
+		multiselect?: boolean | string;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		select?: boolean;
+		skipEmptyWeeks?: boolean;
+		timeIcon?: string;
+		timepicker?: boolean;
+		timepickerHeight?: number;
+		type?: string;
+		weekHeader?: boolean;
+		weekNumber?: boolean;
+		width?: number;
+	}
 
-        render(id: string | number, data: any, type: string): void;
+	type calendarEventName =
+		'onAfterContextMenu'
+		| 'onAfterDateSelect'
+		| 'onAfterMonthChange'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterZoom'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDateSelect'
+		| 'onBeforeMonthChange'
+		| 'onBeforeRender'
+		| 'onBeforeZoom'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDateClear'
+		| 'onDateSelect'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTodaySet'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        resize(): void;
+	export class calendar implements webix.ui.baseview {
+		adjust(): void;
 
-        selectDate(date: string | Date, mode: boolean): void;
+		attachEvent(type: calendarEventName, functor: WebixCallback, id?: string): string | number;
 
-        setValue(date: string | Date): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		blockEvent(): void;
 
-        showCalendar(date: string | Date): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        unbind(): void;
+		define(property: string, value: any): void;
 
-        unblockEvent(): void;
+		destructor(): void;
 
-        $getSize(): any[];
+		detachEvent(id: string): void;
 
-        $height: number;
-        $scope: any;
+		disable(): void;
 
-        $setSize(x: number, y: number): boolean;
+		enable(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: calendarConfig;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-    }
+		getChildViews(): any[];
 
-    interface carouselConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        navigation?: any;
-        on?: EventHash;
-        rows?: any[];
-        scrollSpeed?: string;
-        type?: string;
-        width?: number;
-    }
+		getFormView(): webix.ui.baseview;
 
-    type carouselEventName =
-        'onAfterScroll'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getNode(): any;
 
-    class carousel implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		getParentView(): any;
 
-        adjust(): void;
+		getSelectedDate(): any;
 
-        adjustScroll(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        attachEvent(type: carouselEventName, functor: WebixCallback, id?: string): string | number;
+		getValue(): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getVisibleDate(): any;
 
-        blockEvent(): void;
+		hasEvent(name: string): boolean;
 
-        callEvent(name: string, params: any[]): boolean;
+		hide(): void;
 
-        define(property: string, value: any): void;
+		isEnabled(): boolean;
 
-        destructor(): void;
+		isVisible(): boolean;
 
-        detachEvent(id: string): void;
+		locate(e: Event): string | number;
 
-        disable(): void;
+		mapEvent(map: any): void;
 
-        enable(): void;
+		moveSelection(direction: string): void;
 
-        getActiveId(): string;
+		queryView(config: any, mode?: string): any;
 
-        getActiveIndex(): number;
+		refresh(): void;
 
-        getChildViews(): any[];
+		render(id: string | number, data: any, type: string): void;
 
-        getFormView(): webix.ui.baseview;
+		resize(): void;
 
-        getLayout(): any;
+		selectDate(date: string | Date, mode: boolean): void;
 
-        getNode(): any;
+		setValue(date: string | Date): void;
 
-        getParentView(): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getTopParentView(): webix.ui.baseview;
+		showCalendar(date: string | Date): void;
 
-        hasEvent(name: string): boolean;
+		unbind(): void;
 
-        hide(): void;
+		unblockEvent(): void;
 
-        isEnabled(): boolean;
+		$getSize(): any[];
 
-        isVisible(): boolean;
+		$height: number;
+		$scope: any;
 
-        mapEvent(map: any): void;
+		$setSize(x: number, y: number): boolean;
 
-        queryView(config: any, mode?: string): any;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: calendarConfig;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+	}
 
-        removeView(id: any): void;
+	interface carouselConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		navigation?: any;
+		on?: EventHash;
+		rows?: any[];
+		scrollSpeed?: string;
+		type?: string;
+		width?: number;
+	}
 
-        resize(): void;
+	type carouselEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        scrollTo(x: number, y: number): void;
+	export class carousel implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        setActive(id: string): void;
+		adjust(): void;
 
-        setActiveIndex(index: number): void;
+		adjustScroll(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		attachEvent(type: carouselEventName, functor: WebixCallback, id?: string): string | number;
 
-        showNext(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        showPrev(): void;
+		blockEvent(): void;
 
-        unbind(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        unblockEvent(): void;
+		define(property: string, value: any): void;
 
-        $getSize(): any[];
+		destructor(): void;
 
-        $height: number;
-        $scope: any;
+		detachEvent(id: string): void;
 
-        $setSize(x: number, y: number): boolean;
+		disable(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: carouselConfig;
-        name: string;
-    }
+		enable(): void;
 
-    interface chartConfig {
-        view?: string;
-        alpha?: number;
-        animate?: any;
-        animateDuration?: number;
-        ariaLabel?: string;
-        barWidth?: number;
-        border?: boolean;
-        borderColor?: string;
-        borderless?: boolean;
-        cant?: number;
-        cellWidth?: number;
-        color?: string | WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datathrottle?: number;
-        datatype?: string;
-        disableLines?: boolean;
-        disabled?: boolean;
-        dynamic?: boolean;
-        eventRadius?: number;
-        fill?: string;
-        fixOverflow?: boolean;
-        gradient?: boolean | string | WebixCallback;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        label?: string | WebixCallback;
-        labelOffset?: number;
-        legend?: any;
-        line?: any;
-        lineColor?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        offset?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        origin?: number;
-        padding?: any;
-        pieHeight?: number;
-        pieInnerText?: string | WebixCallback;
-        preset?: string;
-        radius?: number;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        save?: string;
-        scale?: string;
-        scheme?: any;
-        series?: any;
-        shadow?: boolean;
-        tooltip?: string | boolean;
-        type?: string;
-        url?: any;
-        value?: string | WebixTemplate;
-        width?: number;
-        x?: number;
-        xAxis?: any;
-        xValue?: string;
-        y?: number;
-        yAxis?: any;
-        yValue?: string;
-    }
+		getActiveId(): string;
 
-    type chartEventName =
-        'onAfterAdd'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getActiveIndex(): number;
 
-    class chart implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		getChildViews(): any[];
 
-        addSeries(obj: any): void;
+		getFormView(): webix.ui.baseview;
 
-        adjust(): void;
+		getLayout(): any;
 
-        attachEvent(type: chartEventName, functor: WebixCallback, id?: string): string | number;
+		getNode(): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getParentView(): any;
 
-        blockEvent(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        callEvent(name: string, params: any[]): boolean;
+		hasEvent(name: string): boolean;
 
-        clearAll(soft?: boolean): void;
+		hide(): void;
 
-        clearCanvas(): void;
+		isEnabled(): boolean;
 
-        count(): number;
+		isVisible(): boolean;
 
-        define(property: string, value: any): void;
+		mapEvent(map: any): void;
 
-        destructor(): void;
+		queryView(config: any, mode?: string): any;
 
-        detachEvent(id: string): void;
+		removeView(id: any): void;
 
-        disable(): void;
+		resize(): void;
 
-        enable(): void;
+		scrollTo(x: number, y: number): void;
 
-        exists(id: string | number): boolean;
+		setActive(id: string): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		setActiveIndex(index: number): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getChildViews(): any[];
+		showNext(): void;
 
-        getFirstId(): string | number;
+		showPrev(): void;
 
-        getFormView(): webix.ui.baseview;
+		unbind(): void;
 
-        getIdByIndex(index: number): string | number;
+		unblockEvent(): void;
 
-        getIndexById(id: string | number): number;
+		$getSize(): any[];
 
-        getItem(id: string | number): any;
+		$height: number;
+		$scope: any;
 
-        getLastId(): string | number;
+		$setSize(x: number, y: number): boolean;
 
-        getNextId(id: string | number, step: number): string | number;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: carouselConfig;
+		name: string;
+	}
 
-        getNode(): any;
+	interface chartConfig {
+		view?: string;
+		alpha?: number;
+		animate?: any;
+		animateDuration?: number;
+		ariaLabel?: string;
+		barWidth?: number;
+		border?: boolean;
+		borderColor?: string;
+		borderWidth?: number;
+		borderless?: boolean;
+		cant?: number;
+		cellWidth?: number;
+		color?: string | WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disableLines?: boolean;
+		disabled?: boolean;
+		dynamic?: boolean;
+		eventRadius?: number;
+		fill?: string;
+		fixOverflow?: boolean;
+		gradient?: boolean | string | WebixCallback;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		label?: string | WebixCallback;
+		labelOffset?: number;
+		legend?: any;
+		line?: any;
+		lineColor?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		offset?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		origin?: number | string;
+		padding?: any;
+		pieHeight?: number;
+		pieInnerText?: string | WebixCallback;
+		preset?: string;
+		radius?: number;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		save?: any;
+		scale?: string;
+		scheme?: any;
+		series?: any;
+		shadow?: boolean;
+		tooltip?: any;
+		type?: string;
+		url?: any;
+		value?: string | WebixTemplate;
+		width?: number;
+		x?: number;
+		xAxis?: any;
+		xValue?: string;
+		y?: number;
+		yAxis?: any;
+		yValue?: string;
+	}
 
-        getParentView(): any;
+	type chartEventName =
+		'onAfterAdd'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onKeyPress'
+		| 'onLegendClick'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        getPrevId(id: string | number, step: number): string | number;
+	export class chart implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        getTopParentView(): webix.ui.baseview;
+		addSeries(obj: any): void;
 
-        group(config: any, mode: boolean): void;
+		adjust(): void;
 
-        hasEvent(name: string): boolean;
+		attachEvent(type: chartEventName, functor: WebixCallback, id?: string): string | number;
 
-        hide(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        hideSeries(index: number): void;
+		blockEvent(): void;
 
-        isEnabled(): boolean;
+		callEvent(name: string, params: any[]): boolean;
 
-        isVisible(): boolean;
+		clearAll(soft?: boolean): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		clearCanvas(): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		count(): number;
 
-        locate(e: Event): string | number;
+		define(property: string, value: any): void;
 
-        mapEvent(map: any): void;
+		destructor(): void;
 
-        parse(data: any, type: string): void;
+		detachEvent(id: string): void;
 
-        queryView(config: any, mode?: string): any;
+		disable(): void;
 
-        refresh(id?: string | number): void;
+		enable(): void;
 
-        remove(id: string | number): void;
+		exists(id: number | string): boolean;
 
-        removeAllSeries(): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        render(id: string | number, data: any, type: string): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        resize(): void;
+		getChildViews(): any[];
 
-        serialize(): any[];
+		getFirstId(): number | string;
 
-        show(force?: boolean, animation?: boolean): void;
+		getFormView(): webix.ui.baseview;
 
-        showSeries(index: number): void;
+		getIdByIndex(index: number | string): string | number;
 
-        sort(by: string, dir?: string, as?: string): void;
+		getIndexById(id: number | string): number;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		getItem(id: number | string): any;
 
-        unbind(): void;
+		getLastId(): number | string;
 
-        unblockEvent(): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        ungroup(mode: boolean): void;
+		getNode(): any;
 
-        updateItem(id: string | number, data: any): void;
+		getParentView(): any;
 
-        $getSize(): any[];
+		getPrevId(id: number | string, step: number): string | number;
 
-        $height: number;
-        $scope: any;
+		getTopParentView(): webix.ui.baseview;
 
-        $setSize(x: number, y: number): boolean;
+		group(config: any, target?: string | number): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        colormap: { [key: string]: any; };
-        config: chartConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        presets: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		hasEvent(name: string): boolean;
 
-    interface checkboxConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        checkValue?: string;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        customCheckbox?: boolean;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelRight?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        popup?: string;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tooltip?: string;
-        uncheckValue?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		hide(): void;
 
-    type checkboxEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		hideSeries(index: number): void;
 
-    class checkbox implements webix.ui.baseview {
-        adjust(): void;
+		isEnabled(): boolean;
 
-        attachEvent(type: checkboxEventName, functor: WebixCallback, id?: string): string | number;
+		isVisible(): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        blockEvent(): void;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        blur(): void;
+		locate(e: Event): string | number;
 
-        callEvent(name: string, params: any[]): boolean;
+		mapEvent(map: any): void;
 
-        define(property: string, value: any): void;
+		parse(data: any, type: string): void;
 
-        destructor(): void;
+		queryView(config: any, mode?: string): any;
 
-        detachEvent(id: string): void;
+		refresh(id?: number | string): void;
 
-        disable(): void;
+		remove(id: string | number | any[]): void;
 
-        enable(): void;
+		removeAllSeries(): void;
 
-        focus(): void;
+		render(id: string | number, data: any, type: string): void;
 
-        getChildViews(): any[];
+		resize(): void;
 
-        getFormView(): webix.ui.baseview;
+		serialize(all?: boolean): any[];
 
-        getInputNode(): HTMLElement;
+		show(force?: boolean, animation?: boolean): void;
 
-        getNode(): any;
+		showSeries(index: number): void;
 
-        getParentView(): any;
+		sort(by: string, dir?: string, as?: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getValue(): string;
+		unbind(): void;
 
-        hasEvent(name: string): boolean;
+		unblockEvent(): void;
 
-        hide(): void;
+		ungroup(mode: boolean): void;
 
-        isEnabled(): boolean;
+		updateItem(id: number | string, data: any): void;
 
-        isVisible(): boolean;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        mapEvent(map: any): void;
+		$getSize(): any[];
 
-        queryView(config: any, mode?: string): any;
+		$height: number;
+		$scope: any;
 
-        refresh(): void;
+		$setSize(x: number, y: number): boolean;
 
-        render(id: string | number, data: any, type: string): void;
+		$skin: WebixCallback;
 
-        resize(): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        setBottomText(text: string): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        setValue(value: string): void;
+		$tooltipOut(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		$view: HTMLElement;
+		$width: number;
+		colormap: { [key: string]: any; };
+		config: chartConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		presets: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+	interface checkboxConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		checkValue?: string;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		customCheckbox?: boolean;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelRight?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		popup?: string;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		uncheckValue?: string;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        toggle(): void;
+	type checkboxEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        unbind(): void;
+	export class checkbox implements webix.ui.baseview {
+		adjust(): void;
 
-        unblockEvent(): void;
+		attachEvent(type: checkboxEventName, functor: WebixCallback, id?: string): string | number;
 
-        validate(): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $compareValue: WebixCallback;
+		blockEvent(): void;
 
-        $getSize(): any[];
+		blur(): void;
 
-        $getValue(): string;
+		callEvent(name: string, params: any[]): boolean;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		define(property: string, value: any): void;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		destructor(): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		detachEvent(id: string): void;
 
-        $scope: any;
+		disable(): void;
 
-        $setSize(x: number, y: number): boolean;
+		enable(): void;
 
-        $setValue(value: string): void;
+		focus(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: checkboxConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		getChildViews(): any[];
 
-    interface checksuggestConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        button?: boolean;
-        buttonText?: string;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        disabled?: boolean;
-        filter?: WebixCallback;
-        fitMaster?: boolean;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        input?: HTMLElement | string;
-        keyPressTimeout?: number;
-        left?: number;
-        master?: webix.ui.baseview;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        move?: boolean;
-        on?: EventHash;
-        padding?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        relative?: string;
-        resize?: boolean;
-        selectAll?: boolean;
-        separator?: string;
-        template?: string | WebixTemplate;
-        textValue?: string;
-        toFront?: boolean;
-        top?: number;
-        type?: string;
-        url?: string;
-        value?: string | number;
-        width?: number;
-        zIndex?: number;
-    }
+		getFormView(): webix.ui.baseview;
 
-    type checksuggestEventName =
-        'onAfterScroll'
-        | 'onBeforeShow'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValueSuggest'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		getInputNode(): HTMLElement;
 
-    class checksuggest implements webix.ui.baseview {
-        adjust(): void;
+		getNode(): any;
 
-        attachEvent(type: checksuggestEventName, functor: WebixCallback, id?: string): string | number;
+		getParentView(): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        blockEvent(): void;
+		getValue(): string;
 
-        callEvent(name: string, params: any[]): boolean;
+		hasEvent(name: string): boolean;
 
-        close(): void;
+		hide(): void;
 
-        define(property: string, value: any): void;
+		isEnabled(): boolean;
 
-        destructor(): void;
+		isVisible(): boolean;
 
-        detachEvent(id: string): void;
+		mapEvent(map: any): void;
 
-        disable(): void;
+		queryView(config: any, mode?: string): any;
 
-        enable(): void;
+		refresh(): void;
 
-        getBody(): any;
+		render(id: string | number, data: any, type: string): void;
 
-        getButton(): webix.ui.baseview;
+		resize(): void;
 
-        getChildViews(): any[];
+		setBottomText(text: string): void;
 
-        getFormView(): webix.ui.baseview;
+		setValue(value: string): void;
 
-        getHead(): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getItemId(text: string): string | number;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getItemText(id: string | number): string;
+		toggle(): void;
 
-        getList(): webix.ui.baseview;
+		unbind(): void;
 
-        getMasterValue(): any;
+		unblockEvent(): void;
 
-        getNode(): any;
+		validate(): boolean;
 
-        getParentView(): any;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        getSuggestion(): string;
+		$getSize(): any[];
 
-        getTopParentView(): webix.ui.baseview;
+		$getValue(): string;
 
-        getValue(): string | number;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        hasEvent(name: string): boolean;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        hide(): void;
+		$renderLabel(config: any, id: string | number): string;
 
-        isEnabled(): boolean;
+		$scope: any;
 
-        isVisible(): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        linkInput(input: HTMLElement): void;
+		$setValue(value: string): void;
 
-        mapEvent(map: any): void;
+		$skin: WebixCallback;
 
-        queryView(config: any, mode?: string): any;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        resize(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        resizeChildren(): void;
+		$tooltipOut(): void;
 
-        setMasterValue(value: any): void;
+		$view: HTMLElement;
+		$width: number;
+		config: checkboxConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        setPosition(x: number, y: number): void;
+	interface checksuggestConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		button?: boolean;
+		buttonText?: string;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		disabled?: boolean;
+		filter?: WebixCallback;
+		fitMaster?: boolean;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		input?: HTMLElement | string;
+		keyPressTimeout?: number;
+		left?: number;
+		master?: webix.ui.baseview;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		move?: boolean;
+		on?: EventHash;
+		padding?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		relative?: string;
+		resize?: boolean;
+		selectAll?: boolean;
+		separator?: string;
+		template?: string | WebixTemplate;
+		textValue?: string;
+		toFront?: boolean;
+		top?: number;
+		type?: string;
+		url?: string;
+		value?: string | number;
+		width?: number;
+		zIndex?: number;
+	}
 
-        setValue(value: string | number): void;
+	type checksuggestEventName =
+		'onAfterScroll'
+		| 'onBeforeShow'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValueSuggest'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        show(force?: boolean, animation?: boolean): void;
+	export class checksuggest implements webix.ui.baseview {
+		adjust(): void;
 
-        unbind(): void;
+		attachEvent(type: checksuggestEventName, functor: WebixCallback, id?: string): string | number;
 
-        unblockEvent(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $enterKey: WebixCallback;
+		blockEvent(): void;
 
-        $getSize(): any[];
+		callEvent(name: string, params: any[]): boolean;
 
-        $height: number;
-        $scope: any;
+		define(property: string, value: any): void;
 
-        $setSize(x: number, y: number): boolean;
+		destructor(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: checksuggestConfig;
-        name: string;
-    }
+		detachEvent(id: string): void;
 
-    interface colorboardConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cols?: number;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxLightness?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minLightness?: number;
-        minWidth?: number;
-        navigation?: boolean;
-        on?: EventHash;
-        palette?: any[];
-        rows?: number;
-        template?: WebixCallback;
-        value?: string;
-        width?: number;
-    }
+		disable(): void;
 
-    type colorboardEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSelect'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		enable(): void;
 
-    class colorboard implements webix.ui.baseview {
-        adjust(): void;
+		getBody(): any;
 
-        attachEvent(type: colorboardEventName, functor: WebixCallback, id?: string): string | number;
+		getButton(): webix.ui.baseview;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getChildViews(): any[];
 
-        blockEvent(): void;
+		getFormView(): webix.ui.baseview;
 
-        callEvent(name: string, params: any[]): boolean;
+		getHead(): any;
 
-        define(property: string, value: any): void;
+		getItemId(text: string): string | number;
 
-        destructor(): void;
+		getItemText(id: string | number): string;
 
-        detachEvent(id: string): void;
+		getList(): webix.ui.baseview;
 
-        disable(): void;
+		getMasterValue(): any;
 
-        enable(): void;
+		getNode(): any;
 
-        getChildViews(): any[];
+		getParentView(): any;
 
-        getFormView(): webix.ui.baseview;
+		getSuggestion(): string;
 
-        getNode(): any;
+		getTopParentView(): webix.ui.baseview;
 
-        getParentView(): any;
+		getValue(): string | number;
 
-        getTopParentView(): webix.ui.baseview;
+		hasEvent(name: string): boolean;
 
-        getValue(): string;
+		hide(): void;
 
-        hasEvent(name: string): boolean;
+		isEnabled(): boolean;
 
-        hide(): void;
+		isVisible(): boolean;
 
-        isEnabled(): boolean;
+		linkInput(input: HTMLElement): void;
 
-        isVisible(): boolean;
+		mapEvent(map: any): void;
 
-        mapEvent(map: any): void;
+		queryView(config: any, mode?: string): any;
 
-        moveSelection(direction: string): void;
+		resize(): void;
 
-        queryView(config: any, mode?: string): any;
+		resizeChildren(): void;
 
-        refresh(): void;
+		setMasterValue(value: any): void;
 
-        render(id: string | number, data: any, type: string): void;
+		setPosition(x: number, y: number): void;
 
-        resize(): void;
+		setValue(value: string | number): void;
 
-        setValue(value: string): string;
+		show(force?: boolean, animation?: boolean): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		unbind(): void;
 
-        unbind(): void;
+		unblockEvent(): void;
 
-        unblockEvent(): void;
+		$enterKey: WebixCallback;
 
-        $getSize(): any[];
+		$getSize(): any[];
 
-        $height: number;
-        $scope: any;
+		$height: number;
+		$scope: any;
 
-        $setSize(x: number, y: number): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        $setValue(value: string): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: checksuggestConfig;
+		name: string;
+	}
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: colorboardConfig;
-        name: string;
-    }
+	interface colorboardConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		cols?: number;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxLightness?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minLightness?: number;
+		minWidth?: number;
+		navigation?: boolean;
+		on?: EventHash;
+		palette?: any[];
+		rows?: number;
+		template?: WebixCallback;
+		value?: string;
+		width?: number;
+	}
 
-    interface colorpickerConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        editable?: boolean;
-        format?: string;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icons?: boolean;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        placeholder?: string;
-        popup?: string;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        stringResult?: boolean;
-        suggest?: any;
-        timepicker?: boolean;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+	type colorboardEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSelect'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-    type colorpickerEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+	export class colorboard implements webix.ui.baseview {
+		adjust(): void;
 
-    class colorpicker implements webix.ui.baseview {
-        adjust(): void;
+		attachEvent(type: colorboardEventName, functor: WebixCallback, id?: string): string | number;
 
-        attachEvent(type: colorpickerEventName, functor: WebixCallback, id?: string): string | number;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		blockEvent(): void;
 
-        blockEvent(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        blur(): void;
+		define(property: string, value: any): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		destructor(): void;
 
-        define(property: string, value: any): void;
+		detachEvent(id: string): void;
 
-        destructor(): void;
+		disable(): void;
 
-        detachEvent(id: string): void;
+		enable(): void;
 
-        disable(): void;
+		getChildViews(): any[];
 
-        enable(): void;
+		getFormView(): webix.ui.baseview;
 
-        focus(): void;
+		getNode(): any;
 
-        getChildViews(): any[];
+		getParentView(): any;
 
-        getFormView(): webix.ui.baseview;
+		getTopParentView(): webix.ui.baseview;
 
-        getInputNode(): HTMLElement;
+		getValue(): string;
 
-        getNode(): any;
+		hasEvent(name: string): boolean;
 
-        getParentView(): any;
+		hide(): void;
 
-        getPopup(): webix.ui.baseview;
+		isEnabled(): boolean;
 
-        getText(): string;
+		isVisible(): boolean;
 
-        getTopParentView(): webix.ui.baseview;
+		mapEvent(map: any): void;
 
-        getValue(): string;
+		moveSelection(direction: string): void;
 
-        hasEvent(name: string): boolean;
+		queryView(config: any, mode?: string): any;
 
-        hide(): void;
+		refresh(): void;
 
-        isEnabled(): boolean;
+		render(id: string | number, data: any, type: string): void;
 
-        isVisible(): boolean;
+		resize(): void;
 
-        mapEvent(map: any): void;
+		setValue(value: string): string;
 
-        queryView(config: any, mode?: string): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        refresh(): void;
+		unbind(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		unblockEvent(): void;
 
-        resize(): void;
+		$getSize(): any[];
 
-        setBottomText(text: string): void;
+		$height: number;
+		$scope: any;
 
-        setValue(value: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        show(force?: boolean, animation?: boolean): void;
+		$setValue(value: string): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: colorboardConfig;
+		name: string;
+	}
 
-        unbind(): void;
+	interface colorpickerConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		autowidth?: boolean;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		editable?: boolean;
+		format?: string;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icons?: boolean;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		placeholder?: string;
+		point?: boolean;
+		popup?: string;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		stringResult?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        unblockEvent(): void;
+	type colorpickerEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        validate(): boolean;
+	export class colorpicker implements webix.ui.baseview {
+		adjust(): void;
 
-        $compareValue: WebixCallback;
+		attachEvent(type: colorpickerEventName, functor: WebixCallback, id?: string): string | number;
 
-        $getSize(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $getValue(): string;
+		blockEvent(): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		blur(): void;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		callEvent(name: string, params: any[]): boolean;
 
-        $renderLabel(config: any, id: string | number): string;
+		define(property: string, value: any): void;
 
-        $scope: any;
+		destructor(): void;
 
-        $setSize(x: number, y: number): boolean;
+		detachEvent(id: string): void;
 
-        $setValue(value: string): void;
+		disable(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: colorpickerConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		enable(): void;
 
-    interface comboConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        editable?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        options?: any;
-        placeholder?: string;
-        popup?: string;
-        popupWidth?: number;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tooltip?: string;
-        type?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		focus(): void;
 
-    type comboEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getChildViews(): any[];
 
-    class combo implements webix.ui.baseview {
-        adjust(): void;
+		getFormView(): webix.ui.baseview;
 
-        attachEvent(type: comboEventName, functor: WebixCallback, id?: string): string | number;
+		getInputNode(): HTMLElement;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getNode(): any;
 
-        blockEvent(): void;
+		getParentView(): any;
 
-        blur(): void;
+		getPopup(): webix.ui.baseview;
 
-        callEvent(name: string, params: any[]): boolean;
+		getText(): string;
 
-        define(property: string, value: any): void;
+		getTopParentView(): webix.ui.baseview;
 
-        destructor(): void;
+		getValue(): string;
 
-        detachEvent(id: string): void;
+		hasEvent(name: string): boolean;
 
-        disable(): void;
+		hide(): void;
 
-        enable(): void;
+		isEnabled(): boolean;
 
-        focus(): void;
+		isVisible(): boolean;
 
-        getChildViews(): any[];
+		mapEvent(map: any): void;
 
-        getFormView(): webix.ui.baseview;
+		queryView(config: any, mode?: string): any;
 
-        getInputNode(): HTMLElement;
+		refresh(): void;
 
-        getList(): webix.ui.baseview;
+		render(id: string | number, data: any, type: string): void;
 
-        getNode(): any;
+		resize(): void;
 
-        getParentView(): any;
+		setBottomText(text: string): void;
 
-        getPopup(): webix.ui.baseview;
+		setValue(value: string): void;
 
-        getText(): string;
+		show(force?: boolean, animation?: boolean): void;
 
-        getTopParentView(): webix.ui.baseview;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getValue(): string;
+		unbind(): void;
 
-        hasEvent(name: string): boolean;
+		unblockEvent(): void;
 
-        hide(): void;
+		validate(): boolean;
 
-        isEnabled(): boolean;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        isVisible(): boolean;
+		$getSize(): any[];
 
-        mapEvent(map: any): void;
+		$getValue(): string;
 
-        queryView(config: any, mode?: string): any;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        refresh(): void;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        render(id: string | number, data: any, type: string): void;
+		$renderLabel(config: any, id: string | number): string;
 
-        resize(): void;
+		$scope: any;
 
-        setBottomText(text: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        setValue(value: string): void;
+		$setValue(value: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		$skin: WebixCallback;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        unbind(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        unblockEvent(): void;
+		$tooltipOut(): void;
 
-        validate(): boolean;
+		$view: HTMLElement;
+		$width: number;
+		config: colorpickerConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        $compareValue: WebixCallback;
+	interface commentsConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		currentUser?: number;
+		data?: string | any[];
+		datatype?: string;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		listItem?: any;
+		maxHeight?: number;
+		maxWidth?: number;
+		mentions?: boolean;
+		minHeight?: number;
+		minWidth?: number;
+		mode?: string;
+		moreButton?: string | WebixCallback;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		readonly?: boolean;
+		scheme?: any;
+		sendAction?: string;
+		type?: string;
+		url?: any;
+		users?: any[] | string | DataCollection;
+		width?: number;
+	}
 
-        $getSize(): any[];
+	type commentsEventName =
+		'onAfterAdd'
+		| 'onAfterDelete'
+		| 'onAfterEditStart'
+		| 'onAfterLoad'
+		| 'onBeforeAdd'
+		| 'onBeforeDelete'
+		| 'onBeforeEditStart'
+		| 'onBeforeLoad'
+		| 'onBeforeMenuAction'
+		| 'onBindRequest'
+		| 'onDestruct'
+		| 'onLoadError'
+		| 'onUserMentioned'
+		| 'onViewShow';
 
-        $getValue(): string;
+	export class comments implements webix.ui.baseview {
+		adjust(): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		attachEvent(type: commentsEventName, functor: WebixCallback, id?: string): string | number;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		blockEvent(): void;
 
-        $scope: any;
+		callEvent(name: string, params: any[]): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		define(property: string, value: any): void;
 
-        $setValue(value: string): void;
+		destructor(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: comboConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		detachEvent(id: string): void;
 
-    interface contextConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        left?: number;
-        master?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        move?: boolean;
-        on?: EventHash;
-        padding?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        relative?: string;
-        resize?: boolean;
-        toFront?: boolean;
-        top?: number;
-        width?: number;
-        zIndex?: number;
-    }
+		disable(): void;
 
-    type contextEventName =
-        'onAfterScroll'
-        | 'onBeforeShow'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		edit(id: number | string): void;
 
-    class context implements webix.ui.baseview {
-        adjust(): void;
+		enable(): void;
 
-        attachEvent(type: contextEventName, functor: WebixCallback, id?: string): string | number;
+		getChildViews(): any[];
 
-        attachTo(view: any): void;
+		getFormView(): webix.ui.baseview;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getMenu(): any;
 
-        blockEvent(): void;
+		getNode(): any;
 
-        callEvent(name: string, params: any[]): boolean;
+		getParentView(): any;
 
-        close(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        define(property: string, value: any): void;
+		getUsers(): DataCollection;
 
-        destructor(): void;
+		hasEvent(name: string): boolean;
 
-        detachEvent(id: string): void;
+		hide(): void;
 
-        disable(): void;
+		isEnabled(): boolean;
 
-        enable(): void;
+		isVisible(): boolean;
 
-        getBody(): any;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        getChildViews(): any[];
+		mapEvent(map: any): void;
 
-        getContext(): any;
+		parse(data: any, type: string): void;
 
-        getFormView(): webix.ui.baseview;
+		queryView(config: any, mode?: string): any;
 
-        getHead(): any;
+		resize(): void;
 
-        getNode(): any;
+		setCurrentUser(id: number | string): void;
 
-        getParentView(): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getTopParentView(): webix.ui.baseview;
+		unbind(): void;
 
-        hasEvent(name: string): boolean;
+		unblockEvent(): void;
 
-        hide(): void;
+		$exportView(): webix.ui.baseview;
 
-        isEnabled(): boolean;
+		$getSize(): any[];
 
-        isVisible(): boolean;
+		$height: number;
+		$onLoad: WebixCallback;
 
-        mapEvent(map: any): void;
+		$setSize(x: number, y: number): boolean;
 
-        queryView(config: any, mode?: string): any;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: commentsConfig;
+		name: string;
+	}
 
-        resize(): void;
+	interface comboConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		editable?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icon?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		options?: any;
+		placeholder?: string;
+		popup?: string;
+		popupWidth?: number;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        resizeChildren(): void;
+	type comboEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        setContext(context: any): void;
+	export class combo implements webix.ui.baseview {
+		adjust(): void;
 
-        setPosition(x: number, y: number): void;
+		attachEvent(type: comboEventName, functor: WebixCallback, id?: string): string | number;
 
-        show(node?: HTMLElement, position?: any, point?: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        unbind(): void;
+		blockEvent(): void;
 
-        unblockEvent(): void;
+		blur(): void;
 
-        show(force: boolean, animation: boolean): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        $getSize(): any[];
+		define(property: string, value: any): void;
 
-        $height: number;
-        $scope: any;
+		destructor(): void;
 
-        $setSize(x: number, y: number): boolean;
+		detachEvent(id: string): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: contextConfig;
-        name: string;
-    }
+		disable(): void;
 
-    interface contextmenuConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        autoheight?: boolean;
-        autowidth?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        clipboard?: boolean | string;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datafetch?: number;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragscroll?: boolean | string;
-        dynamic?: boolean;
-        externalData?: WebixCallback;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        layout?: string;
-        left?: number;
-        master?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        mouseEventDelay?: number;
-        move?: boolean;
-        multiselect?: string | boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        openAction?: string;
-        padding?: any;
-        pager?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        ready?: WebixCallback;
-        relative?: string;
-        removeMissed?: boolean;
-        resize?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean | string;
-        subMenuPos?: string;
-        submenuConfig?: any;
-        template?: string | WebixCallback;
-        templateCopy?: WebixCallback;
-        toFront?: boolean;
-        tooltip?: string | boolean;
-        top?: number;
-        type?: any;
-        url?: any;
-        width?: number;
-        xCount?: number;
-        yCount?: number;
-        zIndex?: number;
-    }
+		enable(): void;
 
-    type contextmenuEventName =
-        'onAfterAdd'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeShow'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMenuItemClick'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPaste'
-        | 'onSelectChange'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		focus(): void;
 
-    class contextmenu implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		getChildViews(): any[];
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		getFormView(): webix.ui.baseview;
 
-        adjust(): void;
+		getInputNode(): HTMLElement;
 
-        attachEvent(type: contextmenuEventName, functor: WebixCallback, id?: string): string | number;
+		getList(): webix.ui.baseview;
 
-        attachTo(view: any): void;
+		getNode(): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getParentView(): any;
 
-        blockEvent(): void;
+		getPopup(): webix.ui.baseview;
 
-        callEvent(name: string, params: any[]): boolean;
+		getText(): string;
 
-        clearAll(soft?: boolean): void;
+		getTopParentView(): webix.ui.baseview;
 
-        clearCss(css: string, silent?: boolean): void;
+		getValue(): string;
 
-        clearValidation(): void;
+		hasEvent(name: string): boolean;
 
-        close(): void;
+		hide(): void;
 
-        copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+		isEnabled(): boolean;
 
-        count(): number;
+		isVisible(): boolean;
 
-        customize(obj: any): void;
+		mapEvent(map: any): void;
 
-        define(property: string, value: any): void;
+		queryView(config: any, mode?: string): any;
 
-        destructor(): void;
+		refresh(): void;
 
-        detachEvent(id: string): void;
+		render(id: string | number, data: any, type: string): void;
 
-        disable(): void;
+		resize(): void;
 
-        disableItem(id: string | number): void;
+		setBottomText(text: string): void;
 
-        enable(): void;
+		setValue(value: string): void;
 
-        enableItem(id: string | number): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        exists(id: string | number): boolean;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		unbind(): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		unblockEvent(): void;
 
-        getBody(): any;
+		validate(): boolean;
 
-        getChildViews(): any[];
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        getContext(): any;
+		$getSize(): any[];
 
-        getFirstId(): string | number;
+		$getValue(): string;
 
-        getFormView(): webix.ui.baseview;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        getHead(): any;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        getIdByIndex(index: number): string | number;
+		$renderLabel(config: any, id: string | number): string;
 
-        getIndexById(id: string | number): number;
+		$scope: any;
 
-        getItem(id: string | number): any;
+		$setSize(x: number, y: number): boolean;
 
-        getItemNode(id: string | number): HTMLElement;
+		$setValue(value: string): void;
 
-        getLastId(): string | number;
+		$skin: WebixCallback;
 
-        getMenu(id: string | number): any;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        getMenuItem(id: string | number): any;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		$tooltipOut(): void;
 
-        getNode(): any;
+		$view: HTMLElement;
+		$width: number;
+		config: comboConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        getPage(): number;
+	interface contextConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		left?: number;
+		master?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		move?: boolean;
+		on?: EventHash;
+		padding?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		relative?: string;
+		resize?: boolean;
+		toFront?: boolean;
+		top?: number;
+		width?: number;
+		zIndex?: number;
+	}
 
-        getPager(): any;
+	type contextEventName =
+		'onAfterScroll'
+		| 'onBeforeShow'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        getParentView(): any;
+	export class context implements webix.ui.baseview {
+		adjust(): void;
 
-        getPrevId(id: string | number, step: number): string | number;
+		attachEvent(type: contextEventName, functor: WebixCallback, id?: string): string | number;
 
-        getScrollState(): any;
+		attachTo(view: any): void;
 
-        getSelectedId(as_array: boolean): string | any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getSelectedItem(as_array: boolean): any;
+		blockEvent(): void;
 
-        getSubMenu(id: string | number): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        getTopMenu(): any;
+		define(property: string, value: any): void;
 
-        getTopParentView(): webix.ui.baseview;
+		destructor(): void;
 
-        getVisibleCount(): number;
+		detachEvent(id: string): void;
 
-        hasCss(id: string | number, css: string): boolean;
+		disable(): void;
 
-        hasEvent(name: string): boolean;
+		enable(): void;
 
-        hide(): void;
+		getBody(): any;
 
-        hideItem(id: string | number): void;
+		getChildViews(): any[];
 
-        isEnabled(): boolean;
+		getContext(): any;
 
-        isSelected(id: string | number): boolean;
+		getFormView(): webix.ui.baseview;
 
-        isVisible(): boolean;
+		getHead(): any;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		getNode(): any;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		getParentView(): any;
 
-        locate(e: Event): string | number;
+		getTopParentView(): webix.ui.baseview;
 
-        mapEvent(map: any): void;
+		hasEvent(name: string): boolean;
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		hide(): void;
 
-        moveBottom(id: string | number): void;
+		isEnabled(): boolean;
 
-        moveDown(id: string | number, step: number): void;
+		isVisible(): boolean;
 
-        moveSelection(direction: string): void;
+		mapEvent(map: any): void;
 
-        moveTop(id: string | number): void;
+		queryView(config: any, mode?: string): any;
 
-        moveUp(id: string | number, step: number): void;
+		resize(): void;
 
-        parse(data: any, type: string): void;
+		resizeChildren(): void;
 
-        queryView(config: any, mode?: string): any;
+		setContext(context: any): void;
 
-        refresh(id?: string | number): void;
+		setPosition(x: number, y: number): void;
 
-        remove(id: string | number): void;
+		show(node?: HTMLElement, position?: any, point?: string): void;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		unbind(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		unblockEvent(): void;
 
-        resize(): void;
+		show(force: boolean, animation: boolean): void;
 
-        resizeChildren(): void;
+		$getSize(): any[];
 
-        scrollTo(x: number, y: number): void;
+		$height: number;
+		$scope: any;
 
-        select(id: string | any[], preserve: boolean): void;
+		$setSize(x: number, y: number): boolean;
 
-        selectAll(from?: string, to?: string): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: contextConfig;
+		name: string;
+	}
 
-        serialize(): any[];
+	interface contextmenuConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		autoheight?: boolean;
+		autowidth?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		clipboard?: boolean | string;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragscroll?: boolean | string;
+		externalData?: WebixCallback;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		layout?: string;
+		left?: number;
+		master?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		mouseEventDelay?: number;
+		move?: boolean;
+		multiselect?: string | boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		openAction?: string;
+		padding?: any;
+		pager?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		ready?: WebixCallback;
+		relative?: string;
+		removeMissed?: boolean;
+		resize?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean | string;
+		subMenuPos?: string;
+		submenuConfig?: any;
+		template?: string | WebixCallback;
+		templateCopy?: WebixCallback;
+		toFront?: boolean;
+		tooltip?: any;
+		top?: number;
+		type?: any;
+		url?: any;
+		width?: number;
+		xCount?: number;
+		yCount?: number;
+		zIndex?: number;
+	}
 
-        setContext(context: any): void;
+	type contextmenuEventName =
+		'onAfterAdd'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeShow'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMenuItemClick'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPaste'
+		| 'onSelectChange'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        setPage(page: number): void;
+	export class contextmenu implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        setPosition(x: number, y: number): void;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        show(node?: HTMLElement, position?: any, point?: string): void;
+		adjust(): void;
 
-        showItem(id: string | number): void;
+		attachEvent(type: contextmenuEventName, functor: WebixCallback, id?: string): string | number;
 
-        sizeToContent(): void;
+		attachTo(view: any): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		blockEvent(): void;
 
-        unbind(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        unblockEvent(): void;
+		clearAll(soft?: boolean): void;
 
-        unselect(id?: string): void;
+		clearCss(css: string, silent?: boolean): void;
 
-        unselectAll(): void;
+		clearValidation(): void;
 
-        updateItem(id: string | number, data: any): void;
+		copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-        validate(id?: string): boolean;
+		count(): number;
 
-        show(force: boolean, animation: boolean): void;
+		customize(obj: any): void;
 
-        $customPrint: WebixCallback;
+		define(property: string, value: any): void;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		destructor(): void;
 
-        $dragHTML: WebixCallback;
+		detachEvent(id: string): void;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		disable(): void;
 
-        $dragMark(context: any, ev: Event): boolean;
+		disableItem(id: string | number): void;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		enable(): void;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		enableItem(id: string | number): void;
 
-        $dropAllow: WebixCallback;
+		exists(id: number | string): boolean;
 
-        $getSize(): any[];
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        $height: number;
-        $scope: any;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        $setSize(x: number, y: number): boolean;
+		getBody(): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: contextmenuConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		getChildViews(): any[];
 
-    interface counterConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        max?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        min?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        popup?: string;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        step?: number;
-        suggest?: any;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		getContext(): any;
 
-    type counterEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getFirstId(): number | string;
 
-    class counter implements webix.ui.baseview {
-        adjust(): void;
+		getFormView(): webix.ui.baseview;
 
-        attachEvent(type: counterEventName, functor: WebixCallback, id?: string): string | number;
+		getHead(): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getIdByIndex(index: number | string): string | number;
 
-        blockEvent(): void;
+		getIndexById(id: number | string): number;
 
-        blur(): void;
+		getItem(id: number | string): any;
 
-        callEvent(name: string, params: any[]): boolean;
+		getItemNode(id: string | number): HTMLElement;
 
-        define(property: string, value: any): void;
+		getLastId(): number | string;
 
-        destructor(): void;
+		getMenu(id: string | number): any;
 
-        detachEvent(id: string): void;
+		getMenuItem(id: string | number): any;
 
-        disable(): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        enable(): void;
+		getNode(): any;
 
-        focus(): void;
+		getPage(): number;
 
-        getChildViews(): any[];
+		getPager(): any;
 
-        getFormView(): webix.ui.baseview;
+		getParentView(): any;
 
-        getInputNode(): HTMLElement;
+		getPrevId(id: number | string, step: number): string | number;
 
-        getNode(): any;
+		getScrollState(): any;
 
-        getParentView(): any;
+		getSelectedId(as_array: boolean): string | any[];
 
-        getTopParentView(): webix.ui.baseview;
+		getSelectedItem(as_array: boolean): any;
 
-        getValue(): number;
+		getSubMenu(id: string | number): any;
 
-        hasEvent(name: string): boolean;
+		getTopMenu(): any;
 
-        hide(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        isEnabled(): boolean;
+		getVisibleCount(): number;
 
-        isVisible(): boolean;
+		hasCss(id: string | number, css: string): boolean;
 
-        mapEvent(map: any): void;
+		hasEvent(name: string): boolean;
 
-        next(step?: number): void;
+		hide(): void;
 
-        prev(step?: number): void;
+		hideItem(id: string | number): void;
 
-        queryView(config: any, mode?: string): any;
+		isEnabled(): boolean;
 
-        refresh(): void;
+		isEnabledItem(): boolean;
 
-        render(id: string | number, data: any, type: string): void;
+		isSelected(id: string | number): boolean;
 
-        resize(): void;
+		isVisible(): boolean;
 
-        setBottomText(text: string): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        setValue(value: number): void;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        shift(value?: number): void;
+		locate(e: Event): string | number;
 
-        show(force?: boolean, animation?: boolean): void;
+		mapEvent(map: any): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        unbind(): void;
+		moveBottom(id: string | number): void;
 
-        unblockEvent(): void;
+		moveDown(id: string | number, step: number): void;
 
-        validate(): boolean;
+		moveSelection(direction: string): void;
 
-        $compareValue: WebixCallback;
+		moveTop(id: string | number): void;
 
-        $getSize(): any[];
+		moveUp(id: string | number, step: number): void;
 
-        $getValue(): string;
+		parse(data: any, type: string): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		queryView(config: any, mode?: string): any;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		refresh(id?: number | string): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		remove(id: string | number | any[]): void;
 
-        $scope: any;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        $setSize(x: number, y: number): boolean;
+		render(id: string | number, data: any, type: string): void;
 
-        $setValue(value: string): void;
+		resize(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: counterConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		resizeChildren(): void;
 
-    interface dashboardConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cellHeight?: number;
-        cellWidth?: number;
-        cells?: any[];
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        factory?: WebixCallback;
-        gravity?: number;
-        gridColumns?: number;
-        gridRows?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        margin?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        responsive?: string;
-        rows?: any[];
-        visibleBatch?: string;
-        width?: number;
-    }
+		scrollTo(x: number, y: number): void;
 
-    type dashboardEventName = 'onBindRequest' | 'onChange' | 'onDestruct';
+		select(id: string | any[], preserve: boolean): void;
 
-    class dashboard implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		selectAll(from?: string, to?: string): void;
 
-        adjust(): void;
+		serialize(all?: boolean): any[];
 
-        attachEvent(type: dashboardEventName, functor: WebixCallback, id?: string): string | number;
+		setContext(context: any): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		setPage(page: number): void;
 
-        blockEvent(): void;
+		setPosition(x: number, y: number): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		show(node?: HTMLElement, position?: any, point?: string): void;
 
-        clearAll(): void;
+		showItem(id: string | number): void;
 
-        define(property: string, value: any): void;
+		sizeToContent(): void;
 
-        destructor(): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        detachEvent(id: string): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        disable(): void;
+		unbind(): void;
 
-        enable(): void;
+		unblockEvent(): void;
 
-        getChildViews(): any[];
+		unselect(id?: string): void;
 
-        getFormView(): webix.ui.baseview;
+		unselectAll(): void;
 
-        getNode(): any;
+		updateItem(id: number | string, data: any): void;
 
-        getParentView(): any;
+		validate(id?: string): boolean;
 
-        getTopParentView(): webix.ui.baseview;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        hasEvent(name: string): boolean;
+		show(force: boolean, animation: boolean): void;
 
-        hide(): void;
+		$customPrint: WebixCallback;
 
-        index(obj: any): number;
+		$drag(source: HTMLElement, ev: Event): string;
 
-        isEnabled(): boolean;
+		$dragHTML: WebixCallback;
 
-        isVisible(): boolean;
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-        mapEvent(map: any): void;
+		$dragMark(context: any, ev: Event): boolean;
 
-        moveView(id: string | number, view: any): void;
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-        queryView(config: any, mode?: string): any;
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        reconstruct(): void;
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
 
-        removeView(id: any): void;
+		$getSize(): any[];
 
-        resize(): void;
+		$height: number;
+		$scope: any;
 
-        resizeChildren(): void;
+		$setSize(x: number, y: number): boolean;
 
-        restore(state: any, factory?: WebixCallback): void;
+		$skin: WebixCallback;
 
-        serialize(serializer?: WebixCallback): any[];
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        show(force?: boolean, animation?: boolean): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        showBatch(name: string, mode?: boolean): void;
+		$tooltipOut(): void;
 
-        unbind(): void;
+		$view: HTMLElement;
+		$width: number;
+		config: contextmenuConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        unblockEvent(): void;
+	interface counterConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		max?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		min?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		popup?: string;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		step?: number;
+		suggest?: any;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        $dragCreate(source: HTMLElement, event: Event): HTMLElement;
+	type counterEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        $dragDestroy(target: HTMLElement, html: HTMLElement, e: Event): void;
+	export class counter implements webix.ui.baseview {
+		adjust(): void;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		attachEvent(type: counterEventName, functor: WebixCallback, id?: string): string | number;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $dragPos: WebixCallback;
+		blockEvent(): void;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		blur(): void;
 
-        $getSize(): any[];
+		callEvent(name: string, params: any[]): boolean;
 
-        $height: number;
+		define(property: string, value: any): void;
 
-        $setSize(x: number, y: number): boolean;
+		destructor(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: dashboardConfig;
-        name: string;
-    }
+		detachEvent(id: string): void;
 
-    interface datalayoutConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        isolate?: boolean;
-        margin?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        responsive?: string;
-        rows?: any[];
-        save?: string;
-        scheme?: any;
-        type?: string;
-        url?: any;
-        visibleBatch?: string;
-        width?: number;
-    }
+		disable(): void;
 
-    type datalayoutEventName =
-        'onAfterAdd'
-        | 'onAfterDelete'
-        | 'onAfterLoad'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeDelete'
-        | 'onBeforeLoad'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onLoadError';
+		enable(): void;
 
-    class datalayout implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		focus(): void;
 
-        addView(view: any, index?: number): string | number;
+		getChildViews(): any[];
 
-        adjust(): void;
+		getFormView(): webix.ui.baseview;
 
-        attachEvent(type: datalayoutEventName, functor: WebixCallback, id?: string): string | number;
+		getInputNode(): HTMLElement;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getNode(): any;
 
-        blockEvent(): void;
+		getParentView(): any;
 
-        callEvent(name: string, params: any[]): boolean;
+		getTopParentView(): webix.ui.baseview;
 
-        clearAll(soft?: boolean): void;
+		getValue(): number;
 
-        count(): number;
+		hasEvent(name: string): boolean;
 
-        define(property: string, value: any): void;
+		hide(): void;
 
-        destructor(): void;
+		isEnabled(): boolean;
 
-        detachEvent(id: string): void;
+		isVisible(): boolean;
 
-        disable(): void;
+		mapEvent(map: any): void;
 
-        enable(): void;
+		next(step?: number): void;
 
-        exists(id: string | number): boolean;
+		prev(step?: number): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		queryView(config: any, mode?: string): any;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		refresh(): void;
 
-        getChildViews(): any[];
+		render(id: string | number, data: any, type: string): void;
 
-        getFirstId(): string | number;
+		resize(): void;
 
-        getFormView(): webix.ui.baseview;
+		setBottomText(text: string): void;
 
-        getIdByIndex(index: number): string | number;
+		setValue(value: number): void;
 
-        getIndexById(id: string | number): number;
+		shift(value?: number): void;
 
-        getItem(id: string | number): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getLastId(): string | number;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		unbind(): void;
 
-        getNode(): any;
+		unblockEvent(): void;
 
-        getParentView(): any;
+		validate(): boolean;
 
-        getPrevId(id: string | number, step: number): string | number;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        getTopParentView(): webix.ui.baseview;
+		$getSize(): any[];
 
-        getValue(): any[];
+		$getValue(): string;
 
-        hasEvent(name: string): boolean;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        hide(): void;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        index(obj: any): number;
+		$renderLabel(config: any, id: string | number): string;
 
-        isEnabled(): boolean;
+		$scope: any;
 
-        isVisible(): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		$setValue(value: string): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		$skin: WebixCallback;
 
-        mapEvent(map: any): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        parse(data: any, type: string): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        queryView(config: any, mode?: string): any;
+		$tooltipOut(): void;
 
-        reconstruct(): void;
+		$view: HTMLElement;
+		$width: number;
+		config: counterConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        refresh(id?: string | number): void;
+	interface dashboardConfig {
+		view?: string;
+		animate?: any;
+		autoplace?: boolean;
+		borderless?: boolean;
+		cellHeight?: number;
+		cellWidth?: number;
+		cells?: any[];
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		factory?: WebixCallback;
+		gravity?: number;
+		gridColumns?: number;
+		gridRows?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		margin?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: number;
+		paddingX?: number;
+		paddingY?: number;
+		responsive?: string;
+		rows?: any[];
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        remove(id: string | number): void;
+	type dashboardEventName =
+		'onAfterDrop'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBindRequest'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onViewShow';
 
-        removeView(id: any): void;
+	export class dashboard implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        render(id: string | number, obj: any, mode: string): void;
+		adjust(): void;
 
-        resize(): void;
+		attachEvent(type: dashboardEventName, functor: WebixCallback, id?: string): string | number;
 
-        resizeChildren(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        setValue(values: any[]): void;
+		blockEvent(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        showBatch(name: string, mode?: boolean): void;
+		clearAll(): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		define(property: string, value: any): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		destructor(): void;
 
-        unbind(): void;
+		detachEvent(id: string): void;
 
-        unblockEvent(): void;
+		disable(): void;
 
-        updateItem(id: string | number, data: any): void;
+		enable(): void;
 
-        $getSize(): any[];
+		getChildViews(): any[];
 
-        $height: number;
+		getFormView(): webix.ui.baseview;
 
-        $setSize(x: number, y: number): boolean;
+		getNode(): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: datalayoutConfig;
-        data: DataStore;
-        name: string;
-        waitData: Promise<any>;
-    }
+		getParentView(): any;
 
-    interface datasuggestConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        disabled?: boolean;
-        filter?: WebixCallback;
-        fitMaster?: boolean;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        input?: HTMLElement | string;
-        keyPressTimeout?: number;
-        left?: number;
-        master?: webix.ui.baseview;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        move?: boolean;
-        on?: EventHash;
-        padding?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        relative?: string;
-        resize?: boolean;
-        template?: string | WebixTemplate;
-        textValue?: string;
-        toFront?: boolean;
-        top?: number;
-        type?: string;
-        url?: string;
-        width?: number;
-        zIndex?: number;
-    }
+		getTopParentView(): webix.ui.baseview;
 
-    type datasuggestEventName =
-        'onAfterScroll'
-        | 'onBeforeShow'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValueSuggest'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		hasEvent(name: string): boolean;
 
-    class datasuggest implements webix.ui.baseview {
-        adjust(): void;
+		hide(): void;
 
-        attachEvent(type: datasuggestEventName, functor: WebixCallback, id?: string): string | number;
+		index(obj: any): number;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		isEnabled(): boolean;
 
-        blockEvent(): void;
+		isVisible(): boolean;
 
-        callEvent(name: string, params: any[]): boolean;
+		mapEvent(map: any): void;
 
-        close(): void;
+		moveView(id: string | number, view: any): void;
 
-        define(property: string, value: any): void;
+		queryView(config: any, mode?: string): any;
 
-        destructor(): void;
+		reconstruct(): void;
 
-        detachEvent(id: string): void;
+		removeView(id: any): void;
 
-        disable(): void;
+		resize(): void;
 
-        enable(): void;
+		resizeChildren(): void;
 
-        getBody(): any;
+		restore(state: any, factory?: WebixCallback): void;
 
-        getChildViews(): any[];
+		serialize(serializer?: WebixCallback): any[];
 
-        getFormView(): webix.ui.baseview;
+		show(force?: boolean, animation?: boolean): void;
 
-        getHead(): any;
+		showBatch(name: string, mode?: boolean): void;
 
-        getItemId(text: string): string | number;
+		unbind(): void;
 
-        getItemText(id: string | number): string;
+		unblockEvent(): void;
 
-        getList(): webix.ui.baseview;
+		$dragCreate(source: HTMLElement, event: Event): HTMLElement;
 
-        getMasterValue(): any;
+		$dragDestroy(target: HTMLElement, html: HTMLElement, e: Event): void;
 
-        getNode(): any;
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-        getParentView(): any;
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-        getSuggestion(): string;
+		$dragPos: WebixCallback;
 
-        getTopParentView(): webix.ui.baseview;
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        getValue(): string | number;
+		$getSize(): any[];
 
-        hasEvent(name: string): boolean;
+		$height: number;
 
-        hide(): void;
+		$setSize(x: number, y: number): boolean;
 
-        isEnabled(): boolean;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: dashboardConfig;
+		name: string;
+	}
 
-        isVisible(): boolean;
+	interface datalayoutConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		isolate?: boolean;
+		margin?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		responsive?: string;
+		rows?: any[];
+		save?: any;
+		scheme?: any;
+		type?: string;
+		url?: any;
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        linkInput(input: HTMLElement): void;
+	type datalayoutEventName =
+		'onAfterAdd'
+		| 'onAfterDelete'
+		| 'onAfterLoad'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeDelete'
+		| 'onBeforeLoad'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onLoadError'
+		| 'onViewShow';
 
-        mapEvent(map: any): void;
+	export class datalayout implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        queryView(config: any, mode?: string): any;
+		addView(view: any, index?: number): string | number;
 
-        resize(): void;
+		adjust(): void;
 
-        resizeChildren(): void;
+		attachEvent(type: datalayoutEventName, functor: WebixCallback, id?: string): string | number;
 
-        setMasterValue(value: any): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        setPosition(x: number, y: number): void;
+		blockEvent(): void;
 
-        setValue(value: string | number): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        show(node: HTMLElement, position?: any, point?: string): void;
+		clearAll(soft?: boolean): void;
 
-        unbind(): void;
+		count(): number;
 
-        unblockEvent(): void;
+		define(property: string, value: any): void;
 
-        show(force: boolean, animation: boolean): void;
+		destructor(): void;
 
-        $enterKey: WebixCallback;
+		detachEvent(id: string): void;
 
-        $getSize(): any[];
+		disable(): void;
 
-        $height: number;
-        $scope: any;
+		enable(): void;
 
-        $setSize(x: number, y: number): boolean;
+		exists(id: number | string): boolean;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: datasuggestConfig;
-        name: string;
-    }
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-    interface datatableConfig {
-        view?: string;
-        animate?: any;
-        areaselect?: boolean;
-        autoConfig?: boolean;
-        autoheight?: boolean;
-        autowidth?: boolean;
-        blockselect?: boolean | string;
-        borderless?: boolean;
-        checkboxRefresh?: boolean;
-        clipboard?: boolean | string;
-        columnWidth?: number;
-        columns?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datafetch?: number;
-        datathrottle?: number;
-        datatype?: string;
-        delimiter?: any;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragColumn?: boolean | string;
-        dragscroll?: boolean | string;
-        editMath?: boolean;
-        editValue?: string;
-        editable?: boolean;
-        editaction?: string;
-        externalData?: WebixCallback;
-        filterMode?: any;
-        fixedRowHeight?: boolean;
-        footer?: boolean;
-        form?: string;
-        gravity?: number;
-        header?: boolean;
-        headerRowHeight?: number;
-        headermenu?: any;
-        height?: number;
-        hidden?: boolean;
-        hover?: string;
-        id?: string | number;
-        leftSplit?: number;
-        liveValidation?: boolean;
-        loadahead?: number;
-        map?: any;
-        math?: boolean;
-        maxHeight?: number;
-        maxWidth?: number;
-        minColumnHeight?: number;
-        minColumnWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        pager?: any;
-        prerender?: boolean;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        resizeColumn?: any;
-        resizeRow?: boolean;
-        rightSplit?: number;
-        rowHeight?: number;
-        rowLineHeight?: number;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollAlignY?: boolean;
-        scrollX?: boolean;
-        scrollY?: boolean;
-        select?: boolean | string;
-        spans?: any[];
-        subRowHeight?: string;
-        subrow?: string;
-        subview?: webix.ui.baseview | WebixCallback;
-        templateCopy?: WebixCallback;
-        tooltip?: boolean;
-        topSplit?: number;
-        type?: any;
-        url?: any;
-        width?: number;
-        yCount?: number;
-    }
+		find(criterion: WebixCallback, first?: boolean): any;
 
-    type datatableEventName =
-        'onAfterAdd'
-        | 'onAfterAreaAdd'
-        | 'onAfterAreaRemove'
-        | 'onAfterBlockSelect'
-        | 'onAfterColumnDrop'
-        | 'onAfterColumnDropOrder'
-        | 'onAfterColumnHide'
-        | 'onAfterColumnShow'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterEditStart'
-        | 'onAfterEditStop'
-        | 'onAfterFilter'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onAfterUnSelect'
-        | 'onAreaDrag'
-        | 'onBeforeAdd'
-        | 'onBeforeAreaAdd'
-        | 'onBeforeAreaRemove'
-        | 'onBeforeBlockSelect'
-        | 'onBeforeColumnDrag'
-        | 'onBeforeColumnDrop'
-        | 'onBeforeColumnDropOrder'
-        | 'onBeforeColumnHide'
-        | 'onBeforeColumnShow'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeEditStart'
-        | 'onBeforeEditStop'
-        | 'onBeforeFilter'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBeforeUnSelect'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onCheck'
-        | 'onCollectValues'
-        | 'onColumnResize'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEditorChange'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHeaderClick'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onKeyPress'
-        | 'onLiveEdit'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPaste'
-        | 'onResize'
-        | 'onRowResize'
-        | 'onScrollX'
-        | 'onScrollY'
-        | 'onSelectChange'
-        | 'onStructureLoad'
-        | 'onStructureUpdate'
-        | 'onSubViewClose'
-        | 'onSubViewCreate'
-        | 'onSubViewOpen'
-        | 'onSubViewRender'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		getChildViews(): any[];
 
-    class datatable implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		getFirstId(): number | string;
 
-        addCellCss(id: string, name: string, css: string): void;
+		getFormView(): webix.ui.baseview;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		getIdByIndex(index: number | string): string | number;
 
-        addRowCss(id: string, css: string): void;
+		getIndexById(id: number | string): number;
 
-        addSelectArea(start: any, end: any, preserve: boolean, area_name?: string, css?: string, handle?: boolean): void;
+		getItem(id: number | string): any;
 
-        addSpan(id: any, column: string, width: number, height: number, value?: string, css?: string): void;
+		getLastId(): number | string;
 
-        adjust(): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        adjustColumn(id: string | number, mode?: string): void;
+		getNode(): any;
 
-        adjustRowHeight(columnId?: string, silent?: boolean): void;
+		getParentView(): any;
 
-        attachEvent(type: datatableEventName, functor: WebixCallback, id?: string): string | number;
+		getPrevId(id: number | string, step: number): string | number;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        blockEvent(): void;
+		getValue(): any[];
 
-        callEvent(name: string, params: any[]): boolean;
+		hasEvent(name: string): boolean;
 
-        clearAll(soft?: boolean): void;
+		hide(): void;
 
-        clearCss(css: string, silent?: boolean): void;
+		index(obj: any): number;
 
-        clearSelection(): void;
+		isEnabled(): boolean;
 
-        clearValidation(): void;
+		isVisible(): boolean;
 
-        closeSub(id: string | number): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        collectValues(id: string | number): any[];
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        columnId(index: number): string | number;
+		mapEvent(map: any): void;
 
-        copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+		parse(data: any, type: string): void;
 
-        count(): number;
+		queryView(config: any, mode?: string): any;
 
-        define(property: string, value: any): void;
+		reconstruct(): void;
 
-        destructor(): void;
+		refresh(id?: number | string): void;
 
-        detachEvent(id: string): void;
+		remove(id: string | number | any[]): void;
 
-        disable(): void;
+		removeView(id: any): void;
 
-        eachColumn(handler: WebixCallback, all?: boolean): void;
+		render(id: string | number, obj: any, mode: string): void;
 
-        eachRow(handler: WebixCallback, all?: boolean): void;
+		resize(): void;
 
-        edit(id: any): void;
+		resizeChildren(): void;
 
-        editCancel(): void;
+		setValue(values: any[]): void;
 
-        editCell(row: string | number, col: string | number, preserve?: boolean, show?: boolean): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        editColumn(id: string): void;
+		showBatch(name: string, mode?: boolean): void;
 
-        editNext(): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        editRow(id: string): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        editStop(): void;
+		unbind(): void;
 
-        enable(): void;
+		unblockEvent(): void;
 
-        exists(id: string | number): boolean;
+		updateItem(id: number | string, data: any): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        filterByAll(): void;
+		$getSize(): any[];
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		$height: number;
 
-        focusEditor(id: any): void;
+		$setSize(x: number, y: number): boolean;
 
-        freezeRow(id: number | string, state: boolean): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: datalayoutConfig;
+		data: DataStore;
+		name: string;
+		waitData: Promise<any>;
+	}
 
-        getAllSelectAreas(): any;
+	interface datasuggestConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		disabled?: boolean;
+		filter?: WebixCallback;
+		fitMaster?: boolean;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		input?: HTMLElement | string;
+		keyPressTimeout?: number;
+		left?: number;
+		master?: webix.ui.baseview;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		move?: boolean;
+		on?: EventHash;
+		padding?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		relative?: string;
+		resize?: boolean;
+		template?: string | WebixTemplate;
+		textValue?: string;
+		toFront?: boolean;
+		top?: number;
+		type?: string;
+		url?: string;
+		width?: number;
+		zIndex?: number;
+	}
 
-        getChildViews(): any[];
+	type datasuggestEventName =
+		'onAfterScroll'
+		| 'onBeforeShow'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValueSuggest'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        getColumnConfig(id: string): any;
+	export class datasuggest implements webix.ui.baseview {
+		adjust(): void;
 
-        getColumnIndex(id: string | number): number;
+		attachEvent(type: datasuggestEventName, functor: WebixCallback, id?: string): string | number;
 
-        getCss(rowId: string | number, columnId: string | number): string;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getEditState(): any;
+		blockEvent(): void;
 
-        getEditor(row?: any, column?: string | number): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        getEditorValue(): string;
+		define(property: string, value: any): void;
 
-        getFilter(columnID: string | number): any;
+		destructor(): void;
 
-        getFirstId(): string | number;
+		detachEvent(id: string): void;
 
-        getFooterNode(columnId: string, rowIndex?: number): HTMLElement;
+		disable(): void;
 
-        getFormView(): webix.ui.baseview;
+		enable(): void;
 
-        getHeaderContent(id: string | number): { [key: string]: any; };
+		getBody(): any;
 
-        getHeaderNode(columnId: string, rowIndex?: number): HTMLElement;
+		getChildViews(): any[];
 
-        getIdByIndex(index: number): string | number;
+		getFormView(): webix.ui.baseview;
 
-        getIndexById(id: string | number): number;
+		getHead(): any;
 
-        getItem(id: string | number): any;
+		getItemId(text: string): string | number;
 
-        getItemNode(id: string | number): HTMLElement;
+		getItemText(id: string | number): string;
 
-        getLastId(): string | number;
+		getList(): webix.ui.baseview;
 
-        getNextId(id: string | number, step: number): string | number;
+		getMasterValue(): any;
 
-        getNode(): any;
+		getNode(): any;
 
-        getPage(): number;
+		getParentView(): any;
 
-        getPager(): any;
+		getSuggestion(): string;
 
-        getParentView(): any;
+		getTopParentView(): webix.ui.baseview;
 
-        getPrevId(id: string | number, step: number): string | number;
+		getValue(): string | number;
 
-        getScrollState(): any;
+		hasEvent(name: string): boolean;
 
-        getSelectArea(area_name: string): any;
+		hide(): void;
 
-        getSelectedId(asArray: boolean, asString: boolean): any;
+		isEnabled(): boolean;
 
-        getSelectedItem(as_array?: boolean): any;
+		isVisible(): boolean;
 
-        getSpan(): any[];
+		linkInput(input: HTMLElement): void;
 
-        getSpanNode(id: any): HTMLElement;
+		mapEvent(map: any): void;
 
-        getState(): any;
+		queryView(config: any, mode?: string): any;
 
-        getSubView(id: string | number): any;
+		resize(): void;
 
-        getText(rowid: string | number, colid: string | number): string;
+		resizeChildren(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		setMasterValue(value: any): void;
 
-        getVisibleCount(): number;
+		setPosition(x: number, y: number): void;
 
-        group(config: any, mode: boolean): void;
+		setValue(value: string | number): void;
 
-        hasCss(id: string | number, css: string): boolean;
+		show(node: HTMLElement, position?: any, point?: string): void;
 
-        hasEvent(name: string): boolean;
+		unbind(): void;
 
-        hide(): void;
+		unblockEvent(): void;
 
-        hideColumn(id: string | number, options?: any, silent?: boolean, mode?: boolean): void;
+		show(force: boolean, animation: boolean): void;
 
-        hideOverlay(): void;
+		$enterKey: WebixCallback;
 
-        isColumnVisible(id: string | number): boolean;
+		$getSize(): any[];
 
-        isEnabled(): boolean;
+		$height: number;
+		$scope: any;
 
-        isSelected(id: string | number): void;
+		$setSize(x: number, y: number): boolean;
 
-        isVisible(): boolean;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: datasuggestConfig;
+		name: string;
+	}
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+	interface datatableConfig {
+		view?: string;
+		animate?: any;
+		areaselect?: boolean;
+		autoConfig?: boolean;
+		autoheight?: boolean;
+		autowidth?: boolean;
+		blockselect?: boolean | string;
+		borderless?: boolean;
+		checkboxRefresh?: boolean;
+		clipboard?: boolean | string;
+		columnWidth?: number;
+		columns?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		dataFeed?: string | WebixCallback;
+		datafetch?: number;
+		datathrottle?: number;
+		datatype?: string;
+		delimiter?: any;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragColumn?: boolean | string;
+		dragscroll?: boolean | string;
+		editMath?: boolean;
+		editValue?: string;
+		editable?: boolean;
+		editaction?: string;
+		externalData?: WebixCallback;
+		filterMode?: any;
+		fixedRowHeight?: boolean;
+		footer?: boolean;
+		form?: string;
+		gravity?: number;
+		header?: boolean;
+		headerRowHeight?: number;
+		headermenu?: any;
+		height?: number;
+		hidden?: boolean;
+		hover?: string;
+		id?: string | number;
+		keyPressTimeout?: number;
+		leftSplit?: number;
+		liveValidation?: boolean;
+		loadahead?: number;
+		map?: any;
+		math?: boolean;
+		maxColumnWidth?: number;
+		maxHeight?: number;
+		maxRowHeight?: number;
+		maxWidth?: number;
+		minColumnWidth?: number;
+		minHeight?: number;
+		minRowHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		pager?: any;
+		prerender?: boolean;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		resizeColumn?: any;
+		resizeRow?: any;
+		rightSplit?: number;
+		rowHeight?: number;
+		rowLineHeight?: number;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollAlignY?: boolean;
+		scrollX?: boolean;
+		scrollY?: boolean;
+		select?: boolean | string;
+		spans?: any[];
+		subRowHeight?: string;
+		subrow?: string;
+		subview?: webix.ui.baseview | WebixCallback;
+		templateCopy?: WebixCallback;
+		tooltip?: any;
+		topSplit?: number;
+		type?: any;
+		undo?: boolean;
+		url?: any;
+		width?: number;
+		yCount?: number;
+	}
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+	type datatableEventName =
+		'onAfterAdd'
+		| 'onAfterAreaAdd'
+		| 'onAfterAreaRemove'
+		| 'onAfterBlockSelect'
+		| 'onAfterColumnDrop'
+		| 'onAfterColumnDropOrder'
+		| 'onAfterColumnHide'
+		| 'onAfterColumnShow'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterEditStart'
+		| 'onAfterEditStop'
+		| 'onAfterFilter'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onAfterUnSelect'
+		| 'onAreaDrag'
+		| 'onBeforeAdd'
+		| 'onBeforeAreaAdd'
+		| 'onBeforeAreaRemove'
+		| 'onBeforeBlockSelect'
+		| 'onBeforeColumnDrag'
+		| 'onBeforeColumnDrop'
+		| 'onBeforeColumnDropOrder'
+		| 'onBeforeColumnHide'
+		| 'onBeforeColumnShow'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeEditStart'
+		| 'onBeforeEditStop'
+		| 'onBeforeFilter'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBeforeUnSelect'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onCheck'
+		| 'onCollectValues'
+		| 'onColumnGroupCollapse'
+		| 'onColumnResize'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEditorChange'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHeaderClick'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onKeyPress'
+		| 'onLiveEdit'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPaste'
+		| 'onResize'
+		| 'onRowResize'
+		| 'onScrollX'
+		| 'onScrollY'
+		| 'onSelectChange'
+		| 'onStructureLoad'
+		| 'onStructureUpdate'
+		| 'onSubViewClose'
+		| 'onSubViewCreate'
+		| 'onSubViewOpen'
+		| 'onSubViewRender'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        locate(node: HTMLElement | Event): any;
+	export class datatable implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        mapCells(startrow: number, startcol: string, numrows: number, numcols: number, callback: WebixCallback): void;
+		addCellCss(id: string, name: string, css: string): void;
 
-        mapEvent(map: any): void;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        mapSelection(callback: WebixCallback): void;
+		addRowCss(id: string, css: string): void;
 
-        markSorting(column_id: string, direction: string): void;
+		addSelectArea(start: any, end: any, preserve: boolean, area_name?: string, css?: string, handle?: boolean): void;
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		addSpan(id: any, column: string, width: number, height: number, value?: string, css?: string): void;
 
-        moveBottom(id: string | number): void;
+		adjust(): void;
 
-        moveColumn(id: string, index: number): void;
+		adjustColumn(id: string | number, mode?: string): void;
 
-        moveDown(id: string | number, step: number): void;
+		adjustRowHeight(columnId?: string, silent?: boolean): void;
 
-        moveSelection(direction: string): void;
+		attachEvent(type: datatableEventName, functor: WebixCallback, id?: string): string | number;
 
-        moveTop(id: string | number): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        moveUp(id: string | number, step: number): void;
+		blockEvent(): void;
 
-        openSub(id: string | number): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        parse(data: any, type: string): void;
+		clearAll(soft?: boolean): void;
 
-        queryView(config: any, mode?: string): any;
+		clearCss(css: string, silent?: boolean): void;
 
-        refresh(id?: string | number): void;
+		clearSelection(): void;
 
-        refreshColumns(config?: any[], reset?: boolean): void;
+		clearValidation(): void;
 
-        refreshFilter(id: string | number): void;
+		closeSub(id: string | number): void;
 
-        refreshSelectArea(): void;
+		collectValues(id: string | number, mode: any): any[];
 
-        registerFilter(object: any, config: any, controller: any): void;
+		columnId(index: number): string | number;
 
-        remove(id: string | number): void;
+		copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-        removeCellCss(id: string, name: string, css_name: string): void;
+		count(): number;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		define(property: string, value: any): void;
 
-        removeRowCss(id: string, css_name: string): void;
+		destructor(): void;
 
-        removeSelectArea(area_name: string): void;
+		detachEvent(id: string): void;
 
-        removeSpan(id: string | number, column: string): void;
+		disable(): void;
 
-        render(id: string | number, data: any, operation: string): void;
+		eachColumn(handler: WebixCallback, all?: boolean): void;
 
-        resize(): void;
+		eachRow(handler: WebixCallback, all?: boolean): void;
 
-        resizeSubView(id: string | number): void;
+		edit(id: any): void;
 
-        scrollTo(x: number, y: number): void;
+		editCancel(): void;
 
-        select(row_id: string | number, preserve: boolean): void;
+		editCell(row: string | number, col: string | number, preserve?: boolean, show?: boolean): void;
 
-        selectAll(): void;
+		editColumn(id: string): void;
 
-        selectRange(row_id: string | number, end_row_id: string | number, preserve?: boolean): void;
+		editNext(): void;
 
-        serialize(): any[];
+		editRow(id: string): void;
 
-        setColumnWidth(id: string | number, width: number): void;
+		editStop(): void;
 
-        setPage(page: number): void;
+		enable(): void;
 
-        setRowHeight(id: string | number, height: number): void;
+		exists(id: number | string): boolean;
 
-        setState(state: any): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		filterByAll(): void;
 
-        showCell(row: string, column: string): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        showColumn(id: string | number): void;
+		focusEditor(id: any): void;
 
-        showColumnBatch(batch: string | number, preserve: boolean): void;
+		freezeRow(id: number | string, state: boolean): void;
 
-        showItem(id: string | number): void;
+		getAllSelectAreas(): any;
 
-        showItemByIndex(index: number): void;
+		getChildViews(): any[];
 
-        showOverlay(message: string): void;
+		getColumnConfig(id: string): any;
 
-        sort(by: string, dir?: string, as?: string): void;
+		getColumnIndex(id: string | number): number;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		getCss(rowId: string | number, columnId: string | number): string;
 
-        unbind(): void;
+		getEditState(): any;
 
-        unblockEvent(): void;
+		getEditor(row?: any, column?: string | number): any;
 
-        ungroup(mode: boolean): void;
+		getEditorValue(): string;
 
-        unselect(row_id: string | number): void;
+		getFilter(columnID: string | number): any;
 
-        unselectAll(): void;
+		getFirstId(): number | string;
 
-        updateItem(id: string | number, data: any): void;
+		getFooterNode(columnId: string, rowIndex?: number): HTMLElement;
 
-        validate(id?: string): boolean;
+		getFormView(): webix.ui.baseview;
 
-        validateEditor(id?: string | number): boolean;
+		getHeaderContent(id: string | number): { [key: string]: any; };
 
-        $customPrint: WebixCallback;
+		getHeaderNode(columnId: string, rowIndex?: number): HTMLElement;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		getIdByIndex(index: number | string): string | number;
 
-        $dragHTML: WebixCallback;
+		getIndexById(id: number | string): number;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		getItem(id: number | string): any;
 
-        $dragMark(context: any, ev: Event): boolean;
+		getItemNode(id: string | number): HTMLElement;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		getLastId(): number | string;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        $dropAllow: WebixCallback;
+		getNode(): any;
 
-        $getSize(): any[];
+		getPage(): number;
 
-        $height: number;
-        $scope: any;
+		getPager(): any;
 
-        $setSize(x: number, y: number): boolean;
+		getParentView(): any;
 
-        $skin: WebixCallback;
-        $touch: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: datatableConfig;
-        data: DataStore;
-        headerContent: any;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        waitData: Promise<any>;
-    }
+		getPrevId(id: number | string, step: number): string | number;
 
-    interface dataviewConfig {
-        view?: string;
-        animate?: any;
-        autoheight?: boolean;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datafetch?: number;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragscroll?: boolean | string;
-        externalData?: WebixCallback;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        loadahead?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: string | boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        pager?: any;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean | string;
-        template?: string | WebixCallback;
-        tooltip?: string | boolean;
-        type?: any;
-        url?: any;
-        width?: number;
-        xCount?: number;
-        yCount?: number;
-    }
+		getScrollState(): any;
 
-    type dataviewEventName =
-        'onAfterAdd'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onSelectChange'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		getSelectArea(area_name: string): any;
 
-    class dataview implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		getSelectedId(asArray: boolean, asString: boolean): any;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		getSelectedItem(as_array?: boolean): any;
 
-        adjust(): void;
+		getSpan(): any[];
 
-        attachEvent(type: dataviewEventName, functor: WebixCallback, id?: string): string | number;
+		getSpanNode(id: any): HTMLElement;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getState(): any;
 
-        blockEvent(): void;
+		getSubView(id: string | number): any;
 
-        callEvent(name: string, params: any[]): boolean;
+		getText(rowid: string | number, colid: string | number): string;
 
-        clearAll(soft?: boolean): void;
+		getTopParentView(): webix.ui.baseview;
 
-        clearCss(css: string, silent?: boolean): void;
+		getVisibleCount(): number;
 
-        clearValidation(): void;
+		group(config: any, target?: string | number): void;
 
-        copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+		hasCss(id: string | number, css: string): boolean;
 
-        count(): number;
+		hasEvent(name: string): boolean;
 
-        customize(obj: any): void;
+		hide(): void;
 
-        define(property: string, value: any): void;
+		hideColumn(id: string | number, options?: any, silent?: boolean, mode?: boolean): void;
 
-        destructor(): void;
+		hideOverlay(): void;
 
-        detachEvent(id: string): void;
+		ignoreUndo(functor: WebixCallback): void;
 
-        disable(): void;
+		isColumnVisible(id: string | number): boolean;
 
-        enable(): void;
+		isEnabled(): boolean;
 
-        exists(id: string | number): boolean;
+		isSelected(id: string | number): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		isVisible(): boolean;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        getChildViews(): any[];
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        getFirstId(): string | number;
+		locate(node: HTMLElement | Event): any;
 
-        getFormView(): webix.ui.baseview;
+		mapCells(startrow: number, startcol: string, numrows: number, numcols: number, callback: WebixCallback): void;
 
-        getIdByIndex(index: number): string | number;
+		mapEvent(map: any): void;
 
-        getIndexById(id: string | number): number;
+		mapSelection(callback: WebixCallback): void;
 
-        getItem(id: string | number): any;
+		markSorting(column_id: string, direction: string): void;
 
-        getItemNode(id: string | number): HTMLElement;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        getLastId(): string | number;
+		moveBottom(id: string | number): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		moveColumn(id: string, index: number): void;
 
-        getNode(): any;
+		moveDown(id: string | number, step: number): void;
 
-        getPage(): number;
+		moveSelection(direction: string): void;
 
-        getPager(): any;
+		moveTop(id: string | number): void;
 
-        getParentView(): any;
+		moveUp(id: string | number, step: number): void;
 
-        getPrevId(id: string | number, step: number): string | number;
+		openSub(id: string | number): void;
 
-        getScrollState(): any;
+		parse(data: any, type: string): void;
 
-        getSelectedId(as_array: boolean): string | any[];
+		queryView(config: any, mode?: string): any;
 
-        getSelectedItem(as_array: boolean): any;
+		refresh(id?: number | string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		refreshColumns(config?: any[], reset?: boolean): void;
 
-        hasCss(id: string | number, css: string): boolean;
+		refreshFilter(id: string | number): void;
 
-        hasEvent(name: string): boolean;
+		refreshSelectArea(): void;
 
-        hide(): void;
+		registerFilter(object: any, config: any, controller: any): void;
 
-        isEnabled(): boolean;
+		remove(id: string | number | any[]): void;
 
-        isSelected(id: string | number): boolean;
+		removeCellCss(id: string, name: string, css_name: string): void;
 
-        isVisible(): boolean;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		removeRowCss(id: string, css_name: string): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		removeSelectArea(area_name: string): void;
 
-        locate(e: Event): string | number;
+		removeSpan(id: string | number, column: string): void;
 
-        mapEvent(map: any): void;
+		removeUndo(id: string): void;
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		render(id: string | number, data: any, operation: string): void;
 
-        moveBottom(id: string | number): void;
+		resize(): void;
 
-        moveDown(id: string | number, step: number): void;
+		resizeSubView(id: string | number): void;
 
-        moveSelection(direction: string): void;
+		scrollTo(x: number, y: number): void;
 
-        moveTop(id: string | number): void;
+		select(row_id: string | number, preserve: boolean): void;
 
-        moveUp(id: string | number, step: number): void;
+		selectAll(): void;
 
-        parse(data: any, type: string): void;
+		selectRange(row_id: string | number, end_row_id: string | number, preserve?: boolean): void;
 
-        queryView(config: any, mode?: string): any;
+		serialize(all?: boolean): any[];
 
-        refresh(id?: string | number): void;
+		setColumnWidth(id: string | number, width: number): void;
 
-        remove(id: string | number): void;
+		setPage(page: number): void;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		setRowHeight(id: string | number, height: number): void;
 
-        render(id: string | number, data: any, type: string): void;
+		setState(state: any): void;
 
-        resize(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        scrollTo(x: number, y: number): void;
+		showCell(row: string, column: string): void;
 
-        select(id: string | any[], preserve: boolean): void;
+		showColumn(id: string | number): void;
 
-        selectAll(from?: string, to?: string): void;
+		showColumnBatch(batch: string | number, preserve: boolean): void;
 
-        serialize(): any[];
+		showItem(id: string | number): void;
 
-        setPage(page: number): void;
+		showItemByIndex(index: number): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		showOverlay(message: string): void;
 
-        showItem(id: string | number): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		unbind(): void;
 
-        unbind(): void;
+		unblockEvent(): void;
 
-        unblockEvent(): void;
+		undo(id: string): void;
 
-        unselect(id?: string): void;
+		ungroup(mode: boolean): void;
 
-        unselectAll(): void;
+		unselect(row_id: string | number): void;
 
-        updateItem(id: string | number, data: any): void;
+		unselectAll(): void;
 
-        validate(id?: string): boolean;
+		updateItem(id: number | string, data: any): void;
 
-        $customPrint: WebixCallback;
+		validate(id?: string): boolean;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		validateEditor(id?: string | number): boolean;
 
-        $dragHTML: WebixCallback;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		$customPrint: WebixCallback;
 
-        $dragMark(context: any, ev: Event): boolean;
+		$drag(source: HTMLElement, ev: Event): string;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		$dragHTML: WebixCallback;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-        $dropAllow: WebixCallback;
+		$dragMark(context: any, ev: Event): boolean;
 
-        $getSize(): any[];
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-        $height: number;
-        $scope: any;
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        $setSize(x: number, y: number): boolean;
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: dataviewConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		$getSize(): any[];
 
-    interface daterangeConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        button?: boolean;
-        calendarCount?: number;
-        calendarHeight?: number;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        icons?: any;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        timepicker?: boolean;
-        type?: string;
-        value?: any;
-        width?: number;
-    }
+		$height: number;
+		$scope: any;
 
-    type daterangeEventName =
-        'onAfterDateSelect'
-        | 'onBeforeDateSelect'
-        | 'onBindRequest'
-        | 'onChange'
-        | 'onDateClear'
-        | 'onDestruct'
-        | 'onTodaySet';
+		$setSize(x: number, y: number): boolean;
 
-    class daterange implements webix.ui.baseview {
-        addToRange(dates: string | Date): void;
+		$skin: WebixCallback;
 
-        adjust(): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        attachEvent(type: daterangeEventName, functor: WebixCallback, id?: string): string | number;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$tooltipOut(): void;
 
-        blockEvent(): void;
+		$touch: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: datatableConfig;
+		data: DataStore;
+		headerContent: any;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		waitData: Promise<any>;
+	}
 
-        callEvent(name: string, params: any[]): boolean;
+	interface dataviewConfig {
+		view?: string;
+		animate?: any;
+		autoheight?: boolean;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datafetch?: number;
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragscroll?: boolean | string;
+		externalData?: WebixCallback;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		loadahead?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: string | boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		pager?: any;
+		prerender?: boolean;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean | string;
+		sizeToContent?: boolean;
+		template?: string | WebixCallback;
+		tooltip?: any;
+		type?: any;
+		url?: any;
+		width?: number;
+		xCount?: number;
+		yCount?: number;
+	}
 
-        define(property: string, value: any): void;
+	type dataviewEventName =
+		'onAfterAdd'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onSelectChange'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        destructor(): void;
+	export class dataview implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        detachEvent(id: string): void;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        disable(): void;
+		adjust(): void;
 
-        enable(): void;
+		attachEvent(type: dataviewEventName, functor: WebixCallback, id?: string): string | number;
 
-        getChildViews(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getFormView(): webix.ui.baseview;
+		blockEvent(): void;
 
-        getNode(): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        getParentView(): any;
+		clearAll(soft?: boolean): void;
 
-        getTopParentView(): webix.ui.baseview;
+		clearCss(css: string, silent?: boolean): void;
 
-        getValue(): any;
+		clearValidation(): void;
 
-        hasEvent(name: string): boolean;
+		copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-        hide(): void;
+		count(): number;
 
-        isEnabled(): boolean;
+		customize(obj: any): void;
 
-        isVisible(): boolean;
+		define(property: string, value: any): void;
 
-        mapEvent(map: any): void;
+		destructor(): void;
 
-        queryView(config: any, mode?: string): any;
+		detachEvent(id: string): void;
 
-        refresh(): void;
+		disable(): void;
 
-        resize(): void;
+		enable(): void;
 
-        setValue(range: any): void;
+		exists(id: number | string): boolean;
 
-        show(force?: boolean, animation?: boolean): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        unbind(): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        unblockEvent(): void;
+		getChildViews(): any[];
 
-        $getSize(): any[];
+		getFirstId(): number | string;
 
-        $height: number;
+		getFormView(): webix.ui.baseview;
 
-        $setSize(x: number, y: number): boolean;
+		getIdByIndex(index: number | string): string | number;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: daterangeConfig;
-        name: string;
-    }
+		getIndexById(id: number | string): number;
 
-    interface daterangepickerConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        editable?: boolean;
-        format?: string;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        icons?: boolean;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        pattern?: any;
-        placeholder?: string;
-        popup?: string;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        stringResult?: boolean;
-        suggest?: any;
-        timeIcon?: string;
-        timepicker?: boolean;
-        tooltip?: string;
-        type?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		getItem(id: number | string): any;
 
-    type daterangepickerEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getItemNode(id: string | number): HTMLElement;
 
-    class daterangepicker implements webix.ui.baseview {
-        adjust(): void;
+		getLastId(): number | string;
 
-        attachEvent(type: daterangepickerEventName, functor: WebixCallback, id?: string): string | number;
+		getNextId(id: number | string, step: number): string | number;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getNode(): any;
 
-        blockEvent(): void;
+		getPage(): number;
 
-        blur(): void;
+		getPager(): any;
 
-        callEvent(name: string, params: any[]): boolean;
+		getParentView(): any;
 
-        define(property: string, value: any): void;
+		getPrevId(id: number | string, step: number): string | number;
 
-        destructor(): void;
+		getScrollState(): any;
 
-        detachEvent(id: string): void;
+		getSelectedId(as_array: boolean): string | any[];
 
-        disable(): void;
+		getSelectedItem(as_array: boolean): any;
 
-        enable(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        focus(): void;
+		hasCss(id: string | number, css: string): boolean;
 
-        getChildViews(): any[];
+		hasEvent(name: string): boolean;
 
-        getFormView(): webix.ui.baseview;
+		hide(): void;
 
-        getInputNode(): HTMLElement;
+		isEnabled(): boolean;
 
-        getNode(): any;
+		isSelected(id: string | number): boolean;
 
-        getParentView(): any;
+		isVisible(): boolean;
 
-        getPopup(): webix.ui.baseview;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        getText(): string;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        getTopParentView(): webix.ui.baseview;
+		locate(e: Event): string | number;
 
-        getValue(): string;
+		mapEvent(map: any): void;
 
-        hasEvent(name: string): boolean;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        hide(): void;
+		moveBottom(id: string | number): void;
 
-        isEnabled(): boolean;
+		moveDown(id: string | number, step: number): void;
 
-        isVisible(): boolean;
+		moveSelection(direction: string): void;
 
-        mapEvent(map: any): void;
+		moveTop(id: string | number): void;
 
-        queryView(config: any, mode?: string): any;
+		moveUp(id: string | number, step: number): void;
 
-        refresh(): void;
+		parse(data: any, type: string): void;
 
-        render(id: string | number, data: any, type: string): void;
+		queryView(config: any, mode?: string): any;
 
-        resize(): void;
+		refresh(id?: number | string): void;
 
-        setBottomText(text: string): void;
+		remove(id: string | number | any[]): void;
 
-        setValue(value: string): void;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		render(id: string | number, data: any, type: string): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		resize(): void;
 
-        unbind(): void;
+		scrollTo(x: number, y: number): void;
 
-        unblockEvent(): void;
+		select(id: string | any[], preserve: boolean): void;
 
-        validate(): boolean;
+		selectAll(from?: string, to?: string): void;
 
-        $compareValue: WebixCallback;
-        $cssName: string;
+		serialize(all?: boolean): any[];
 
-        $getSize(): any[];
+		setPage(page: number): void;
 
-        $getValue(): string;
+		show(force?: boolean, animation?: boolean): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		showItem(id: string | number): void;
 
-        $renderInput(config: any): HTMLElement;
+		sort(by: string, dir?: string, as?: string): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        $scope: any;
+		unbind(): void;
 
-        $setSize(x: number, y: number): boolean;
+		unblockEvent(): void;
 
-        $setValue(value: string): void;
+		unselect(id?: string): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: daterangepickerConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		unselectAll(): void;
 
-    interface daterangesuggestConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        disabled?: boolean;
-        filter?: WebixCallback;
-        fitMaster?: boolean;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        input?: HTMLElement | string;
-        keyPressTimeout?: number;
-        left?: number;
-        master?: webix.ui.baseview;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        move?: boolean;
-        on?: EventHash;
-        padding?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        relative?: string;
-        resize?: boolean;
-        template?: string | WebixTemplate;
-        textValue?: string;
-        toFront?: boolean;
-        top?: number;
-        type?: string;
-        url?: string;
-        width?: number;
-        zIndex?: number;
-    }
+		updateItem(id: number | string, data: any): void;
 
-    type daterangesuggestEventName =
-        'onAfterScroll'
-        | 'onBeforeShow'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValueSuggest'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		validate(id?: string): boolean;
 
-    class daterangesuggest implements webix.ui.baseview {
-        adjust(): void;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        attachEvent(type: daterangesuggestEventName, functor: WebixCallback, id?: string): string | number;
+		$customPrint: WebixCallback;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$drag(source: HTMLElement, ev: Event): string;
 
-        blockEvent(): void;
+		$dragHTML: WebixCallback;
 
-        callEvent(name: string, params: any[]): boolean;
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-        close(): void;
+		$dragMark(context: any, ev: Event): boolean;
 
-        define(property: string, value: any): void;
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-        destructor(): void;
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        detachEvent(id: string): void;
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
 
-        disable(): void;
+		$getSize(): any[];
 
-        enable(): void;
+		$height: number;
+		$scope: any;
 
-        getBody(): any;
+		$setSize(x: number, y: number): boolean;
 
-        getButton(): webix.ui.baseview;
+		$skin: WebixCallback;
 
-        getChildViews(): any[];
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        getFormView(): webix.ui.baseview;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        getHead(): any;
+		$tooltipOut(): void;
 
-        getItemId(text: string): string | number;
+		$view: HTMLElement;
+		$width: number;
+		config: dataviewConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        getItemText(id: string | number): string;
+	interface daterangeConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		button?: boolean;
+		calendarCount?: number;
+		calendarHeight?: number;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		icons?: any;
+		id?: string | number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		timepicker?: boolean;
+		type?: string;
+		value?: any;
+		width?: number;
+	}
 
-        getList(): webix.ui.baseview;
+	type daterangeEventName =
+		'onAfterDateSelect'
+		| 'onBeforeDateSelect'
+		| 'onBindRequest'
+		| 'onChange'
+		| 'onDateClear'
+		| 'onDestruct'
+		| 'onTodaySet'
+		| 'onViewShow';
 
-        getMasterValue(): any;
+	export class daterange implements webix.ui.baseview {
+		addToRange(dates: string | Date): void;
 
-        getNode(): any;
+		adjust(): void;
 
-        getParentView(): any;
+		attachEvent(type: daterangeEventName, functor: WebixCallback, id?: string): string | number;
 
-        getRange(): webix.ui.baseview;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getSuggestion(): string;
+		blockEvent(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		callEvent(name: string, params: any[]): boolean;
 
-        getValue(): string | number;
+		define(property: string, value: any): void;
 
-        hasEvent(name: string): boolean;
+		destructor(): void;
 
-        hide(): void;
+		detachEvent(id: string): void;
 
-        isEnabled(): boolean;
+		disable(): void;
 
-        isVisible(): boolean;
+		enable(): void;
 
-        linkInput(input: HTMLElement): void;
+		getChildViews(): any[];
 
-        mapEvent(map: any): void;
+		getFormView(): webix.ui.baseview;
 
-        queryView(config: any, mode?: string): any;
+		getNode(): any;
 
-        resize(): void;
+		getParentView(): any;
 
-        resizeChildren(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        setMasterValue(value: any): void;
+		getValue(): any;
 
-        setPosition(x: number, y: number): void;
+		hasEvent(name: string): boolean;
 
-        setValue(value: string | number): void;
+		hide(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		isEnabled(): boolean;
 
-        unbind(): void;
+		isVisible(): boolean;
 
-        unblockEvent(): void;
+		mapEvent(map: any): void;
 
-        $enterKey: WebixCallback;
+		queryView(config: any, mode?: string): any;
 
-        $getSize(): any[];
+		refresh(): void;
 
-        $height: number;
-        $scope: any;
+		resize(): void;
 
-        $setSize(x: number, y: number): boolean;
+		setValue(range: any): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: daterangesuggestConfig;
-        name: string;
-    }
+		show(force?: boolean, animation?: boolean): void;
 
-    interface datepickerConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        editable?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        icons?: boolean;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        multiselect?: boolean | string;
-        name?: string;
-        on?: EventHash;
-        placeholder?: string;
-        point?: boolean;
-        popup?: string;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        separator?: string;
-        stringResult?: boolean;
-        suggest?: any;
-        timeIcon?: string;
-        timepicker?: boolean;
-        tooltip?: string;
-        type?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: Date | string;
-        width?: number;
-    }
+		unbind(): void;
 
-    type datepickerEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		unblockEvent(): void;
 
-    class datepicker implements webix.ui.baseview {
-        adjust(): void;
+		$getSize(): any[];
 
-        attachEvent(type: datepickerEventName, functor: WebixCallback, id?: string): string | number;
+		$height: number;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        blockEvent(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: daterangeConfig;
+		name: string;
+	}
 
-        blur(): void;
+	interface daterangepickerConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		editable?: boolean;
+		format?: string;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icon?: string;
+		icons?: boolean;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		pattern?: any;
+		placeholder?: string;
+		point?: boolean;
+		popup?: string;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		stringResult?: boolean;
+		suggest?: any;
+		timeIcon?: string;
+		timepicker?: boolean;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        callEvent(name: string, params: any[]): boolean;
+	type daterangepickerEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        define(property: string, value: any): void;
+	export class daterangepicker implements webix.ui.baseview {
+		adjust(): void;
 
-        destructor(): void;
+		attachEvent(type: daterangepickerEventName, functor: WebixCallback, id?: string): string | number;
 
-        detachEvent(id: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        disable(): void;
+		blockEvent(): void;
 
-        enable(): void;
+		blur(): void;
 
-        focus(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        getChildViews(): any[];
+		define(property: string, value: any): void;
 
-        getFormView(): webix.ui.baseview;
+		destructor(): void;
 
-        getInputNode(): HTMLElement;
+		detachEvent(id: string): void;
 
-        getNode(): any;
+		disable(): void;
 
-        getParentView(): any;
+		enable(): void;
 
-        getPopup(): webix.ui.baseview;
+		focus(): void;
 
-        getText(): string;
+		getChildViews(): any[];
 
-        getTopParentView(): webix.ui.baseview;
+		getFormView(): webix.ui.baseview;
 
-        getValue(): string;
+		getInputNode(): HTMLElement;
 
-        hasEvent(name: string): boolean;
+		getNode(): any;
 
-        hide(): void;
+		getParentView(): any;
 
-        isEnabled(): boolean;
+		getPopup(): webix.ui.baseview;
 
-        isVisible(): boolean;
+		getText(): string;
 
-        mapEvent(map: any): void;
+		getTopParentView(): webix.ui.baseview;
 
-        queryView(config: any, mode?: string): any;
+		getValue(): string;
 
-        refresh(): void;
+		hasEvent(name: string): boolean;
 
-        render(id: string | number, data: any, type: string): void;
+		hide(): void;
 
-        resize(): void;
+		isEnabled(): boolean;
 
-        setBottomText(text: string): void;
+		isVisible(): boolean;
 
-        setValue(value: string): void;
+		mapEvent(map: any): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		queryView(config: any, mode?: string): any;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		refresh(): void;
 
-        unbind(): void;
+		render(id: string | number, data: any, type: string): void;
 
-        unblockEvent(): void;
+		resize(): void;
 
-        validate(): boolean;
+		setBottomText(text: string): void;
 
-        $compareValue: WebixCallback;
+		setValue(value: string): void;
 
-        $getSize(): any[];
+		show(force?: boolean, animation?: boolean): void;
 
-        $getValue(): string;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		unbind(): void;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		unblockEvent(): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		validate(): boolean;
 
-        $scope: any;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
+		$cssName: string;
 
-        $setSize(x: number, y: number): boolean;
+		$getSize(): any[];
 
-        $setValue(value: string): void;
+		$getValue(): string;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: datepickerConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-    interface dbllistConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        buttons?: string | boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datatype?: string;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        labelBottomLeft?: string;
-        labelBottomRight?: string;
-        labelLeft?: string;
-        labelRight?: string;
-        list?: any;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        type?: string;
-        url?: any;
-        value?: string | any[];
-        width?: number;
-    }
+		$renderInput(config: any): HTMLElement;
 
-    type dbllistEventName =
-        'onAfterLoad'
-        | 'onBeforeLoad'
-        | 'onBindRequest'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onLoadError';
+		$renderLabel(config: any, id: string | number): string;
 
-    class dbllist implements webix.ui.baseview {
-        adjust(): void;
+		$scope: any;
 
-        attachEvent(type: dbllistEventName, functor: WebixCallback, id?: string): string | number;
+		$setSize(x: number, y: number): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$setValue(value: string): void;
 
-        blockEvent(): void;
+		$skin: WebixCallback;
 
-        callEvent(name: string, params: any[]): boolean;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        define(property: string, value: any): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        destructor(): void;
+		$tooltipOut(): void;
 
-        detachEvent(id: string): void;
+		$view: HTMLElement;
+		$width: number;
+		config: daterangepickerConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        disable(): void;
+	interface daterangesuggestConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		disabled?: boolean;
+		filter?: WebixCallback;
+		fitMaster?: boolean;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		input?: HTMLElement | string;
+		keyPressTimeout?: number;
+		left?: number;
+		master?: webix.ui.baseview;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		move?: boolean;
+		on?: EventHash;
+		padding?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		relative?: string;
+		resize?: boolean;
+		template?: string | WebixTemplate;
+		textValue?: string;
+		toFront?: boolean;
+		top?: number;
+		type?: string;
+		url?: string;
+		width?: number;
+		zIndex?: number;
+	}
 
-        enable(): void;
+	type daterangesuggestEventName =
+		'onAfterScroll'
+		| 'onBeforeShow'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValueSuggest'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        focus(): void;
+	export class daterangesuggest implements webix.ui.baseview {
+		adjust(): void;
 
-        getChildViews(): any[];
+		attachEvent(type: daterangesuggestEventName, functor: WebixCallback, id?: string): string | number;
 
-        getFormView(): webix.ui.baseview;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getNode(): any;
+		blockEvent(): void;
 
-        getParentView(): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        getTopParentView(): webix.ui.baseview;
+		define(property: string, value: any): void;
 
-        getValue(): string;
+		destructor(): void;
 
-        hasEvent(name: string): boolean;
+		detachEvent(id: string): void;
 
-        hide(): void;
+		disable(): void;
 
-        innerId(id: number | string): number | string;
+		enable(): void;
 
-        isEnabled(): boolean;
+		getBody(): any;
 
-        isVisible(): boolean;
+		getButton(): webix.ui.baseview;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		getChildViews(): any[];
 
-        mapEvent(map: any): void;
+		getFormView(): webix.ui.baseview;
 
-        parse(data: any, type: string): void;
+		getHead(): any;
 
-        queryView(config: any, mode?: string): any;
+		getItemId(text: string): string | number;
 
-        resize(): void;
+		getItemText(id: string | number): string;
 
-        select(id: string | any[], mode: boolean): void;
+		getList(): webix.ui.baseview;
 
-        setValue(ids: string | any[]): void;
+		getMasterValue(): any;
 
-        show(force?: boolean, animation?: boolean): void;
+		getNode(): any;
 
-        ui(view: any): webix.ui.baseview;
+		getParentView(): any;
 
-        unbind(): void;
+		getRange(): webix.ui.baseview;
 
-        unblockEvent(): void;
+		getSuggestion(): string;
 
-        $$: any;
+		getTopParentView(): webix.ui.baseview;
 
-        $getSize(): any[];
+		getValue(): string | number;
 
-        $height: number;
-        $onLoad: WebixCallback;
+		hasEvent(name: string): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		hide(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: dbllistConfig;
-        name: string;
-    }
+		isEnabled(): boolean;
 
-    interface excelviewerConfig {
-        view?: string;
-        animate?: any;
-        areaselect?: boolean;
-        autoConfig?: boolean;
-        autoheight?: boolean;
-        autowidth?: boolean;
-        blockselect?: boolean | string;
-        borderless?: boolean;
-        checkboxRefresh?: boolean;
-        clipboard?: boolean | string;
-        columnWidth?: number;
-        columns?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datafetch?: number;
-        datathrottle?: number;
-        datatype?: string;
-        delimiter?: any;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragColumn?: boolean | string;
-        dragscroll?: boolean | string;
-        editMath?: boolean;
-        editValue?: string;
-        editable?: boolean;
-        editaction?: string;
-        excelHeader?: boolean;
-        externalData?: WebixCallback;
-        filterMode?: any;
-        fixedRowHeight?: boolean;
-        footer?: boolean;
-        form?: string;
-        gravity?: number;
-        header?: boolean;
-        headerRowHeight?: number;
-        headermenu?: any;
-        height?: number;
-        hidden?: boolean;
-        hover?: string;
-        id?: string | number;
-        leftSplit?: number;
-        liveValidation?: boolean;
-        loadahead?: number;
-        map?: any;
-        math?: boolean;
-        maxHeight?: number;
-        maxWidth?: number;
-        minColumnHeight?: number;
-        minColumnWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        pager?: any;
-        prerender?: boolean;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        resizeColumn?: any;
-        resizeRow?: boolean;
-        rightSplit?: number;
-        rowHeight?: number;
-        rowLineHeight?: number;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollAlignY?: boolean;
-        scrollX?: boolean;
-        scrollY?: boolean;
-        select?: boolean | string;
-        spans?: any[];
-        subRowHeight?: string;
-        subrow?: string;
-        subview?: webix.ui.baseview | WebixCallback;
-        templateCopy?: WebixCallback;
-        toolbar?: string;
-        tooltip?: string | boolean;
-        topSplit?: number;
-        type?: any;
-        url?: any;
-        width?: number;
-        yCount?: number;
-    }
+		isVisible(): boolean;
 
-    type excelviewerEventName =
-        'onAfterAdd'
-        | 'onAfterAreaAdd'
-        | 'onAfterAreaRemove'
-        | 'onAfterBlockSelect'
-        | 'onAfterColumnDrop'
-        | 'onAfterColumnDropOrder'
-        | 'onAfterColumnHide'
-        | 'onAfterColumnShow'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterEditStart'
-        | 'onAfterEditStop'
-        | 'onAfterFilter'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onAfterUnSelect'
-        | 'onAreaDrag'
-        | 'onBeforeAdd'
-        | 'onBeforeAreaAdd'
-        | 'onBeforeAreaRemove'
-        | 'onBeforeBlockSelect'
-        | 'onBeforeColumnDrag'
-        | 'onBeforeColumnDrop'
-        | 'onBeforeColumnDropOrder'
-        | 'onBeforeColumnHide'
-        | 'onBeforeColumnShow'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeEditStart'
-        | 'onBeforeEditStop'
-        | 'onBeforeFilter'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBeforeUnSelect'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onCheck'
-        | 'onCollectValues'
-        | 'onColumnResize'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEditorChange'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHeaderClick'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onKeyPress'
-        | 'onLiveEdit'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPaste'
-        | 'onResize'
-        | 'onRowResize'
-        | 'onScrollX'
-        | 'onScrollY'
-        | 'onSelectChange'
-        | 'onStructureLoad'
-        | 'onStructureUpdate'
-        | 'onSubViewClose'
-        | 'onSubViewCreate'
-        | 'onSubViewOpen'
-        | 'onSubViewRender'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		linkInput(input: HTMLElement): void;
 
-    class excelviewer implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		mapEvent(map: any): void;
 
-        addCellCss(id: string, name: string, css: string): void;
+		queryView(config: any, mode?: string): any;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		resize(): void;
 
-        addRowCss(id: string, css: string): void;
+		resizeChildren(): void;
 
-        addSpan(id: any, column: string, width: number, height: number, value?: string, css?: string): void;
+		setMasterValue(value: any): void;
 
-        adjust(): void;
+		setPosition(x: number, y: number): void;
 
-        adjustColumn(id: string | number, mode?: string): void;
+		setValue(value: string | number): void;
 
-        adjustRowHeight(columnId?: string, silent?: boolean): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        attachEvent(type: excelviewerEventName, functor: WebixCallback, id?: string): string | number;
+		unbind(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		unblockEvent(): void;
 
-        blockEvent(): void;
+		$enterKey: WebixCallback;
 
-        callEvent(name: string, params: any[]): boolean;
+		$getSize(): any[];
 
-        clearAll(soft?: boolean): void;
+		$height: number;
+		$scope: any;
 
-        clearCss(css: string, silent?: boolean): void;
+		$setSize(x: number, y: number): boolean;
 
-        clearValidation(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: daterangesuggestConfig;
+		name: string;
+	}
 
-        closeSub(id: string | number): void;
+	interface datepickerConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		editable?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icon?: string;
+		icons?: boolean;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		multiselect?: boolean | string;
+		name?: string;
+		on?: EventHash;
+		placeholder?: string;
+		point?: boolean;
+		popup?: string;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		separator?: string;
+		stringResult?: boolean;
+		suggest?: any;
+		timeIcon?: string;
+		timepicker?: boolean;
+		tooltip?: any;
+		type?: string;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: Date | string;
+		width?: number;
+	}
 
-        collectValues(id: string | number): any[];
+	type datepickerEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        columnId(index: number): string | number;
+	export class datepicker implements webix.ui.baseview {
+		adjust(): void;
 
-        copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+		attachEvent(type: datepickerEventName, functor: WebixCallback, id?: string): string | number;
 
-        count(): number;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        define(property: string, value: any): void;
+		blockEvent(): void;
 
-        destructor(): void;
+		blur(): void;
 
-        detachEvent(id: string): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        disable(): void;
+		define(property: string, value: any): void;
 
-        eachColumn(handler: WebixCallback, all?: boolean): void;
+		destructor(): void;
 
-        eachRow(handler: WebixCallback, all?: boolean): void;
+		detachEvent(id: string): void;
 
-        edit(id: any): void;
+		disable(): void;
 
-        editCancel(): void;
+		enable(): void;
 
-        editCell(row: string | number, col: string | number, preserve?: boolean, show?: boolean): void;
+		focus(): void;
 
-        editColumn(id: string): void;
+		getChildViews(): any[];
 
-        editNext(): void;
+		getFormView(): webix.ui.baseview;
 
-        editRow(id: string): void;
+		getInputNode(): HTMLElement;
 
-        editStop(): void;
+		getNode(): any;
 
-        enable(): void;
+		getParentView(): any;
 
-        exists(id: string | number): boolean;
+		getPopup(): webix.ui.baseview;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		getText(): string;
 
-        filterByAll(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		getValue(): string;
 
-        focusEditor(id: any): void;
+		hasEvent(name: string): boolean;
 
-        freezeRow(id: number | string, state: boolean): void;
+		hide(): void;
 
-        getChildViews(): any[];
+		isEnabled(): boolean;
 
-        getColumnConfig(id: string): any;
+		isVisible(): boolean;
 
-        getColumnIndex(id: string | number): number;
+		mapEvent(map: any): void;
 
-        getCss(rowId: string | number, columnId: string | number): string;
+		queryView(config: any, mode?: string): any;
 
-        getEditState(): any;
+		refresh(): void;
 
-        getEditor(id?: string): any;
+		render(id: string | number, data: any, type: string): void;
 
-        getEditorValue(): string;
+		resize(): void;
 
-        getFilter(columnID: string | number): any;
+		setBottomText(text: string): void;
 
-        getFirstId(): string | number;
+		setValue(value: string): void;
 
-        getFooterNode(columnId: string, rowIndex?: number): HTMLElement;
+		show(force?: boolean, animation?: boolean): void;
 
-        getFormView(): webix.ui.baseview;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getHeaderContent(id: string | number): { [key: string]: any; };
+		unbind(): void;
 
-        getHeaderNode(columnId: string, rowIndex?: number): HTMLElement;
+		unblockEvent(): void;
 
-        getIdByIndex(index: number): string | number;
+		validate(): boolean;
 
-        getIndexById(id: string | number): number;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        getItem(id: string | number): any;
+		$getSize(): any[];
 
-        getItemNode(id: string | number): HTMLElement;
+		$getValue(): string;
 
-        getLastId(): string | number;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        getNextId(id: string | number, step: number): string | number;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        getNode(): any;
+		$renderLabel(config: any, id: string | number): string;
 
-        getPage(): number;
+		$scope: any;
 
-        getPager(): any;
+		$setSize(x: number, y: number): boolean;
 
-        getParentView(): any;
+		$setValue(value: string): void;
 
-        getPrevId(id: string | number, step: number): string | number;
+		$skin: WebixCallback;
 
-        getScrollState(): any;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        getSelectedId(asArray: boolean, asString: boolean): any;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        getSelectedItem(as_array?: boolean): any;
+		$tooltipOut(): void;
 
-        getSheets(): any[];
+		$view: HTMLElement;
+		$width: number;
+		config: datepickerConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        getSpan(): any[];
+	interface dbllistConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		buttons?: string | boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datatype?: string;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		labelBottomLeft?: string;
+		labelBottomRight?: string;
+		labelLeft?: string;
+		labelRight?: string;
+		list?: any;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		type?: string;
+		url?: any;
+		value?: string | any[];
+		width?: number;
+	}
 
-        getSpanNode(id: any): HTMLElement;
+	type dbllistEventName =
+		'onAfterLoad'
+		| 'onBeforeLoad'
+		| 'onBindRequest'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onLoadError'
+		| 'onViewShow';
 
-        getState(): any;
+	export class dbllist implements webix.ui.baseview {
+		adjust(): void;
 
-        getSubView(id: string | number): any;
+		attachEvent(type: dbllistEventName, functor: WebixCallback, id?: string): string | number;
 
-        getText(rowid: string | number, colid: string | number): string;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		blockEvent(): void;
 
-        getVisibleCount(): number;
+		callEvent(name: string, params: any[]): boolean;
 
-        group(config: any, mode: boolean): void;
+		define(property: string, value: any): void;
 
-        hasCss(id: string | number, css: string): boolean;
+		destructor(): void;
 
-        hasEvent(name: string): boolean;
+		detachEvent(id: string): void;
 
-        hide(): void;
+		disable(): void;
 
-        hideColumn(id: string | number, options?: any, silent?: boolean, mode?: boolean): void;
+		enable(): void;
 
-        hideOverlay(): void;
+		focus(): void;
 
-        isColumnVisible(id: string | number): boolean;
+		getChildViews(): any[];
 
-        isEnabled(): boolean;
+		getFormView(): webix.ui.baseview;
 
-        isVisible(): boolean;
+		getNode(): any;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		getParentView(): any;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		getTopParentView(): webix.ui.baseview;
 
-        locate(node: HTMLElement | Event): any;
+		getValue(): string;
 
-        mapCells(startrow: number, startcol: string, numrows: number, numcols: number, callback: WebixCallback): void;
+		hasEvent(name: string): boolean;
 
-        mapEvent(map: any): void;
+		hide(): void;
 
-        markSorting(column_id: string, direction: string): void;
+		innerId(id: number | string): number | string;
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		isEnabled(): boolean;
 
-        moveBottom(id: string | number): void;
+		isVisible(): boolean;
 
-        moveColumn(id: string, index: number): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        moveDown(id: string | number, step: number): void;
+		mapEvent(map: any): void;
 
-        moveSelection(direction: string): void;
+		parse(data: any, type: string): void;
 
-        moveTop(id: string | number): void;
+		queryView(config: any, mode?: string): any;
 
-        moveUp(id: string | number, step: number): void;
+		resize(): void;
 
-        openSub(id: string | number): void;
+		select(id: string | any[], mode: boolean): void;
 
-        parse(data: any, type: string): void;
+		setValue(ids: string | any[]): void;
 
-        queryView(config: any, mode?: string): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        refresh(id?: string | number): void;
+		ui(view: any): webix.ui.baseview;
 
-        refreshColumns(config?: any[], reset?: boolean): void;
+		unbind(): void;
 
-        refreshFilter(id: string | number): void;
+		unblockEvent(): void;
 
-        registerFilter(object: any, config: any, controller: any): void;
+		$$: any;
 
-        remove(id: string | number): void;
+		$getSize(): any[];
 
-        removeCellCss(id: string, name: string, css_name: string): void;
+		$height: number;
+		$onLoad: WebixCallback;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		$setSize(x: number, y: number): boolean;
 
-        removeRowCss(id: string, css_name: string): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: dbllistConfig;
+		name: string;
+	}
 
-        removeSpan(id: string | number, column: string): void;
+	interface excelviewerConfig {
+		view?: string;
+		animate?: any;
+		areaselect?: boolean;
+		autoConfig?: boolean;
+		autoheight?: boolean;
+		autowidth?: boolean;
+		blockselect?: boolean | string;
+		borderless?: boolean;
+		checkboxRefresh?: boolean;
+		clipboard?: boolean | string;
+		columnWidth?: number;
+		columns?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datafetch?: number;
+		datathrottle?: number;
+		datatype?: string;
+		delimiter?: any;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragColumn?: boolean | string;
+		dragscroll?: boolean | string;
+		editMath?: boolean;
+		editValue?: string;
+		editable?: boolean;
+		editaction?: string;
+		excelHeader?: boolean;
+		externalData?: WebixCallback;
+		filterMode?: any;
+		fixedRowHeight?: boolean;
+		footer?: boolean;
+		form?: string;
+		gravity?: number;
+		header?: boolean;
+		headerRowHeight?: number;
+		headermenu?: any;
+		height?: number;
+		hidden?: boolean;
+		hover?: string;
+		id?: string | number;
+		keyPressTimeout?: number;
+		leftSplit?: number;
+		liveValidation?: boolean;
+		loadahead?: number;
+		map?: any;
+		math?: boolean;
+		maxColumnWidth?: number;
+		maxHeight?: number;
+		maxRowHeight?: number;
+		maxWidth?: number;
+		minColumnWidth?: number;
+		minHeight?: number;
+		minRowHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		pager?: any;
+		prerender?: boolean;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		resizeColumn?: any;
+		resizeRow?: any;
+		rightSplit?: number;
+		rowHeight?: number;
+		rowLineHeight?: number;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollAlignY?: boolean;
+		scrollX?: boolean;
+		scrollY?: boolean;
+		select?: boolean | string;
+		spans?: any[];
+		subRowHeight?: string;
+		subrow?: string;
+		subview?: webix.ui.baseview | WebixCallback;
+		templateCopy?: WebixCallback;
+		toolbar?: string;
+		tooltip?: any;
+		topSplit?: number;
+		type?: any;
+		undo?: boolean;
+		url?: any;
+		width?: number;
+		yCount?: number;
+	}
 
-        render(id: string | number, data: any, operation: string): void;
+	type excelviewerEventName =
+		'onAfterAdd'
+		| 'onAfterAreaAdd'
+		| 'onAfterAreaRemove'
+		| 'onAfterBlockSelect'
+		| 'onAfterColumnDrop'
+		| 'onAfterColumnDropOrder'
+		| 'onAfterColumnHide'
+		| 'onAfterColumnShow'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterEditStart'
+		| 'onAfterEditStop'
+		| 'onAfterFilter'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onAfterUnSelect'
+		| 'onAreaDrag'
+		| 'onBeforeAdd'
+		| 'onBeforeAreaAdd'
+		| 'onBeforeAreaRemove'
+		| 'onBeforeBlockSelect'
+		| 'onBeforeColumnDrag'
+		| 'onBeforeColumnDrop'
+		| 'onBeforeColumnDropOrder'
+		| 'onBeforeColumnHide'
+		| 'onBeforeColumnShow'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeEditStart'
+		| 'onBeforeEditStop'
+		| 'onBeforeFilter'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBeforeUnSelect'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onCheck'
+		| 'onCollectValues'
+		| 'onColumnResize'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEditorChange'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHeaderClick'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onKeyPress'
+		| 'onLiveEdit'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPaste'
+		| 'onResize'
+		| 'onRowResize'
+		| 'onScrollX'
+		| 'onScrollY'
+		| 'onSelectChange'
+		| 'onStructureLoad'
+		| 'onStructureUpdate'
+		| 'onSubViewClose'
+		| 'onSubViewCreate'
+		| 'onSubViewOpen'
+		| 'onSubViewRender'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        resize(): void;
+	export class excelviewer implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        resizeSubView(id: string | number): void;
+		addCellCss(id: string, name: string, css: string): void;
 
-        scrollTo(x: number, y: number): void;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        serialize(): any[];
+		addRowCss(id: string, css: string): void;
 
-        setColumnWidth(id: string | number, width: number): void;
+		addSelectArea(start: any, end: any, preserve: boolean, area_name?: string, css?: string, handle?: boolean): void;
 
-        setPage(page: number): void;
+		addSpan(id: any, column: string, width: number, height: number, value?: string, css?: string): void;
 
-        setRowHeight(id: string | number, height: number): void;
+		adjust(): void;
 
-        setState(state: any): void;
+		adjustColumn(id: string | number, mode?: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		adjustRowHeight(columnId?: string, silent?: boolean): void;
 
-        showCell(row: string, column: string): void;
+		attachEvent(type: excelviewerEventName, functor: WebixCallback, id?: string): string | number;
 
-        showColumn(id: string | number): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        showColumnBatch(batch: string | number, preserve: boolean): void;
+		blockEvent(): void;
 
-        showItem(id: string | number): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        showItemByIndex(index: number): void;
+		clearAll(soft?: boolean): void;
 
-        showOverlay(message: string): void;
+		clearCss(css: string, silent?: boolean): void;
 
-        showSheet(name: string): void;
+		clearValidation(): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		closeSub(id: string | number): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		collectValues(id: string | number, mode: any): any[];
 
-        unbind(): void;
+		columnId(index: number): string | number;
 
-        unblockEvent(): void;
+		copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-        ungroup(mode: boolean): void;
+		count(): number;
 
-        updateItem(id: string | number, data: any): void;
+		define(property: string, value: any): void;
 
-        validate(id?: string): boolean;
+		destructor(): void;
 
-        validateEditor(id?: string | number): boolean;
+		detachEvent(id: string): void;
 
-        $customPrint: WebixCallback;
+		disable(): void;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		eachColumn(handler: WebixCallback, all?: boolean): void;
 
-        $dragHTML: WebixCallback;
+		eachRow(handler: WebixCallback, all?: boolean): void;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		edit(id: any): void;
 
-        $dragMark(context: any, ev: Event): boolean;
+		editCancel(): void;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		editCell(row: string | number, col: string | number, preserve?: boolean, show?: boolean): void;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		editColumn(id: string): void;
 
-        $dropAllow: WebixCallback;
+		editNext(): void;
 
-        $getSize(): any[];
+		editRow(id: string): void;
 
-        $height: number;
-        $scope: any;
+		editStop(): void;
 
-        $setSize(x: number, y: number): boolean;
+		enable(): void;
 
-        $skin: WebixCallback;
-        $touch: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: excelviewerConfig;
-        data: DataStore;
-        headerContent: any;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        waitData: Promise<any>;
-    }
+		exists(id: number | string): boolean;
 
-    interface fieldsetConfig {
-        view?: string;
-        $cssName?: string;
-        animate?: any;
-        body?: webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        label?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        paddingX?: number;
-        paddingY?: number;
-        width?: number;
-    }
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-    type fieldsetEventName =
-        'onAfterScroll'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		filterByAll(): void;
 
-    class fieldset implements webix.ui.baseview {
-        adjust(): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		focusEditor(id: any): void;
 
-        define(property: string, value: any): void;
+		freezeRow(id: number | string, state: boolean): void;
 
-        destructor(): void;
+		getAllSelectAreas(): any;
 
-        disable(): void;
+		getChildViews(): any[];
 
-        enable(): void;
+		getColumnConfig(id: string): any;
 
-        getBody(): any;
+		getColumnIndex(id: string | number): number;
 
-        getChildViews(): any[];
+		getCss(rowId: string | number, columnId: string | number): string;
 
-        getFormView(): webix.ui.baseview;
+		getEditState(): any;
 
-        getNode(): any;
+		getEditor(id?: string): any;
 
-        getParentView(): any;
+		getEditorValue(): string;
 
-        getTopParentView(): webix.ui.baseview;
+		getFilter(columnID: string | number): any;
 
-        hide(): void;
+		getFirstId(): number | string;
 
-        isEnabled(): boolean;
+		getFooterNode(columnId: string, rowIndex?: number): HTMLElement;
 
-        isVisible(): boolean;
+		getFormView(): webix.ui.baseview;
 
-        queryView(config: any, mode?: string): any;
+		getHeaderContent(id: string | number): { [key: string]: any; };
 
-        resize(): void;
+		getHeaderNode(columnId: string, rowIndex?: number): HTMLElement;
 
-        resizeChildren(): void;
+		getIdByIndex(index: number | string): string | number;
 
-        show(force?: boolean, animation?: boolean): void;
+		getIndexById(id: number | string): number;
 
-        unbind(): void;
+		getItem(id: number | string): any;
 
-        $getSize(): any[];
+		getItemNode(id: string | number): HTMLElement;
 
-        $height: number;
-        $scope: any;
+		getLastId(): number | string;
 
-        $setSize(x: number, y: number): boolean;
+		getNextId(id: number | string, step: number): string | number;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: fieldsetConfig;
-        name: string;
-    }
+		getNode(): any;
 
-    interface filemanagerConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        disabledHistory?: boolean;
-        filterMode?: any;
-        gravity?: number;
-        handlers?: any;
-        height?: number;
-        hidden?: boolean;
-        icons?: any;
-        id?: string | number;
-        legacyUploader?: boolean;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mode?: string;
-        modes?: any[];
-        noFileCache?: boolean;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        readonly?: boolean;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        save?: string;
-        scheme?: any;
-        structure?: any;
-        templateCreate?: WebixCallback;
-        templateDate?: WebixCallback;
-        templateIcon?: WebixCallback;
-        templateName?: WebixCallback;
-        templateSize?: WebixCallback;
-        templateType?: WebixCallback;
-        type?: string;
-        uploadProgress?: any;
-        url?: any;
-        width?: number;
-    }
+		getPage(): number;
 
-    type filemanagerEventName =
-        'onAfterAdd'
-        | 'onAfterBack'
-        | 'onAfterCreateFolder'
-        | 'onAfterDelete'
-        | 'onAfterDeleteFile'
-        | 'onAfterDrop'
-        | 'onAfterDynParse'
-        | 'onAfterEditFile'
-        | 'onAfterEditStop'
-        | 'onAfterFileUpload'
-        | 'onAfterHideTree'
-        | 'onAfterLevelDown'
-        | 'onAfterLevelUp'
-        | 'onAfterLoad'
-        | 'onAfterMarkCopy'
-        | 'onAfterMarkCut'
-        | 'onAfterMenu'
-        | 'onAfterModeChange'
-        | 'onAfterPasteFile'
-        | 'onAfterPathClick'
-        | 'onAfterRun'
-        | 'onAfterSearch'
-        | 'onAfterShowTree'
-        | 'onAfterSort'
-        | 'onAfterUploadDialog'
-        | 'onBeforeAdd'
-        | 'onBeforeBack'
-        | 'onBeforeCreateFolder'
-        | 'onBeforeDelete'
-        | 'onBeforeDeleteFile'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDynLoad'
-        | 'onBeforeDynParse'
-        | 'onBeforeEditFile'
-        | 'onBeforeEditStop'
-        | 'onBeforeFileUpload'
-        | 'onBeforeHideTree'
-        | 'onBeforeLevelDown'
-        | 'onBeforeLevelUp'
-        | 'onBeforeLoad'
-        | 'onBeforeMarkCopy'
-        | 'onBeforeMarkCut'
-        | 'onBeforeMenu'
-        | 'onBeforeModeChange'
-        | 'onBeforePasteFile'
-        | 'onBeforeRequest'
-        | 'onBeforeRun'
-        | 'onBeforeSearch'
-        | 'onBeforeSearchRequest'
-        | 'onBeforeShowTree'
-        | 'onBeforeSort'
-        | 'onBeforeUploadDialog'
-        | 'onBindRequest'
-        | 'onComponentInit'
-        | 'onCopyError'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDynLoadError'
-        | 'onErrorResponse'
-        | 'onFolderSelect'
-        | 'onHideSearchResults'
-        | 'onHistoryChange'
-        | 'onItemRename'
-        | 'onItemSelect'
-        | 'onLoadError'
-        | 'onMoveError'
-        | 'onPathComplete'
-        | 'onPathLevel'
-        | 'onShowSearchResults'
-        | 'onSuccessResponse'
-        | 'onViewInit';
+		getPager(): any;
 
-    class filemanager implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		getParentView(): any;
 
-        adjust(): void;
+		getPrevId(id: number | string, step: number): string | number;
 
-        attachEvent(type: filemanagerEventName, functor: WebixCallback, id?: string): string | number;
+		getScrollState(): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getSelectArea(area_name: string): any;
 
-        blockEvent(): void;
+		getSelectedId(asArray: boolean, asString: boolean): any;
 
-        callEvent(name: string, params: any[]): boolean;
+		getSelectedItem(as_array?: boolean): any;
 
-        clearAll(soft?: boolean): void;
+		getSheets(): any[];
 
-        copy(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): number;
+		getSpan(): any[];
 
-        copyFile(source: string | any[], target: string): void;
+		getSpanNode(id: any): HTMLElement;
 
-        count(): number;
+		getState(): any;
 
-        createFolder(targetId: string): void;
+		getSubView(id: string | number): any;
 
-        define(property: string, value: any): void;
+		getText(rowid: string | number, colid: string | number): string;
 
-        deleteFile(ids: string | any[]): void;
+		getTopParentView(): webix.ui.baseview;
 
-        destructor(): void;
+		getVisibleCount(): number;
 
-        detachEvent(id: string): void;
+		group(config: any, target?: string | number): void;
 
-        disable(): void;
+		hasCss(id: string | number, css: string): boolean;
 
-        download(id: string): void;
+		hasEvent(name: string): boolean;
 
-        editFile(id: string): void;
+		hide(): void;
 
-        enable(): void;
+		hideColumn(id: string | number, options?: any, silent?: boolean, mode?: boolean): void;
 
-        exists(id: string | number): boolean;
+		hideOverlay(): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		isColumnVisible(id: string | number): boolean;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		isEnabled(): boolean;
 
-        getActive(): string;
+		isVisible(): boolean;
 
-        getActiveView(): any;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        getBranchIndex(id: string | number, parent?: string | number): number;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        getChildViews(): any[];
+		locate(node: HTMLElement | Event): any;
 
-        getCurrentFolder(): string;
+		mapCells(startrow: number, startcol: string, numrows: number, numcols: number, callback: WebixCallback): void;
 
-        getFirstChildId(id: string | number): string;
+		mapEvent(map: any): void;
 
-        getFirstId(): string | number;
+		markSorting(column_id: string, direction: string): void;
 
-        getFormView(): webix.ui.baseview;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        getIdByIndex(index: number): string | number;
+		moveBottom(id: string | number): void;
 
-        getIndexById(id: string | number): number;
+		moveColumn(id: string, index: number): void;
 
-        getItem(id: string | number): any;
+		moveDown(id: string | number, step: number): void;
 
-        getLastId(): string | number;
+		moveSelection(direction: string): void;
 
-        getMenu(): any;
+		moveTop(id: string | number): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		moveUp(id: string | number, step: number): void;
 
-        getNextSiblingId(id: string | number): string | number;
+		openSub(id: string | number): void;
 
-        getNode(): any;
+		parse(data: any, type: string): void;
 
-        getParentId(id: string | number): string | number;
+		queryView(config: any, mode?: string): any;
 
-        getParentView(): any;
+		refresh(id?: number | string): void;
 
-        getPath(id: string): any[];
+		refreshColumns(config?: any[], reset?: boolean): void;
 
-        getPathNames(id: string): any[];
+		refreshFilter(id: string | number): void;
 
-        getPrevId(id: string | number, step: number): string | number;
+		refreshSelectArea(): void;
 
-        getPrevSiblingId(id: string | number): string | number;
+		registerFilter(object: any, config: any, controller: any): void;
 
-        getSearchData(id: string, text: string): any[];
+		remove(id: string | number | any[]): void;
 
-        getSelectedFile(): string | any[];
+		removeCellCss(id: string, name: string, css_name: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        getUploader(): any;
+		removeRowCss(id: string, css_name: string): void;
 
-        goBack(step: number): void;
+		removeSelectArea(area_name: string): void;
 
-        goForward(step: number): void;
+		removeSpan(id: string | number, column: string): void;
 
-        hasEvent(name: string): boolean;
+		render(id: string | number, data: any, operation: string): void;
 
-        hide(): void;
+		resize(): void;
 
-        hideProgress(): void;
+		resizeSubView(id: string | number): void;
 
-        hideSearchResults(): void;
+		scrollTo(x: number, y: number): void;
 
-        hideTree(): void;
+		serialize(all?: boolean): any[];
 
-        innerId(id: number | string): number | string;
+		setColumnWidth(id: string | number, width: number): void;
 
-        isBranch(id: string | number): boolean;
+		setPage(page: number): void;
 
-        isEnabled(): boolean;
+		setRowHeight(id: string | number, height: number): void;
 
-        isVisible(): boolean;
+		setState(state: any): void;
 
-        levelUp(id: string): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		showCell(row: string, column: string): void;
 
-        loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+		showColumn(id: string | number): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		showColumnBatch(batch: string | number, preserve: boolean): void;
 
-        mapEvent(map: any): void;
+		showItem(id: string | number): void;
 
-        markCopy(id: string | any[]): void;
+		showItemByIndex(index: number): void;
 
-        markCut(id: string | any[]): void;
+		showOverlay(message: string): void;
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		showSheet(name: string): void;
 
-        moveFile(source: string, target: string): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        openFolders(folders: any[]): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        parse(data: any, type: string): void;
+		unbind(): void;
 
-        pasteFile(id: string): void;
+		unblockEvent(): void;
 
-        queryView(config: any, mode?: string): any;
+		ungroup(mode: boolean): void;
 
-        refresh(id?: string | number): void;
+		updateItem(id: number | string, data: any): void;
 
-        remove(id: string | number): void;
+		validate(id?: string): boolean;
 
-        renameFile(id: string, name: string, property: string): void;
+		validateEditor(id?: string | number): boolean;
 
-        resize(): void;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        setPath(id: string): void;
+		$customPrint: WebixCallback;
 
-        show(force?: boolean, animation?: boolean): void;
+		$drag(source: HTMLElement, ev: Event): string;
 
-        showProgress(config?: any): void;
+		$dragHTML: WebixCallback;
 
-        showSearchResults(text: string): void;
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-        showTree(): void;
+		$dragMark(context: any, ev: Event): boolean;
 
-        sort(by: string, dir?: string, as?: string): void;
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        ui(view: any): webix.ui.baseview;
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
 
-        unbind(): void;
+		$getSize(): any[];
 
-        unblockEvent(): void;
+		$height: number;
+		$scope: any;
 
-        updateItem(id: string | number, data: any): void;
+		$setSize(x: number, y: number): boolean;
 
-        uploadFile(target: string): void;
+		$skin: WebixCallback;
 
-        $$: any;
-        $dropAllow: WebixCallback;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        $getSize(): any[];
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        $height: number;
+		$tooltipOut(): void;
 
-        $setSize(x: number, y: number): boolean;
+		$touch: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: excelviewerConfig;
+		data: DataStore;
+		headerContent: any;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		waitData: Promise<any>;
+	}
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: filemanagerConfig;
-        data: DataStore;
-        name: string;
-        waitData: Promise<any>;
-    }
+	interface fieldsetConfig {
+		view?: string;
+		$cssName?: string;
+		animate?: any;
+		body?: webix.ui.baseview;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		label?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		paddingX?: number;
+		paddingY?: number;
+		width?: number;
+	}
 
-    interface formConfig {
-        view?: string;
-        animate?: any;
-        autoheight?: boolean;
-        borderless?: boolean;
-        cols?: any[];
-        complexData?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datatype?: string;
-        disabled?: boolean;
-        elements?: any[];
-        elementsConfig?: { [key: string]: any; };
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        isolate?: boolean;
-        margin?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        responsive?: string;
-        rows?: any[];
-        rules?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        type?: string;
-        url?: any;
-        visibleBatch?: string;
-        width?: number;
-    }
+	type fieldsetEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-    type formEventName =
-        'onAfterLoad'
-        | 'onAfterScroll'
-        | 'onAfterValidation'
-        | 'onBeforeLoad'
-        | 'onBeforeValidate'
-        | 'onBindRequest'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onLoadError'
-        | 'onSubmit'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onValues';
+	export class fieldset implements webix.ui.baseview {
+		adjust(): void;
 
-    class form implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        adjust(): void;
+		define(property: string, value: any): void;
 
-        attachEvent(type: formEventName, functor: WebixCallback, id?: string): string | number;
+		destructor(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		disable(): void;
 
-        blockEvent(): void;
+		enable(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		getBody(): any;
 
-        clear(): void;
+		getChildViews(): any[];
 
-        clearValidation(): void;
+		getFormView(): webix.ui.baseview;
 
-        define(property: string, value: any): void;
+		getNode(): any;
 
-        destructor(): void;
+		getParentView(): any;
 
-        detachEvent(id: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        disable(): void;
+		hide(): void;
 
-        enable(): void;
+		isEnabled(): boolean;
 
-        focus(item: string): void;
+		isVisible(): boolean;
 
-        getChildViews(): any[];
+		queryView(config: any, mode?: string): any;
 
-        getCleanValues(): any;
+		resize(): void;
 
-        getDirtyValues(): any;
+		resizeChildren(): void;
 
-        getFormView(): webix.ui.baseview;
+		show(force?: boolean, animation?: boolean): void;
 
-        getNode(): any;
+		unbind(): void;
 
-        getParentView(): any;
+		$getSize(): any[];
 
-        getScrollState(): any;
+		$height: number;
+		$scope: any;
 
-        getTopParentView(): webix.ui.baseview;
+		$setSize(x: number, y: number): boolean;
 
-        getValues(details?: any): any;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: fieldsetConfig;
+		name: string;
+	}
 
-        hasEvent(name: string): boolean;
+	interface filemanagerConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		filterMode?: any;
+		gravity?: number;
+		handlers?: any;
+		height?: number;
+		hidden?: boolean;
+		icons?: any;
+		id?: string | number;
+		legacyUploader?: boolean;
+		maxHeight?: number;
+		maxWidth?: number;
+		menuFilter?: WebixCallback;
+		minHeight?: number;
+		minWidth?: number;
+		mode?: string;
+		modes?: any[];
+		noFileCache?: boolean;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		readonly?: boolean;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		save?: any;
+		scheme?: any;
+		structure?: any;
+		templateCreate?: WebixCallback;
+		templateDate?: WebixCallback;
+		templateIcon?: WebixCallback;
+		templateName?: WebixCallback;
+		templateSize?: WebixCallback;
+		templateType?: WebixCallback;
+		type?: string;
+		uploadProgress?: any;
+		url?: any;
+		width?: number;
+	}
 
-        hide(): void;
+	type filemanagerEventName =
+		'onAfterAdd'
+		| 'onAfterBack'
+		| 'onAfterCreateFolder'
+		| 'onAfterDelete'
+		| 'onAfterDeleteFile'
+		| 'onAfterDrop'
+		| 'onAfterDynParse'
+		| 'onAfterEditFile'
+		| 'onAfterEditStop'
+		| 'onAfterFileUpload'
+		| 'onAfterHideTree'
+		| 'onAfterLevelDown'
+		| 'onAfterLevelUp'
+		| 'onAfterLoad'
+		| 'onAfterMarkCopy'
+		| 'onAfterMarkCut'
+		| 'onAfterMenu'
+		| 'onAfterModeChange'
+		| 'onAfterPasteFile'
+		| 'onAfterPathClick'
+		| 'onAfterRun'
+		| 'onAfterSearch'
+		| 'onAfterShowTree'
+		| 'onAfterSort'
+		| 'onAfterUploadDialog'
+		| 'onBeforeAdd'
+		| 'onBeforeBack'
+		| 'onBeforeCreateFolder'
+		| 'onBeforeDelete'
+		| 'onBeforeDeleteFile'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDynLoad'
+		| 'onBeforeDynParse'
+		| 'onBeforeEditFile'
+		| 'onBeforeEditStop'
+		| 'onBeforeFileUpload'
+		| 'onBeforeHideTree'
+		| 'onBeforeLevelDown'
+		| 'onBeforeLevelUp'
+		| 'onBeforeLoad'
+		| 'onBeforeMarkCopy'
+		| 'onBeforeMarkCut'
+		| 'onBeforeMenu'
+		| 'onBeforeModeChange'
+		| 'onBeforePasteFile'
+		| 'onBeforeRequest'
+		| 'onBeforeRun'
+		| 'onBeforeSearch'
+		| 'onBeforeSearchRequest'
+		| 'onBeforeShowTree'
+		| 'onBeforeSort'
+		| 'onBeforeUploadDialog'
+		| 'onBindRequest'
+		| 'onComponentInit'
+		| 'onCopyError'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDynLoadError'
+		| 'onErrorResponse'
+		| 'onFolderSelect'
+		| 'onHideSearchResults'
+		| 'onHistoryChange'
+		| 'onItemRename'
+		| 'onItemSelect'
+		| 'onLoadError'
+		| 'onMoveError'
+		| 'onPathComplete'
+		| 'onPathLevel'
+		| 'onShowSearchResults'
+		| 'onSuccessResponse'
+		| 'onViewInit'
+		| 'onViewShow';
 
-        index(obj: any): number;
+	export class filemanager implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        isDirty(): boolean;
+		adjust(): void;
 
-        isEnabled(): boolean;
+		attachEvent(type: filemanagerEventName, functor: WebixCallback, id?: string): string | number;
 
-        isVisible(): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		blockEvent(): void;
 
-        mapEvent(map: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        markInvalid(name: string, state?: boolean | string): void;
+		clearAll(soft?: boolean): void;
 
-        parse(data: any, type: string): void;
+		copy(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): number;
 
-        queryView(config: any, mode?: string): any;
+		copyFile(source: string | any[], target: string): void;
 
-        reconstruct(): void;
+		count(): number;
 
-        refresh(): void;
+		createFolder(targetId: string): void;
 
-        removeView(id: any): void;
+		define(property: string, value: any): void;
 
-        render(id: string | number, data: any, type: string): void;
+		deleteFile(ids: string | any[]): void;
 
-        resize(): void;
+		destructor(): void;
 
-        resizeChildren(): void;
+		detachEvent(id: string): void;
 
-        restore(state: any, factory?: WebixCallback): void;
+		disable(): void;
 
-        scrollTo(x: number, y: number): void;
+		download(id: string): void;
 
-        serialize(serializer?: WebixCallback): any;
+		editFile(id: string): void;
 
-        setDirty(mark?: boolean): void;
+		enable(): void;
 
-        setValues(values: any, update?: boolean): void;
+		exists(id: number | string): boolean;
 
-        show(force?: boolean, animation?: boolean): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        showBatch(name: string, mode?: boolean): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        unbind(): void;
+		getActive(): string | any[];
 
-        unblockEvent(): void;
+		getActiveView(): any;
 
-        validate(mode?: any): boolean;
+		getBranchIndex(id: string | number, parent?: string | number): number;
 
-        $getSize(): any[];
+		getChildViews(): any[];
 
-        $height: number;
+		getCurrentFolder(): string;
 
-        $setSize(x: number, y: number): boolean;
+		getFirstChildId(id: string | number): string;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: formConfig;
-        elements: any;
-        name: string;
-    }
+		getFirstId(): number | string;
 
-    interface forminputConfig {
-        view?: string;
-        $cssName?: string;
-        animate?: any;
-        body?: webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        label?: string;
-        labelAlign?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        value?: any;
-        width?: number;
-    }
+		getFormView(): webix.ui.baseview;
 
-    type forminputEventName =
-        'onAfterScroll'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getIdByIndex(index: number | string): string | number;
 
-    class forminput implements webix.ui.baseview {
-        adjust(): void;
+		getIndexById(id: number | string): number;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getItem(id: number | string): any;
 
-        define(property: string, value: any): void;
+		getLastId(): number | string;
 
-        destructor(): void;
+		getMenu(): any;
 
-        disable(): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        enable(): void;
+		getNextSiblingId(id: string | number): string | number;
 
-        focus(): void;
+		getNode(): any;
 
-        getBody(): any;
+		getParentId(id: string | number): string | number;
 
-        getChildViews(): any[];
+		getParentView(): any;
 
-        getFormView(): webix.ui.baseview;
+		getPath(id: string): any[];
 
-        getNode(): any;
+		getPathNames(id: string): any[];
 
-        getParentView(): any;
+		getPrevId(id: number | string, step: number): string | number;
 
-        getTopParentView(): webix.ui.baseview;
+		getPrevSiblingId(id: string | number): string | number;
 
-        getValue(): string;
+		getSearchData(id: string, text: string): any[];
 
-        hide(): void;
+		getSelectedFile(): string | any[];
 
-        isEnabled(): boolean;
+		getTopParentView(): webix.ui.baseview;
 
-        isVisible(): boolean;
+		getUploader(): any;
 
-        queryView(config: any, mode?: string): any;
+		goBack(step: number): void;
 
-        resize(): void;
+		goForward(step: number): void;
 
-        resizeChildren(): void;
+		hasEvent(name: string): boolean;
 
-        setBottomText(text: string): void;
+		hide(): void;
 
-        setValue(value: any): void;
+		hideProgress(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		hideSearchResults(): void;
 
-        unbind(): void;
+		hideTree(): void;
 
-        $getSize(): any[];
+		innerId(id: number | string): number | string;
 
-        $height: number;
-        $scope: any;
+		isBranch(id: string | number): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		isEnabled(): boolean;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: forminputConfig;
-        name: string;
-    }
+		isVisible(): boolean;
 
-    interface gageConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        label?: string;
-        maxHeight?: number;
-        maxRange?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minRange?: number;
-        minWidth?: number;
-        on?: EventHash;
-        placeholder?: string;
-        scale?: number;
-        smoothFlow?: boolean;
-        stroke?: number;
-        value?: number;
-        width?: number;
-    }
+		levelUp(id: string): void;
 
-    type gageEventName =
-        'onAfterScroll'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-    class gage implements webix.ui.baseview {
-        adjust(): void;
+		loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-        attachEvent(type: gageEventName, functor: WebixCallback, id?: string): string | number;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		mapEvent(map: any): void;
 
-        blockEvent(): void;
+		markCopy(id: string | any[]): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		markCut(id: string | any[]): void;
 
-        define(property: string, value: any): void;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        destructor(): void;
+		moveFile(source: string, target: string): void;
 
-        detachEvent(id: string): void;
+		openFolders(folders: any[]): void;
 
-        disable(): void;
+		parse(data: any, type: string): void;
 
-        enable(): void;
+		pasteFile(id: string): void;
 
-        getChildViews(): any[];
+		queryView(config: any, mode?: string): any;
 
-        getFormView(): webix.ui.baseview;
+		refresh(id?: number | string): void;
 
-        getNode(): any;
+		remove(id: string | number | any[]): void;
 
-        getParentView(): any;
+		renameFile(id: string, name: string, property: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		resize(): void;
 
-        getValue(): number;
+		setDefaultHandlers(url: string): void;
 
-        hasEvent(name: string): boolean;
+		setPath(id: string): void;
 
-        hide(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        isEnabled(): boolean;
+		showProgress(config?: any): void;
 
-        isVisible(): boolean;
+		showSearchResults(text: string): void;
 
-        mapEvent(map: any): void;
+		showTree(): void;
 
-        queryView(config: any, mode?: string): any;
+		sort(by: string, dir?: string, as?: string): void;
 
-        resize(): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        setValue(new_value: number): void;
+		ui(view: any): webix.ui.baseview;
 
-        show(force?: boolean, animation?: boolean): void;
+		unbind(): void;
 
-        unbind(): void;
+		unblockEvent(): void;
 
-        unblockEvent(): void;
+		updateItem(id: number | string, data: any): void;
 
-        $getSize(): any[];
+		uploadFile(target: string): void;
 
-        $height: number;
-        $scope: any;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        $setSize(x: number, y: number): boolean;
+		$$: any;
+		$dropAllow: WebixCallback;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: gageConfig;
-        name: string;
-    }
+		$getSize(): any[];
 
-    interface geochartConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        chart?: any;
-        columns?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        key?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        save?: string;
-        scheme?: any;
-        tooltip?: string;
-        url?: any;
-        width?: number;
-    }
+		$height: number;
 
-    type geochartEventName =
-        'onAfterAdd'
-        | 'onAfterDelete'
-        | 'onAfterLoad'
-        | 'onAfterScroll'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeDelete'
-        | 'onBeforeLoad'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMapError'
-        | 'onMapReady'
-        | 'onRegionClick'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		$setSize(x: number, y: number): boolean;
 
-    class geochart implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: filemanagerConfig;
+		data: DataStore;
+		name: string;
+		waitData: Promise<any>;
+	}
 
-        adjust(): void;
+	interface formConfig {
+		view?: string;
+		animate?: any;
+		autoheight?: boolean;
+		borderless?: boolean;
+		cols?: any[];
+		complexData?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		dataFeed?: string | WebixCallback;
+		datatype?: string;
+		disabled?: boolean;
+		elements?: any[];
+		elementsConfig?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		isolate?: boolean;
+		margin?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		responsive?: string;
+		rows?: any[];
+		rules?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		type?: string;
+		url?: any;
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        attachEvent(type: geochartEventName, functor: WebixCallback, id?: string): string | number;
+	type formEventName =
+		'onAfterLoad'
+		| 'onAfterScroll'
+		| 'onAfterValidation'
+		| 'onBeforeLoad'
+		| 'onBeforeValidate'
+		| 'onBindRequest'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onLoadError'
+		| 'onSubmit'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onValues'
+		| 'onViewShow';
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+	export class form implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        blockEvent(): void;
+		adjust(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		attachEvent(type: formEventName, functor: WebixCallback, id?: string): string | number;
 
-        clearAll(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        count(): number;
+		blockEvent(): void;
 
-        define(property: string, value: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        destructor(): void;
+		clear(): void;
 
-        detachEvent(id: string): void;
+		clearValidation(): void;
 
-        disable(): void;
+		define(property: string, value: any): void;
 
-        enable(): void;
+		destructor(): void;
 
-        exists(id: string | number): boolean;
+		detachEvent(id: string): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		disable(): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		enable(): void;
 
-        getChildViews(): any[];
+		focus(item: string): void;
 
-        getFirstId(): string | number;
+		getChildViews(): any[];
 
-        getFormView(): webix.ui.baseview;
+		getCleanValues(): any;
 
-        getIdByIndex(index: number): string | number;
+		getDirtyValues(): any;
 
-        getIndexById(id: string | number): number;
+		getFormView(): webix.ui.baseview;
 
-        getItem(id: string | number): any;
+		getNode(): any;
 
-        getLastId(): string | number;
+		getParentView(): any;
 
-        getMap(): any;
+		getScrollState(): any;
 
-        getNextId(id: string | number, step: number): string | number;
+		getTopParentView(): webix.ui.baseview;
 
-        getNode(): any;
+		getValues(details?: any): any;
 
-        getParentView(): any;
+		hasEvent(name: string): boolean;
 
-        getPrevId(id: string | number, step: number): string | number;
+		hide(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		index(obj: any): number;
 
-        hasEvent(name: string): boolean;
+		isDirty(): boolean;
 
-        hide(): void;
+		isEnabled(): boolean;
 
-        isEnabled(): boolean;
+		isVisible(): boolean;
 
-        isVisible(): boolean;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		mapEvent(map: any): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		markInvalid(name: string, state?: boolean | string): void;
 
-        mapEvent(map: any): void;
+		parse(data: any, type: string): void;
 
-        parse(data: any, type: string): void;
+		queryView(config: any, mode?: string): any;
 
-        queryView(config: any, mode?: string): any;
+		reconstruct(): void;
 
-        refresh(id?: string | number): void;
+		refresh(): void;
 
-        remove(id: string | number): void;
+		removeView(id: any): void;
 
-        render(): void;
+		render(id: string | number, data: any, type: string): void;
 
-        resize(): void;
+		resize(): void;
 
-        serialize(): any[];
+		resizeChildren(): void;
 
-        setDisplayMode(mode: string): void;
+		restore(state: any, factory?: WebixCallback): void;
 
-        setRegion(region: string): void;
+		scrollTo(x: number, y: number): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		serialize(serializer?: WebixCallback): any;
 
-        sort(by: string, dir?: string, as?: string): void;
+		setDirty(mark?: boolean): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		setValues(values: any, update?: boolean): void;
 
-        unbind(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        unblockEvent(): void;
+		showBatch(name: string, mode?: boolean): void;
 
-        updateItem(id: string | number, data: any): void;
+		unbind(): void;
 
-        $getSize(): any[];
+		unblockEvent(): void;
 
-        $height: number;
-        $scope: any;
+		validate(mode?: any): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		$getSize(): any[];
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: geochartConfig;
-        data: DataStore;
-        name: string;
-        waitData: Promise<any>;
-    }
+		$height: number;
 
-    interface googleMapConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        center?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        gravity?: number;
-        heatmapConfig?: any;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        layerType?: string;
-        mapType?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        save?: string;
-        scheme?: any;
-        url?: any;
-        width?: number;
-        zoom?: number;
-    }
+		$setSize(x: number, y: number): boolean;
 
-    type googleMapEventName =
-        'onAfterAdd'
-        | 'onAfterDelete'
-        | 'onAfterLoad'
-        | 'onAfterScroll'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeDelete'
-        | 'onBeforeLoad'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHeatMapRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: formConfig;
+		elements: any;
+		name: string;
+	}
 
-    class googleMap implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+	interface forminputConfig {
+		view?: string;
+		$cssName?: string;
+		animate?: any;
+		body?: webix.ui.baseview;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		value?: any;
+		width?: number;
+	}
 
-        adjust(): void;
+	type forminputEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        attachEvent(type: googleMapEventName, functor: WebixCallback, id?: string): string | number;
+	export class forminput implements webix.ui.baseview {
+		adjust(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        blockEvent(): void;
+		define(property: string, value: any): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		destructor(): void;
 
-        clearAll(soft?: boolean): void;
+		disable(): void;
 
-        count(): number;
+		enable(): void;
 
-        define(property: string, value: any): void;
+		focus(): void;
 
-        destructor(): void;
+		getBody(): any;
 
-        detachEvent(id: string): void;
+		getChildViews(): any[];
 
-        disable(): void;
+		getFormView(): webix.ui.baseview;
 
-        enable(): void;
+		getNode(): any;
 
-        exists(id: string | number): boolean;
+		getParentView(): any;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		getTopParentView(): webix.ui.baseview;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		getValue(): string;
 
-        getChildViews(): any[];
+		hide(): void;
 
-        getFirstId(): string | number;
+		isEnabled(): boolean;
 
-        getFormView(): webix.ui.baseview;
+		isVisible(): boolean;
 
-        getIdByIndex(index: number): string | number;
+		queryView(config: any, mode?: string): any;
 
-        getIndexById(id: string | number): number;
+		resize(): void;
 
-        getItem(id: string | number): any;
+		resizeChildren(): void;
 
-        getLastId(): string | number;
+		setBottomText(text: string): void;
 
-        getMap(): any;
+		setValue(value: any): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		show(force?: boolean, animation?: boolean): void;
 
-        getNode(): any;
+		unbind(): void;
 
-        getParentView(): any;
+		$getSize(): any[];
 
-        getPrevId(id: string | number, step: number): string | number;
+		$height: number;
+		$scope: any;
 
-        getTopParentView(): webix.ui.baseview;
+		$setSize(x: number, y: number): boolean;
 
-        hasEvent(name: string): boolean;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: forminputConfig;
+		name: string;
+	}
 
-        hide(): void;
+	interface gageConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		color?: string | WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		label?: string;
+		maxHeight?: number;
+		maxRange?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minRange?: number;
+		minWidth?: number;
+		on?: EventHash;
+		placeholder?: string;
+		scale?: number;
+		smoothFlow?: boolean;
+		stroke?: number;
+		value?: number;
+		width?: number;
+	}
 
-        isEnabled(): boolean;
+	type gageEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        isVisible(): boolean;
+	export class gage implements webix.ui.baseview {
+		adjust(): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		attachEvent(type: gageEventName, functor: WebixCallback, id?: string): string | number;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        mapEvent(map: any): void;
+		blockEvent(): void;
 
-        parse(data: any, type: string): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        queryView(config: any, mode?: string): any;
+		define(property: string, value: any): void;
 
-        refresh(id?: string | number): void;
+		destructor(): void;
 
-        remove(id: string | number): void;
+		detachEvent(id: string): void;
 
-        render(): void;
+		disable(): void;
 
-        resize(): void;
+		enable(): void;
 
-        serialize(): any[];
+		getChildViews(): any[];
 
-        show(force?: boolean, animation?: boolean): void;
+		getFormView(): webix.ui.baseview;
 
-        sort(by: string, dir?: string, as?: string): void;
+		getNode(): any;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		getParentView(): any;
 
-        unbind(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        unblockEvent(): void;
+		getValue(): number;
 
-        updateItem(id: string | number, data: any): void;
+		hasEvent(name: string): boolean;
 
-        $getSize(): any[];
+		hide(): void;
 
-        $height: number;
-        $onLoad: WebixCallback;
-        $scope: any;
+		isEnabled(): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		isVisible(): boolean;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: googleMapConfig;
-        data: DataStore;
-        name: string;
-        waitData: Promise<any>;
-    }
+		mapEvent(map: any): void;
 
-    interface gridlayoutConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cellHeight?: number;
-        cellWidth?: number;
-        cells?: any[];
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        factory?: WebixCallback;
-        gravity?: number;
-        gridColumns?: number;
-        gridRows?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        margin?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        responsive?: string;
-        rows?: any[];
-        visibleBatch?: string;
-        width?: number;
-    }
+		queryView(config: any, mode?: string): any;
 
-    type gridlayoutEventName = 'onBindRequest' | 'onChange' | 'onDestruct';
+		refresh(): void;
 
-    class gridlayout implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		resize(): void;
 
-        adjust(): void;
+		setValue(new_value: number): void;
 
-        attachEvent(type: gridlayoutEventName, functor: WebixCallback, id?: string): string | number;
+		show(force?: boolean, animation?: boolean): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		unbind(): void;
 
-        blockEvent(): void;
+		unblockEvent(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		$getSize(): any[];
 
-        clearAll(): void;
+		$height: number;
+		$scope: any;
 
-        define(property: string, value: any): void;
+		$setSize(x: number, y: number): boolean;
 
-        destructor(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: gageConfig;
+		name: string;
+	}
 
-        detachEvent(id: string): void;
+	interface geochartConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		chart?: any;
+		columns?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		key?: string;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		save?: any;
+		scheme?: any;
+		tooltip?: string | WebixCallback;
+		url?: any;
+		width?: number;
+	}
 
-        disable(): void;
+	type geochartEventName =
+		'onAfterAdd'
+		| 'onAfterDelete'
+		| 'onAfterLoad'
+		| 'onAfterScroll'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeDelete'
+		| 'onBeforeLoad'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMapError'
+		| 'onMapReady'
+		| 'onRegionClick'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        enable(): void;
+	export class geochart implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        getChildViews(): any[];
+		adjust(): void;
 
-        getFormView(): webix.ui.baseview;
+		attachEvent(type: geochartEventName, functor: WebixCallback, id?: string): string | number;
 
-        getNode(): any;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getParentView(): any;
+		blockEvent(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		callEvent(name: string, params: any[]): boolean;
 
-        hasEvent(name: string): boolean;
+		clearAll(): void;
 
-        hide(): void;
+		count(): number;
 
-        index(obj: any): number;
+		define(property: string, value: any): void;
 
-        isEnabled(): boolean;
+		destructor(): void;
 
-        isVisible(): boolean;
+		detachEvent(id: string): void;
 
-        mapEvent(map: any): void;
+		disable(): void;
 
-        moveView(id: string | number, view: any): void;
+		enable(): void;
 
-        queryView(config: any, mode?: string): any;
+		exists(id: number | string): boolean;
 
-        reconstruct(): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        removeView(id: any): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        resize(): void;
+		getChildViews(): any[];
 
-        resizeChildren(): void;
+		getFirstId(): number | string;
 
-        restore(state: any, factory?: WebixCallback): void;
+		getFormView(): webix.ui.baseview;
 
-        serialize(serializer?: WebixCallback): any[];
+		getIdByIndex(index: number | string): string | number;
 
-        show(force?: boolean, animation?: boolean): void;
+		getIndexById(id: number | string): number;
 
-        showBatch(name: string, mode?: boolean): void;
+		getItem(id: number | string): any;
 
-        unbind(): void;
+		getLastId(): number | string;
 
-        unblockEvent(): void;
+		getMap(): any;
 
-        $getSize(): any[];
+		getNextId(id: number | string, step: number): string | number;
 
-        $height: number;
+		getNode(): any;
 
-        $setSize(x: number, y: number): boolean;
+		getParentView(): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: gridlayoutConfig;
-        name: string;
-    }
+		getPrevId(id: number | string, step: number): string | number;
 
-    interface gridsuggestConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        disabled?: boolean;
-        filter?: WebixCallback;
-        fitMaster?: boolean;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        input?: HTMLElement | string;
-        keyPressTimeout?: number;
-        left?: number;
-        master?: webix.ui.baseview;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        move?: boolean;
-        on?: EventHash;
-        padding?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        relative?: string;
-        resize?: boolean;
-        template?: string | WebixTemplate;
-        textValue?: string;
-        toFront?: boolean;
-        top?: number;
-        type?: string;
-        url?: string;
-        width?: number;
-        zIndex?: number;
-    }
+		getTopParentView(): webix.ui.baseview;
 
-    type gridsuggestEventName =
-        'onAfterScroll'
-        | 'onBeforeShow'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValueSuggest'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		hasEvent(name: string): boolean;
 
-    class gridsuggest implements webix.ui.baseview {
-        adjust(): void;
+		hide(): void;
 
-        attachEvent(type: gridsuggestEventName, functor: WebixCallback, id?: string): string | number;
+		isEnabled(): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		isVisible(): boolean;
 
-        blockEvent(): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        callEvent(name: string, params: any[]): boolean;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        close(): void;
+		mapEvent(map: any): void;
 
-        define(property: string, value: any): void;
+		parse(data: any, type: string): void;
 
-        destructor(): void;
+		queryView(config: any, mode?: string): any;
 
-        detachEvent(id: string): void;
+		refresh(id?: number | string): void;
 
-        disable(): void;
+		remove(id: string | number | any[]): void;
 
-        enable(): void;
+		render(): void;
 
-        getBody(): any;
+		resize(): void;
 
-        getChildViews(): any[];
+		serialize(all?: boolean): any[];
 
-        getFormView(): webix.ui.baseview;
+		setDisplayMode(mode: string): void;
 
-        getHead(): any;
+		setRegion(region: string): void;
 
-        getItemId(text: string): string | number;
+		show(force?: boolean, animation?: boolean): void;
 
-        getItemText(id: string | number): string;
+		sort(by: string, dir?: string, as?: string): void;
 
-        getList(): webix.ui.baseview;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getMasterValue(): any;
+		unbind(): void;
 
-        getNode(): any;
+		unblockEvent(): void;
 
-        getParentView(): any;
+		updateItem(id: number | string, data: any): void;
 
-        getSuggestion(): string;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        getTopParentView(): webix.ui.baseview;
+		$getSize(): any[];
 
-        getValue(): string | number;
+		$height: number;
+		$scope: any;
 
-        hasEvent(name: string): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        hide(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: geochartConfig;
+		data: DataStore;
+		name: string;
+		waitData: Promise<any>;
+	}
 
-        isEnabled(): boolean;
+	interface googleMapConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		center?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		dataFeed?: string | WebixCallback;
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		gravity?: number;
+		heatmapConfig?: any;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		layerType?: string;
+		mapType?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		save?: any;
+		scheme?: any;
+		url?: any;
+		width?: number;
+		zoom?: number;
+	}
 
-        isVisible(): boolean;
+	type googleMapEventName =
+		'onAfterAdd'
+		| 'onAfterDelete'
+		| 'onAfterLoad'
+		| 'onAfterScroll'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeDelete'
+		| 'onBeforeLoad'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHeatMapRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        linkInput(input: HTMLElement): void;
+	export class googleMap implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        mapEvent(map: any): void;
+		adjust(): void;
 
-        queryView(config: any, mode?: string): any;
+		attachEvent(type: googleMapEventName, functor: WebixCallback, id?: string): string | number;
 
-        resize(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        resizeChildren(): void;
+		blockEvent(): void;
 
-        setMasterValue(value: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        setPosition(x: number, y: number): void;
+		clearAll(soft?: boolean): void;
 
-        setValue(value: string | number): void;
+		count(): number;
 
-        show(node: HTMLElement, position?: any, point?: string): void;
+		define(property: string, value: any): void;
 
-        unbind(): void;
+		destructor(): void;
 
-        unblockEvent(): void;
+		detachEvent(id: string): void;
 
-        show(force: boolean, animation: boolean): void;
+		disable(): void;
 
-        $enterKey: WebixCallback;
+		enable(): void;
 
-        $getSize(): any[];
+		exists(id: number | string): boolean;
 
-        $height: number;
-        $scope: any;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        $setSize(x: number, y: number): boolean;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: gridsuggestConfig;
-        name: string;
-    }
+		getChildViews(): any[];
 
-    interface grouplistConfig {
-        view?: string;
-        animate?: any;
-        autoheight?: boolean;
-        autowidth?: boolean;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        clipboard?: boolean | string;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datafetch?: number;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragscroll?: boolean | string;
-        dynamic?: boolean;
-        externalData?: WebixCallback;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        layout?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: string | boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        pager?: any;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean | string;
-        template?: string | WebixCallback;
-        templateBack?: string | string | WebixTemplate;
-        templateCopy?: WebixCallback;
-        templateGroup?: string | WebixCallback;
-        templateItem?: string | WebixCallback;
-        tooltip?: string | boolean;
-        type?: any;
-        url?: any;
-        width?: number;
-        xCount?: number;
-        yCount?: number;
-    }
+		getFirstId(): number | string;
 
-    type grouplistEventName =
-        'onAfterAdd'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPaste'
-        | 'onSelectChange'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		getFormView(): webix.ui.baseview;
 
-    class grouplist implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		getIdByIndex(index: number | string): string | number;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		getIndexById(id: number | string): number;
 
-        adjust(): void;
+		getItem(id: number | string): any;
 
-        attachEvent(type: grouplistEventName, functor: WebixCallback, id?: string): string | number;
+		getLastId(): number | string;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getMap(waitMap?: boolean): any;
 
-        blockEvent(): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        callEvent(name: string, params: any[]): boolean;
+		getNode(): any;
 
-        clearAll(soft?: boolean): void;
+		getParentView(): any;
 
-        clearCss(css: string, silent?: boolean): void;
+		getPrevId(id: number | string, step: number): string | number;
 
-        clearValidation(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+		hasEvent(name: string): boolean;
 
-        count(): number;
+		hide(): void;
 
-        customize(obj: any): void;
+		isEnabled(): boolean;
 
-        define(property: string, value: any): void;
+		isVisible(): boolean;
 
-        destructor(): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        detachEvent(id: string): void;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        disable(): void;
+		mapEvent(map: any): void;
 
-        enable(): void;
+		parse(data: any, type: string): void;
 
-        exists(id: string | number): boolean;
+		queryView(config: any, mode?: string): any;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		refresh(id?: number | string): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		remove(id: string | number | any[]): void;
 
-        getChildViews(): any[];
+		render(): void;
 
-        getFirstId(): string | number;
+		resize(): void;
 
-        getFormView(): webix.ui.baseview;
+		serialize(all?: boolean): any[];
 
-        getIdByIndex(index: number): string | number;
+		show(force?: boolean, animation?: boolean): void;
 
-        getIndexById(id: string | number): number;
+		sort(by: string, dir?: string, as?: string): void;
 
-        getItem(id: string | number): any;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getItemNode(id: string | number): HTMLElement;
+		unbind(): void;
 
-        getLastId(): string | number;
+		unblockEvent(): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		updateItem(id: number | string, data: any): void;
 
-        getNode(): any;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        getOpenState(): any;
+		$getSize(): any[];
 
-        getPage(): number;
+		$height: number;
+		$onLoad: WebixCallback;
+		$scope: any;
 
-        getPager(): any;
+		$setSize(x: number, y: number): boolean;
 
-        getParentView(): any;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: googleMapConfig;
+		data: DataStore;
+		name: string;
+		waitData: Promise<any>;
+	}
 
-        getPrevId(id: string | number, step: number): string | number;
+	interface gridlayoutConfig {
+		view?: string;
+		animate?: any;
+		autoplace?: boolean;
+		borderless?: boolean;
+		cellHeight?: number;
+		cellWidth?: number;
+		cells?: any[];
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		factory?: WebixCallback;
+		gravity?: number;
+		gridColumns?: number;
+		gridRows?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		margin?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: number;
+		paddingX?: number;
+		paddingY?: number;
+		responsive?: string;
+		rows?: any[];
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        getScrollState(): any;
+	type gridlayoutEventName = 'onBindRequest' | 'onChange' | 'onDestruct' | 'onViewShow';
 
-        getSelectedId(as_array: boolean): string | any[];
+	export class gridlayout implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        getSelectedItem(as_array: boolean): any;
+		adjust(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		attachEvent(type: gridlayoutEventName, functor: WebixCallback, id?: string): string | number;
 
-        getVisibleCount(): number;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        group(config: any, mode: boolean): void;
+		blockEvent(): void;
 
-        hasCss(id: string | number, css: string): boolean;
+		callEvent(name: string, params: any[]): boolean;
 
-        hasEvent(name: string): boolean;
+		clearAll(): void;
 
-        hide(): void;
+		define(property: string, value: any): void;
 
-        isEnabled(): boolean;
+		destructor(): void;
 
-        isSelected(id: string | number): boolean;
+		detachEvent(id: string): void;
 
-        isVisible(): boolean;
+		disable(): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		enable(): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		getChildViews(): any[];
 
-        locate(e: Event): string | number;
+		getFormView(): webix.ui.baseview;
 
-        mapEvent(map: any): void;
+		getNode(): any;
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		getParentView(): any;
 
-        moveBottom(id: string | number): void;
+		getTopParentView(): webix.ui.baseview;
 
-        moveDown(id: string | number, step: number): void;
+		hasEvent(name: string): boolean;
 
-        moveSelection(direction: string): void;
+		hide(): void;
 
-        moveTop(id: string | number): void;
+		index(obj: any): number;
 
-        moveUp(id: string | number, step: number): void;
+		isEnabled(): boolean;
 
-        parse(data: any, type: string): void;
+		isVisible(): boolean;
 
-        queryView(config: any, mode?: string): any;
+		mapEvent(map: any): void;
 
-        refresh(id?: string | number): void;
+		moveView(id: string | number, view: any): void;
 
-        remove(id: string | number): void;
+		queryView(config: any, mode?: string): any;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		reconstruct(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		removeView(id: any): void;
 
-        resize(): void;
+		resize(): void;
 
-        scrollTo(x: number, y: number): void;
+		resizeChildren(): void;
 
-        select(id: string | any[], preserve: boolean): void;
+		restore(state: any, factory?: WebixCallback): void;
 
-        selectAll(from?: string, to?: string): void;
+		serialize(serializer?: WebixCallback): any[];
 
-        serialize(): any[];
+		show(force?: boolean, animation?: boolean): void;
 
-        setPage(page: number): void;
+		showBatch(name: string, mode?: boolean): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		unbind(): void;
 
-        showItem(id: string | number): void;
+		unblockEvent(): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		$getSize(): any[];
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$height: number;
 
-        unbind(): void;
+		$setSize(x: number, y: number): boolean;
 
-        unblockEvent(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: gridlayoutConfig;
+		name: string;
+	}
 
-        ungroup(mode: boolean): void;
+	interface gridsuggestConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		disabled?: boolean;
+		filter?: WebixCallback;
+		fitMaster?: boolean;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		input?: HTMLElement | string;
+		keyPressTimeout?: number;
+		left?: number;
+		master?: webix.ui.baseview;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		move?: boolean;
+		on?: EventHash;
+		padding?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		relative?: string;
+		resize?: boolean;
+		template?: string | WebixTemplate;
+		textValue?: string;
+		toFront?: boolean;
+		top?: number;
+		type?: string;
+		url?: string;
+		width?: number;
+		zIndex?: number;
+	}
 
-        unselect(id?: string): void;
+	type gridsuggestEventName =
+		'onAfterScroll'
+		| 'onBeforeShow'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValueSuggest'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        unselectAll(): void;
+	export class gridsuggest implements webix.ui.baseview {
+		adjust(): void;
 
-        updateItem(id: string | number, data: any): void;
+		attachEvent(type: gridsuggestEventName, functor: WebixCallback, id?: string): string | number;
 
-        validate(id?: string): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $customPrint: WebixCallback;
+		blockEvent(): void;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		callEvent(name: string, params: any[]): boolean;
 
-        $dragHTML: WebixCallback;
+		define(property: string, value: any): void;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		destructor(): void;
 
-        $dragMark(context: any, ev: Event): boolean;
+		detachEvent(id: string): void;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		disable(): void;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		enable(): void;
 
-        $dropAllow: WebixCallback;
+		getBody(): any;
 
-        $getSize(): any[];
+		getChildViews(): any[];
 
-        $height: number;
-        $scope: any;
+		getFormView(): webix.ui.baseview;
 
-        $setSize(x: number, y: number): boolean;
+		getHead(): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: grouplistConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		getItemId(text: string): string | number;
 
-    interface headerlayoutConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        collapsed?: boolean;
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        isolate?: boolean;
-        margin?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        multi?: boolean | string;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        panelClass?: string;
-        responsive?: string;
-        rows?: any[];
-        type?: string;
-        visibleBatch?: string;
-        width?: number;
-    }
+		getItemText(id: string | number): string;
 
-    type headerlayoutEventName = 'onAfterCollapse' | 'onAfterExpand' | 'onBindRequest' | 'onDestruct';
+		getList(): webix.ui.baseview;
 
-    class headerlayout implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		getMasterValue(): any;
 
-        adjust(): void;
+		getNode(): any;
 
-        attachEvent(type: headerlayoutEventName, functor: WebixCallback, id?: string): string | number;
+		getParentView(): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getSuggestion(): string;
 
-        blockEvent(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        callEvent(name: string, params: any[]): boolean;
+		getValue(): string | number;
 
-        define(property: string, value: any): void;
+		hasEvent(name: string): boolean;
 
-        destructor(): void;
+		hide(): void;
 
-        detachEvent(id: string): void;
+		isEnabled(): boolean;
 
-        disable(): void;
+		isVisible(): boolean;
 
-        enable(): void;
+		linkInput(input: HTMLElement): void;
 
-        getChildViews(): any[];
+		mapEvent(map: any): void;
 
-        getFormView(): webix.ui.baseview;
+		queryView(config: any, mode?: string): any;
 
-        getNode(): any;
+		resize(): void;
 
-        getParentView(): any;
+		resizeChildren(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		setMasterValue(value: any): void;
 
-        hasEvent(name: string): boolean;
+		setPosition(x: number, y: number): void;
 
-        hide(): void;
+		setValue(value: string | number): void;
 
-        index(obj: any): number;
+		show(node: HTMLElement, position?: any, point?: string): void;
 
-        isEnabled(): boolean;
+		unbind(): void;
 
-        isVisible(): boolean;
+		unblockEvent(): void;
 
-        mapEvent(map: any): void;
+		show(force: boolean, animation: boolean): void;
 
-        queryView(config: any, mode?: string): any;
+		$enterKey: WebixCallback;
 
-        reconstruct(): void;
+		$getSize(): any[];
 
-        removeView(id: any): void;
+		$height: number;
+		$scope: any;
 
-        resize(): void;
+		$setSize(x: number, y: number): boolean;
 
-        resizeChildren(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: gridsuggestConfig;
+		name: string;
+	}
 
-        restore(state: any, factory?: WebixCallback): void;
+	interface grouplistConfig {
+		view?: string;
+		animate?: any;
+		autoheight?: boolean;
+		autowidth?: boolean;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		clipboard?: boolean | string;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragscroll?: boolean | string;
+		externalData?: WebixCallback;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		layout?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: string | boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		pager?: any;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean | string;
+		template?: string | WebixCallback;
+		templateBack?: string | string | WebixTemplate;
+		templateCopy?: WebixCallback;
+		templateGroup?: string | WebixCallback;
+		templateItem?: string | WebixCallback;
+		tooltip?: any;
+		type?: any;
+		url?: any;
+		width?: number;
+		xCount?: number;
+		yCount?: number;
+	}
 
-        serialize(serializer?: WebixCallback): any;
+	type grouplistEventName =
+		'onAfterAdd'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPaste'
+		| 'onSelectChange'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        show(force?: boolean, animation?: boolean): void;
+	export class grouplist implements webix.ui.baseview {
+		add(obj: any, index?: number, parentId?: string): string;
 
-        showBatch(name: string, mode?: boolean): void;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        unbind(): void;
+		adjust(): void;
 
-        unblockEvent(): void;
+		attachEvent(type: grouplistEventName, functor: WebixCallback, id?: string): string | number;
 
-        $getSize(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $height: number;
+		blockEvent(): void;
 
-        $setSize(x: number, y: number): boolean;
+		callEvent(name: string, params: any[]): boolean;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: headerlayoutConfig;
-        name: string;
-    }
+		clearAll(soft?: boolean): void;
 
-    interface hintConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        nextButton?: boolean | string;
-        on?: EventHash;
-        prevButton?: boolean | string;
-        steps?: any[];
-        width?: number;
-    }
+		clearCss(css: string, silent?: boolean): void;
 
-    type hintEventName =
-        'onAfterScroll'
-        | 'onAfterStart'
-        | 'onBeforeStart'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnd'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onNext'
-        | 'onPrevious'
-        | 'onSkip'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		clearValidation(): void;
 
-    class hint implements webix.ui.baseview {
-        adjust(): void;
+		copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-        attachEvent(type: hintEventName, functor: WebixCallback, id?: string): string | number;
+		count(): number;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		customize(obj: any): void;
 
-        blockEvent(): void;
+		define(property: string, value: any): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		destructor(): void;
 
-        define(property: string, value: any): void;
+		detachEvent(id: string): void;
 
-        destructor(): void;
+		disable(): void;
 
-        detachEvent(id: string): void;
+		disableItem(id: string | number): void;
 
-        disable(): void;
+		enable(): void;
 
-        enable(): void;
+		enableItem(id: string | number): void;
 
-        end(): void;
+		exists(id: number | string): boolean;
 
-        getChildViews(): any[];
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        getCurrentStep(): number;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        getFormView(): webix.ui.baseview;
+		getChildViews(): any[];
 
-        getNode(): any;
+		getFirstId(): number | string;
 
-        getParentView(): any;
+		getFormView(): webix.ui.baseview;
 
-        getSteps(): any[];
+		getIdByIndex(index: number | string): string | number;
 
-        getTopParentView(): webix.ui.baseview;
+		getIndexById(id: number | string): number;
 
-        hasEvent(name: string): boolean;
+		getItem(id: number | string): any;
 
-        hide(): void;
+		getItemNode(id: string | number): HTMLElement;
 
-        isEnabled(): boolean;
+		getLastId(): number | string;
 
-        isVisible(): boolean;
+		getNextId(id: number | string, step: number): string | number;
 
-        mapEvent(map: any): void;
+		getNode(): any;
 
-        queryView(config: any, mode?: string): any;
+		getOpenState(): any;
 
-        resize(): void;
+		getPage(): number;
 
-        resume(stepNumber?: number): void;
+		getPager(): any;
 
-        setSteps(steps: any[]): void;
+		getParentView(): any;
 
-        show(force?: boolean, animation?: boolean): void;
+		getPrevId(id: number | string, step: number): string | number;
 
-        start(): void;
+		getScrollState(): any;
 
-        unbind(): void;
+		getSelectedId(as_array: boolean): string | any[];
 
-        unblockEvent(): void;
+		getSelectedItem(as_array: boolean): any;
 
-        $getSize(): any[];
+		getTopParentView(): webix.ui.baseview;
 
-        $height: number;
-        $scope: any;
+		getVisibleCount(): number;
 
-        $setSize(x: number, y: number): boolean;
+		group(config: any, target?: string | number): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: hintConfig;
-        name: string;
-    }
+		hasCss(id: string | number, css: string): boolean;
 
-    interface htmlformConfig {
-        view?: string;
-        animate?: any;
-        autoheight?: boolean;
-        borderless?: boolean;
-        complexData?: boolean;
-        container?: string | HTMLElement;
-        content?: string | number | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datatype?: string;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        src?: string;
-        template?: string | WebixCallback;
-        url?: any;
-        width?: number;
-    }
+		hasEvent(name: string): boolean;
 
-    type htmlformEventName =
-        'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValues'
-        | 'onViewResize';
+		hide(): void;
 
-    class htmlform implements webix.ui.baseview {
-        adjust(): void;
+		isEnabled(): boolean;
 
-        attachEvent(type: htmlformEventName, functor: WebixCallback, id?: string): string | number;
+		isEnabledItem(): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		isSelected(id: string | number): boolean;
 
-        blockEvent(): void;
+		isVisible(): boolean;
 
-        blur(): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        callEvent(name: string, params: any[]): boolean;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        clear(all?: boolean): void;
+		locate(e: Event): string | number;
 
-        define(property: string, value: any): void;
+		mapEvent(map: any): void;
 
-        destructor(): void;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        detachEvent(id: string): void;
+		moveBottom(id: string | number): void;
 
-        disable(): void;
+		moveDown(id: string | number, step: number): void;
 
-        enable(): void;
+		moveSelection(direction: string): void;
 
-        focus(item: string): void;
+		moveTop(id: string | number): void;
 
-        getChildViews(): any[];
+		moveUp(id: string | number, step: number): void;
 
-        getCleanValues(): any;
+		parse(data: any, type: string): void;
 
-        getDirtyValues(): any;
+		queryView(config: any, mode?: string): any;
 
-        getFormView(): webix.ui.baseview;
+		refresh(id?: number | string): void;
 
-        getNode(): any;
+		remove(id: string | number | any[]): void;
 
-        getParentView(): any;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        getScrollState(): any;
+		render(id: string | number, data: any, type: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		resize(): void;
 
-        getValues(details?: any): any;
+		scrollTo(x: number, y: number): void;
 
-        hasEvent(name: string): boolean;
+		select(id: string | any[], preserve: boolean): void;
 
-        hide(): void;
+		selectAll(from?: string, to?: string): void;
 
-        isDirty(): boolean;
+		serialize(all?: boolean): any[];
 
-        isEnabled(): boolean;
+		setPage(page: number): void;
 
-        isVisible(): boolean;
+		show(force?: boolean, animation?: boolean): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		showItem(id: string | number): void;
 
-        mapEvent(map: any): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        markInvalid(name: string, state?: boolean | string): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        parse(data: any, type: string): void;
+		unbind(): void;
 
-        queryView(config: any, mode?: string): any;
+		unblockEvent(): void;
 
-        refresh(): void;
+		ungroup(mode: boolean): void;
 
-        render(id: string | number, data: any, type: string): void;
+		unselect(id?: string): void;
 
-        resize(): void;
+		unselectAll(): void;
 
-        scrollTo(x: number, y: number): void;
+		updateItem(id: number | string, data: any): void;
 
-        setContent(node: any): void;
+		validate(id?: string): boolean;
 
-        setDirty(mark?: boolean): void;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        setHTML(html: string): void;
+		$customPrint: WebixCallback;
 
-        setValues(values: any, update?: boolean): void;
+		$drag(source: HTMLElement, ev: Event): string;
 
-        show(force?: boolean, animation?: boolean): void;
+		$dragHTML: WebixCallback;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-        unbind(): void;
+		$dragMark(context: any, ev: Event): boolean;
 
-        unblockEvent(): void;
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-        $getSize(): any[];
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        $height: number;
-        $scope: any;
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
 
-        $setSize(x: number, y: number): boolean;
+		$getSize(): any[];
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: htmlformConfig;
-        name: string;
-    }
+		$height: number;
+		$scope: any;
 
-    interface iconConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        id?: string | number;
-        inputHeight?: number;
-        inputWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        popup?: string;
-        tooltip?: string;
-        value?: string | number;
-        width?: number;
-    }
+		$setSize(x: number, y: number): boolean;
 
-    type iconEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		$skin: WebixCallback;
 
-    class icon implements webix.ui.baseview {
-        adjust(): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        attachEvent(type: iconEventName, functor: WebixCallback, id?: string): string | number;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$tooltipOut(): void;
 
-        blockEvent(): void;
+		$view: HTMLElement;
+		$width: number;
+		config: grouplistConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        blur(): void;
+	interface headerlayoutConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		collapsed?: boolean;
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		isolate?: boolean;
+		margin?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		multi?: boolean | string;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		panelClass?: string;
+		responsive?: string;
+		rows?: any[];
+		type?: string;
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        callEvent(name: string, params: any[]): boolean;
+	type headerlayoutEventName = 'onAfterCollapse' | 'onAfterExpand' | 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
-        define(property: string, value: any): void;
+	export class headerlayout implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        destructor(): void;
+		adjust(): void;
 
-        detachEvent(id: string): void;
+		attachEvent(type: headerlayoutEventName, functor: WebixCallback, id?: string): string | number;
 
-        disable(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        enable(): void;
+		blockEvent(): void;
 
-        focus(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        getChildViews(): any[];
+		define(property: string, value: any): void;
 
-        getFormView(): webix.ui.baseview;
+		destructor(): void;
 
-        getInputNode(): HTMLElement;
+		detachEvent(id: string): void;
 
-        getNode(): any;
+		disable(): void;
 
-        getParentView(): any;
+		enable(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		getChildViews(): any[];
 
-        getValue(): string;
+		getFormView(): webix.ui.baseview;
 
-        hasEvent(name: string): boolean;
+		getNode(): any;
 
-        hide(): void;
+		getParentView(): any;
 
-        isEnabled(): boolean;
+		getTopParentView(): webix.ui.baseview;
 
-        isVisible(): boolean;
+		hasEvent(name: string): boolean;
 
-        mapEvent(map: any): void;
+		hide(): void;
 
-        queryView(config: any, mode?: string): any;
+		index(obj: any): number;
 
-        refresh(): void;
+		isEnabled(): boolean;
 
-        render(id: string | number, data: any, type: string): void;
+		isVisible(): boolean;
 
-        resize(): void;
+		mapEvent(map: any): void;
 
-        setValue(value: string): void;
+		queryView(config: any, mode?: string): any;
 
-        show(force?: boolean, animation?: boolean): void;
+		reconstruct(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		removeView(id: any): void;
 
-        unbind(): void;
+		resize(): void;
 
-        unblockEvent(): void;
+		resizeChildren(): void;
 
-        $compareValue: WebixCallback;
+		restore(state: any, factory?: WebixCallback): void;
 
-        $getSize(): any[];
+		serialize(serializer?: WebixCallback): any;
 
-        $getValue(): string;
+		show(force?: boolean, animation?: boolean): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
+		showBatch(name: string, mode?: boolean): void;
 
-        $renderInput(config: any): HTMLElement;
+		unbind(): void;
 
-        $scope: any;
+		unblockEvent(): void;
 
-        $setSize(x: number, y: number): boolean;
+		$getSize(): any[];
 
-        $setValue(value: string): void;
+		$height: number;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: iconConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		$setSize(x: number, y: number): boolean;
 
-    interface iframeConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        src?: string;
-        width?: number;
-    }
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: headerlayoutConfig;
+		name: string;
+	}
 
-    type iframeEventName =
-        'onAfterLoad'
-        | 'onAfterScroll'
-        | 'onBeforeLoad'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+	interface hintConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		left?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		nextButton?: boolean | string;
+		on?: EventHash;
+		prevButton?: boolean | string;
+		stepTimeout?: number;
+		steps?: any[];
+		top?: number;
+		width?: number;
+	}
 
-    class iframe implements webix.ui.baseview {
-        adjust(): void;
+	type hintEventName =
+		'onAfterScroll'
+		| 'onAfterStart'
+		| 'onBeforeStart'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnd'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onNext'
+		| 'onPrevious'
+		| 'onSkip'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        attachEvent(type: iframeEventName, functor: WebixCallback, id?: string): string | number;
+	export class hint implements webix.ui.baseview {
+		adjust(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		attachEvent(type: hintEventName, functor: WebixCallback, id?: string): string | number;
 
-        blockEvent(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		blockEvent(): void;
 
-        define(property: string, value: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        destructor(): void;
+		define(property: string, value: any): void;
 
-        detachEvent(id: string): void;
+		destructor(): void;
 
-        disable(): void;
+		detachEvent(id: string): void;
 
-        enable(): void;
+		disable(): void;
 
-        getChildViews(): any[];
+		enable(): void;
 
-        getFormView(): webix.ui.baseview;
+		end(): void;
 
-        getIframe(): HTMLElement;
+		getChildViews(): any[];
 
-        getNode(): any;
+		getCurrentStep(): number;
 
-        getParentView(): any;
+		getFormView(): webix.ui.baseview;
 
-        getTopParentView(): webix.ui.baseview;
+		getNode(): any;
 
-        getWindow(): HTMLElement;
+		getParentView(): any;
 
-        hasEvent(name: string): boolean;
+		getSteps(): any[];
 
-        hide(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        isEnabled(): boolean;
+		hasEvent(name: string): boolean;
 
-        isVisible(): boolean;
+		hide(): void;
 
-        load(value: string): void;
+		isEnabled(): boolean;
 
-        mapEvent(map: any): void;
+		isVisible(): boolean;
 
-        queryView(config: any, mode?: string): any;
+		mapEvent(map: any): void;
 
-        resize(): void;
+		queryView(config: any, mode?: string): any;
 
-        show(force?: boolean, animation?: boolean): void;
+		resize(): void;
 
-        unbind(): void;
+		resume(stepNumber?: number): void;
 
-        unblockEvent(): void;
+		setSteps(steps: any[]): void;
 
-        $getSize(): any[];
+		show(force?: boolean, animation?: boolean): void;
 
-        $height: number;
-        $scope: any;
+		start(): void;
 
-        $setSize(x: number, y: number): boolean;
+		unbind(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: iframeConfig;
-        name: string;
-    }
+		unblockEvent(): void;
 
-    interface kanbanConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        collapsed?: boolean;
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        isolate?: boolean;
-        listFilter?: WebixCallback;
-        margin?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        multi?: boolean | string;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        panelClass?: string;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        responsive?: string;
-        rows?: any[];
-        save?: string;
-        scheme?: any;
-        type?: string;
-        url?: any;
-        visibleBatch?: string;
-        width?: number;
-    }
+		$getSize(): any[];
 
-    type kanbanEventName =
-        'onAfterAdd'
-        | 'onAfterCollapse'
-        | 'onAfterDelete'
-        | 'onAfterExpand'
-        | 'onAfterLoad'
-        | 'onAfterSort'
-        | 'onAfterStatusChange'
-        | 'onAvatarClick'
-        | 'onBeforeAdd'
-        | 'onBeforeDelete'
-        | 'onBeforeLoad'
-        | 'onBeforeSort'
-        | 'onBeforeStatusChange'
-        | 'onBindRequest'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onListAfterContextMenu'
-        | 'onListAfterDrop'
-        | 'onListAfterSelect'
-        | 'onListBeforeContextMenu'
-        | 'onListBeforeDrag'
-        | 'onListBeforeDragIn'
-        | 'onListBeforeDrop'
-        | 'onListBeforeSelect'
-        | 'onListIconClick'
-        | 'onListItemClick'
-        | 'onListItemDblClick'
-        | 'onLoadError';
+		$height: number;
+		$scope: any;
 
-    class kanban implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		$setSize(x: number, y: number): boolean;
 
-        addView(view: any, index?: number): string | number;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: hintConfig;
+		name: string;
+	}
 
-        adjust(): void;
+	interface htmlformConfig {
+		view?: string;
+		animate?: any;
+		autoheight?: boolean;
+		borderless?: boolean;
+		complexData?: boolean;
+		container?: string | HTMLElement;
+		content?: string | number | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datatype?: string;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		src?: string;
+		template?: string | WebixCallback;
+		tooltip?: any;
+		url?: any;
+		width?: number;
+	}
 
-        attachEvent(type: kanbanEventName, functor: WebixCallback, id?: string): string | number;
+	type htmlformEventName =
+		'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValues'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+	export class htmlform implements webix.ui.baseview {
+		adjust(): void;
 
-        blockEvent(): void;
+		attachEvent(type: htmlformEventName, functor: WebixCallback, id?: string): string | number;
 
-        callEvent(name: string, params: any[]): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        clearAll(soft?: boolean): void;
+		blockEvent(): void;
 
-        count(): number;
+		blur(): void;
 
-        define(property: string, value: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        destructor(): void;
+		clear(all?: boolean): void;
 
-        detachEvent(id: string): void;
+		define(property: string, value: any): void;
 
-        disable(): void;
+		destructor(): void;
 
-        eachList(func: WebixCallback): void;
+		detachEvent(id: string): void;
 
-        enable(): void;
+		disable(): void;
 
-        exists(id: string | number): boolean;
+		enable(): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		focus(item: string): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		getChildViews(): any[];
 
-        getChildViews(): any[];
+		getCleanValues(): any;
 
-        getFirstId(): string | number;
+		getDirtyValues(): any;
 
-        getFormView(): webix.ui.baseview;
+		getFormView(): webix.ui.baseview;
 
-        getIdByIndex(index: number): string | number;
+		getNode(): any;
 
-        getIndexById(id: string | number): number;
+		getParentView(): any;
 
-        getItem(id: string | number): any;
+		getScrollState(): any;
 
-        getLastId(): string | number;
+		getTopParentView(): webix.ui.baseview;
 
-        getNextId(id: string | number, step: number): string | number;
+		getValues(details?: any): any;
 
-        getNode(): any;
+		hasEvent(name: string): boolean;
 
-        getOwnerList(itemId: string | number): any;
+		hide(): void;
 
-        getParentView(): any;
+		isDirty(): boolean;
 
-        getPrevId(id: string | number, step: number): string | number;
+		isEnabled(): boolean;
 
-        getSelectedId(): string | number;
+		isVisible(): boolean;
 
-        getTopParentView(): webix.ui.baseview;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        hasEvent(name: string): boolean;
+		mapEvent(map: any): void;
 
-        hide(): void;
+		markInvalid(name: string, state?: boolean | string): void;
 
-        index(obj: any): number;
+		parse(data: any, type: string): void;
 
-        isEnabled(): boolean;
+		queryView(config: any, mode?: string): any;
 
-        isVisible(): boolean;
+		refresh(): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		render(id: string | number, data: any, type: string): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		resize(): void;
 
-        mapEvent(map: any): void;
+		scrollTo(x: number, y: number): void;
 
-        parse(data: any, type: string): void;
+		setContent(node: any): void;
 
-        queryView(config: any, mode?: string): any;
+		setDirty(mark?: boolean): void;
 
-        reconstruct(): void;
+		setHTML(html: string): void;
 
-        refresh(id?: string | number): void;
+		setValues(values: any, update?: boolean): void;
 
-        remove(id: string | number): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        removeView(id: any): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        resize(): void;
+		unbind(): void;
 
-        resizeChildren(): void;
+		unblockEvent(): void;
 
-        restore(state: any, factory?: WebixCallback): void;
+		$getSize(): any[];
 
-        select(id: string | number): void;
+		$height: number;
+		$scope: any;
 
-        serialize(): any[];
+		$setSize(x: number, y: number): boolean;
 
-        setIndex(id: string | number, index: number): void;
+		$skin: WebixCallback;
 
-        show(force?: boolean, animation?: boolean): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        showBatch(name: string, mode?: boolean): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		$tooltipOut(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$view: HTMLElement;
+		$width: number;
+		config: htmlformConfig;
+		name: string;
+	}
 
-        unbind(): void;
+	interface iconConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		autowidth?: boolean;
+		borderless?: boolean;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icon?: string;
+		id?: string | number;
+		inputHeight?: number;
+		inputWidth?: number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		popup?: string;
+		tooltip?: any;
+		value?: string | number;
+		width?: number;
+	}
 
-        unblockEvent(): void;
+	type iconEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        updateItem(id: string | number, data: any): void;
+	export class icon implements webix.ui.baseview {
+		adjust(): void;
 
-        $getSize(): any[];
+		attachEvent(type: iconEventName, functor: WebixCallback, id?: string): string | number;
 
-        $height: number;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $setSize(x: number, y: number): boolean;
+		blockEvent(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: kanbanConfig;
-        data: DataStore;
-        name: string;
-        waitData: Promise<any>;
-    }
+		blur(): void;
 
-    interface labelConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputHeight?: number;
-        inputWidth?: number;
-        label?: string;
-        labelPosition?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        popup?: string;
-        tooltip?: string;
-        value?: string | number;
-        width?: number;
-    }
+		callEvent(name: string, params: any[]): boolean;
 
-    type labelEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		define(property: string, value: any): void;
 
-    class label implements webix.ui.baseview {
-        adjust(): void;
+		destructor(): void;
 
-        attachEvent(type: labelEventName, functor: WebixCallback, id?: string): string | number;
+		detachEvent(id: string): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		disable(): void;
 
-        blockEvent(): void;
+		enable(): void;
 
-        blur(): void;
+		focus(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		getChildViews(): any[];
 
-        define(property: string, value: any): void;
+		getFormView(): webix.ui.baseview;
 
-        destructor(): void;
+		getInputNode(): HTMLElement;
 
-        detachEvent(id: string): void;
+		getNode(): any;
 
-        disable(): void;
+		getParentView(): any;
 
-        enable(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        focus(): void;
+		getValue(): string;
 
-        getChildViews(): any[];
+		hasEvent(name: string): boolean;
 
-        getFormView(): webix.ui.baseview;
+		hide(): void;
 
-        getInputNode(): HTMLElement;
+		isEnabled(): boolean;
 
-        getNode(): any;
+		isVisible(): boolean;
 
-        getParentView(): any;
+		mapEvent(map: any): void;
 
-        getTopParentView(): webix.ui.baseview;
+		queryView(config: any, mode?: string): any;
 
-        getValue(): string;
+		refresh(): void;
 
-        hasEvent(name: string): boolean;
+		render(id: string | number, data: any, type: string): void;
 
-        hide(): void;
+		resize(): void;
 
-        isEnabled(): boolean;
+		setValue(value: string): void;
 
-        isVisible(): boolean;
+		show(force?: boolean, animation?: boolean): void;
 
-        mapEvent(map: any): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        queryView(config: any, mode?: string): any;
+		unbind(): void;
 
-        refresh(): void;
+		unblockEvent(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		$compareValue: WebixCallback;
 
-        resize(): void;
+		$getSize(): any[];
 
-        setHTML(html: string): void;
+		$getValue(): string;
 
-        setValue(value: string): void;
+		$height: number;
+		$prepareValue: WebixCallback;
 
-        show(force?: boolean, animation?: boolean): void;
+		$renderInput(config: any): HTMLElement;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$scope: any;
 
-        unbind(): void;
+		$setSize(x: number, y: number): boolean;
 
-        unblockEvent(): void;
+		$setValue(value: string): void;
 
-        $compareValue: WebixCallback;
+		$skin: WebixCallback;
 
-        $getSize(): any[];
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        $getValue(): string;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
+		$tooltipOut(): void;
 
-        $renderInput(config: any): HTMLElement;
+		$view: HTMLElement;
+		$width: number;
+		config: iconConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        $scope: any;
+	interface iframeConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		src?: string;
+		width?: number;
+	}
 
-        $setSize(x: number, y: number): boolean;
+	type iframeEventName =
+		'onAfterLoad'
+		| 'onAfterScroll'
+		| 'onBeforeLoad'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        $setValue(value: string): void;
+	export class iframe implements webix.ui.baseview {
+		adjust(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: labelConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		attachEvent(type: iframeEventName, functor: WebixCallback, id?: string): string | number;
 
-    interface layoutConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        isolate?: boolean;
-        margin?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        responsive?: string;
-        rows?: any[];
-        type?: string;
-        visibleBatch?: string;
-        width?: number;
-    }
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    type layoutEventName = 'onBindRequest' | 'onDestruct';
+		blockEvent(): void;
 
-    class layout implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		callEvent(name: string, params: any[]): boolean;
 
-        adjust(): void;
+		define(property: string, value: any): void;
 
-        attachEvent(type: layoutEventName, functor: WebixCallback, id?: string): string | number;
+		destructor(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		detachEvent(id: string): void;
 
-        blockEvent(): void;
+		disable(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		enable(): void;
 
-        define(property: string, value: any): void;
+		getChildViews(): any[];
 
-        destructor(): void;
+		getFormView(): webix.ui.baseview;
 
-        detachEvent(id: string): void;
+		getIframe(): HTMLElement;
 
-        disable(): void;
+		getNode(): any;
 
-        enable(): void;
+		getParentView(): any;
 
-        getChildViews(): any[];
+		getTopParentView(): webix.ui.baseview;
 
-        getFormView(): webix.ui.baseview;
+		getWindow(): HTMLElement;
 
-        getNode(): any;
+		hasEvent(name: string): boolean;
 
-        getParentView(): any;
+		hide(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		isEnabled(): boolean;
 
-        hasEvent(name: string): boolean;
+		isVisible(): boolean;
 
-        hide(): void;
+		load(value: string): void;
 
-        index(obj: any): number;
+		mapEvent(map: any): void;
 
-        isEnabled(): boolean;
+		queryView(config: any, mode?: string): any;
 
-        isVisible(): boolean;
+		resize(): void;
 
-        mapEvent(map: any): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        queryView(config: any, mode?: string): any;
+		unbind(): void;
 
-        reconstruct(): void;
+		unblockEvent(): void;
 
-        removeView(id: any): void;
+		$getSize(): any[];
 
-        resize(): void;
+		$height: number;
+		$scope: any;
 
-        resizeChildren(): void;
+		$setSize(x: number, y: number): boolean;
 
-        restore(state: any, factory: WebixCallback, configOnly: boolean): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: iframeConfig;
+		name: string;
+	}
 
-        serialize(serializer?: WebixCallback): any;
+	interface kanbanConfig {
+		view?: string;
+		animate?: any;
+		attachments?: string;
+		borderless?: boolean;
+		cardActions?: boolean | any[];
+		collapsed?: boolean;
+		colors?: any[] | string;
+		cols?: any[];
+		comments?: any;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		delimiter?: string;
+		disabled?: boolean;
+		editor?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		isolate?: boolean;
+		listFilter?: WebixCallback;
+		margin?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		multi?: boolean | string;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		panelClass?: string;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		responsive?: string;
+		rows?: any[];
+		save?: any;
+		scheme?: any;
+		tags?: any[] | string;
+		type?: string;
+		url?: any;
+		userList?: any;
+		users?: any[] | string;
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        show(force?: boolean, animation?: boolean): void;
+	type kanbanEventName =
+		'onAfterAdd'
+		| 'onAfterCollapse'
+		| 'onAfterCopy'
+		| 'onAfterDelete'
+		| 'onAfterEditorShow'
+		| 'onAfterExpand'
+		| 'onAfterLoad'
+		| 'onAfterSort'
+		| 'onAfterStatusChange'
+		| 'onAvatarClick'
+		| 'onBeforeAdd'
+		| 'onBeforeCopy'
+		| 'onBeforeDelete'
+		| 'onBeforeEditorAction'
+		| 'onBeforeEditorShow'
+		| 'onBeforeLoad'
+		| 'onBeforeSort'
+		| 'onBeforeStatusChange'
+		| 'onBindRequest'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onListAfterContextMenu'
+		| 'onListAfterDrop'
+		| 'onListAfterSelect'
+		| 'onListBeforeContextMenu'
+		| 'onListBeforeDrag'
+		| 'onListBeforeDragIn'
+		| 'onListBeforeDrop'
+		| 'onListBeforeSelect'
+		| 'onListIconClick'
+		| 'onListItemClick'
+		| 'onListItemDblClick'
+		| 'onLoadError'
+		| 'onViewShow';
 
-        showBatch(name: string, mode?: boolean): void;
+	export class kanban implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        unbind(): void;
+		addView(view: any, index?: number): string | number;
 
-        unblockEvent(): void;
+		adjust(): void;
 
-        $getSize(): any[];
+		attachEvent(type: kanbanEventName, functor: WebixCallback, id?: string): string | number;
 
-        $height: number;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $setSize(x: number, y: number): boolean;
+		blockEvent(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: layoutConfig;
-        name: string;
-    }
+		callEvent(name: string, params: any[]): boolean;
 
-    interface listConfig {
-        view?: string;
-        animate?: any;
-        autoheight?: boolean;
-        autowidth?: boolean;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        clipboard?: boolean | string;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datafetch?: number;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragscroll?: boolean | string;
-        dynamic?: boolean;
-        externalData?: WebixCallback;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        layout?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: string | boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        pager?: any;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean | string;
-        template?: string | WebixCallback;
-        templateCopy?: WebixCallback;
-        tooltip?: string | boolean;
-        type?: any;
-        url?: any;
-        width?: number;
-        xCount?: number;
-        yCount?: number;
-    }
+		clearAll(soft?: boolean): void;
 
-    type listEventName =
-        'onAfterAdd'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPaste'
-        | 'onSelectChange'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		copy(id: number | string): void;
 
-    class list implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		count(): number;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		define(property: string, value: any): void;
 
-        adjust(): void;
+		destructor(): void;
 
-        attachEvent(type: listEventName, functor: WebixCallback, id?: string): string | number;
+		detachEvent(id: string): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		disable(): void;
 
-        blockEvent(): void;
+		eachList(func: WebixCallback): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		enable(): void;
 
-        clearAll(soft?: boolean): void;
+		exists(id: number | string): boolean;
 
-        clearCss(css: string, silent?: boolean): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        clearValidation(): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+		getChildViews(): any[];
 
-        count(): number;
+		getColors(): DataCollection;
 
-        customize(obj: any): void;
+		getComments(): webix.ui.baseview;
 
-        define(property: string, value: any): void;
+		getEditor(): webix.ui.baseview;
 
-        destructor(): void;
+		getFirstId(): number | string;
 
-        detachEvent(id: string): void;
+		getFormView(): webix.ui.baseview;
 
-        disable(): void;
+		getIdByIndex(index: number | string): string | number;
 
-        enable(): void;
+		getIndexById(id: number | string): number;
 
-        exists(id: string | number): boolean;
+		getItem(id: number | string): any;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		getLastId(): number | string;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		getMenu(): webix.ui.baseview;
 
-        getChildViews(): any[];
+		getNextId(id: number | string, step: number): string | number;
 
-        getFirstId(): string | number;
+		getNode(): any;
 
-        getFormView(): webix.ui.baseview;
+		getOwnerList(itemId: string | number): any;
 
-        getIdByIndex(index: number): string | number;
+		getParentView(): any;
 
-        getIndexById(id: string | number): number;
+		getPrevId(id: number | string, step: number): string | number;
 
-        getItem(id: string | number): any;
+		getSelectedId(): string | number;
 
-        getItemNode(id: string | number): HTMLElement;
+		getStatuses(): any[];
 
-        getLastId(): string | number;
+		getTags(): DataCollection;
 
-        getNextId(id: string | number, step: number): string | number;
+		getTopParentView(): webix.ui.baseview;
 
-        getNode(): any;
+		getUserList(): webix.ui.baseview;
 
-        getPage(): number;
+		getUsers(): DataCollection;
 
-        getPager(): any;
+		hasEvent(name: string): boolean;
 
-        getParentView(): any;
+		hide(): void;
 
-        getPrevId(id: string | number, step: number): string | number;
+		index(obj: any): number;
 
-        getScrollState(): any;
+		isEnabled(): boolean;
 
-        getSelectedId(as_array: boolean): string | any[];
+		isVisible(): boolean;
 
-        getSelectedItem(as_array: boolean): any;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        getTopParentView(): webix.ui.baseview;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        getVisibleCount(): number;
+		mapEvent(map: any): void;
 
-        hasCss(id: string | number, css: string): boolean;
+		parse(data: any, type: string): void;
 
-        hasEvent(name: string): boolean;
+		queryView(config: any, mode?: string): any;
 
-        hide(): void;
+		reconstruct(): void;
 
-        isEnabled(): boolean;
+		refresh(id?: number | string): void;
 
-        isSelected(id: string | number): boolean;
+		remove(id: string | number | any[]): void;
 
-        isVisible(): boolean;
+		removeView(id: any): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		resize(): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		resizeChildren(): void;
 
-        locate(e: Event): string | number;
+		restore(state: any, factory?: WebixCallback): void;
 
-        mapEvent(map: any): void;
+		select(id: string | number): void;
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		serialize(all?: boolean): any[];
 
-        moveBottom(id: string | number): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        moveDown(id: string | number, step: number): void;
+		showBatch(name: string, mode?: boolean): void;
 
-        moveSelection(direction: string): void;
+		showEditor(obj?: any): void;
 
-        moveTop(id: string | number): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        moveUp(id: string | number, step: number): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        parse(data: any, type: string): void;
+		unbind(): void;
 
-        queryView(config: any, mode?: string): any;
+		unblockEvent(): void;
 
-        refresh(id?: string | number): void;
+		updateItem(id: number | string, data: any): void;
 
-        remove(id: string | number): void;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		$getSize(): any[];
 
-        render(id: string | number, data: any, type: string): void;
+		$height: number;
 
-        resize(): void;
+		$setSize(x: number, y: number): boolean;
 
-        scrollTo(x: number, y: number): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: kanbanConfig;
+		data: DataStore;
+		name: string;
+		waitData: Promise<any>;
+	}
 
-        select(id: string | any[], preserve: boolean): void;
+	interface labelConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		autowidth?: boolean;
+		borderless?: boolean;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputHeight?: number;
+		inputWidth?: number;
+		keyPressTimeout?: number;
+		label?: string;
+		labelPosition?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		popup?: string;
+		tooltip?: any;
+		value?: string | number;
+		width?: number;
+	}
 
-        selectAll(from?: string, to?: string): void;
+	type labelEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        serialize(): any[];
+	export class label implements webix.ui.baseview {
+		adjust(): void;
 
-        setPage(page: number): void;
+		attachEvent(type: labelEventName, functor: WebixCallback, id?: string): string | number;
 
-        show(force?: boolean, animation?: boolean): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        showItem(id: string | number): void;
+		blockEvent(): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		blur(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        unbind(): void;
+		define(property: string, value: any): void;
 
-        unblockEvent(): void;
+		destructor(): void;
 
-        unselect(id?: string): void;
+		detachEvent(id: string): void;
 
-        unselectAll(): void;
+		disable(): void;
 
-        updateItem(id: string | number, data: any): void;
+		enable(): void;
 
-        validate(id?: string): boolean;
+		focus(): void;
 
-        $customPrint: WebixCallback;
+		getChildViews(): any[];
 
-        $drag(source: HTMLElement, ev: Event): string;
+		getFormView(): webix.ui.baseview;
 
-        $dragHTML: WebixCallback;
+		getInputNode(): HTMLElement;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		getNode(): any;
 
-        $dragMark(context: any, ev: Event): boolean;
+		getParentView(): any;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		getTopParentView(): webix.ui.baseview;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		getValue(): string;
 
-        $dropAllow: WebixCallback;
+		hasEvent(name: string): boolean;
 
-        $getSize(): any[];
+		hide(): void;
 
-        $height: number;
-        $scope: any;
+		isEnabled(): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		isVisible(): boolean;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: listConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		mapEvent(map: any): void;
 
-    interface menuConfig {
-        view?: string;
-        animate?: any;
-        autoheight?: boolean;
-        autowidth?: boolean;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        clipboard?: boolean | string;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datafetch?: number;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragscroll?: boolean | string;
-        dynamic?: boolean;
-        externalData?: WebixCallback;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        layout?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: string | boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        openAction?: string;
-        pager?: any;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean | string;
-        subMenuPos?: string;
-        submenuConfig?: any;
-        template?: string | WebixCallback;
-        templateCopy?: WebixCallback;
-        tooltip?: string | boolean;
-        type?: any;
-        url?: any;
-        width?: number;
-        xCount?: number;
-        yCount?: number;
-    }
+		queryView(config: any, mode?: string): any;
 
-    type menuEventName =
-        'onAfterAdd'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMenuItemClick'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPaste'
-        | 'onSelectChange'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		refresh(): void;
 
-    class menu implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		render(id: string | number, data: any, type: string): void;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		resize(): void;
 
-        adjust(): void;
+		setHTML(html: string): void;
 
-        attachEvent(type: menuEventName, functor: WebixCallback, id?: string): string | number;
+		setValue(value: string): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        blockEvent(): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		unbind(): void;
 
-        clearAll(soft?: boolean): void;
+		unblockEvent(): void;
 
-        clearCss(css: string, silent?: boolean): void;
+		$compareValue: WebixCallback;
 
-        clearValidation(): void;
+		$getSize(): any[];
 
-        copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+		$getValue(): string;
 
-        count(): number;
+		$height: number;
+		$prepareValue: WebixCallback;
 
-        customize(obj: any): void;
+		$renderInput(config: any): HTMLElement;
 
-        define(property: string, value: any): void;
+		$scope: any;
 
-        destructor(): void;
+		$setSize(x: number, y: number): boolean;
 
-        detachEvent(id: string): void;
+		$setValue(value: string): void;
 
-        disable(): void;
+		$skin: WebixCallback;
 
-        disableItem(id: string | number): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        enable(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        enableItem(id: string | number): void;
+		$tooltipOut(): void;
 
-        exists(id: string | number): boolean;
+		$view: HTMLElement;
+		$width: number;
+		config: labelConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+	interface layoutConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		isolate?: boolean;
+		margin?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		responsive?: string;
+		rows?: any[];
+		type?: string;
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        find(criterion: WebixCallback, first?: boolean): any;
+	type layoutEventName = 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
-        getChildViews(): any[];
+	export class layout implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        getFirstId(): string | number;
+		adjust(): void;
 
-        getFormView(): webix.ui.baseview;
+		attachEvent(type: layoutEventName, functor: WebixCallback, id?: string): string | number;
 
-        getIdByIndex(index: number): string | number;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getIndexById(id: string | number): number;
+		blockEvent(): void;
 
-        getItem(id: string | number): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        getItemNode(id: string | number): HTMLElement;
+		define(property: string, value: any): void;
 
-        getLastId(): string | number;
+		destructor(): void;
 
-        getMenu(id: string | number): any;
+		detachEvent(id: string): void;
 
-        getMenuItem(id: string | number): any;
+		disable(): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		enable(): void;
 
-        getNode(): any;
+		getChildViews(): any[];
 
-        getPage(): number;
+		getFormView(): webix.ui.baseview;
 
-        getPager(): any;
+		getNode(): any;
 
-        getParentView(): any;
+		getParentView(): any;
 
-        getPrevId(id: string | number, step: number): string | number;
+		getTopParentView(): webix.ui.baseview;
 
-        getScrollState(): any;
+		hasEvent(name: string): boolean;
 
-        getSelectedId(as_array: boolean): string | any[];
+		hide(): void;
 
-        getSelectedItem(as_array: boolean): any;
+		index(obj: any): number;
 
-        getSubMenu(id: string | number): any;
+		isEnabled(): boolean;
 
-        getTopMenu(): any;
+		isVisible(): boolean;
 
-        getTopParentView(): webix.ui.baseview;
+		mapEvent(map: any): void;
 
-        getVisibleCount(): number;
+		queryView(config: any, mode?: string): any;
 
-        hasCss(id: string | number, css: string): boolean;
+		reconstruct(): void;
 
-        hasEvent(name: string): boolean;
+		removeView(id: any): void;
 
-        hide(): void;
+		resize(): void;
 
-        hideItem(id: string | number): void;
+		resizeChildren(): void;
 
-        isEnabled(): boolean;
+		restore(state: any, factory: WebixCallback, configOnly: boolean): void;
 
-        isSelected(id: string | number): boolean;
+		serialize(serializer?: WebixCallback): any;
 
-        isVisible(): boolean;
+		show(force?: boolean, animation?: boolean): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		showBatch(name: string, mode?: boolean): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		unbind(): void;
 
-        locate(e: Event): string | number;
+		unblockEvent(): void;
 
-        mapEvent(map: any): void;
+		$getSize(): any[];
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		$height: number;
 
-        moveBottom(id: string | number): void;
+		$setSize(x: number, y: number): boolean;
 
-        moveDown(id: string | number, step: number): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: layoutConfig;
+		name: string;
+	}
 
-        moveSelection(direction: string): void;
+	interface listConfig {
+		view?: string;
+		animate?: any;
+		autoheight?: boolean;
+		autowidth?: boolean;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		clipboard?: boolean | string;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		dataFeed?: string | WebixCallback;
+		datafetch?: number;
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragscroll?: boolean | string;
+		dynamic?: boolean;
+		externalData?: WebixCallback;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		layout?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: string | boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		pager?: any;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean | string;
+		template?: string | WebixCallback;
+		templateCopy?: WebixCallback;
+		tooltip?: any;
+		type?: any;
+		url?: any;
+		width?: number;
+		xCount?: number;
+		yCount?: number;
+	}
 
-        moveTop(id: string | number): void;
+	type listEventName =
+		'onAfterAdd'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPaste'
+		| 'onSelectChange'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        moveUp(id: string | number, step: number): void;
+	export class list implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        parse(data: any, type: string): void;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        queryView(config: any, mode?: string): any;
+		adjust(): void;
 
-        refresh(id?: string | number): void;
+		attachEvent(type: listEventName, functor: WebixCallback, id?: string): string | number;
 
-        remove(id: string | number): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		blockEvent(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        resize(): void;
+		clearAll(soft?: boolean): void;
 
-        scrollTo(x: number, y: number): void;
+		clearCss(css: string, silent?: boolean): void;
 
-        select(id: string | any[], preserve: boolean): void;
+		clearValidation(): void;
 
-        selectAll(from?: string, to?: string): void;
+		copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-        serialize(): any[];
+		count(): number;
 
-        setPage(page: number): void;
+		customize(obj: any): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		define(property: string, value: any): void;
 
-        showItem(id: string | number): void;
+		destructor(): void;
 
-        sizeToContent(): void;
+		detachEvent(id: string): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		disable(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		disableItem(id: string | number): void;
 
-        unbind(): void;
+		enable(): void;
 
-        unblockEvent(): void;
+		enableItem(id: string | number): void;
 
-        unselect(id?: string): void;
+		exists(id: number | string): boolean;
 
-        unselectAll(): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        updateItem(id: string | number, data: any): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        validate(id?: string): boolean;
+		getChildViews(): any[];
 
-        $customPrint: WebixCallback;
+		getFirstId(): number | string;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		getFormView(): webix.ui.baseview;
 
-        $dragHTML: WebixCallback;
+		getIdByIndex(index: number | string): string | number;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		getIndexById(id: number | string): number;
 
-        $dragMark(context: any, ev: Event): boolean;
+		getItem(id: number | string): any;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		getItemNode(id: string | number): HTMLElement;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		getLastId(): number | string;
 
-        $dropAllow: WebixCallback;
+		getNextId(id: number | string, step: number): string | number;
 
-        $getSize(): any[];
+		getNode(): any;
 
-        $height: number;
-        $scope: any;
+		getPage(): number;
 
-        $setSize(x: number, y: number): boolean;
+		getPager(): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: menuConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		getParentView(): any;
 
-    interface multicomboConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        button?: boolean;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        keepText?: boolean;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        newValues?: boolean;
-        on?: EventHash;
-        optionWidth?: number;
-        options?: any;
-        placeholder?: string;
-        popup?: string;
-        popupWidth?: number;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        separator?: string;
-        suggest?: any;
-        tagMode?: boolean;
-        tagTemplate?: WebixCallback;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		getPrevId(id: number | string, step: number): string | number;
 
-    type multicomboEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getScrollState(): any;
 
-    class multicombo implements webix.ui.baseview {
-        adjust(): void;
+		getSelectedId(as_array: boolean): string | any[];
 
-        attachEvent(type: multicomboEventName, functor: WebixCallback, id?: string): string | number;
+		getSelectedItem(as_array: boolean): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        blockEvent(): void;
+		getVisibleCount(): number;
 
-        blur(): void;
+		hasCss(id: string | number, css: string): boolean;
 
-        callEvent(name: string, params: any[]): boolean;
+		hasEvent(name: string): boolean;
 
-        define(property: string, value: any): void;
+		hide(): void;
 
-        destructor(): void;
+		isEnabled(): boolean;
 
-        detachEvent(id: string): void;
+		isEnabledItem(): boolean;
 
-        disable(): void;
+		isSelected(id: string | number): boolean;
 
-        enable(): void;
+		isVisible(): boolean;
 
-        focus(): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        getChildViews(): any[];
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        getFormView(): webix.ui.baseview;
+		locate(e: Event): string | number;
 
-        getInputNode(): HTMLElement;
+		mapEvent(map: any): void;
 
-        getList(): webix.ui.baseview;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        getNode(): any;
+		moveBottom(id: string | number): void;
 
-        getParentView(): any;
+		moveDown(id: string | number, step: number): void;
 
-        getPopup(): webix.ui.baseview;
+		moveSelection(direction: string): void;
 
-        getText(): string;
+		moveTop(id: string | number): void;
 
-        getTopParentView(): webix.ui.baseview;
+		moveUp(id: string | number, step: number): void;
 
-        getValue(): string;
+		parse(data: any, type: string): void;
 
-        hasEvent(name: string): boolean;
+		queryView(config: any, mode?: string): any;
 
-        hide(): void;
+		refresh(id?: number | string): void;
 
-        isEnabled(): boolean;
+		remove(id: string | number | any[]): void;
 
-        isVisible(): boolean;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        mapEvent(map: any): void;
+		render(id: string | number, data: any, type: string): void;
 
-        queryView(config: any, mode?: string): any;
+		resize(): void;
 
-        refresh(): void;
+		scrollTo(x: number, y: number): void;
 
-        render(id: string | number, data: any, type: string): void;
+		select(id: string | any[], preserve: boolean): void;
 
-        resize(): void;
+		selectAll(from?: string, to?: string): void;
 
-        setBottomText(text: string): void;
+		serialize(all?: boolean): any[];
 
-        setValue(value: string): void;
+		setPage(page: number): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		showItem(id: string | number): void;
 
-        unbind(): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        unblockEvent(): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        validate(): boolean;
+		unbind(): void;
 
-        $compareValue: WebixCallback;
-        $cssName: string;
+		unblockEvent(): void;
 
-        $getSize(): any[];
+		unselect(id?: string): void;
 
-        $getValue(): string;
+		unselectAll(): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
+		updateItem(id: number | string, data: any): void;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		validate(id?: string): boolean;
 
-        $renderLabel(config: any, id: string | number): string;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        $scope: any;
+		$customPrint: WebixCallback;
 
-        $setSize(x: number, y: number): boolean;
+		$drag(source: HTMLElement, ev: Event): string;
 
-        $setValue(value: string): void;
+		$dragHTML: WebixCallback;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: multicomboConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-    interface multiselectConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        optionWidth?: number;
-        options?: any;
-        placeholder?: string;
-        popup?: string;
-        popupWidth?: number;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        separator?: string;
-        suggest?: any;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		$dragMark(context: any, ev: Event): boolean;
 
-    type multiselectEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-    class multiselect implements webix.ui.baseview {
-        adjust(): void;
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        attachEvent(type: multiselectEventName, functor: WebixCallback, id?: string): string | number;
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$getSize(): any[];
 
-        blockEvent(): void;
+		$height: number;
+		$scope: any;
 
-        blur(): void;
+		$setSize(x: number, y: number): boolean;
 
-        callEvent(name: string, params: any[]): boolean;
+		$skin: WebixCallback;
 
-        define(property: string, value: any): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        destructor(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        detachEvent(id: string): void;
+		$tooltipOut(): void;
 
-        disable(): void;
+		$view: HTMLElement;
+		$width: number;
+		config: listConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        enable(): void;
+	interface menuConfig {
+		view?: string;
+		animate?: any;
+		autoheight?: boolean;
+		autowidth?: boolean;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		clipboard?: boolean | string;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragscroll?: boolean | string;
+		externalData?: WebixCallback;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		layout?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: string | boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		openAction?: string;
+		pager?: any;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean | string;
+		subMenuPos?: string;
+		submenuConfig?: any;
+		template?: string | WebixCallback;
+		templateCopy?: WebixCallback;
+		tooltip?: any;
+		type?: any;
+		url?: any;
+		width?: number;
+		xCount?: number;
+		yCount?: number;
+	}
 
-        focus(): void;
+	type menuEventName =
+		'onAfterAdd'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMenuItemClick'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPaste'
+		| 'onSelectChange'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        getChildViews(): any[];
+	export class menu implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        getFormView(): webix.ui.baseview;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        getInputNode(): HTMLElement;
+		adjust(): void;
 
-        getList(): webix.ui.baseview;
+		attachEvent(type: menuEventName, functor: WebixCallback, id?: string): string | number;
 
-        getNode(): any;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getParentView(): any;
+		blockEvent(): void;
 
-        getPopup(): webix.ui.baseview;
+		callEvent(name: string, params: any[]): boolean;
 
-        getText(): string;
+		clearAll(soft?: boolean): void;
 
-        getTopParentView(): webix.ui.baseview;
+		clearCss(css: string, silent?: boolean): void;
 
-        getValue(): string;
+		clearValidation(): void;
 
-        hasEvent(name: string): boolean;
+		copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-        hide(): void;
+		count(): number;
 
-        isEnabled(): boolean;
+		customize(obj: any): void;
 
-        isVisible(): boolean;
+		define(property: string, value: any): void;
 
-        mapEvent(map: any): void;
+		destructor(): void;
 
-        queryView(config: any, mode?: string): any;
+		detachEvent(id: string): void;
 
-        refresh(): void;
+		disable(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		disableItem(id: string | number): void;
 
-        resize(): void;
+		enable(): void;
 
-        setBottomText(text: string): void;
+		enableItem(id: string | number): void;
 
-        setValue(value: string): void;
+		exists(id: number | string): boolean;
 
-        show(force?: boolean, animation?: boolean): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        unbind(): void;
+		getChildViews(): any[];
 
-        unblockEvent(): void;
+		getFirstId(): number | string;
 
-        validate(): boolean;
+		getFormView(): webix.ui.baseview;
 
-        $compareValue: WebixCallback;
-        $cssName: string;
+		getIdByIndex(index: number | string): string | number;
 
-        $getSize(): any[];
+		getIndexById(id: number | string): number;
 
-        $getValue(): string;
+		getItem(id: number | string): any;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		getItemNode(id: string | number): HTMLElement;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		getLastId(): number | string;
 
-        $renderLabel(config: any, id: string | number): string;
+		getMenu(id: string | number): any;
 
-        $scope: any;
+		getMenuItem(id: string | number): any;
 
-        $setSize(x: number, y: number): boolean;
+		getNextId(id: number | string, step: number): string | number;
 
-        $setValue(value: string): void;
+		getNode(): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: multiselectConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		getPage(): number;
 
-    interface multisuggestConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        button?: boolean;
-        buttonText?: string;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        disabled?: boolean;
-        filter?: WebixCallback;
-        fitMaster?: boolean;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        input?: HTMLElement | string;
-        keyPressTimeout?: number;
-        left?: number;
-        master?: webix.ui.baseview;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        move?: boolean;
-        on?: EventHash;
-        padding?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        relative?: string;
-        resize?: boolean;
-        separator?: string;
-        template?: string | WebixTemplate;
-        textValue?: string;
-        toFront?: boolean;
-        top?: number;
-        type?: string;
-        url?: string;
-        value?: string | number;
-        width?: number;
-        zIndex?: number;
-    }
+		getPager(): any;
 
-    type multisuggestEventName =
-        'onAfterScroll'
-        | 'onBeforeShow'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValueSuggest'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		getParentView(): any;
 
-    class multisuggest implements webix.ui.baseview {
-        adjust(): void;
+		getPrevId(id: number | string, step: number): string | number;
 
-        attachEvent(type: multisuggestEventName, functor: WebixCallback, id?: string): string | number;
+		getScrollState(): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getSelectedId(as_array: boolean): string | any[];
 
-        blockEvent(): void;
+		getSelectedItem(as_array: boolean): any;
 
-        callEvent(name: string, params: any[]): boolean;
+		getSubMenu(id: string | number): any;
 
-        close(): void;
+		getTopMenu(): any;
 
-        define(property: string, value: any): void;
+		getTopParentView(): webix.ui.baseview;
 
-        destructor(): void;
+		getVisibleCount(): number;
 
-        detachEvent(id: string): void;
+		hasCss(id: string | number, css: string): boolean;
 
-        disable(): void;
+		hasEvent(name: string): boolean;
 
-        enable(): void;
+		hide(): void;
 
-        getBody(): any;
+		hideItem(id: string | number): void;
 
-        getButton(): webix.ui.baseview;
+		isEnabled(): boolean;
 
-        getChildViews(): any[];
+		isEnabledItem(): boolean;
 
-        getFormView(): webix.ui.baseview;
+		isSelected(id: string | number): boolean;
 
-        getHead(): any;
+		isVisible(): boolean;
 
-        getItemId(text: string): string | number;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        getItemText(id: string | number): string;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        getList(): webix.ui.baseview;
+		locate(e: Event): string | number;
 
-        getMasterValue(): any;
+		mapEvent(map: any): void;
 
-        getNode(): any;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        getParentView(): any;
+		moveBottom(id: string | number): void;
 
-        getSuggestion(): string;
+		moveDown(id: string | number, step: number): void;
 
-        getTopParentView(): webix.ui.baseview;
+		moveSelection(direction: string): void;
 
-        getValue(): string | number;
+		moveTop(id: string | number): void;
 
-        hasEvent(name: string): boolean;
+		moveUp(id: string | number, step: number): void;
 
-        hide(): void;
+		parse(data: any, type: string): void;
 
-        isEnabled(): boolean;
+		queryView(config: any, mode?: string): any;
 
-        isVisible(): boolean;
+		refresh(id?: number | string): void;
 
-        linkInput(input: HTMLElement): void;
+		remove(id: string | number | any[]): void;
 
-        mapEvent(map: any): void;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        queryView(config: any, mode?: string): any;
+		render(id: string | number, data: any, type: string): void;
 
-        resize(): void;
+		resize(): void;
 
-        resizeChildren(): void;
+		scrollTo(x: number, y: number): void;
 
-        setMasterValue(value: any): void;
+		select(id: string | any[], preserve: boolean): void;
 
-        setPosition(x: number, y: number): void;
+		selectAll(from?: string, to?: string): void;
 
-        setValue(value: string | number): void;
+		serialize(all?: boolean): any[];
 
-        show(force?: boolean, animation?: boolean): void;
+		setPage(page: number): void;
 
-        unbind(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        unblockEvent(): void;
+		showItem(id: string | number): void;
 
-        $enterKey: WebixCallback;
+		sizeToContent(): void;
 
-        $getSize(): any[];
+		sort(by: string, dir?: string, as?: string): void;
 
-        $height: number;
-        $scope: any;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        $setSize(x: number, y: number): boolean;
+		unbind(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: multisuggestConfig;
-        name: string;
-    }
+		unblockEvent(): void;
 
-    interface multitextConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        iconWidth?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        placeholder?: string;
-        popup?: string;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        separator?: string;
-        subConfig?: any;
-        suggest?: any;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		unselect(id?: string): void;
 
-    type multitextEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSectionAdd'
-        | 'onSectionRemove'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		unselectAll(): void;
 
-    class multitext implements webix.ui.baseview {
-        addSection(): string | number;
+		updateItem(id: number | string, data: any): void;
 
-        adjust(): void;
+		validate(id?: string): boolean;
 
-        attachEvent(type: multitextEventName, functor: WebixCallback, id?: string): string | number;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$customPrint: WebixCallback;
 
-        blockEvent(): void;
+		$drag(source: HTMLElement, ev: Event): string;
 
-        blur(): void;
+		$dragHTML: WebixCallback;
 
-        callEvent(name: string, params: any[]): boolean;
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-        define(property: string, value: any): void;
+		$dragMark(context: any, ev: Event): boolean;
 
-        destructor(): void;
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-        detachEvent(id: string): void;
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        disable(): void;
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
 
-        enable(): void;
+		$getSize(): any[];
 
-        focus(): void;
+		$height: number;
+		$scope: any;
 
-        getChildViews(): any[];
+		$setSize(x: number, y: number): boolean;
 
-        getFormView(): webix.ui.baseview;
+		$skin: WebixCallback;
 
-        getInputNode(): HTMLElement;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        getNode(): any;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        getParentView(): any;
+		$tooltipOut(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		$view: HTMLElement;
+		$width: number;
+		config: menuConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        getValue(): string;
+	interface multicomboConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		button?: boolean;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keepText?: boolean;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		newValues?: boolean;
+		on?: EventHash;
+		optionWidth?: number;
+		options?: any;
+		placeholder?: string;
+		popup?: string;
+		popupWidth?: number;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		separator?: string;
+		suggest?: any;
+		tagMode?: boolean;
+		tagTemplate?: WebixCallback;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: number | string | any[];
+		width?: number;
+	}
 
-        getValueHere(): string;
+	type multicomboEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        hasEvent(name: string): boolean;
+	export class multicombo implements webix.ui.baseview {
+		adjust(): void;
 
-        hide(): void;
+		attachEvent(type: multicomboEventName, functor: WebixCallback, id?: string): string | number;
 
-        isEnabled(): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        isVisible(): boolean;
+		blockEvent(): void;
 
-        mapEvent(map: any): void;
+		blur(): void;
 
-        queryView(config: any, mode?: string): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        refresh(): void;
+		define(property: string, value: any): void;
 
-        removeSection(id?: string | number): void;
+		destructor(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		detachEvent(id: string): void;
 
-        resize(): void;
+		disable(): void;
 
-        setBottomText(text: string): void;
+		enable(): void;
 
-        setValue(value: string): void;
+		focus(): void;
 
-        setValueHere(value: string | number): void;
+		getChildViews(): any[];
 
-        show(force?: boolean, animation?: boolean): void;
+		getFormView(): webix.ui.baseview;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		getInputNode(): HTMLElement;
 
-        unbind(): void;
+		getList(): webix.ui.baseview;
 
-        unblockEvent(): void;
+		getNode(): any;
 
-        validate(): boolean;
+		getParentView(): any;
 
-        $compareValue: WebixCallback;
-        $cssName: string;
+		getPopup(): webix.ui.baseview;
 
-        $getSize(): any[];
+		getText(): string;
 
-        $getValue(): string;
+		getTopParentView(): webix.ui.baseview;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		getValue(config?: any): string | any[];
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		hasEvent(name: string): boolean;
 
-        $renderLabel(config: any, id: string | number): string;
+		hide(): void;
 
-        $scope: any;
+		isEnabled(): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		isVisible(): boolean;
 
-        $setValue(value: string): void;
+		mapEvent(map: any): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: multitextConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		queryView(config: any, mode?: string): any;
 
-    interface multiviewConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cells?: any;
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        fitBiggest?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        keepViews?: boolean;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        responsive?: string;
-        rows?: any[];
-        visibleBatch?: string;
-        width?: number;
-    }
+		refresh(): void;
 
-    type multiviewEventName = 'onBeforeBack' | 'onBindRequest' | 'onDestruct' | 'onViewChange';
+		render(id: string | number, data: any, type: string): void;
 
-    class multiview implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		resize(): void;
 
-        adjust(): void;
+		setBottomText(text: string): void;
 
-        attachEvent(type: multiviewEventName, functor: WebixCallback, id?: string): string | number;
+		setValue(value: string): void;
 
-        back(step: number): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        blockEvent(): void;
+		unbind(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		unblockEvent(): void;
 
-        define(property: string, value: any): void;
+		validate(): boolean;
 
-        destructor(): void;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
+		$cssName: string;
 
-        detachEvent(id: string): void;
+		$getSize(): any[];
 
-        disable(): void;
+		$getValue(): string;
 
-        enable(): void;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
 
-        getActiveId(): void;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        getChildViews(): any[];
+		$renderLabel(config: any, id: string | number): string;
 
-        getFormView(): webix.ui.baseview;
+		$scope: any;
 
-        getNode(): any;
+		$setSize(x: number, y: number): boolean;
 
-        getParentView(): any;
+		$setValue(value: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		$skin: WebixCallback;
 
-        getValue(): string | number;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        hasEvent(name: string): boolean;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        hide(): void;
+		$tooltipOut(): void;
 
-        index(obj: any): number;
+		$view: HTMLElement;
+		$width: number;
+		config: multicomboConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        isEnabled(): boolean;
+	interface multiselectConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icon?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		optionWidth?: number;
+		options?: any;
+		placeholder?: string;
+		popup?: string;
+		popupWidth?: number;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		separator?: string;
+		suggest?: any;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        isVisible(): boolean;
+	type multiselectEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        mapEvent(map: any): void;
+	export class multiselect implements webix.ui.baseview {
+		adjust(): void;
 
-        queryView(config: any, mode?: string): any;
+		attachEvent(type: multiselectEventName, functor: WebixCallback, id?: string): string | number;
 
-        reconstruct(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        removeView(id: any): void;
+		blockEvent(): void;
 
-        resize(): void;
+		blur(): void;
 
-        resizeChildren(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        setValue(id: string | number): void;
+		define(property: string, value: any): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		destructor(): void;
 
-        showBatch(name: string, mode?: boolean): void;
+		detachEvent(id: string): void;
 
-        unbind(): void;
+		disable(): void;
 
-        unblockEvent(): void;
+		enable(): void;
 
-        $getSize(): any[];
+		focus(): void;
 
-        $height: number;
+		getChildViews(): any[];
 
-        $setSize(x: number, y: number): boolean;
+		getFormView(): webix.ui.baseview;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: multiviewConfig;
-        name: string;
-    }
+		getInputNode(): HTMLElement;
 
-    interface organogramConfig {
-        view?: string;
-        animate?: any;
-        ariaLabel?: string;
-        autoheight?: boolean;
-        autowidth?: boolean;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        filterMode?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: string | boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean | string;
-        template?: string | WebixCallback;
-        threeState?: boolean;
-        tooltip?: string | boolean;
-        type?: any;
-        url?: any;
-        width?: number;
-    }
+		getList(): webix.ui.baseview;
 
-    type organogramEventName =
-        'onAfterAdd'
-        | 'onAfterClose'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterLoad'
-        | 'onAfterOpen'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeClose'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeLoad'
-        | 'onBeforeOpen'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemCheck'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onSelectChange'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getNode(): any;
 
-    class organogram implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		getParentView(): any;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		getPopup(): webix.ui.baseview;
 
-        adjust(): void;
+		getText(): string;
 
-        attachEvent(type: organogramEventName, functor: WebixCallback, id?: string): string | number;
+		getTopParentView(): webix.ui.baseview;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getValue(): string;
 
-        blockEvent(): void;
+		hasEvent(name: string): boolean;
 
-        callEvent(name: string, params: any[]): boolean;
+		hide(): void;
 
-        clearAll(soft?: boolean): void;
+		isEnabled(): boolean;
 
-        clearCss(css: string, silent?: boolean): void;
+		isVisible(): boolean;
 
-        close(id: string | number): void;
+		mapEvent(map: any): void;
 
-        closeAll(): void;
+		queryView(config: any, mode?: string): any;
 
-        count(): number;
+		refresh(): void;
 
-        customize(obj: any): void;
+		render(id: string | number, data: any, type: string): void;
 
-        define(property: string, value: any): void;
+		resize(): void;
 
-        destructor(): void;
+		setBottomText(text: string): void;
 
-        detachEvent(id: string): void;
+		setValue(value: string): void;
 
-        disable(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        enable(): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        exists(id: string | number): boolean;
+		unbind(): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		unblockEvent(): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		validate(): boolean;
 
-        getBranchIndex(id: string | number, parent?: string | number): number;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
+		$cssName: string;
 
-        getChildViews(): any[];
+		$getSize(): any[];
 
-        getFirstChildId(id: string | number): string;
+		$getValue(): string;
 
-        getFirstId(): string | number;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        getFormView(): webix.ui.baseview;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        getIdByIndex(index: number): string | number;
+		$renderLabel(config: any, id: string | number): string;
 
-        getIndexById(id: string | number): number;
+		$scope: any;
 
-        getItem(id: string | number): any;
+		$setSize(x: number, y: number): boolean;
 
-        getItemNode(id: string | number): HTMLElement;
+		$setValue(value: string): void;
 
-        getLastId(): string | number;
+		$skin: WebixCallback;
 
-        getNextId(id: string | number, step: number): string | number;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        getNextSiblingId(id: string | number): string | number;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        getNode(): any;
+		$tooltipOut(): void;
 
-        getOpenItems(): any[];
+		$view: HTMLElement;
+		$width: number;
+		config: multiselectConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        getParentId(id: string | number): string | number;
+	interface multisuggestConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		button?: boolean;
+		buttonText?: string;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		disabled?: boolean;
+		filter?: WebixCallback;
+		fitMaster?: boolean;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		input?: HTMLElement | string;
+		keyPressTimeout?: number;
+		left?: number;
+		master?: webix.ui.baseview;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		move?: boolean;
+		on?: EventHash;
+		padding?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		relative?: string;
+		resize?: boolean;
+		separator?: string;
+		template?: string | WebixTemplate;
+		textValue?: string;
+		toFront?: boolean;
+		top?: number;
+		type?: string;
+		url?: string;
+		value?: string | number;
+		width?: number;
+		zIndex?: number;
+	}
 
-        getParentView(): any;
+	type multisuggestEventName =
+		'onAfterScroll'
+		| 'onBeforeShow'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValueSuggest'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        getPrevId(id: string | number, step: number): string | number;
+	export class multisuggest implements webix.ui.baseview {
+		adjust(): void;
 
-        getPrevSiblingId(id: string | number): string | number;
+		attachEvent(type: multisuggestEventName, functor: WebixCallback, id?: string): string | number;
 
-        getScrollState(): any;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getSelectedId(as_array: boolean): string | any[];
+		blockEvent(): void;
 
-        getSelectedItem(as_array: boolean): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        getState(): any;
+		define(property: string, value: any): void;
 
-        getTopParentView(): webix.ui.baseview;
+		destructor(): void;
 
-        group(config: any, mode: boolean): void;
+		detachEvent(id: string): void;
 
-        hasCss(id: string | number, css: string): boolean;
+		disable(): void;
 
-        hasEvent(name: string): boolean;
+		enable(): void;
 
-        hide(): void;
+		getBody(): any;
 
-        isBranch(id: string | number): boolean;
+		getButton(): webix.ui.baseview;
 
-        isBranchOpen(id: string | number): boolean;
+		getChildViews(): any[];
 
-        isEnabled(): boolean;
+		getFormView(): webix.ui.baseview;
 
-        isSelected(id: string | number): boolean;
+		getHead(): any;
 
-        isVisible(): boolean;
+		getItemId(text: string): string | number;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		getItemText(id: string | number): string;
 
-        loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+		getList(): webix.ui.baseview;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		getMasterValue(): any;
 
-        locate(e: Event): string | number;
+		getNode(): any;
 
-        mapEvent(map: any): void;
+		getParentView(): any;
 
-        open(id: string | number, show?: boolean): void;
+		getSuggestion(): string;
 
-        openAll(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        parse(data: any, type: string): void;
+		getValue(): string | number;
 
-        queryView(config: any, mode?: string): any;
+		hasEvent(name: string): boolean;
 
-        refresh(id?: string | number): void;
+		hide(): void;
 
-        remove(id: string | number): void;
+		isEnabled(): boolean;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		isVisible(): boolean;
 
-        render(id: string | number, data: any, type: string): void;
+		linkInput(input: HTMLElement): void;
 
-        resize(): void;
+		mapEvent(map: any): void;
 
-        scrollTo(x: number, y: number): void;
+		queryView(config: any, mode?: string): any;
 
-        select(id: string | any[], preserve: boolean): void;
+		resize(): void;
 
-        selectAll(from?: string, to?: string): void;
+		resizeChildren(): void;
 
-        serialize(): any[];
+		setMasterValue(value: any): void;
 
-        setState(state: any): void;
+		setPosition(x: number, y: number): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		setValue(value: string | number): void;
 
-        showItem(id: string | number): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		unbind(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		unblockEvent(): void;
 
-        unbind(): void;
+		$enterKey: WebixCallback;
 
-        unblockEvent(): void;
+		$getSize(): any[];
 
-        ungroup(mode: boolean): void;
+		$height: number;
+		$scope: any;
 
-        unselect(id?: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        unselectAll(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: multisuggestConfig;
+		name: string;
+	}
 
-        updateItem(id: string | number, data: any): void;
+	interface multitextConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icon?: string;
+		iconWidth?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		placeholder?: string;
+		popup?: string;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		separator?: string;
+		subConfig?: any;
+		suggest?: any;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        $getSize(): any[];
+	type multitextEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSectionAdd'
+		| 'onSectionRemove'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        $height: number;
-        $scope: any;
+	export class multitext implements webix.ui.baseview {
+		addSection(): string | number;
 
-        $setSize(x: number, y: number): boolean;
+		adjust(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: organogramConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		attachEvent(type: multitextEventName, functor: WebixCallback, id?: string): string | number;
 
-    interface pagerConfig {
-        view?: string;
-        animate?: any;
-        apiOnly?: boolean;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        count?: number;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        group?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        limit?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        page?: number;
-        size?: number;
-        template?: string | WebixCallback;
-        width?: number;
-    }
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    type pagerEventName =
-        'onAfterContextMenu'
-        | 'onAfterPageChange'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeContextMenu'
-        | 'onBeforePageChange'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		blockEvent(): void;
 
-    class pager implements webix.ui.baseview {
-        adjust(): void;
+		blur(): void;
 
-        attachEvent(type: pagerEventName, functor: WebixCallback, id?: string): string | number;
+		callEvent(name: string, params: any[]): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		define(property: string, value: any): void;
 
-        blockEvent(): void;
+		destructor(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		detachEvent(id: string): void;
 
-        clone(config: any): any;
+		disable(): void;
 
-        customize(obj: any): void;
+		enable(): void;
 
-        define(property: string, value: any): void;
+		focus(): void;
 
-        destructor(): void;
+		getChildViews(): any[];
 
-        detachEvent(id: string): void;
+		getFormView(): webix.ui.baseview;
 
-        disable(): void;
+		getInputNode(): HTMLElement;
 
-        enable(): void;
+		getNode(): any;
 
-        getChildViews(): any[];
+		getParentView(): any;
 
-        getFormView(): webix.ui.baseview;
+		getTopParentView(): webix.ui.baseview;
 
-        getNode(): any;
+		getValue(): string;
 
-        getParentView(): any;
+		getValueHere(): string;
 
-        getTopParentView(): webix.ui.baseview;
+		hasEvent(name: string): boolean;
 
-        hasEvent(name: string): boolean;
+		hide(): void;
 
-        hide(): void;
+		isEnabled(): boolean;
 
-        isEnabled(): boolean;
+		isVisible(): boolean;
 
-        isVisible(): boolean;
+		mapEvent(map: any): void;
 
-        mapEvent(map: any): void;
+		queryView(config: any, mode?: string): any;
 
-        queryView(config: any, mode?: string): any;
+		refresh(): void;
 
-        refresh(id?: string | number): void;
+		removeSection(id?: string | number): void;
 
-        render(id: string | number, data: any, type: string): void;
+		render(id: string | number, data: any, type: string): void;
 
-        resize(): void;
+		resize(): void;
 
-        select(page: number): void;
+		setBottomText(text: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		setValue(value: string): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		setValueHere(value: string | number): void;
 
-        unbind(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        unblockEvent(): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        $getSize(): any[];
+		unbind(): void;
 
-        $height: number;
-        $scope: any;
+		unblockEvent(): void;
 
-        $setSize(x: number, y: number): boolean;
+		validate(): boolean;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: pagerConfig;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-    }
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
+		$cssName: string;
 
-    interface panelConfig {
-        view?: string;
-        animate?: any;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        icon?: string | boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        resize?: boolean;
-        type?: string;
-        width?: number;
-    }
+		$getSize(): any[];
 
-    type panelEventName = 'onBindRequest' | 'onDestruct' | 'onViewResize';
+		$getValue(): string;
 
-    class panel implements webix.ui.baseview {
-        adjust(): void;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        attachEvent(type: panelEventName, functor: WebixCallback, id?: string): string | number;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$renderLabel(config: any, id: string | number): string;
 
-        blockEvent(): void;
+		$scope: any;
 
-        callEvent(name: string, params: any[]): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        define(property: string, value: any): void;
+		$setValue(value: string): void;
 
-        destructor(): void;
+		$skin: WebixCallback;
 
-        detachEvent(id: string): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        disable(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        enable(): void;
+		$tooltipOut(): void;
 
-        getChildViews(): any[];
+		$view: HTMLElement;
+		$width: number;
+		config: multitextConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        getFormView(): webix.ui.baseview;
+	interface multiviewConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		cells?: any;
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		fitBiggest?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keepViews?: boolean;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		responsive?: string;
+		rows?: any[];
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        getNode(): any;
+	type multiviewEventName = 'onBeforeBack' | 'onBindRequest' | 'onDestruct' | 'onViewChange' | 'onViewShow';
 
-        getParentView(): any;
+	export class multiview implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        getTopParentView(): webix.ui.baseview;
+		adjust(): void;
 
-        hasEvent(name: string): boolean;
+		attachEvent(type: multiviewEventName, functor: WebixCallback, id?: string): string | number;
 
-        hide(): void;
+		back(step: number): void;
 
-        isEnabled(): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        isVisible(): boolean;
+		blockEvent(): void;
 
-        mapEvent(map: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        queryView(config: any, mode?: string): any;
+		define(property: string, value: any): void;
 
-        resize(): void;
+		destructor(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		detachEvent(id: string): void;
 
-        unbind(): void;
+		disable(): void;
 
-        unblockEvent(): void;
+		enable(): void;
 
-        $getSize(): any[];
+		getActiveId(): string;
 
-        $height: number;
+		getChildViews(): any[];
 
-        $resizeEnd(pos: number): void;
+		getFormView(): webix.ui.baseview;
 
-        $resizeMove(pos: number): void;
+		getNode(): any;
 
-        $setSize(x: number, y: number): boolean;
+		getParentView(): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: panelConfig;
-        name: string;
-    }
+		getTopParentView(): webix.ui.baseview;
 
-    interface pdfviewerConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datatype?: string;
-        disabled?: boolean;
-        downloadName?: string;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        scale?: string | number;
-        toolbar?: string;
-        url?: any;
-        width?: number;
-    }
+		getValue(): string | number;
 
-    type pdfviewerEventName =
-        'onAfterLoad'
-        | 'onAfterScroll'
-        | 'onBeforeLoad'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onDocumentReady'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onPageRender'
-        | 'onScaleChange'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		hasEvent(name: string): boolean;
 
-    class pdfviewer implements webix.ui.baseview {
-        adjust(): void;
+		hide(): void;
 
-        attachEvent(type: pdfviewerEventName, functor: WebixCallback, id?: string): string | number;
+		index(obj: any): number;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		isEnabled(): boolean;
 
-        blockEvent(): void;
+		isVisible(): boolean;
 
-        callEvent(name: string, params: any[]): boolean;
+		mapEvent(map: any): void;
 
-        clear(): void;
+		queryView(config: any, mode?: string): any;
 
-        define(property: string, value: any): void;
+		reconstruct(): void;
 
-        destructor(): void;
+		removeView(id: any): void;
 
-        detachEvent(id: string): void;
+		resize(): void;
 
-        disable(): void;
+		resizeChildren(): void;
 
-        download(): void;
+		setValue(id: string | number): void;
 
-        enable(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        getChildViews(): any[];
+		showBatch(name: string, mode?: boolean): void;
 
-        getFormView(): webix.ui.baseview;
+		unbind(): void;
 
-        getNode(): any;
+		unblockEvent(): void;
 
-        getParentView(): any;
+		$getSize(): any[];
 
-        getTopParentView(): webix.ui.baseview;
+		$height: number;
 
-        hasEvent(name: string): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        hide(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: multiviewConfig;
+		name: string;
+	}
 
-        isEnabled(): boolean;
+	interface organogramConfig {
+		view?: string;
+		animate?: any;
+		ariaLabel?: string;
+		autoheight?: boolean;
+		autowidth?: boolean;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		dataFeed?: string | WebixCallback;
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		filterMode?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: string | boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean | string;
+		template?: string | WebixCallback;
+		threeState?: boolean;
+		tooltip?: any;
+		type?: any;
+		url?: any;
+		width?: number;
+	}
 
-        isVisible(): boolean;
+	type organogramEventName =
+		'onAfterAdd'
+		| 'onAfterClose'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterLoad'
+		| 'onAfterOpen'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeClose'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeLoad'
+		| 'onBeforeOpen'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemCheck'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onSelectChange'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+	export class organogram implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        mapEvent(map: any): void;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        nextPage(): void;
+		adjust(): void;
 
-        parse(data: any, type: string): void;
+		attachEvent(type: organogramEventName, functor: WebixCallback, id?: string): string | number;
 
-        prevPage(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        queryView(config: any, mode?: string): any;
+		blockEvent(): void;
 
-        renderPage(page: number): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        resize(): void;
+		clearAll(soft?: boolean): void;
 
-        setScale(scale: string | number, update: boolean): void;
+		clearCss(css: string, silent?: boolean): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		close(id: string | number): void;
 
-        unbind(): void;
+		closeAll(): void;
 
-        unblockEvent(): void;
+		count(): number;
 
-        zoomIn(): void;
+		customize(obj: any): void;
 
-        zoomOut(): void;
+		define(property: string, value: any): void;
 
-        $getSize(): any[];
+		destructor(): void;
 
-        $height: number;
-        $numPages: number;
-        $onLoad: WebixCallback;
-        $pageNum: number;
-        $scope: any;
+		detachEvent(id: string): void;
 
-        $setSize(x: number, y: number): boolean;
+		disable(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: pdfviewerConfig;
-        name: string;
-    }
+		enable(): void;
 
-    interface pivotConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        columnWidth?: number;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datatype?: string;
-        disabled?: boolean;
-        externalProcessing?: boolean;
-        fieldMap?: any;
-        filterLabelAlign?: string;
-        filterLabelWidth?: number;
-        filterMap?: any;
-        filterMinWidth?: number;
-        filterPlaceholder?: boolean | string;
-        filterWidth?: number;
-        footer?: string | boolean;
-        format?: WebixCallback;
-        gravity?: number;
-        headerTemplate?: WebixCallback;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        max?: boolean;
-        maxHeight?: number;
-        maxWidth?: number;
-        min?: boolean;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        ping?: WebixCallback;
-        popup?: any;
-        profile?: boolean;
-        readonly?: boolean;
-        readonlyTitle?: string;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        scheme?: any;
-        separateLabel?: boolean;
-        stableRowId?: boolean;
-        structure?: any;
-        totalColumn?: string | boolean;
-        type?: string;
-        url?: any;
-        webWorker?: string;
-        width?: number;
-        yScaleWidth?: number;
-    }
+		exists(id: number | string): boolean;
 
-    type pivotEventName =
-        'onAfterAdd'
-        | 'onAfterDelete'
-        | 'onAfterLoad'
-        | 'onAfterSort'
-        | 'onApply'
-        | 'onBeforeAdd'
-        | 'onBeforeApply'
-        | 'onBeforeCancel'
-        | 'onBeforeDelete'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onCancel'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onFilterChange'
-        | 'onFilterCreate'
-        | 'onHeaderInit'
-        | 'onItemClick'
-        | 'onLoadError'
-        | 'onPopup'
-        | 'onViewInit'
-        | 'onWebWorkerEnd'
-        | 'onWebWorkerStart';
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-    class pivot implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        addOperation(name: string, operation: WebixCallback, options: any): void;
+		getBranchIndex(id: string | number, parent?: string | number): number;
 
-        addTotalOperation(name: string, operation: WebixCallback, options: any): void;
+		getChildViews(): any[];
 
-        adjust(): void;
+		getFirstChildId(id: string | number): string;
 
-        attachEvent(type: pivotEventName, functor: WebixCallback, id?: string): string | number;
+		getFirstId(): number | string;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getFormView(): webix.ui.baseview;
 
-        blockEvent(): void;
+		getIdByIndex(index: number | string): string | number;
 
-        callEvent(name: string, params: any[]): boolean;
+		getIndexById(id: number | string): number;
 
-        clearAll(soft?: boolean): void;
+		getItem(id: number | string): any;
 
-        configure(): void;
+		getItemNode(id: string | number): HTMLElement;
 
-        count(): number;
+		getLastId(): number | string;
 
-        define(property: string, value: any): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        destructor(): void;
+		getNextSiblingId(id: string | number): string | number;
 
-        detachEvent(id: string): void;
+		getNode(): any;
 
-        disable(): void;
+		getOpenItems(): any[];
 
-        enable(): void;
+		getParentId(id: string | number): string | number;
 
-        exists(id: string | number): boolean;
+		getParentView(): any;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		getPrevId(id: number | string, step: number): string | number;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		getPrevSiblingId(id: string | number): string | number;
 
-        getChildViews(): any[];
+		getScrollState(): any;
 
-        getConfigWindow(): any;
+		getSelectedId(as_array: boolean): string | any[];
 
-        getFields(): any;
+		getSelectedItem(as_array: boolean): any;
 
-        getFilterView(): any;
+		getState(): any;
 
-        getFirstId(): string | number;
+		getTopParentView(): webix.ui.baseview;
 
-        getFormView(): webix.ui.baseview;
+		group(config: any, target?: string | number): void;
 
-        getIdByIndex(index: number): string | number;
+		hasCss(id: string | number, css: string): boolean;
 
-        getIndexById(id: string | number): number;
+		hasEvent(name: string): boolean;
 
-        getItem(id: string | number): any;
+		hide(): void;
 
-        getLastId(): string | number;
+		isBranch(id: string | number): boolean;
 
-        getNextId(id: string | number, step: number): string | number;
+		isBranchOpen(id: string | number): boolean;
 
-        getNode(): any;
+		isEnabled(): boolean;
 
-        getParentView(): any;
+		isSelected(id: string | number): boolean;
 
-        getPrevId(id: string | number, step: number): string | number;
+		isVisible(): boolean;
 
-        getStructure(): any;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        getTopParentView(): webix.ui.baseview;
+		loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-        hasEvent(name: string): boolean;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        hide(): void;
+		locate(e: Event): string | number;
 
-        innerId(id: number | string): number | string;
+		mapEvent(map: any): void;
 
-        isEnabled(): boolean;
+		open(id: string | number, show?: boolean): void;
 
-        isVisible(): boolean;
+		openAll(): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		parse(data: any, type: string): void;
 
-        mapEvent(map: any): void;
+		queryView(config: any, mode?: string): any;
 
-        parse(data: any, type: string): void;
+		refresh(id?: number | string): void;
 
-        queryView(config: any, mode?: string): any;
+		remove(id: string | number | any[]): void;
 
-        refresh(id?: string | number): void;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        remove(id: string | number): void;
+		render(id: string | number, data: any, type: string): void;
 
-        render(): void;
+		resize(): void;
 
-        resize(): void;
+		scrollTo(x: number, y: number): void;
 
-        setStructure(config: any): void;
+		select(id: string | any[], preserve: boolean): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		selectAll(from?: string, to?: string): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		serialize(all?: boolean): any[];
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		setState(state: any): void;
 
-        ui(view: any): webix.ui.baseview;
+		show(force?: boolean, animation?: boolean): void;
 
-        unbind(): void;
+		showItem(id: string | number): void;
 
-        unblockEvent(): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        updateItem(id: string | number, data: any): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        $$: any;
-        $divider: string;
+		unbind(): void;
 
-        $getSize(): any[];
+		unblockEvent(): void;
 
-        $height: number;
+		ungroup(mode: boolean): void;
 
-        $setSize(x: number, y: number): boolean;
+		unselect(id?: string): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: pivotConfig;
-        data: DataStore;
-        name: string;
-        operations: any;
-        waitData: Promise<any>;
-    }
+		unselectAll(): void;
 
-    interface popupConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        left?: number;
-        master?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        move?: boolean;
-        on?: EventHash;
-        padding?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        relative?: string;
-        resize?: boolean;
-        toFront?: boolean;
-        top?: number;
-        width?: number;
-        zIndex?: number;
-    }
+		updateItem(id: number | string, data: any): void;
 
-    type popupEventName =
-        'onAfterScroll'
-        | 'onBeforeShow'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		waitSave(handler: WebixCallback): Promise<any>;
 
-    class popup implements webix.ui.baseview {
-        adjust(): void;
+		$getSize(): any[];
 
-        attachEvent(type: popupEventName, functor: WebixCallback, id?: string): string | number;
+		$height: number;
+		$scope: any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        blockEvent(): void;
+		$skin: WebixCallback;
 
-        callEvent(name: string, params: any[]): boolean;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        close(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        define(property: string, value: any): void;
+		$tooltipOut(): void;
 
-        destructor(): void;
+		$view: HTMLElement;
+		$width: number;
+		config: organogramConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        detachEvent(id: string): void;
+	interface pagerConfig {
+		view?: string;
+		animate?: any;
+		apiOnly?: boolean;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		count?: number;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		group?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		level?: number;
+		limit?: number;
+		master?: boolean;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		page?: number;
+		size?: number;
+		template?: string | WebixCallback;
+		width?: number;
+	}
 
-        disable(): void;
+	type pagerEventName =
+		'onAfterContextMenu'
+		| 'onAfterPageChange'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeContextMenu'
+		| 'onBeforePageChange'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        enable(): void;
+	export class pager implements webix.ui.baseview {
+		adjust(): void;
 
-        getBody(): any;
+		attachEvent(type: pagerEventName, functor: WebixCallback, id?: string): string | number;
 
-        getChildViews(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getFormView(): webix.ui.baseview;
+		blockEvent(): void;
 
-        getHead(): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        getNode(): any;
+		clone(config: any): any;
 
-        getParentView(): any;
+		customize(obj: any): void;
 
-        getTopParentView(): webix.ui.baseview;
+		define(property: string, value: any): void;
 
-        hasEvent(name: string): boolean;
+		destructor(): void;
 
-        hide(): void;
+		detachEvent(id: string): void;
 
-        isEnabled(): boolean;
+		disable(): void;
 
-        isVisible(): boolean;
+		enable(): void;
 
-        mapEvent(map: any): void;
+		getChildViews(): any[];
 
-        queryView(config: any, mode?: string): any;
+		getFormView(): webix.ui.baseview;
 
-        resize(): void;
+		getNode(): any;
 
-        resizeChildren(): void;
+		getParentView(): any;
 
-        setPosition(x: number, y: number): void;
+		getTopParentView(): webix.ui.baseview;
 
-        show(node?: HTMLElement, position?: any, point?: string): void;
+		hasEvent(name: string): boolean;
 
-        unbind(): void;
+		hide(): void;
 
-        unblockEvent(): void;
+		isEnabled(): boolean;
 
-        show(force: boolean, animation: boolean): void;
+		isVisible(): boolean;
 
-        $getSize(): any[];
+		mapEvent(map: any): void;
 
-        $height: number;
-        $scope: any;
+		queryView(config: any, mode?: string): any;
 
-        $setSize(x: number, y: number): boolean;
+		refresh(id?: string | number): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: popupConfig;
-        name: string;
-    }
+		render(id: string | number, data: any, type: string): void;
 
-    interface portletConfig {
-        view?: string;
-        animate?: any;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        cols?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        icon?: boolean | string;
-        id?: string | number;
-        isolate?: boolean;
-        layoutType?: string;
-        margin?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mode?: string;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        responsive?: string;
-        rows?: any[];
-        type?: string;
-        visibleBatch?: string;
-        width?: number;
-    }
+		resize(): void;
 
-    type portletEventName = 'onAfterPortletMove' | 'onBeforePortletMove' | 'onBindRequest' | 'onDestruct';
+		select(page: number): void;
 
-    class portlet implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		show(force?: boolean, animation?: boolean): void;
 
-        adjust(): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        attachEvent(type: portletEventName, functor: WebixCallback, id?: string): string | number;
+		unbind(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		unblockEvent(): void;
 
-        blockEvent(): void;
+		$getSize(): any[];
 
-        callEvent(name: string, params: any[]): boolean;
+		$height: number;
+		$scope: any;
 
-        define(property: string, value: any): void;
+		$setSize(x: number, y: number): boolean;
 
-        destructor(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: pagerConfig;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+	}
 
-        detachEvent(id: string): void;
+	interface panelConfig {
+		view?: string;
+		animate?: any;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		icon?: string | boolean;
+		id?: string | number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		resize?: boolean;
+		type?: string;
+		width?: number;
+	}
 
-        disable(): void;
+	type panelEventName = 'onBindRequest' | 'onDestruct' | 'onViewResize' | 'onViewShow';
 
-        enable(): void;
+	export class panel implements webix.ui.baseview {
+		adjust(): void;
 
-        getChildViews(): any[];
+		attachEvent(type: panelEventName, functor: WebixCallback, id?: string): string | number;
 
-        getFormView(): webix.ui.baseview;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getNode(): any;
+		blockEvent(): void;
 
-        getParentView(): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        getTopParentView(): webix.ui.baseview;
+		define(property: string, value: any): void;
 
-        hasEvent(name: string): boolean;
+		destructor(): void;
 
-        hide(): void;
+		detachEvent(id: string): void;
 
-        index(obj: any): number;
+		disable(): void;
 
-        isEnabled(): boolean;
+		enable(): void;
 
-        isVisible(): boolean;
+		getChildViews(): any[];
 
-        mapEvent(map: any): void;
+		getFormView(): webix.ui.baseview;
 
-        markDropArea(target: string, mode: string): void;
+		getNode(): any;
 
-        movePortlet(target: string, mode: string): void;
+		getParentView(): any;
 
-        queryView(config: any, mode?: string): any;
+		getTopParentView(): webix.ui.baseview;
 
-        reconstruct(): void;
+		hasEvent(name: string): boolean;
 
-        removeView(id: any): void;
+		hide(): void;
 
-        resize(): void;
+		isEnabled(): boolean;
 
-        resizeChildren(): void;
+		isVisible(): boolean;
 
-        restore(state: any, factory: WebixCallback): void;
+		mapEvent(map: any): void;
 
-        serialize(serializer?: WebixCallback): any;
+		queryView(config: any, mode?: string): any;
 
-        show(force?: boolean, animation?: boolean): void;
+		resize(): void;
 
-        showBatch(name: string, mode?: boolean): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        unbind(): void;
+		unbind(): void;
 
-        unblockEvent(): void;
+		unblockEvent(): void;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		$getSize(): any[];
 
-        $getSize(): any[];
+		$height: number;
 
-        $height: number;
+		$resizeEnd(pos: number): void;
 
-        $setSize(x: number, y: number): boolean;
+		$resizeMove(pos: number): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: portletConfig;
-        name: string;
-    }
+		$setSize(x: number, y: number): boolean;
 
-    interface propertyConfig {
-        view?: string;
-        animate?: any;
-        autoheight?: boolean;
-        borderless?: boolean;
-        complexData?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datatype?: string;
-        disabled?: boolean;
-        editValue?: string;
-        editable?: boolean;
-        editaction?: string;
-        elements?: any;
-        form?: string;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        map?: any;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        nameWidth?: number;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        template?: string | WebixCallback;
-        tooltip?: string | boolean;
-        url?: any;
-        width?: number;
-    }
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: panelConfig;
+		name: string;
+	}
 
-    type propertyEventName =
-        'onAfterContextMenu'
-        | 'onAfterEditStart'
-        | 'onAfterEditStop'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeContextMenu'
-        | 'onBeforeEditStart'
-        | 'onBeforeEditStop'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onCheck'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onKeyPress'
-        | 'onLiveEdit'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+	interface pdfviewerConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datatype?: string;
+		disabled?: boolean;
+		downloadName?: string;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		scale?: string | number;
+		toolbar?: string;
+		url?: any;
+		width?: number;
+	}
 
-    class property implements webix.ui.baseview {
-        adjust(): void;
+	type pdfviewerEventName =
+		'onAfterLoad'
+		| 'onAfterScroll'
+		| 'onBeforeLoad'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onDocumentReady'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onPageRender'
+		| 'onScaleChange'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        attachEvent(type: propertyEventName, functor: WebixCallback, id?: string): string | number;
+	export class pdfviewer implements webix.ui.baseview {
+		adjust(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		attachEvent(type: pdfviewerEventName, functor: WebixCallback, id?: string): string | number;
 
-        blockEvent(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		blockEvent(): void;
 
-        customize(obj: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        define(property: string, value: any): void;
+		clear(): void;
 
-        destructor(): void;
+		define(property: string, value: any): void;
 
-        detachEvent(id: string): void;
+		destructor(): void;
 
-        disable(): void;
+		detachEvent(id: string): void;
 
-        edit(id: any): void;
+		disable(): void;
 
-        editCancel(): void;
+		download(): void;
 
-        editNext(): void;
+		enable(): void;
 
-        editStop(): void;
+		getChildViews(): any[];
 
-        enable(): void;
+		getFormView(): webix.ui.baseview;
 
-        focusEditor(id: any): void;
+		getNode(): any;
 
-        getChildViews(): any[];
+		getParentView(): any;
 
-        getEditState(): any;
+		getPopup(): webix.ui.baseview;
 
-        getEditor(id?: string): any;
+		getTopParentView(): webix.ui.baseview;
 
-        getEditorValue(): string;
+		hasEvent(name: string): boolean;
 
-        getFormView(): webix.ui.baseview;
+		hide(): void;
 
-        getItem(id: string): any;
+		isEnabled(): boolean;
 
-        getItemNode(id: string | number): HTMLElement;
+		isVisible(): boolean;
 
-        getNode(): any;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        getParentView(): any;
+		mapEvent(map: any): void;
 
-        getScrollState(): any;
+		nextPage(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		parse(data: any, type: string): void;
 
-        getValues(): { [key: string]: any; };
+		prevPage(): void;
 
-        hasEvent(name: string): boolean;
+		queryView(config: any, mode?: string): any;
 
-        hide(): void;
+		renderPage(page: number): void;
 
-        isEnabled(): boolean;
+		resize(): void;
 
-        isVisible(): boolean;
+		setScale(scale: string | number, update: boolean): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		show(force?: boolean, animation?: boolean): void;
 
-        locate(e: Event): string | number;
+		unbind(): void;
 
-        mapEvent(map: any): void;
+		unblockEvent(): void;
 
-        parse(data: any, type: string): void;
+		zoomIn(): void;
 
-        queryView(config: any, mode?: string): any;
+		zoomOut(): void;
 
-        refresh(id?: string | number): void;
+		$getSize(): any[];
 
-        registerType(name: string, data: any): void;
+		$height: number;
+		$numPages: number;
+		$onLoad: WebixCallback;
+		$pageNum: number;
+		$scope: any;
 
-        render(id: string | number, data: any, type: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        resize(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: pdfviewerConfig;
+		name: string;
+	}
 
-        scrollTo(x: number, y: number): void;
+	interface pivotConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		columnWidth?: number;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datatable?: any;
+		datatype?: string;
+		defaultOperation?: string;
+		disabled?: boolean;
+		externalProcessing?: boolean;
+		fieldMap?: any;
+		filterLabelAlign?: string;
+		filterLabelWidth?: number;
+		filterMap?: any;
+		filterMinWidth?: number;
+		filterPlaceholder?: boolean | string;
+		filterWidth?: number;
+		footer?: string | boolean;
+		format?: WebixCallback;
+		gravity?: number;
+		headerTemplate?: WebixCallback;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		max?: boolean;
+		maxHeight?: number;
+		maxWidth?: number;
+		min?: boolean;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		ping?: WebixCallback;
+		popup?: any;
+		profile?: boolean;
+		readonly?: boolean;
+		readonlyTitle?: string;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		scheme?: any;
+		separateLabel?: boolean;
+		stableRowId?: boolean;
+		structure?: any;
+		totalColumn?: string | boolean;
+		type?: string;
+		url?: any;
+		webWorker?: string;
+		width?: number;
+		yScaleWidth?: number;
+	}
 
-        setValues(values: any, update?: boolean): void;
+	type pivotEventName =
+		'onAfterAdd'
+		| 'onAfterDelete'
+		| 'onAfterLoad'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeApply'
+		| 'onBeforeCancel'
+		| 'onBeforeDelete'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onCancel'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onFilterChange'
+		| 'onFilterCreate'
+		| 'onHeaderInit'
+		| 'onItemClick'
+		| 'onLoadError'
+		| 'onPopup'
+		| 'onViewInit'
+		| 'onViewShow'
+		| 'onWebWorkerEnd'
+		| 'onWebWorkerStart';
 
-        show(force?: boolean, animation?: boolean): void;
+	export class pivot implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        showItem(id: string | number): void;
+		addOperation(name: string, operation: WebixCallback, options: any): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		addTotalOperation(name: string, operation: WebixCallback, options: any): void;
 
-        unbind(): void;
+		adjust(): void;
 
-        unblockEvent(): void;
+		attachEvent(type: pivotEventName, functor: WebixCallback, id?: string): string | number;
 
-        updateItem(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        validateEditor(id?: string | number): boolean;
+		blockEvent(): void;
 
-        $getSize(): any[];
+		callEvent(name: string, params: any[]): boolean;
 
-        $height: number;
-        $scope: any;
+		clearAll(soft?: boolean): void;
 
-        $setSize(x: number, y: number): boolean;
+		configure(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: propertyConfig;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_edit: { [key: string]: any; };
-        on_mouse_move: WebixCallback;
-        on_render: { [key: string]: any; };
-        type: { [key: string]: any; };
-    }
+		count(): number;
 
-    interface querybuilderConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        columnMode?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        fields?: any[];
-        filtering?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        inputMaxWidth?: number;
-        inputWidth?: number;
-        maxHeight?: number;
-        maxLevel?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        sorting?: boolean;
-        type?: string;
-        width?: number;
-    }
+		define(property: string, value: any): void;
 
-    type querybuilderEventName = 'onBindRequest' | 'onDestruct' | 'onKeySelect';
+		destructor(): void;
 
-    class querybuilder implements webix.ui.baseview {
-        adjust(): void;
+		detachEvent(id: string): void;
 
-        attachEvent(type: querybuilderEventName, functor: WebixCallback, id?: string): string | number;
+		disable(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		enable(): void;
 
-        blockEvent(): void;
+		exists(id: number | string): boolean;
 
-        callEvent(name: string, params: any[]): boolean;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        define(property: string, value: any): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        destructor(): void;
+		getChildViews(): any[];
 
-        detachEvent(id: string): void;
+		getConfigWindow(): any;
 
-        disable(): void;
+		getFields(): any;
 
-        enable(): void;
+		getFilterView(): any;
 
-        focus(): void;
+		getFirstId(): number | string;
 
-        getChildViews(): any[];
+		getFormView(): webix.ui.baseview;
 
-        getFilterHelper(): WebixCallback;
+		getIdByIndex(index: number | string): string | number;
 
-        getFilters(): any[];
+		getIndexById(id: number | string): number;
 
-        getFormView(): webix.ui.baseview;
+		getItem(id: number | string): any;
 
-        getNode(): any;
+		getLastId(): number | string;
 
-        getParentView(): any;
+		getNextId(id: number | string, step: number): string | number;
 
-        getSortingElements(): any[];
+		getNode(): any;
 
-        getSortingHelper(): WebixCallback;
+		getParentView(): any;
 
-        getTopParentView(): webix.ui.baseview;
+		getPrevId(id: number | string, step: number): string | number;
 
-        getValue(): any[];
+		getStructure(): any;
 
-        hasEvent(name: string): boolean;
+		getTopParentView(): webix.ui.baseview;
 
-        hide(): void;
+		hasEvent(name: string): boolean;
 
-        isEnabled(): boolean;
+		hide(): void;
 
-        isVisible(): boolean;
+		innerId(id: number | string): number | string;
 
-        mapEvent(map: any): void;
+		isEnabled(): boolean;
 
-        queryView(config: any, mode?: string): any;
+		isVisible(): boolean;
 
-        resize(): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        setFilters(filters: any[]): void;
+		mapEvent(map: any): void;
 
-        setValue(rules: any, fields: any[]): void;
+		parse(data: any, type: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		queryView(config: any, mode?: string): any;
 
-        toSQL(config?: any, rules?: any): any;
+		refresh(id?: number | string): void;
 
-        unbind(): void;
+		remove(id: string | number | any[]): void;
 
-        unblockEvent(): void;
+		render(): void;
 
-        validate(): void;
+		resize(): void;
 
-        $getSize(): any[];
+		setStructure(config: any): void;
 
-        $height: number;
+		show(force?: boolean, animation?: boolean): void;
 
-        $setSize(x: number, y: number): boolean;
+		sort(by: string, dir?: string, as?: string): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: querybuilderConfig;
-        name: string;
-        sqlOperators: any;
-    }
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-    interface radioConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        customRadio?: boolean;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        newline?: boolean;
-        on?: EventHash;
-        optionHeight?: number;
-        options?: any[];
-        popup?: string;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        vertical?: boolean;
-        width?: number;
-    }
+		ui(view: any): webix.ui.baseview;
 
-    type radioEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		unbind(): void;
 
-    class radio implements webix.ui.baseview {
-        adjust(): void;
+		unblockEvent(): void;
 
-        attachEvent(type: radioEventName, functor: WebixCallback, id?: string): string | number;
+		updateItem(id: number | string, data: any): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        blockEvent(): void;
+		$$: any;
+		$divider: string;
 
-        blur(): void;
+		$getSize(): any[];
 
-        callEvent(name: string, params: any[]): boolean;
+		$height: number;
 
-        define(property: string, value: any): void;
+		$setSize(x: number, y: number): boolean;
 
-        destructor(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: pivotConfig;
+		data: DataStore;
+		name: string;
+		operations: any;
+		waitData: Promise<any>;
+	}
 
-        detachEvent(id: string): void;
+	interface popupConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		body?: string | webix.ui.baseview;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		left?: number;
+		master?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		move?: boolean;
+		on?: EventHash;
+		padding?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		relative?: string;
+		resize?: boolean;
+		toFront?: boolean;
+		top?: number;
+		width?: number;
+		zIndex?: number;
+	}
 
-        disable(): void;
+	type popupEventName =
+		'onAfterScroll'
+		| 'onBeforeShow'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        enable(): void;
+	export class popup implements webix.ui.baseview {
+		adjust(): void;
 
-        focus(): void;
+		attachEvent(type: popupEventName, functor: WebixCallback, id?: string): string | number;
 
-        getChildViews(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getFormView(): webix.ui.baseview;
+		blockEvent(): void;
 
-        getInputNode(): HTMLElement;
+		callEvent(name: string, params: any[]): boolean;
 
-        getNode(): any;
+		define(property: string, value: any): void;
 
-        getParentView(): any;
+		destructor(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		detachEvent(id: string): void;
 
-        getValue(): string;
+		disable(): void;
 
-        hasEvent(name: string): boolean;
+		enable(): void;
 
-        hide(): void;
+		getBody(): any;
 
-        isEnabled(): boolean;
+		getChildViews(): any[];
 
-        isVisible(): boolean;
+		getFormView(): webix.ui.baseview;
 
-        mapEvent(map: any): void;
+		getHead(): any;
 
-        queryView(config: any, mode?: string): any;
+		getNode(): any;
 
-        refresh(): void;
+		getParentView(): any;
 
-        render(id: string | number, data: any, type: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        resize(): void;
+		hasEvent(name: string): boolean;
 
-        setBottomText(text: string): void;
+		hide(): void;
 
-        setValue(value: string): void;
+		isEnabled(): boolean;
 
-        show(force?: boolean, animation?: boolean): void;
+		isVisible(): boolean;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		mapEvent(map: any): void;
 
-        unbind(): void;
+		queryView(config: any, mode?: string): any;
 
-        unblockEvent(): void;
+		resize(): void;
 
-        validate(): boolean;
+		resizeChildren(): void;
 
-        $compareValue: WebixCallback;
+		setPosition(x: number, y: number): void;
 
-        $getSize(): any[];
+		show(node?: HTMLElement, position?: any, point?: string): void;
 
-        $getValue(): string;
+		unbind(): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		unblockEvent(): void;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		show(force: boolean, animation: boolean): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		$getSize(): any[];
 
-        $scope: any;
+		$height: number;
+		$scope: any;
 
-        $setSize(x: number, y: number): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        $setValue(value: string): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: popupConfig;
+		name: string;
+	}
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: radioConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+	interface portletConfig {
+		view?: string;
+		animate?: any;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		cols?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		icon?: boolean | string;
+		id?: string | number;
+		isolate?: boolean;
+		layoutType?: string;
+		margin?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mode?: string;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		responsive?: string;
+		rows?: any[];
+		type?: string;
+		visibleBatch?: string;
+		width?: number;
+	}
 
-    interface rangechartConfig {
-        view?: string;
-        alpha?: number;
-        animate?: any;
-        ariaLabel?: string;
-        barWidth?: number;
-        border?: boolean;
-        borderColor?: string;
-        borderless?: boolean;
-        cant?: number;
-        color?: string | WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datathrottle?: number;
-        datatype?: string;
-        disableLines?: boolean;
-        disabled?: boolean;
-        eventRadius?: number;
-        fill?: string;
-        fixOverflow?: boolean;
-        frameId?: string;
-        gradient?: boolean | string | WebixCallback;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        label?: string | WebixCallback;
-        labelOffset?: number;
-        legend?: any;
-        line?: any;
-        lineColor?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        offset?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        origin?: number;
-        padding?: any;
-        pieHeight?: number;
-        pieInnerText?: string | WebixCallback;
-        preset?: string;
-        radius?: number;
-        range?: any;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        save?: string;
-        scale?: string;
-        scheme?: any;
-        series?: any;
-        shadow?: boolean;
-        tooltip?: string | boolean;
-        type?: string;
-        url?: any;
-        value?: string | WebixTemplate;
-        width?: number;
-        x?: number;
-        xAxis?: any;
-        xValue?: string;
-        y?: number;
-        yAxis?: any;
-        yValue?: string;
-    }
+	type portletEventName =
+		'onAfterPortletMove'
+		| 'onBeforePortletMove'
+		| 'onBindRequest'
+		| 'onDestruct'
+		| 'onViewShow';
 
-    type rangechartEventName =
-        'onAfterAdd'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterLoad'
-        | 'onAfterRangeChange'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+	export class portlet implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-    class rangechart implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		adjust(): void;
 
-        addSeries(obj: any): void;
+		attachEvent(type: portletEventName, functor: WebixCallback, id?: string): string | number;
 
-        adjust(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        attachEvent(type: rangechartEventName, functor: WebixCallback, id?: string): string | number;
+		blockEvent(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        blockEvent(): void;
+		define(property: string, value: any): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		destructor(): void;
 
-        clearAll(soft?: boolean): void;
+		detachEvent(id: string): void;
 
-        clearCanvas(): void;
+		disable(): void;
 
-        count(): number;
+		enable(): void;
 
-        define(property: string, value: any): void;
+		getChildViews(): any[];
 
-        destructor(): void;
+		getFormView(): webix.ui.baseview;
 
-        detachEvent(id: string): void;
+		getNode(): any;
 
-        disable(): void;
+		getParentView(): any;
 
-        enable(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        exists(id: string | number): boolean;
+		hasEvent(name: string): boolean;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		hide(): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		index(obj: any): number;
 
-        getChildViews(): any[];
+		isEnabled(): boolean;
 
-        getFirstId(): string | number;
+		isVisible(): boolean;
 
-        getFormView(): webix.ui.baseview;
+		mapEvent(map: any): void;
 
-        getFrameData(): any[];
+		markDropArea(target: string, mode: string): void;
 
-        getFrameRange(): any;
+		movePortlet(target: string, mode: string): void;
 
-        getIdByIndex(index: number): string | number;
+		queryView(config: any, mode?: string): any;
 
-        getIndexById(id: string | number): number;
+		reconstruct(): void;
 
-        getItem(id: string | number): any;
+		removeView(id: any): void;
 
-        getLastId(): string | number;
+		resize(): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		resizeChildren(): void;
 
-        getNode(): any;
+		restore(state: any, factory: WebixCallback): void;
 
-        getParentView(): any;
+		serialize(serializer?: WebixCallback): any;
 
-        getPrevId(id: string | number, step: number): string | number;
+		show(force?: boolean, animation?: boolean): void;
 
-        getTopParentView(): webix.ui.baseview;
+		showBatch(name: string, mode?: boolean): void;
 
-        group(config: any, mode: boolean): void;
+		unbind(): void;
 
-        hasEvent(name: string): boolean;
+		unblockEvent(): void;
 
-        hide(): void;
+		$drag(source: HTMLElement, ev: Event): string;
 
-        hideSeries(index: number): void;
+		$getSize(): any[];
 
-        isEnabled(): boolean;
+		$height: number;
 
-        isVisible(): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: portletConfig;
+		name: string;
+	}
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+	interface propertyConfig {
+		view?: string;
+		animate?: any;
+		autoheight?: boolean;
+		borderless?: boolean;
+		complexData?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datatype?: string;
+		disabled?: boolean;
+		editValue?: string;
+		editable?: boolean;
+		editaction?: string;
+		elements?: any;
+		form?: string;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		map?: any;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		nameWidth?: number;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		template?: string | WebixCallback;
+		tooltip?: any;
+		url?: any;
+		width?: number;
+	}
 
-        locate(e: Event): string | number;
+	type propertyEventName =
+		'onAfterContextMenu'
+		| 'onAfterEditStart'
+		| 'onAfterEditStop'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeContextMenu'
+		| 'onBeforeEditStart'
+		| 'onBeforeEditStop'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onCheck'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onKeyPress'
+		| 'onLiveEdit'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        mapEvent(map: any): void;
+	export class property implements webix.ui.baseview {
+		adjust(): void;
 
-        parse(data: any, type: string): void;
+		attachEvent(type: propertyEventName, functor: WebixCallback, id?: string): string | number;
 
-        queryView(config: any, mode?: string): any;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        refresh(id?: string | number): void;
+		blockEvent(): void;
 
-        remove(id: string | number): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        removeAllSeries(): void;
+		clear(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		customize(obj: any): void;
 
-        resize(): void;
+		define(property: string, value: any): void;
 
-        serialize(): any[];
+		destructor(): void;
 
-        setFrameRange(range: any): void;
+		detachEvent(id: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		disable(): void;
 
-        showSeries(index: number): void;
+		edit(id: any): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		editCancel(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		editNext(): void;
 
-        unbind(): void;
+		editStop(): void;
 
-        unblockEvent(): void;
+		enable(): void;
 
-        ungroup(mode: boolean): void;
+		focusEditor(id: any): void;
 
-        updateItem(id: string | number, data: any): void;
+		getChildViews(): any[];
 
-        $getSize(): any[];
+		getEditState(): any;
 
-        $height: number;
-        $scope: any;
+		getEditor(id?: string): any;
 
-        $setSize(x: number, y: number): boolean;
+		getEditorValue(): string;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        colormap: { [key: string]: any; };
-        config: rangechartConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        presets: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		getFormView(): webix.ui.baseview;
 
-    interface rangesliderConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        max?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        min?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        popup?: string;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        separator?: string;
-        step?: number;
-        stringResult?: boolean;
-        suggest?: any;
-        title?: string | WebixCallback;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | any[];
-        width?: number;
-    }
+		getItem(id: string): any;
 
-    type rangesliderEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSliderDrag'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getItemNode(id: string | number): HTMLElement;
 
-    class rangeslider implements webix.ui.baseview {
-        adjust(): void;
+		getNode(): any;
 
-        attachEvent(type: rangesliderEventName, functor: WebixCallback, id?: string): string | number;
+		getParentView(): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getScrollState(): any;
 
-        blockEvent(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        blur(): void;
+		getValues(): { [key: string]: any; };
 
-        callEvent(name: string, params: any[]): boolean;
+		hasEvent(name: string): boolean;
 
-        define(property: string, value: any): void;
+		hide(): void;
 
-        destructor(): void;
+		isEnabled(): boolean;
 
-        detachEvent(id: string): void;
+		isVisible(): boolean;
 
-        disable(): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        enable(): void;
+		locate(e: Event): string | number;
 
-        focus(): void;
+		mapEvent(map: any): void;
 
-        getChildViews(): any[];
+		parse(data: any, type: string): void;
 
-        getFormView(): webix.ui.baseview;
+		queryView(config: any, mode?: string): any;
 
-        getInputNode(): HTMLElement;
+		refresh(id?: string | number): void;
 
-        getNode(): any;
+		registerType(name: string, data: any): void;
 
-        getParentView(): any;
+		render(id: string | number, data: any, type: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		resize(): void;
 
-        getValue(): string;
+		scrollTo(x: number, y: number): void;
 
-        hasEvent(name: string): boolean;
+		setValues(values: any, update?: boolean): void;
 
-        hide(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        isEnabled(): boolean;
+		showItem(id: string | number): void;
 
-        isVisible(): boolean;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        mapEvent(map: any): void;
+		unbind(): void;
 
-        queryView(config: any, mode?: string): any;
+		unblockEvent(): void;
 
-        refresh(): void;
+		updateItem(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		validateEditor(id?: string | number): boolean;
 
-        resize(): void;
+		$getSize(): any[];
 
-        setBottomText(text: string): void;
+		$height: number;
+		$scope: any;
 
-        setValue(value: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        show(force?: boolean, animation?: boolean): void;
+		$skin: WebixCallback;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        unbind(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        unblockEvent(): void;
+		$tooltipOut(): void;
 
-        validate(): boolean;
+		$view: HTMLElement;
+		$width: number;
+		config: propertyConfig;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_edit: { [key: string]: any; };
+		on_mouse_move: WebixCallback;
+		on_render: { [key: string]: any; };
+		type: { [key: string]: any; };
+	}
 
-        $compareValue: WebixCallback;
-        $cssName: string;
+	interface proxyConfig {
+		view?: string;
+		animate?: any;
+		body?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		width?: number;
+	}
 
-        $getSize(): any[];
+	type proxyEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        $getValue(): string;
+	export class proxy implements webix.ui.baseview {
+		adjust(): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		define(property: string, value: any): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		destructor(): void;
 
-        $scope: any;
+		disable(): void;
 
-        $setSize(x: number, y: number): boolean;
+		enable(): void;
 
-        $setValue(value: string): void;
+		getChildViews(): any[];
 
-        $skin: WebixCallback;
-        $touchCapture: boolean;
-        $view: HTMLElement;
-        $width: number;
-        config: rangesliderConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		getFormView(): webix.ui.baseview;
 
-    interface resizerConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        onContext?: { [key: string]: any; };
-        width?: number;
-    }
+		getNode(): any;
 
-    type resizerEventName =
-        'onAfterContextMenu'
-        | 'onAfterScroll'
-        | 'onBeforeContextMenu'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getParentView(): any;
 
-    class resizer implements webix.ui.baseview {
-        adjust(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		hide(): void;
 
-        define(property: string, value: any): void;
+		isEnabled(): boolean;
 
-        destructor(): void;
+		isVisible(): boolean;
 
-        disable(): void;
+		queryView(config: any, mode?: string): any;
 
-        enable(): void;
+		resize(): void;
 
-        getChildViews(): any[];
+		show(force?: boolean, animation?: boolean): void;
 
-        getFormView(): webix.ui.baseview;
+		unbind(): void;
 
-        getNode(): any;
+		$getSize(): any[];
 
-        getParentView(): any;
+		$height: number;
+		$scope: any;
 
-        getTopParentView(): webix.ui.baseview;
+		$setSize(x: number, y: number): boolean;
 
-        hide(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: proxyConfig;
+		name: string;
+	}
 
-        isEnabled(): boolean;
+	interface querybuilderConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		columnMode?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		fields?: any[];
+		filtering?: boolean;
+		filters?: any[] | DataCollection;
+		glue?: string;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		inputMaxWidth?: number;
+		inputWidth?: number;
+		maxHeight?: number;
+		maxLevel?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		sorting?: boolean;
+		type?: string;
+		width?: number;
+	}
 
-        isVisible(): boolean;
+	type querybuilderEventName = 'onBindRequest' | 'onDestruct' | 'onKeySelect' | 'onViewShow';
 
-        queryView(config: any, mode?: string): any;
+	export class querybuilder implements webix.ui.baseview {
+		adjust(): void;
 
-        resize(): void;
+		attachEvent(type: querybuilderEventName, functor: WebixCallback, id?: string): string | number;
 
-        show(force?: boolean, animation?: boolean): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        unbind(): void;
+		blockEvent(): void;
 
-        $getSize(): any[];
+		callEvent(name: string, params: any[]): boolean;
 
-        $height: number;
-        $scope: any;
+		define(property: string, value: any): void;
 
-        $setSize(x: number, y: number): boolean;
+		destructor(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: resizerConfig;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-    }
+		detachEvent(id: string): void;
 
-    interface richselectConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        options?: any;
-        placeholder?: string;
-        popup?: string;
-        popupWidth?: number;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		disable(): void;
 
-    type richselectEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		eachLine(callback: WebixCallback): void;
 
-    class richselect implements webix.ui.baseview {
-        adjust(): void;
+		enable(): void;
 
-        attachEvent(type: richselectEventName, functor: WebixCallback, id?: string): string | number;
+		focus(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getChildViews(): any[];
 
-        blockEvent(): void;
+		getFilterHelper(): WebixCallback;
 
-        blur(): void;
+		getFormView(): webix.ui.baseview;
 
-        callEvent(name: string, params: any[]): boolean;
+		getNode(): any;
 
-        define(property: string, value: any): void;
+		getParentView(): any;
 
-        destructor(): void;
+		getSortingElements(): any[];
 
-        detachEvent(id: string): void;
+		getSortingHelper(): WebixCallback;
 
-        disable(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        enable(): void;
+		getValue(): any;
 
-        focus(): void;
+		hasEvent(name: string): boolean;
 
-        getChildViews(): any[];
+		hide(): void;
 
-        getFormView(): webix.ui.baseview;
+		isEnabled(): boolean;
 
-        getInputNode(): HTMLElement;
+		isVisible(): boolean;
 
-        getList(): webix.ui.baseview;
+		mapEvent(map: any): void;
 
-        getNode(): any;
+		queryView(config: any, mode?: string): any;
 
-        getParentView(): any;
+		resize(): void;
 
-        getPopup(): webix.ui.baseview;
+		setValue(value: any): void;
 
-        getText(): string;
+		show(force?: boolean, animation?: boolean): void;
 
-        getTopParentView(): webix.ui.baseview;
+		toSQL(config?: any, rules?: any): any;
 
-        getValue(): string;
+		unbind(): void;
 
-        hasEvent(name: string): boolean;
+		unblockEvent(): void;
 
-        hide(): void;
+		validate(): void;
 
-        isEnabled(): boolean;
+		$getSize(): any[];
 
-        isVisible(): boolean;
+		$height: number;
 
-        mapEvent(map: any): void;
+		$setSize(x: number, y: number): boolean;
 
-        queryView(config: any, mode?: string): any;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: querybuilderConfig;
+		name: string;
+		sqlOperators: any;
+	}
 
-        refresh(): void;
+	interface radioConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		autowidth?: boolean;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		customRadio?: boolean;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		newline?: boolean;
+		on?: EventHash;
+		optionHeight?: number;
+		options?: any[];
+		popup?: string;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		vertical?: boolean;
+		width?: number;
+	}
 
-        render(id: string | number, data: any, type: string): void;
+	type radioEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onOptionAdd'
+		| 'onOptionRemove'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        resize(): void;
+	export class radio implements webix.ui.baseview {
+		addOption(id: string | number, value: any, show?: boolean, index?: number): void;
 
-        setBottomText(text: string): void;
+		adjust(): void;
 
-        setValue(value: string): void;
+		attachEvent(type: radioEventName, functor: WebixCallback, id?: string): string | number;
 
-        show(force?: boolean, animation?: boolean): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		blockEvent(): void;
 
-        unbind(): void;
+		blur(): void;
 
-        unblockEvent(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        validate(): boolean;
+		define(property: string, value: any): void;
 
-        $compareValue: WebixCallback;
+		destructor(): void;
 
-        $getSize(): any[];
+		detachEvent(id: string): void;
 
-        $getValue(): string;
+		disable(): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		disableOption(id: string | number): void;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		enable(): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		enableOption(id: string | number): void;
 
-        $scope: any;
+		focus(): void;
 
-        $setSize(x: number, y: number): boolean;
+		getChildViews(): any[];
 
-        $setValue(value: string): void;
+		getFormView(): webix.ui.baseview;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: richselectConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		getInputNode(): HTMLElement;
 
-    interface richtextConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        label?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        type?: string;
-        value?: string | number;
-        width?: number;
-    }
+		getNode(): any;
 
-    type richtextEventName = 'onBindRequest' | 'onChange' | 'onDestruct';
+		getOption(id: string | number): any;
 
-    class richtext implements webix.ui.baseview {
-        adjust(): void;
+		getParentView(): any;
 
-        attachEvent(type: richtextEventName, functor: WebixCallback, id?: string): string | number;
+		getTopParentView(): webix.ui.baseview;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getValue(): string;
 
-        blockEvent(): void;
+		hasEvent(name: string): boolean;
 
-        callEvent(name: string, params: any[]): boolean;
+		hide(): void;
 
-        define(property: string, value: any): void;
+		hideOption(id: string | number): void;
 
-        destructor(): void;
+		isEnabled(): boolean;
 
-        detachEvent(id: string): void;
+		isVisible(): boolean;
 
-        disable(): void;
+		mapEvent(map: any): void;
 
-        enable(): void;
+		optionIndex(ID: string | number): number;
 
-        focus(): void;
+		queryView(config: any, mode?: string): any;
 
-        getChildViews(): any[];
+		refresh(): void;
 
-        getFormView(): webix.ui.baseview;
+		removeOption(id: string | number): void;
 
-        getInputNode(): HTMLElement;
+		render(id: string | number, data: any, type: string): void;
 
-        getNode(): any;
+		resize(): void;
 
-        getParentView(): any;
+		setBottomText(text: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		setValue(value: string): void;
 
-        getValue(): string;
+		show(force?: boolean, animation?: boolean): void;
 
-        hasEvent(name: string): boolean;
+		showOption(id: string | number): void;
 
-        hide(): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        innerId(id: number | string): number | string;
+		unbind(): void;
 
-        isEnabled(): boolean;
+		unblockEvent(): void;
 
-        isVisible(): boolean;
+		validate(): boolean;
 
-        mapEvent(map: any): void;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        queryView(config: any, mode?: string): any;
+		$getSize(): any[];
 
-        refresh(): void;
+		$getValue(): string;
 
-        resize(): void;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        setValue(value: string): void;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        show(force?: boolean, animation?: boolean): void;
+		$renderLabel(config: any, id: string | number): string;
 
-        ui(view: any): webix.ui.baseview;
+		$scope: any;
 
-        unbind(): void;
+		$setSize(x: number, y: number): boolean;
 
-        unblockEvent(): void;
+		$setValue(value: string): void;
 
-        $$: any;
+		$skin: WebixCallback;
 
-        $getSize(): any[];
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        $height: number;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        $setSize(x: number, y: number): boolean;
+		$tooltipOut(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: richtextConfig;
-        name: string;
-    }
+		$view: HTMLElement;
+		$width: number;
+		config: radioConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-    interface scrollviewConfig {
-        view?: string;
-        animate?: any;
-        body?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        width?: number;
-    }
+	interface rangechartConfig {
+		view?: string;
+		alpha?: number;
+		animate?: any;
+		ariaLabel?: string;
+		barWidth?: number;
+		border?: boolean;
+		borderColor?: string;
+		borderWidth?: number;
+		borderless?: boolean;
+		cant?: number;
+		color?: string | WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disableLines?: boolean;
+		disabled?: boolean;
+		eventRadius?: number;
+		fill?: string;
+		fixOverflow?: boolean;
+		frameId?: string;
+		gradient?: boolean | string | WebixCallback;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		label?: string | WebixCallback;
+		labelOffset?: number;
+		legend?: any;
+		line?: any;
+		lineColor?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		offset?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		origin?: number | string;
+		padding?: any;
+		pieHeight?: number;
+		pieInnerText?: string | WebixCallback;
+		preset?: string;
+		radius?: number;
+		range?: any;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		save?: any;
+		scale?: string;
+		scheme?: any;
+		series?: any;
+		shadow?: boolean;
+		tooltip?: any;
+		type?: string;
+		url?: any;
+		value?: string | WebixTemplate;
+		width?: number;
+		x?: number;
+		xAxis?: any;
+		xValue?: string;
+		y?: number;
+		yAxis?: any;
+		yValue?: string;
+	}
 
-    type scrollviewEventName =
-        'onAfterScroll'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+	type rangechartEventName =
+		'onAfterAdd'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterLoad'
+		| 'onAfterRangeChange'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onKeyPress'
+		| 'onLegendClick'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-    class scrollview implements webix.ui.baseview {
-        adjust(): void;
+	export class rangechart implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        attachEvent(type: scrollviewEventName, functor: WebixCallback, id?: string): string | number;
+		addSeries(obj: any): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		adjust(): void;
 
-        blockEvent(): void;
+		attachEvent(type: rangechartEventName, functor: WebixCallback, id?: string): string | number;
 
-        callEvent(name: string, params: any[]): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        define(property: string, value: any): void;
+		blockEvent(): void;
 
-        destructor(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        detachEvent(id: string): void;
+		clearAll(soft?: boolean): void;
 
-        disable(): void;
+		clearCanvas(): void;
 
-        enable(): void;
+		count(): number;
 
-        getBody(): any;
+		define(property: string, value: any): void;
 
-        getChildViews(): any[];
+		destructor(): void;
 
-        getFormView(): webix.ui.baseview;
+		detachEvent(id: string): void;
 
-        getNode(): any;
+		disable(): void;
 
-        getParentView(): any;
+		enable(): void;
 
-        getScrollState(): any;
+		exists(id: number | string): boolean;
 
-        getTopParentView(): webix.ui.baseview;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        hasEvent(name: string): boolean;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        hide(): void;
+		getChildViews(): any[];
 
-        isEnabled(): boolean;
+		getFirstId(): number | string;
 
-        isVisible(): boolean;
+		getFormView(): webix.ui.baseview;
 
-        mapEvent(map: any): void;
+		getFrameData(): any[];
 
-        queryView(config: any, mode?: string): any;
+		getFrameRange(): any;
 
-        resize(): void;
+		getIdByIndex(index: number | string): string | number;
 
-        resizeChildren(): void;
+		getIndexById(id: number | string): number;
 
-        scrollTo(x: number, y: number): void;
+		getItem(id: number | string): any;
 
-        show(force?: boolean, animation?: boolean): void;
+		getLastId(): number | string;
 
-        showView(id: string | number): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        unbind(): void;
+		getNode(): any;
 
-        unblockEvent(): void;
+		getParentView(): any;
 
-        $getSize(): any[];
+		getPrevId(id: number | string, step: number): string | number;
 
-        $height: number;
-        $scope: any;
+		getTopParentView(): webix.ui.baseview;
 
-        $setSize(x: number, y: number): boolean;
+		group(config: any, target?: string | number): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: scrollviewConfig;
-        name: string;
-    }
+		hasEvent(name: string): boolean;
 
-    interface searchConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        pattern?: any;
-        placeholder?: string;
-        popup?: string;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tooltip?: string;
-        type?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		hide(): void;
 
-    type searchEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSearchIconClick'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		hideSeries(index: number): void;
 
-    class search implements webix.ui.baseview {
-        adjust(): void;
+		isEnabled(): boolean;
 
-        attachEvent(type: searchEventName, functor: WebixCallback, id?: string): string | number;
+		isVisible(): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        blockEvent(): void;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        blur(): void;
+		locate(e: Event): string | number;
 
-        callEvent(name: string, params: any[]): boolean;
+		mapEvent(map: any): void;
 
-        define(property: string, value: any): void;
+		parse(data: any, type: string): void;
 
-        destructor(): void;
+		queryView(config: any, mode?: string): any;
 
-        detachEvent(id: string): void;
+		refresh(id?: number | string): void;
 
-        disable(): void;
+		remove(id: string | number | any[]): void;
 
-        enable(): void;
+		removeAllSeries(): void;
 
-        focus(): void;
+		render(id: string | number, data: any, type: string): void;
 
-        getChildViews(): any[];
+		resize(): void;
 
-        getFormView(): webix.ui.baseview;
+		serialize(all?: boolean): any[];
 
-        getInputNode(): HTMLElement;
+		setFrameRange(range: any): void;
 
-        getNode(): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getParentView(): any;
+		showSeries(index: number): void;
 
-        getTopParentView(): webix.ui.baseview;
+		sort(by: string, dir?: string, as?: string): void;
 
-        getValue(): string;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        hasEvent(name: string): boolean;
+		unbind(): void;
 
-        hide(): void;
+		unblockEvent(): void;
 
-        isEnabled(): boolean;
+		ungroup(mode: boolean): void;
 
-        isVisible(): boolean;
+		updateItem(id: number | string, data: any): void;
 
-        mapEvent(map: any): void;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        queryView(config: any, mode?: string): any;
+		$getSize(): any[];
 
-        refresh(): void;
+		$height: number;
+		$scope: any;
 
-        render(id: string | number, data: any, type: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        resize(): void;
+		$skin: WebixCallback;
 
-        setBottomText(text: string): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        setValue(value: string): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		$tooltipOut(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$view: HTMLElement;
+		$width: number;
+		colormap: { [key: string]: any; };
+		config: rangechartConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		presets: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        unbind(): void;
+	interface rangesliderConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		max?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		min?: number;
+		minHeight?: number;
+		minWidth?: number;
+		moveTitle?: boolean;
+		name?: string;
+		on?: EventHash;
+		popup?: string;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		separator?: string;
+		step?: number;
+		stringResult?: boolean;
+		suggest?: any;
+		title?: string | WebixCallback;
+		tooltip?: any;
+		type?: string;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | any[];
+		vertical?: boolean;
+		width?: number;
+	}
 
-        unblockEvent(): void;
+	type rangesliderEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSliderDrag'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        validate(): boolean;
+	export class rangeslider implements webix.ui.baseview {
+		adjust(): void;
 
-        $compareValue: WebixCallback;
+		attachEvent(type: rangesliderEventName, functor: WebixCallback, id?: string): string | number;
 
-        $getSize(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $getValue(): string;
+		blockEvent(): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		blur(): void;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		callEvent(name: string, params: any[]): boolean;
 
-        $renderLabel(config: any, id: string | number): string;
+		define(property: string, value: any): void;
 
-        $scope: any;
+		destructor(): void;
 
-        $setSize(x: number, y: number): boolean;
+		detachEvent(id: string): void;
 
-        $setValue(value: string): void;
+		disable(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: searchConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		enable(): void;
 
-    interface segmentedConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        multiview?: boolean;
-        name?: string;
-        on?: EventHash;
-        optionWidth?: number;
-        options?: any;
-        popup?: string;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		focus(): void;
 
-    type segmentedEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterTabClick'
-        | 'onBeforeRender'
-        | 'onBeforeTabClick'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onOptionRemove'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getChildViews(): any[];
 
-    class segmented implements webix.ui.baseview {
-        addOption(obj: any, show?: boolean, index?: number): void;
-        addOption(id: string | number, value: any, show?: boolean, index?: number): void;
+		getFormView(): webix.ui.baseview;
 
-        adjust(): void;
+		getInputNode(): HTMLElement;
 
-        attachEvent(type: segmentedEventName, functor: WebixCallback, id?: string): string | number;
+		getNode(): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getParentView(): any;
 
-        blockEvent(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        blur(): void;
+		getValue(): string;
 
-        callEvent(name: string, params: any[]): boolean;
+		hasEvent(name: string): boolean;
 
-        define(property: string, value: any): void;
+		hide(): void;
 
-        destructor(): void;
+		isEnabled(): boolean;
 
-        detachEvent(id: string): void;
+		isVisible(): boolean;
 
-        disable(): void;
+		mapEvent(map: any): void;
 
-        enable(): void;
+		queryView(config: any, mode?: string): any;
 
-        focus(): void;
+		refresh(): void;
 
-        getChildViews(): any[];
+		render(id: string | number, data: any, type: string): void;
 
-        getFormView(): webix.ui.baseview;
+		resize(): void;
 
-        getInputNode(): HTMLElement;
+		setBottomText(text: string): void;
 
-        getNode(): any;
+		setValue(value: string): void;
 
-        getParentView(): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getTopParentView(): webix.ui.baseview;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getValue(): string;
+		unbind(): void;
 
-        hasEvent(name: string): boolean;
+		unblockEvent(): void;
 
-        hide(): void;
+		validate(): boolean;
 
-        hideOption(id: string | number): void;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
+		$cssName: string;
 
-        isEnabled(): boolean;
+		$getSize(): any[];
 
-        isVisible(): boolean;
+		$getValue(): string;
 
-        mapEvent(map: any): void;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        optionIndex(ID: string | number): number;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        queryView(config: any, mode?: string): any;
+		$renderLabel(config: any, id: string | number): string;
 
-        refresh(): void;
+		$scope: any;
 
-        removeOption(id: string | number): void;
+		$setSize(x: number, y: number): boolean;
 
-        render(id: string | number, data: any, type: string): void;
+		$setValue(value: string): void;
 
-        resize(): void;
+		$skin: WebixCallback;
 
-        setBottomText(text: string): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        setValue(value: string): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		$tooltipOut(): void;
 
-        showOption(id: string | number): void;
+		$touchCapture: boolean;
+		$view: HTMLElement;
+		$width: number;
+		config: rangesliderConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+	interface resizerConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		onContext?: { [key: string]: any; };
+		width?: number;
+	}
 
-        unbind(): void;
+	type resizerEventName = 'onViewShow';
 
-        unblockEvent(): void;
+	export class resizer implements webix.ui.baseview {
+		adjust(): void;
 
-        validate(): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $compareValue: WebixCallback;
+		define(property: string, value: any): void;
 
-        $getSize(): any[];
+		destructor(): void;
 
-        $getValue(): string;
+		disable(): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		enable(): void;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		getChildViews(): any[];
 
-        $renderLabel(config: any, id: string | number): string;
+		getFormView(): webix.ui.baseview;
 
-        $scope: any;
+		getNode(): any;
 
-        $setSize(x: number, y: number): boolean;
+		getParentView(): any;
 
-        $setValue(value: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: segmentedConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		hide(): void;
 
-    interface selectConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        options?: any[] | string;
-        placeholder?: string;
-        popup?: string;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		isEnabled(): boolean;
 
-    type selectEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		isVisible(): boolean;
 
-    class select implements webix.ui.baseview {
-        adjust(): void;
+		queryView(config: any, mode?: string): any;
 
-        attachEvent(type: selectEventName, functor: WebixCallback, id?: string): string | number;
+		resize(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        blockEvent(): void;
+		unbind(): void;
 
-        blur(): void;
+		$getSize(): any[];
 
-        callEvent(name: string, params: any[]): boolean;
+		$height: number;
+		$scope: any;
 
-        define(property: string, value: any): void;
+		$setSize(x: number, y: number): boolean;
 
-        destructor(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: resizerConfig;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+	}
 
-        detachEvent(id: string): void;
+	interface richselectConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icon?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		options?: any;
+		placeholder?: string;
+		popup?: string;
+		popupWidth?: number;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        disable(): void;
+	type richselectEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        enable(): void;
+	export class richselect implements webix.ui.baseview {
+		adjust(): void;
 
-        focus(): void;
+		attachEvent(type: richselectEventName, functor: WebixCallback, id?: string): string | number;
 
-        getChildViews(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getFormView(): webix.ui.baseview;
+		blockEvent(): void;
 
-        getInputNode(): HTMLElement;
+		blur(): void;
 
-        getNode(): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        getParentView(): any;
+		define(property: string, value: any): void;
 
-        getTopParentView(): webix.ui.baseview;
+		destructor(): void;
 
-        getValue(): string;
+		detachEvent(id: string): void;
 
-        hasEvent(name: string): boolean;
+		disable(): void;
 
-        hide(): void;
+		enable(): void;
 
-        isEnabled(): boolean;
+		focus(): void;
 
-        isVisible(): boolean;
+		getChildViews(): any[];
 
-        mapEvent(map: any): void;
+		getFormView(): webix.ui.baseview;
 
-        queryView(config: any, mode?: string): any;
+		getInputNode(): HTMLElement;
 
-        refresh(): void;
+		getList(): webix.ui.baseview;
 
-        render(id: string | number, data: any, type: string): void;
+		getNode(): any;
 
-        resize(): void;
+		getParentView(): any;
 
-        setBottomText(text: string): void;
+		getPopup(): webix.ui.baseview;
 
-        setValue(value: string): void;
+		getText(): string;
 
-        show(force?: boolean, animation?: boolean): void;
+		getTopParentView(): webix.ui.baseview;
 
-        unbind(): void;
+		getValue(): string;
 
-        unblockEvent(): void;
+		hasEvent(name: string): boolean;
 
-        validate(): boolean;
+		hide(): void;
 
-        $compareValue: WebixCallback;
+		isEnabled(): boolean;
 
-        $getSize(): any[];
+		isVisible(): boolean;
 
-        $getValue(): string;
+		mapEvent(map: any): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		queryView(config: any, mode?: string): any;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		refresh(): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		render(id: string | number, data: any, type: string): void;
 
-        $scope: any;
+		resize(): void;
 
-        $setSize(x: number, y: number): boolean;
+		setBottomText(text: string): void;
 
-        $setValue(value: string): void;
+		setValue(value: string): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: selectConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		show(force?: boolean, animation?: boolean): void;
 
-    interface sidebarConfig {
-        view?: string;
-        activeTitle?: boolean;
-        animate?: any;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        clipboard?: boolean | string;
-        collapsed?: boolean;
-        collapsedWidth?: number;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragscroll?: boolean | string;
-        filterMode?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: string | boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        pager?: any;
-        position?: string;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean | string;
-        template?: string | WebixCallback;
-        templateCopy?: WebixCallback;
-        threeState?: boolean;
-        titleHeight?: number;
-        tooltip?: string | boolean;
-        type?: any;
-        url?: any;
-        width?: number;
-    }
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-    type sidebarEventName =
-        'onAfterAdd'
-        | 'onAfterClose'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterLoad'
-        | 'onAfterOpen'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeClose'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeLoad'
-        | 'onBeforeOpen'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemCheck'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPartialRender'
-        | 'onPaste'
-        | 'onSelectChange'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		unbind(): void;
 
-    class sidebar implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		unblockEvent(): void;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		validate(): boolean;
 
-        adjust(): void;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        attachEvent(type: sidebarEventName, functor: WebixCallback, id?: string): string | number;
+		$getSize(): any[];
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$getValue(): string;
 
-        blockEvent(): void;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        callEvent(name: string, params: any[]): boolean;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        checkAll(id?: string | number): void;
+		$renderLabel(config: any, id: string | number): string;
 
-        checkItem(id: string): void;
+		$scope: any;
 
-        clearAll(soft?: boolean): void;
+		$setSize(x: number, y: number): boolean;
 
-        clearCss(css: string, silent?: boolean): void;
+		$setValue(value: string): void;
 
-        clearValidation(): void;
+		$skin: WebixCallback;
 
-        close(id: string | number): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        closeAll(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        collapse(): void;
+		$tooltipOut(): void;
 
-        copy(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): number;
+		$view: HTMLElement;
+		$width: number;
+		config: richselectConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        count(): number;
+	interface richtextConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		label?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		type?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        customize(obj: any): void;
+	type richtextEventName = 'onBindRequest' | 'onChange' | 'onDestruct' | 'onViewShow';
 
-        define(property: string, value: any): void;
+	export class richtext implements webix.ui.baseview {
+		adjust(): void;
 
-        destructor(): void;
+		attachEvent(type: richtextEventName, functor: WebixCallback, id?: string): string | number;
 
-        detachEvent(id: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        disable(): void;
+		blockEvent(): void;
 
-        enable(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        exists(id: string | number): boolean;
+		define(property: string, value: any): void;
 
-        expand(): void;
+		destructor(): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		detachEvent(id: string): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		disable(): void;
 
-        getBranchIndex(id: string | number, parent?: string | number): number;
+		enable(): void;
 
-        getChecked(): any[];
+		focus(): void;
 
-        getChildViews(): any[];
+		getChildViews(): any[];
 
-        getFirstChildId(id: string | number): string;
+		getFormView(): webix.ui.baseview;
 
-        getFirstId(): string | number;
+		getInputNode(): HTMLElement;
 
-        getFormView(): webix.ui.baseview;
+		getNode(): any;
 
-        getIdByIndex(index: number): string | number;
+		getParentView(): any;
 
-        getIndexById(id: string | number): number;
+		getTopParentView(): webix.ui.baseview;
 
-        getItem(id: string | number): any;
+		getValue(): string;
 
-        getItemNode(id: string | number): HTMLElement;
+		hasEvent(name: string): boolean;
 
-        getLastId(): string | number;
+		hide(): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		innerId(id: number | string): number | string;
 
-        getNextSiblingId(id: string | number): string | number;
+		isEnabled(): boolean;
 
-        getNode(): any;
+		isVisible(): boolean;
 
-        getOpenItems(): any[];
+		mapEvent(map: any): void;
 
-        getPage(): number;
+		queryView(config: any, mode?: string): any;
 
-        getPager(): any;
+		refresh(): void;
 
-        getParentId(id: string | number): string | number;
+		resize(): void;
 
-        getParentView(): any;
+		setValue(value: string): void;
 
-        getPopup(): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getPrevId(id: string | number, step: number): string | number;
+		ui(view: any): webix.ui.baseview;
 
-        getPrevSiblingId(id: string | number): string | number;
+		unbind(): void;
 
-        getScrollState(): any;
+		unblockEvent(): void;
 
-        getSelectedId(as_array: boolean): string | any[];
+		$$: any;
 
-        getSelectedItem(as_array: boolean): any;
+		$getSize(): any[];
 
-        getState(): any;
+		$height: number;
 
-        getTopParentView(): webix.ui.baseview;
+		$setSize(x: number, y: number): boolean;
 
-        group(config: any, mode: boolean): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: richtextConfig;
+		name: string;
+	}
 
-        hasCss(id: string | number, css: string): boolean;
+	interface scrollviewConfig {
+		view?: string;
+		animate?: any;
+		body?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		width?: number;
+	}
 
-        hasEvent(name: string): boolean;
+	type scrollviewEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        hide(): void;
+	export class scrollview implements webix.ui.baseview {
+		adjust(): void;
 
-        isBranch(id: string | number): boolean;
+		attachEvent(type: scrollviewEventName, functor: WebixCallback, id?: string): string | number;
 
-        isBranchOpen(id: string | number): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        isChecked(id: string | number): boolean;
+		blockEvent(): void;
 
-        isEnabled(): boolean;
+		callEvent(name: string, params: any[]): boolean;
 
-        isSelected(id: string | number): boolean;
+		define(property: string, value: any): void;
 
-        isVisible(): boolean;
+		destructor(): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		detachEvent(id: string): void;
 
-        loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+		disable(): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		enable(): void;
 
-        locate(e: Event): string | number;
+		getBody(): any;
 
-        mapEvent(map: any): void;
+		getChildViews(): any[];
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		getFormView(): webix.ui.baseview;
 
-        moveSelection(direction: string): void;
+		getNode(): any;
 
-        open(id: string | number, show?: boolean): void;
+		getParentView(): any;
 
-        openAll(): void;
+		getScrollState(): any;
 
-        parse(data: any, type: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        queryView(config: any, mode?: string): any;
+		hasEvent(name: string): boolean;
 
-        refresh(id?: string | number): void;
+		hide(): void;
 
-        remove(id: string | number): void;
+		isEnabled(): boolean;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		isVisible(): boolean;
 
-        render(id: string | number, data: any, type: string): void;
+		mapEvent(map: any): void;
 
-        resize(): void;
+		queryView(config: any, mode?: string): any;
 
-        scrollTo(x: number, y: number): void;
+		resize(): void;
 
-        select(id: string | any[], preserve: boolean): void;
+		resizeChildren(): void;
 
-        selectAll(from?: string, to?: string): void;
+		scrollTo(x: number, y: number): void;
 
-        serialize(): any[];
+		show(force?: boolean, animation?: boolean): void;
 
-        setPage(page: number): void;
+		showView(id: string | number): void;
 
-        setState(state: any): void;
+		unbind(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		unblockEvent(): void;
 
-        showItem(id: string | number): void;
+		$getSize(): any[];
 
-        sort(by: string, dir?: string, as?: string): void;
+		$height: number;
+		$scope: any;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$setSize(x: number, y: number): boolean;
 
-        toggle(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: scrollviewConfig;
+		name: string;
+	}
 
-        unbind(): void;
+	interface searchConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		autowidth?: boolean;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icon?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		pattern?: any;
+		placeholder?: string;
+		popup?: string;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		type?: string;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        unblockEvent(): void;
+	type searchEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSearchIconClick'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        uncheckAll(id?: string | number): void;
+	export class search implements webix.ui.baseview {
+		adjust(): void;
 
-        uncheckItem(id: string): void;
+		attachEvent(type: searchEventName, functor: WebixCallback, id?: string): string | number;
 
-        ungroup(mode: boolean): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        unselect(id?: string): void;
+		blockEvent(): void;
 
-        unselectAll(): void;
+		blur(): void;
 
-        updateItem(id: string | number, data: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        validate(id?: string): boolean;
+		define(property: string, value: any): void;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		destructor(): void;
 
-        $dragHTML: WebixCallback;
+		detachEvent(id: string): void;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		disable(): void;
 
-        $dragMark(context: any, ev: Event): boolean;
+		enable(): void;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		focus(): void;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		getChildViews(): any[];
 
-        $dropAllow: WebixCallback;
-        $fixEditor: WebixCallback;
+		getFormView(): webix.ui.baseview;
 
-        $getSize(): any[];
+		getInputNode(): HTMLElement;
 
-        $height: number;
-        $scope: any;
+		getNode(): any;
 
-        $setSize(x: number, y: number): boolean;
+		getParentView(): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: sidebarConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		getTopParentView(): webix.ui.baseview;
 
-    interface sidemenuConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        left?: number;
-        master?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        move?: boolean;
-        on?: EventHash;
-        padding?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        relative?: string;
-        resize?: boolean;
-        state?: WebixCallback;
-        toFront?: boolean;
-        top?: number;
-        width?: number;
-        zIndex?: number;
-    }
+		getValue(): string;
 
-    type sidemenuEventName =
-        'onAfterScroll'
-        | 'onBeforeShow'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		hasEvent(name: string): boolean;
 
-    class sidemenu implements webix.ui.baseview {
-        adjust(): void;
+		hide(): void;
 
-        attachEvent(type: sidemenuEventName, functor: WebixCallback, id?: string): string | number;
+		isEnabled(): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		isVisible(): boolean;
 
-        blockEvent(): void;
+		mapEvent(map: any): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		queryView(config: any, mode?: string): any;
 
-        close(): void;
+		refresh(): void;
 
-        define(property: string, value: any): void;
+		render(id: string | number, data: any, type: string): void;
 
-        destructor(): void;
+		resize(): void;
 
-        detachEvent(id: string): void;
+		setBottomText(text: string): void;
 
-        disable(): void;
+		setValue(value: string): void;
 
-        enable(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        getBody(): any;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getChildViews(): any[];
+		unbind(): void;
 
-        getFormView(): webix.ui.baseview;
+		unblockEvent(): void;
 
-        getHead(): any;
+		validate(): boolean;
 
-        getNode(): any;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        getParentView(): any;
+		$getSize(): any[];
 
-        getTopParentView(): webix.ui.baseview;
+		$getValue(): string;
 
-        hasEvent(name: string): boolean;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        hide(): void;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        isEnabled(): boolean;
+		$renderLabel(config: any, id: string | number): string;
 
-        isVisible(): boolean;
+		$scope: any;
 
-        mapEvent(map: any): void;
+		$setSize(x: number, y: number): boolean;
 
-        queryView(config: any, mode?: string): any;
+		$setValue(value: string): void;
 
-        resize(): void;
+		$skin: WebixCallback;
 
-        resizeChildren(): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        setPosition(x: number, y: number): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		$tooltipOut(): void;
 
-        unbind(): void;
+		$view: HTMLElement;
+		$width: number;
+		config: searchConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        unblockEvent(): void;
+	interface segmentedConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		multiview?: boolean;
+		name?: string;
+		on?: EventHash;
+		optionWidth?: number;
+		options?: any[];
+		popup?: string;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        $getSize(): any[];
+	type segmentedEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterTabClick'
+		| 'onBeforeRender'
+		| 'onBeforeTabClick'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onOptionAdd'
+		| 'onOptionRemove'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        $height: number;
-        $scope: any;
+	export class segmented implements webix.ui.baseview {
+		addOption(id: string | number, value: any, show?: boolean, index?: number): void;
 
-        $setSize(x: number, y: number): boolean;
+		adjust(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: sidemenuConfig;
-        name: string;
-    }
+		attachEvent(type: segmentedEventName, functor: WebixCallback, id?: string): string | number;
 
-    interface sliderConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        max?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        min?: number;
-        minHeight?: number;
-        minWidth?: number;
-        moveTitle?: boolean;
-        name?: string;
-        on?: EventHash;
-        placeholder?: string;
-        popup?: string;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        step?: number;
-        suggest?: any;
-        title?: string | WebixCallback;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        vertical?: boolean;
-        width?: number;
-    }
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    type sliderEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSliderDrag'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		blockEvent(): void;
 
-    class slider implements webix.ui.baseview {
-        adjust(): void;
+		blur(): void;
 
-        attachEvent(type: sliderEventName, functor: WebixCallback, id?: string): string | number;
+		callEvent(name: string, params: any[]): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		define(property: string, value: any): void;
 
-        blockEvent(): void;
+		destructor(): void;
 
-        blur(): void;
+		detachEvent(id: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		disable(): void;
 
-        define(property: string, value: any): void;
+		disableOption(id: string | number): void;
 
-        destructor(): void;
+		enable(): void;
 
-        detachEvent(id: string): void;
+		enableOption(id: string | number): void;
 
-        disable(): void;
+		focus(): void;
 
-        enable(): void;
+		getChildViews(): any[];
 
-        focus(): void;
+		getFormView(): webix.ui.baseview;
 
-        getChildViews(): any[];
+		getInputNode(): HTMLElement;
 
-        getFormView(): webix.ui.baseview;
+		getNode(): any;
 
-        getInputNode(): HTMLElement;
+		getOption(id: string | number): any;
 
-        getNode(): any;
+		getParentView(): any;
 
-        getParentView(): any;
+		getTopParentView(): webix.ui.baseview;
 
-        getTopParentView(): webix.ui.baseview;
+		getValue(): string;
 
-        getValue(): string;
+		hasEvent(name: string): boolean;
 
-        hasEvent(name: string): boolean;
+		hide(): void;
 
-        hide(): void;
+		hideOption(id: string | number): void;
 
-        isEnabled(): boolean;
+		isEnabled(): boolean;
 
-        isVisible(): boolean;
+		isVisible(): boolean;
 
-        mapEvent(map: any): void;
+		mapEvent(map: any): void;
 
-        queryView(config: any, mode?: string): any;
+		optionIndex(ID: string | number): number;
 
-        refresh(): void;
+		queryView(config: any, mode?: string): any;
 
-        render(id: string | number, data: any, type: string): void;
+		refresh(): void;
 
-        resize(): void;
+		removeOption(id: string | number): void;
 
-        setBottomText(text: string): void;
+		render(id: string | number, data: any, type: string): void;
 
-        setValue(value: string): void;
+		resize(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		setBottomText(text: string): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		setValue(value: string): void;
 
-        unbind(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        unblockEvent(): void;
+		showOption(id: string | number): void;
 
-        validate(): boolean;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        $compareValue: WebixCallback;
+		unbind(): void;
 
-        $getSize(): any[];
+		unblockEvent(): void;
 
-        $getValue(): string;
+		validate(): boolean;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		$getSize(): any[];
 
-        $renderLabel(config: any, id: string | number): string;
+		$getValue(): string;
 
-        $scope: any;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        $setSize(x: number, y: number): boolean;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        $setValue(value: string): void;
+		$renderLabel(config: any, id: string | number): string;
 
-        $skin: WebixCallback;
-        $touchCapture: boolean;
-        $view: HTMLElement;
-        $width: number;
-        config: sliderConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		$scope: any;
 
-    interface spacerConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        width?: number;
-    }
+		$setSize(x: number, y: number): boolean;
 
-    type spacerEventName =
-        'onAfterScroll'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		$setValue(value: string): void;
 
-    class spacer implements webix.ui.baseview {
-        adjust(): void;
+		$skin: WebixCallback;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        define(property: string, value: any): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        destructor(): void;
+		$tooltipOut(): void;
 
-        disable(): void;
+		$view: HTMLElement;
+		$width: number;
+		config: segmentedConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        enable(): void;
+	interface selectConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		options?: any[] | string;
+		placeholder?: string;
+		popup?: string;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        getChildViews(): any[];
+	type selectEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        getFormView(): webix.ui.baseview;
+	export class select implements webix.ui.baseview {
+		adjust(): void;
 
-        getNode(): any;
+		attachEvent(type: selectEventName, functor: WebixCallback, id?: string): string | number;
 
-        getParentView(): any;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		blockEvent(): void;
 
-        hide(): void;
+		blur(): void;
 
-        isEnabled(): boolean;
+		callEvent(name: string, params: any[]): boolean;
 
-        isVisible(): boolean;
+		define(property: string, value: any): void;
 
-        queryView(config: any, mode?: string): any;
+		destructor(): void;
 
-        resize(): void;
+		detachEvent(id: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		disable(): void;
 
-        unbind(): void;
+		enable(): void;
 
-        $getSize(): any[];
+		focus(): void;
 
-        $height: number;
-        $scope: any;
+		getChildViews(): any[];
 
-        $setSize(x: number, y: number): boolean;
+		getFormView(): webix.ui.baseview;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: spacerConfig;
-        name: string;
-    }
+		getInputNode(): HTMLElement;
 
-    interface spreadsheetConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        bottombar?: boolean;
-        buttons?: any;
-        columnCount?: number;
-        conditionStyle?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datatype?: string;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        liveEditor?: boolean;
-        maxHeight?: number;
-        maxWidth?: number;
-        menu?: boolean;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        readonly?: boolean;
-        resizeCell?: boolean;
-        rowCount?: number;
-        sheetTabWidth?: number;
-        subbar?: any;
-        toolbar?: string | boolean;
-        type?: string;
-        url?: any;
-        width?: number;
-    }
+		getNode(): any;
 
-    type spreadsheetEventName =
-        'onAfterLoad'
-        | 'onAfterSelect'
-        | 'onAfterSheetShow'
-        | 'onBeforeLoad'
-        | 'onBeforeSheetShow'
-        | 'onBeforeSpan'
-        | 'onBeforeSplit'
-        | 'onBeforeValueChange'
-        | 'onBindRequest'
-        | 'onCellChange'
-        | 'onComponentInit'
-        | 'onDataParse'
-        | 'onDataSerialize'
-        | 'onDestruct'
-        | 'onLoadError'
-        | 'onMathRefresh'
-        | 'onReset'
-        | 'onSheetAdd'
-        | 'onSheetRemove'
-        | 'onSheetRename'
-        | 'onStyleSet';
+		getParentView(): any;
 
-    class spreadsheet implements webix.ui.baseview {
-        addFilter(rowId: number, columnId: number): void;
+		getTopParentView(): webix.ui.baseview;
 
-        addImage(rowId: number, columnId: number, url: string): void;
+		getValue(): string;
 
-        addSheet(content: any): void;
+		hasEvent(name: string): boolean;
 
-        addSparkline(rowId: number, columnId: number, config: any): void;
+		hide(): void;
 
-        addStyle(styleProps: any, baseStyle: any): void;
+		isEnabled(): boolean;
 
-        adjust(): void;
+		isVisible(): boolean;
 
-        alert(config: any): HTMLElement;
+		mapEvent(map: any): void;
 
-        attachEvent(type: spreadsheetEventName, functor: WebixCallback, id?: string): string | number;
+		queryView(config: any, mode?: string): any;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		refresh(): void;
 
-        blockEvent(): void;
+		render(id: string | number, data: any, type: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		resize(): void;
 
-        clearRange(rangeStr: string, type: any): void;
+		setBottomText(text: string): void;
 
-        clearSheet(): void;
+		setValue(value: string): void;
 
-        combineCells(range?: any): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        compactStyles(): void;
+		unbind(): void;
 
-        confirm(config: any): void;
+		unblockEvent(): void;
 
-        define(property: string, value: any): void;
+		validate(): boolean;
 
-        deleteColumn(columnId: number): void;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        deleteRow(rowId: number): void;
+		$getSize(): any[];
 
-        destructor(): void;
+		$getValue(): string;
 
-        detachEvent(id: string): void;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        disable(): void;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        eachSelectedCell(handler: WebixCallback): void;
+		$renderLabel(config: any, id: string | number): string;
 
-        editSheet(name: string): void;
+		$scope: any;
 
-        enable(): void;
+		$setSize(x: number, y: number): boolean;
 
-        filterSpreadSheet(): void;
+		$setValue(value: string): void;
 
-        freezeColumns(columns: number): void;
+		$skin: WebixCallback;
 
-        freezeRows(rows: number): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        getActiveSheet(): string;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        getCellEditor(row: number, column: number): any;
+		$tooltipOut(): void;
 
-        getCellValue(row: number, column: number): string;
+		$view: HTMLElement;
+		$width: number;
+		config: selectConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        getChildViews(): any[];
+	interface sidebarConfig {
+		view?: string;
+		activeTitle?: boolean;
+		animate?: any;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		clipboard?: boolean | string;
+		collapsed?: boolean;
+		collapsedWidth?: number;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		dataFeed?: string | WebixCallback;
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragscroll?: boolean | string;
+		filterMode?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multipleOpen?: boolean;
+		multiselect?: string | boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		pager?: any;
+		position?: string;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean | string;
+		template?: string | WebixCallback;
+		templateCopy?: WebixCallback;
+		threeState?: boolean;
+		titleHeight?: number;
+		tooltip?: any;
+		type?: any;
+		url?: any;
+		width?: number;
+	}
 
-        getColumn(id: string): any;
+	type sidebarEventName =
+		'onAfterAdd'
+		| 'onAfterClose'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterLoad'
+		| 'onAfterOpen'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeClose'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeLoad'
+		| 'onBeforeOpen'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemCheck'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPartialRender'
+		| 'onPaste'
+		| 'onSelectChange'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        getFormView(): webix.ui.baseview;
+	export class sidebar implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        getNode(): any;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        getParentView(): any;
+		adjust(): void;
 
-        getRow(id: string): any;
+		attachEvent(type: sidebarEventName, functor: WebixCallback, id?: string): string | number;
 
-        getSelectedId(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getSelectedRange(): string;
+		blockEvent(): void;
 
-        getSheetData(sheet_name: string): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        getStyle(row: number, column: number): any;
+		checkAll(id?: string | number): void;
 
-        getTopParentView(): webix.ui.baseview;
+		checkItem(id: string): void;
 
-        hasEvent(name: string): boolean;
+		clearAll(soft?: boolean): void;
 
-        hide(): void;
+		clearCss(css: string, silent?: boolean): void;
 
-        hideColumn(columnId: number, state: boolean): void;
+		clearValidation(): void;
 
-        hideGridlines(state: boolean): void;
+		close(id: string | number): void;
 
-        hideHeaders(state: boolean): void;
+		closeAll(): void;
 
-        hideRow(rowId: number, state: boolean): void;
+		collapse(): void;
 
-        innerId(id: number | string): number | string;
+		copy(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): number;
 
-        insertColumn(columnId: number): void;
+		count(): number;
 
-        insertRow(rowId: number): void;
+		customize(obj: any): void;
 
-        isCellLocked(rowId: number, columnId: number): boolean;
+		define(property: string, value: any): void;
 
-        isColumnVisible(columnId: number): boolean;
+		destructor(): void;
 
-        isEnabled(): boolean;
+		detachEvent(id: string): void;
 
-        isRowVisible(rowId: number): boolean;
+		disable(): void;
 
-        isVisible(): boolean;
+		enable(): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		exists(id: number | string): boolean;
 
-        lockCell(row: any, column: any, state: boolean): void;
+		expand(): void;
 
-        mapEvent(map: any): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        parse(data: any, type: string): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        queryView(config: any, mode?: string): any;
+		getBranchIndex(id: string | number, parent?: string | number): number;
 
-        recalculate(): void;
+		getChecked(): any[];
 
-        redo(): void;
+		getChildViews(): any[];
 
-        refresh(): void;
+		getFirstChildId(id: string | number): string;
 
-        registerMathMethod(name: string, handler: WebixCallback): void;
+		getFirstId(): number | string;
 
-        removeFilter(): void;
+		getFormView(): webix.ui.baseview;
 
-        removeSheet(name: string): void;
+		getIdByIndex(index: number | string): string | number;
 
-        renameSheet(name: string, newName: string): void;
+		getIndexById(id: number | string): number;
 
-        reset(): void;
+		getItem(id: number | string): any;
 
-        resetUndo(): void;
+		getItemNode(id: string | number): HTMLElement;
 
-        resize(): void;
+		getLastId(): number | string;
 
-        saveCell(row: number, column: number): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        serialize(options?: any): any;
+		getNextSiblingId(id: string | number): string | number;
 
-        setCellEditor(rowId: number, columnId: number, editorObject: any): void;
+		getNode(): any;
 
-        setCellFilter(rowId: number, columnId: number, options: string | any[]): void;
+		getOpenItems(): any[];
 
-        setCellValue(row: number, column: any, value: string): void;
+		getPage(): number;
 
-        setFormat(rowId: number, columnId: number, format: string): void;
+		getPager(): any;
 
-        setPlaceholder(placeholder: any): void;
+		getParentId(id: string | number): string | number;
 
-        setRangeStyle(rangeStr: string, style: any): void;
+		getParentView(): any;
 
-        setRangeValue(range: string): void;
+		getPopup(): any;
 
-        setStyle(row: number, column: number, style: any): void;
+		getPrevId(id: number | string, step: number): string | number;
 
-        show(force?: boolean, animation?: boolean): void;
+		getPrevSiblingId(id: string | number): string | number;
 
-        showSheet(name: string): void;
+		getScrollState(): any;
 
-        sortRange(range?: string, dir?: string): void;
+		getSelectedId(as_array: boolean): string | any[];
 
-        splitCell(row: number, column: number): void;
+		getSelectedItem(as_array: boolean): any;
 
-        ui(view: any): webix.ui.baseview;
+		getState(): any;
 
-        unbind(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        unblockEvent(): void;
+		group(config: any, target?: string | number): void;
 
-        undo(id: string): void;
+		hasCss(id: string | number, css: string): boolean;
 
-        $$: any;
+		hasEvent(name: string): boolean;
 
-        $getSize(): any[];
+		hide(): void;
 
-        $height: number;
+		isBranch(id: string | number): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		isBranchOpen(id: string | number): boolean;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: spreadsheetConfig;
-        name: string;
-    }
+		isChecked(id: string | number): boolean;
 
-    interface submenuConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        autoheight?: boolean;
-        autowidth?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        clipboard?: boolean | string;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datafetch?: number;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragscroll?: boolean | string;
-        dynamic?: boolean;
-        externalData?: WebixCallback;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        layout?: string;
-        left?: number;
-        master?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        mouseEventDelay?: number;
-        move?: boolean;
-        multiselect?: string | boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        openAction?: string;
-        padding?: any;
-        pager?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        ready?: WebixCallback;
-        relative?: string;
-        removeMissed?: boolean;
-        resize?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean | string;
-        subMenuPos?: string;
-        submenuConfig?: any;
-        template?: string | WebixCallback;
-        templateCopy?: WebixCallback;
-        toFront?: boolean;
-        tooltip?: string | boolean;
-        top?: number;
-        type?: any;
-        url?: any;
-        width?: number;
-        xCount?: number;
-        yCount?: number;
-        zIndex?: number;
-    }
+		isEnabled(): boolean;
 
-    type submenuEventName =
-        'onAfterAdd'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeShow'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMenuItemClick'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPaste'
-        | 'onSelectChange'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		isSelected(id: string | number): boolean;
 
-    class submenu implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		isVisible(): boolean;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        adjust(): void;
+		loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-        attachEvent(type: submenuEventName, functor: WebixCallback, id?: string): string | number;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		locate(e: Event): string | number;
 
-        blockEvent(): void;
+		mapEvent(map: any): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        clearAll(soft?: boolean): void;
+		moveSelection(direction: string): void;
 
-        clearCss(css: string, silent?: boolean): void;
+		open(id: string | number, show?: boolean): void;
 
-        clearValidation(): void;
+		openAll(): void;
 
-        close(): void;
+		parse(data: any, type: string): void;
 
-        copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+		queryView(config: any, mode?: string): any;
 
-        count(): number;
+		refresh(id?: number | string): void;
 
-        customize(obj: any): void;
+		remove(id: string | number | any[]): void;
 
-        define(property: string, value: any): void;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        destructor(): void;
+		render(id: string | number, data: any, type: string): void;
 
-        detachEvent(id: string): void;
+		resize(): void;
 
-        disable(): void;
+		scrollTo(x: number, y: number): void;
 
-        disableItem(id: string | number): void;
+		select(id: string | any[], preserve: boolean): void;
 
-        enable(): void;
+		selectAll(from?: string, to?: string): void;
 
-        enableItem(id: string | number): void;
+		serialize(all?: boolean): any[];
 
-        exists(id: string | number): boolean;
+		setPage(page: number): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		setState(state: any): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getBody(): any;
+		showItem(id: string | number): void;
 
-        getChildViews(): any[];
+		sort(by: string, dir?: string, as?: string): void;
 
-        getFirstId(): string | number;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getFormView(): webix.ui.baseview;
+		toggle(): void;
 
-        getHead(): any;
+		unbind(): void;
 
-        getIdByIndex(index: number): string | number;
+		unblockEvent(): void;
 
-        getIndexById(id: string | number): number;
+		uncheckAll(id?: string | number): void;
 
-        getItem(id: string | number): any;
+		uncheckItem(id: string): void;
 
-        getItemNode(id: string | number): HTMLElement;
+		ungroup(mode: boolean): void;
 
-        getLastId(): string | number;
+		unselect(id?: string): void;
 
-        getMenu(id: string | number): any;
+		unselectAll(): void;
 
-        getMenuItem(id: string | number): any;
+		updateItem(id: number | string, data: any): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		validate(id?: string): boolean;
 
-        getNode(): any;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        getPage(): number;
+		$drag(source: HTMLElement, ev: Event): string;
 
-        getPager(): any;
+		$dragHTML: WebixCallback;
 
-        getParentView(): any;
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-        getPrevId(id: string | number, step: number): string | number;
+		$dragMark(context: any, ev: Event): boolean;
 
-        getScrollState(): any;
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-        getSelectedId(as_array: boolean): string | any[];
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        getSelectedItem(as_array: boolean): any;
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
+		$fixEditor: WebixCallback;
 
-        getSubMenu(id: string | number): any;
+		$getSize(): any[];
 
-        getTopMenu(): any;
+		$height: number;
+		$scope: any;
 
-        getTopParentView(): webix.ui.baseview;
+		$setSize(x: number, y: number): boolean;
 
-        getVisibleCount(): number;
+		$skin: WebixCallback;
 
-        hasCss(id: string | number, css: string): boolean;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        hasEvent(name: string): boolean;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        hide(): void;
+		$tooltipOut(): void;
 
-        hideItem(id: string | number): void;
+		$view: HTMLElement;
+		$width: number;
+		config: sidebarConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        isEnabled(): boolean;
+	interface sidemenuConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		left?: number;
+		master?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		move?: boolean;
+		on?: EventHash;
+		padding?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		relative?: string;
+		resize?: boolean;
+		state?: WebixCallback;
+		toFront?: boolean;
+		top?: number;
+		width?: number;
+		zIndex?: number;
+	}
 
-        isSelected(id: string | number): boolean;
+	type sidemenuEventName =
+		'onAfterScroll'
+		| 'onBeforeShow'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        isVisible(): boolean;
+	export class sidemenu implements webix.ui.baseview {
+		adjust(): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		attachEvent(type: sidemenuEventName, functor: WebixCallback, id?: string): string | number;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        locate(e: Event): string | number;
+		blockEvent(): void;
 
-        mapEvent(map: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		define(property: string, value: any): void;
 
-        moveBottom(id: string | number): void;
+		destructor(): void;
 
-        moveDown(id: string | number, step: number): void;
+		detachEvent(id: string): void;
 
-        moveSelection(direction: string): void;
+		disable(): void;
 
-        moveTop(id: string | number): void;
+		enable(): void;
 
-        moveUp(id: string | number, step: number): void;
+		getBody(): any;
 
-        parse(data: any, type: string): void;
+		getChildViews(): any[];
 
-        queryView(config: any, mode?: string): any;
+		getFormView(): webix.ui.baseview;
 
-        refresh(id?: string | number): void;
+		getHead(): any;
 
-        remove(id: string | number): void;
+		getNode(): any;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		getParentView(): any;
 
-        render(id: string | number, data: any, type: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        resize(): void;
+		hasEvent(name: string): boolean;
 
-        resizeChildren(): void;
+		hide(): void;
 
-        scrollTo(x: number, y: number): void;
+		isEnabled(): boolean;
 
-        select(id: string | any[], preserve: boolean): void;
+		isVisible(): boolean;
 
-        selectAll(from?: string, to?: string): void;
+		mapEvent(map: any): void;
 
-        serialize(): any[];
+		queryView(config: any, mode?: string): any;
 
-        setPage(page: number): void;
+		resize(): void;
 
-        setPosition(x: number, y: number): void;
+		resizeChildren(): void;
 
-        show(node?: HTMLElement, position?: any, point?: string): void;
+		setPosition(x: number, y: number): void;
 
-        showItem(id: string | number): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        sizeToContent(): void;
+		unbind(): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		unblockEvent(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$getSize(): any[];
 
-        unbind(): void;
+		$height: number;
+		$scope: any;
 
-        unblockEvent(): void;
+		$setSize(x: number, y: number): boolean;
 
-        unselect(id?: string): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: sidemenuConfig;
+		name: string;
+	}
 
-        unselectAll(): void;
+	interface sliderConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		max?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		min?: number;
+		minHeight?: number;
+		minWidth?: number;
+		moveTitle?: boolean;
+		name?: string;
+		on?: EventHash;
+		placeholder?: string;
+		popup?: string;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		step?: number;
+		suggest?: any;
+		title?: string | WebixCallback;
+		tooltip?: any;
+		type?: string;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		vertical?: boolean;
+		width?: number;
+	}
 
-        updateItem(id: string | number, data: any): void;
+	type sliderEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSliderDrag'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        validate(id?: string): boolean;
+	export class slider implements webix.ui.baseview {
+		adjust(): void;
 
-        show(force: boolean, animation: boolean): void;
+		attachEvent(type: sliderEventName, functor: WebixCallback, id?: string): string | number;
 
-        $customPrint: WebixCallback;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		blockEvent(): void;
 
-        $dragHTML: WebixCallback;
+		blur(): void;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		callEvent(name: string, params: any[]): boolean;
 
-        $dragMark(context: any, ev: Event): boolean;
+		define(property: string, value: any): void;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		destructor(): void;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		detachEvent(id: string): void;
 
-        $dropAllow: WebixCallback;
+		disable(): void;
 
-        $getSize(): any[];
+		enable(): void;
 
-        $height: number;
-        $scope: any;
+		focus(): void;
 
-        $setSize(x: number, y: number): boolean;
+		getChildViews(): any[];
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: submenuConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		getFormView(): webix.ui.baseview;
 
-    interface suggestConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        disabled?: boolean;
-        filter?: WebixCallback;
-        fitMaster?: boolean;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        input?: HTMLElement | string;
-        keyPressTimeout?: number;
-        left?: number;
-        master?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        move?: boolean;
-        on?: EventHash;
-        padding?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        relative?: string;
-        resize?: boolean;
-        template?: string | WebixTemplate;
-        textValue?: string;
-        toFront?: boolean;
-        top?: number;
-        type?: string;
-        url?: string;
-        width?: number;
-        zIndex?: number;
-    }
+		getInputNode(): HTMLElement;
 
-    type suggestEventName =
-        'onAfterScroll'
-        | 'onBeforeShow'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValueSuggest'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		getNode(): any;
 
-    class suggest implements webix.ui.baseview {
-        adjust(): void;
+		getParentView(): any;
 
-        attachEvent(type: suggestEventName, functor: WebixCallback, id?: string): string | number;
+		getTopParentView(): webix.ui.baseview;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getValue(): string;
 
-        blockEvent(): void;
+		hasEvent(name: string): boolean;
 
-        callEvent(name: string, params: any[]): boolean;
+		hide(): void;
 
-        close(): void;
+		isEnabled(): boolean;
 
-        define(property: string, value: any): void;
+		isVisible(): boolean;
 
-        destructor(): void;
+		mapEvent(map: any): void;
 
-        detachEvent(id: string): void;
+		queryView(config: any, mode?: string): any;
 
-        disable(): void;
+		refresh(): void;
 
-        enable(): void;
+		render(id: string | number, data: any, type: string): void;
 
-        getBody(): any;
+		resize(): void;
 
-        getChildViews(): any[];
+		setBottomText(text: string): void;
 
-        getFormView(): webix.ui.baseview;
+		setValue(value: string): void;
 
-        getHead(): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getItemId(text: string): string | number;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getItemText(id: string | number): string;
+		unbind(): void;
 
-        getList(): webix.ui.baseview;
+		unblockEvent(): void;
 
-        getMasterValue(): any;
+		validate(): boolean;
 
-        getNode(): any;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        getParentView(): any;
+		$getSize(): any[];
 
-        getSuggestion(): string;
+		$getValue(): string;
 
-        getTopParentView(): webix.ui.baseview;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        getValue(): string | number;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        hasEvent(name: string): boolean;
+		$renderLabel(config: any, id: string | number): string;
 
-        hide(): void;
+		$scope: any;
 
-        isEnabled(): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        isVisible(): boolean;
+		$setValue(value: string): void;
 
-        linkInput(input: HTMLElement): void;
+		$skin: WebixCallback;
 
-        mapEvent(map: any): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        queryView(config: any, mode?: string): any;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        resize(): void;
+		$tooltipOut(): void;
 
-        resizeChildren(): void;
+		$touchCapture: boolean;
+		$view: HTMLElement;
+		$width: number;
+		config: sliderConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        setMasterValue(value: any): void;
+	interface spacerConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		width?: number;
+	}
 
-        setPosition(x: number, y: number): void;
+	type spacerEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        setValue(value: string | number): void;
+	export class spacer implements webix.ui.baseview {
+		adjust(): void;
 
-        show(node: HTMLElement, position?: any, point?: string): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        unbind(): void;
+		define(property: string, value: any): void;
 
-        unblockEvent(): void;
+		destructor(): void;
 
-        show(force: boolean, animation: boolean): void;
+		disable(): void;
 
-        $enterKey: WebixCallback;
+		enable(): void;
 
-        $getSize(): any[];
+		getChildViews(): any[];
 
-        $height: number;
-        $scope: any;
+		getFormView(): webix.ui.baseview;
 
-        $setSize(x: number, y: number): boolean;
+		getNode(): any;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: suggestConfig;
-        name: string;
-    }
+		getParentView(): any;
 
-    interface switchButtonConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        badge?: number | string;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        checkValue?: string;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        customCheckbox?: boolean;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        id?: string | number;
-        image?: string;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelRight?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        pattern?: any;
-        placeholder?: string;
-        popup?: string;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tooltip?: string;
-        type?: string;
-        uncheckValue?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		getTopParentView(): webix.ui.baseview;
 
-    type switchButtonEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		hide(): void;
 
-    class switchButton implements webix.ui.baseview {
-        adjust(): void;
+		isEnabled(): boolean;
 
-        attachEvent(type: switchButtonEventName, functor: WebixCallback, id?: string): string | number;
+		isVisible(): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		queryView(config: any, mode?: string): any;
 
-        blockEvent(): void;
+		resize(): void;
 
-        blur(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		unbind(): void;
 
-        define(property: string, value: any): void;
+		$getSize(): any[];
 
-        destructor(): void;
+		$height: number;
+		$scope: any;
 
-        detachEvent(id: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        disable(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: spacerConfig;
+		name: string;
+	}
 
-        enable(): void;
+	interface spreadsheetConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		bottombar?: boolean;
+		buttons?: any;
+		clipboard?: boolean;
+		clipboardDecimalDelimiter?: string;
+		columnCount?: number;
+		columnWidth?: number;
+		conditionStyle?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datatype?: string;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		liveEditor?: boolean;
+		maxHeight?: number;
+		maxWidth?: number;
+		menu?: boolean;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		readonly?: boolean;
+		resizeCell?: boolean;
+		rowCount?: number;
+		rowHeight?: number;
+		sheetTabWidth?: number;
+		subbar?: any;
+		toolbar?: string | boolean;
+		type?: string;
+		url?: any;
+		width?: number;
+	}
 
-        focus(): void;
+	type spreadsheetEventName =
+		'onAfterConditionSet'
+		| 'onAfterLoad'
+		| 'onAfterRangeSet'
+		| 'onAfterSelect'
+		| 'onAfterSheetShow'
+		| 'onAfterSpan'
+		| 'onAfterSplit'
+		| 'onBeforeCommentShow'
+		| 'onBeforeLoad'
+		| 'onBeforeSheetShow'
+		| 'onBeforeSpan'
+		| 'onBeforeSplit'
+		| 'onBeforeValueChange'
+		| 'onBindRequest'
+		| 'onCellChange'
+		| 'onChange'
+		| 'onCommentHide'
+		| 'onComponentInit'
+		| 'onDataParse'
+		| 'onDataSerialize'
+		| 'onDestruct'
+		| 'onLoadError'
+		| 'onMathRefresh'
+		| 'onReset'
+		| 'onSheetAdd'
+		| 'onSheetRemove'
+		| 'onSheetRename'
+		| 'onStyleSet'
+		| 'onViewInit'
+		| 'onViewShow';
 
-        getChildViews(): any[];
+	export class spreadsheet implements webix.ui.baseview {
+		addFilter(rowId: number, columnId: number): void;
 
-        getFormView(): webix.ui.baseview;
+		addImage(rowId: number, columnId: number, url: string): void;
 
-        getInputNode(): HTMLElement;
+		addSheet(content: any): void;
 
-        getNode(): any;
+		addSparkline(rowId: number, columnId: number, config: any): void;
 
-        getParentView(): any;
+		addStyle(styleProps: any, baseStyle: any): void;
 
-        getTopParentView(): webix.ui.baseview;
+		adjust(): void;
 
-        getValue(): string;
+		alert(config: any): HTMLElement;
 
-        hasEvent(name: string): boolean;
+		attachEvent(type: spreadsheetEventName, functor: WebixCallback, id?: string): string | number;
 
-        hide(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        isEnabled(): boolean;
+		blockEvent(): void;
 
-        isVisible(): boolean;
+		callEvent(name: string, params: any[]): boolean;
 
-        mapEvent(map: any): void;
+		changeDecimals(row: number, column: number, change: number): void;
 
-        queryView(config: any, mode?: string): any;
+		clearRange(rangeStr: string, type: any): void;
 
-        refresh(): void;
+		clearSheet(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		combineCells(range?: any): void;
 
-        resize(): void;
+		compactStyles(): void;
 
-        setBottomText(text: string): void;
+		confirm(config: any): void;
 
-        setValue(value: string): void;
+		define(property: string, value: any): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		deleteColumn(columnId: number): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		deleteRow(rowId: number): void;
 
-        toggle(): void;
+		destructor(): void;
 
-        unbind(): void;
+		detachEvent(id: string): void;
 
-        unblockEvent(): void;
+		disable(): void;
 
-        validate(): boolean;
+		eachSelectedCell(handler: WebixCallback): void;
 
-        $compareValue: WebixCallback;
+		editSheet(name: string): void;
 
-        $getSize(): any[];
+		enable(): void;
 
-        $getValue(): string;
+		filterSpreadSheet(): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		freezeColumns(columns: number): void;
 
-        $renderInput(config: any): HTMLElement;
+		freezeRows(rows: number): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		getActiveSheet(): string;
 
-        $scope: any;
+		getCellEditor(row: number, column: number): any;
 
-        $setSize(x: number, y: number): boolean;
+		getCellValue(row: number, column: number): string;
 
-        $setValue(value: string): void;
+		getChildViews(): any[];
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: switchButtonConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		getColumn(id: string): any;
 
-    interface tabbarConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomOffset?: number;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        moreTemplate?: WebixCallback;
-        multiview?: boolean;
-        name?: string;
-        on?: EventHash;
-        optionWidth?: number;
-        options?: any;
-        placeholder?: string;
-        popup?: string;
-        popupTemplate?: WebixCallback;
-        popupWidth?: number;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tabMargin?: number;
-        tabMinWidth?: number;
-        tabMoreWidth?: number;
-        tabOffset?: number;
-        tabbarPopup?: webix.ui.baseview;
-        topOffset?: number;
-        type?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-        yCount?: number;
-    }
+		getFormView(): webix.ui.baseview;
 
-    type tabbarEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterTabClick'
-        | 'onBeforeRender'
-        | 'onBeforeTabClick'
-        | 'onBeforeTabClose'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onOptionRemove'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getNode(): any;
 
-    class tabbar implements webix.ui.baseview {
-        addOption(obj: any, show?: boolean, index?: number): void;
-        addOption(id: string | number, value: any, show?: boolean, index?: number): void;
+		getParentView(): any;
 
-        adjust(): void;
+		getRow(id: string): any;
 
-        attachEvent(type: tabbarEventName, functor: WebixCallback, id?: string): string | number;
+		getSelectedId(): any[];
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getSelectedRange(): string;
 
-        blockEvent(): void;
+		getSheetData(sheet_name: string): void;
 
-        blur(): void;
+		getStyle(row: number, column: number): any;
 
-        callEvent(name: string, params: any[]): boolean;
+		getTopParentView(): webix.ui.baseview;
 
-        define(property: string, value: any): void;
+		groupUndo(func: WebixCallback): void;
 
-        destructor(): void;
+		hasEvent(name: string): boolean;
 
-        detachEvent(id: string): void;
+		hide(): void;
 
-        disable(): void;
+		hideColumn(columnId: number, state: boolean): void;
 
-        enable(): void;
+		hideGridlines(state: boolean): void;
 
-        focus(): void;
+		hideHeaders(state: boolean): void;
 
-        getChildViews(): any[];
+		hideRow(rowId: number, state: boolean): void;
 
-        getFormView(): webix.ui.baseview;
+		ignoreUndo(func: WebixCallback): void;
 
-        getInputNode(): HTMLElement;
+		innerId(id: number | string): number | string;
 
-        getNode(): any;
+		insertColumn(columnId: number): void;
 
-        getParentView(): any;
+		insertRow(rowId: number): void;
 
-        getPopup(): webix.ui.baseview;
+		isCellLocked(rowId: number, columnId: number): boolean;
 
-        getTopParentView(): webix.ui.baseview;
+		isColumnVisible(columnId: number): boolean;
 
-        getValue(): string;
+		isEnabled(): boolean;
 
-        hasEvent(name: string): boolean;
+		isRowVisible(rowId: number): boolean;
 
-        hide(): void;
+		isVisible(): boolean;
 
-        hideOption(id: string | number): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        isEnabled(): boolean;
+		lockCell(row: any, column: any, state: boolean): void;
 
-        isVisible(): boolean;
+		mapEvent(map: any): void;
 
-        mapEvent(map: any): void;
+		parse(data: any, type: string): void;
 
-        optionIndex(ID: string | number): number;
+		queryView(config: any, mode?: string): any;
 
-        queryView(config: any, mode?: string): any;
+		recalculate(): void;
 
-        refresh(): void;
+		redo(): void;
 
-        removeOption(id: string | number): void;
+		refresh(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		registerMathMethod(name: string, handler: WebixCallback): void;
 
-        resize(): void;
+		removeFilter(): void;
 
-        setBottomText(text: string): void;
+		removeSheet(name: string): void;
 
-        setValue(value: string): void;
+		renameSheet(name: string, newName: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		reset(): void;
 
-        showOption(id: string | number): void;
+		resetUndo(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		resize(): void;
 
-        unbind(): void;
+		saveCell(row: number, column: number): void;
 
-        unblockEvent(): void;
+		serialize(options?: any): any;
 
-        validate(): boolean;
+		setCellEditor(rowId: number, columnId: number, editorObject: any): void;
 
-        $compareValue: WebixCallback;
+		setCellFilter(rowId: number, columnId: number, options: string | any[]): void;
 
-        $getSize(): any[];
+		setCellValue(row: number, column: any, value: string): void;
 
-        $getValue(): string;
+		setColumnWidth(id: string | number, width: number): void;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		setFormat(rowId: number, columnId: number, format: string): void;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		setPlaceholder(placeholder: any): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		setRangeStyle(rangeStr: string, style: any): void;
 
-        $scope: any;
+		setRangeValue(range: string): void;
 
-        $setSize(x: number, y: number): boolean;
+		setRowHeight(id: string | number, height: number): void;
 
-        $setValue(value: string): void;
+		setStyle(row: number, column: number, style: any): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: tabbarConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		show(force?: boolean, animation?: boolean): void;
 
-    interface tabviewConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cells?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        multiview?: any;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        tabbar?: any;
-        type?: string;
-        width?: number;
-    }
+		showSheet(name: string): void;
 
-    type tabviewEventName = 'onBindRequest' | 'onDestruct';
+		sortRange(range?: string, dir?: string): void;
 
-    class tabview implements webix.ui.baseview {
-        addView(obj: any): void;
+		splitCell(row: number, column: number): void;
 
-        adjust(): void;
+		ui(view: any): webix.ui.baseview;
 
-        attachEvent(type: tabviewEventName, functor: WebixCallback, id?: string): string | number;
+		unbind(): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		unblockEvent(): void;
 
-        blockEvent(): void;
+		undo(id: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		$$: any;
 
-        define(property: string, value: any): void;
+		$getSize(): any[];
 
-        destructor(): void;
+		$height: number;
 
-        detachEvent(id: string): void;
+		$setSize(x: number, y: number): boolean;
 
-        disable(): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		comments: any;
+		config: spreadsheetConfig;
+		name: string;
+	}
 
-        enable(): void;
+	interface submenuConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		autoheight?: boolean;
+		autowidth?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		clipboard?: boolean | string;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragscroll?: boolean | string;
+		externalData?: WebixCallback;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		layout?: string;
+		left?: number;
+		master?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		mouseEventDelay?: number;
+		move?: boolean;
+		multiselect?: string | boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		openAction?: string;
+		padding?: any;
+		pager?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		ready?: WebixCallback;
+		relative?: string;
+		removeMissed?: boolean;
+		resize?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean | string;
+		subMenuPos?: string;
+		submenuConfig?: any;
+		template?: string | WebixCallback;
+		templateCopy?: WebixCallback;
+		toFront?: boolean;
+		tooltip?: any;
+		top?: number;
+		type?: any;
+		url?: any;
+		width?: number;
+		xCount?: number;
+		yCount?: number;
+		zIndex?: number;
+	}
 
-        getChildViews(): any[];
+	type submenuEventName =
+		'onAfterAdd'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeShow'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMenuItemClick'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPaste'
+		| 'onSelectChange'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        getFormView(): webix.ui.baseview;
+	export class submenu implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        getMultiview(): any;
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        getNode(): any;
+		adjust(): void;
 
-        getParentView(): any;
+		attachEvent(type: submenuEventName, functor: WebixCallback, id?: string): string | number;
 
-        getTabbar(): any;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		blockEvent(): void;
 
-        getValue(): string;
+		callEvent(name: string, params: any[]): boolean;
 
-        hasEvent(name: string): boolean;
+		clearAll(soft?: boolean): void;
 
-        hide(): void;
+		clearCss(css: string, silent?: boolean): void;
 
-        isEnabled(): boolean;
+		clearValidation(): void;
 
-        isVisible(): boolean;
+		copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
-        mapEvent(map: any): void;
+		count(): number;
 
-        queryView(config: any, mode?: string): any;
+		customize(obj: any): void;
 
-        removeView(id: any): void;
+		define(property: string, value: any): void;
 
-        resize(): void;
+		destructor(): void;
 
-        setValue(value: string): void;
+		detachEvent(id: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		disable(): void;
 
-        unbind(): void;
+		disableItem(id: string | number): void;
 
-        unblockEvent(): void;
+		enable(): void;
 
-        $getSize(): any[];
+		enableItem(id: string | number): void;
 
-        $height: number;
+		exists(id: number | string): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: tabviewConfig;
-        name: string;
-    }
+		find(criterion: WebixCallback, first?: boolean): any;
 
-    interface templateConfig {
-        view?: string;
-        animate?: any;
-        autoheight?: boolean;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        content?: string | number | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datatype?: string;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        src?: string;
-        template?: string | WebixCallback;
-        type?: string;
-        url?: any;
-        width?: number;
-    }
+		getBody(): any;
 
-    type templateEventName =
-        'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getChildViews(): any[];
 
-    class template implements webix.ui.baseview {
-        adjust(): void;
+		getFirstId(): number | string;
 
-        attachEvent(type: templateEventName, functor: WebixCallback, id?: string): string | number;
+		getFormView(): webix.ui.baseview;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getHead(): any;
 
-        blockEvent(): void;
+		getIdByIndex(index: number | string): string | number;
 
-        callEvent(name: string, params: any[]): boolean;
+		getIndexById(id: number | string): number;
 
-        define(property: string, value: any): void;
+		getItem(id: number | string): any;
 
-        destructor(): void;
+		getItemNode(id: string | number): HTMLElement;
 
-        detachEvent(id: string): void;
+		getLastId(): number | string;
 
-        disable(): void;
+		getMenu(id: string | number): any;
 
-        enable(): void;
+		getMenuItem(id: string | number): any;
 
-        getChildViews(): any[];
+		getNextId(id: number | string, step: number): string | number;
 
-        getFormView(): webix.ui.baseview;
+		getNode(): any;
 
-        getNode(): any;
+		getPage(): number;
 
-        getParentView(): any;
+		getPager(): any;
 
-        getScrollState(): any;
+		getParentView(): any;
 
-        getTopParentView(): webix.ui.baseview;
+		getPrevId(id: number | string, step: number): string | number;
 
-        getValues(): void;
+		getScrollState(): any;
 
-        hasEvent(name: string): boolean;
+		getSelectedId(as_array: boolean): string | any[];
 
-        hide(): void;
+		getSelectedItem(as_array: boolean): any;
 
-        isEnabled(): boolean;
+		getSubMenu(id: string | number): any;
 
-        isVisible(): boolean;
+		getTopMenu(): any;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		getTopParentView(): webix.ui.baseview;
 
-        mapEvent(map: any): void;
+		getVisibleCount(): number;
 
-        parse(data: any, type: string): void;
+		hasCss(id: string | number, css: string): boolean;
 
-        queryView(config: any, mode?: string): any;
+		hasEvent(name: string): boolean;
 
-        refresh(): void;
+		hide(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		hideItem(id: string | number): void;
 
-        resize(): void;
+		isEnabled(): boolean;
 
-        scrollTo(x: number, y: number): void;
+		isEnabledItem(): boolean;
 
-        setContent(node: any): void;
+		isSelected(id: string | number): boolean;
 
-        setHTML(html: string): void;
+		isVisible(): boolean;
 
-        setValues(obj: any, update?: boolean): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        show(force?: boolean, animation?: boolean): void;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		locate(e: Event): string | number;
 
-        unbind(): void;
+		mapEvent(map: any): void;
 
-        unblockEvent(): void;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        $getSize(): any[];
+		moveBottom(id: string | number): void;
 
-        $height: number;
-        $scope: any;
+		moveDown(id: string | number, step: number): void;
 
-        $setSize(x: number, y: number): boolean;
+		moveSelection(direction: string): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: templateConfig;
-        name: string;
-    }
+		moveTop(id: string | number): void;
 
-    interface textConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        pattern?: any;
-        placeholder?: string;
-        popup?: string;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tooltip?: string;
-        type?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		moveUp(id: string | number, step: number): void;
 
-    type textEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		parse(data: any, type: string): void;
 
-    class text implements webix.ui.baseview {
-        adjust(): void;
+		queryView(config: any, mode?: string): any;
 
-        attachEvent(type: textEventName, functor: WebixCallback, id?: string): string | number;
+		refresh(id?: number | string): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		remove(id: string | number | any[]): void;
 
-        blockEvent(): void;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        blur(): void;
+		render(id: string | number, data: any, type: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		resize(): void;
 
-        define(property: string, value: any): void;
+		resizeChildren(): void;
 
-        destructor(): void;
+		scrollTo(x: number, y: number): void;
 
-        detachEvent(id: string): void;
+		select(id: string | any[], preserve: boolean): void;
 
-        disable(): void;
+		selectAll(from?: string, to?: string): void;
 
-        enable(): void;
+		serialize(all?: boolean): any[];
 
-        focus(): void;
+		setPage(page: number): void;
 
-        getChildViews(): any[];
+		setPosition(x: number, y: number): void;
 
-        getFormView(): webix.ui.baseview;
+		show(node?: HTMLElement, position?: any, point?: string): void;
 
-        getInputNode(): HTMLElement;
+		showItem(id: string | number): void;
 
-        getNode(): any;
+		sizeToContent(): void;
 
-        getParentView(): any;
+		sort(by: string, dir?: string, as?: string): void;
 
-        getTopParentView(): webix.ui.baseview;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getValue(): string;
+		unbind(): void;
 
-        hasEvent(name: string): boolean;
+		unblockEvent(): void;
 
-        hide(): void;
+		unselect(id?: string): void;
 
-        isEnabled(): boolean;
+		unselectAll(): void;
 
-        isVisible(): boolean;
+		updateItem(id: number | string, data: any): void;
 
-        mapEvent(map: any): void;
+		validate(id?: string): boolean;
 
-        queryView(config: any, mode?: string): any;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        refresh(): void;
+		show(force: boolean, animation: boolean): void;
 
-        render(id: string | number, data: any, type: string): void;
+		$customPrint: WebixCallback;
 
-        resize(): void;
+		$drag(source: HTMLElement, ev: Event): string;
 
-        setBottomText(text: string): void;
+		$dragHTML: WebixCallback;
 
-        setValue(value: string): void;
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-        show(force?: boolean, animation?: boolean): void;
+		$dragMark(context: any, ev: Event): boolean;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-        unbind(): void;
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        unblockEvent(): void;
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
 
-        validate(): boolean;
+		$getSize(): any[];
 
-        $compareValue: WebixCallback;
+		$height: number;
+		$scope: any;
 
-        $getSize(): any[];
+		$setSize(x: number, y: number): boolean;
 
-        $getValue(): string;
+		$skin: WebixCallback;
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        $renderInput(config: any): HTMLElement;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        $renderLabel(config: any, id: string | number): string;
+		$tooltipOut(): void;
 
-        $scope: any;
+		$view: HTMLElement;
+		$width: number;
+		config: submenuConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        $setSize(x: number, y: number): boolean;
+	interface suggestConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		disabled?: boolean;
+		filter?: WebixCallback;
+		fitMaster?: boolean;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		input?: HTMLElement | string;
+		keyPressTimeout?: number;
+		left?: number;
+		master?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		move?: boolean;
+		on?: EventHash;
+		padding?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		relative?: string;
+		resize?: boolean;
+		template?: string | WebixTemplate;
+		textValue?: string;
+		toFront?: boolean;
+		top?: number;
+		type?: string;
+		url?: string;
+		width?: number;
+		zIndex?: number;
+	}
 
-        $setValue(value: string): void;
+	type suggestEventName =
+		'onAfterScroll'
+		| 'onBeforeShow'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValueSuggest'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: textConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+	export class suggest implements webix.ui.baseview {
+		adjust(): void;
 
-    interface textareaConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        attributes?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        bottomLabel?: string;
-        bottomPadding?: number;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        format?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputAlign?: string;
-        inputHeight?: number;
-        inputPadding?: number;
-        inputWidth?: number;
-        invalid?: boolean;
-        invalidMessage?: string;
-        label?: string;
-        labelAlign?: string;
-        labelPosition?: string;
-        labelWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        on?: EventHash;
-        pattern?: any;
-        placeholder?: string;
-        popup?: string;
-        readonly?: boolean;
-        relatedAction?: string;
-        relatedView?: string;
-        required?: boolean;
-        suggest?: any;
-        tooltip?: string;
-        validate?: WebixCallback;
-        validateEvent?: string;
-        value?: string | number;
-        width?: number;
-    }
+		attachEvent(type: suggestEventName, functor: WebixCallback, id?: string): string | number;
 
-    type textareaEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    class textarea implements webix.ui.baseview {
-        adjust(): void;
+		blockEvent(): void;
 
-        attachEvent(type: textareaEventName, functor: WebixCallback, id?: string): string | number;
+		callEvent(name: string, params: any[]): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		define(property: string, value: any): void;
 
-        blockEvent(): void;
+		destructor(): void;
 
-        blur(): void;
+		detachEvent(id: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		disable(): void;
 
-        define(property: string, value: any): void;
+		enable(): void;
 
-        destructor(): void;
+		getBody(): any;
 
-        detachEvent(id: string): void;
+		getChildViews(): any[];
 
-        disable(): void;
+		getFormView(): webix.ui.baseview;
 
-        enable(): void;
+		getHead(): any;
 
-        focus(): void;
+		getItemId(text: string): string | number;
 
-        getChildViews(): any[];
+		getItemText(id: string | number): string;
 
-        getFormView(): webix.ui.baseview;
+		getList(): webix.ui.baseview;
 
-        getInputNode(): HTMLElement;
+		getMasterValue(): any;
 
-        getNode(): any;
+		getNode(): any;
 
-        getParentView(): any;
+		getParentView(): any;
 
-        getTopParentView(): webix.ui.baseview;
+		getSuggestion(): string;
 
-        getValue(): string;
+		getTopParentView(): webix.ui.baseview;
 
-        hasEvent(name: string): boolean;
+		getValue(): string | number;
 
-        hide(): void;
+		hasEvent(name: string): boolean;
 
-        isEnabled(): boolean;
+		hide(): void;
 
-        isVisible(): boolean;
+		isEnabled(): boolean;
 
-        mapEvent(map: any): void;
+		isVisible(): boolean;
 
-        queryView(config: any, mode?: string): any;
+		linkInput(input: HTMLElement): void;
 
-        refresh(): void;
+		mapEvent(map: any): void;
 
-        render(id: string | number, data: any, type: string): void;
+		queryView(config: any, mode?: string): any;
 
-        resize(): void;
+		resize(): void;
 
-        setBottomText(text: string): void;
+		resizeChildren(): void;
 
-        setValue(value: string): void;
+		setMasterValue(value: any): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		setPosition(x: number, y: number): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		setValue(value: string | number): void;
 
-        unbind(): void;
+		show(node: HTMLElement, position?: any, point?: string): void;
 
-        unblockEvent(): void;
+		unbind(): void;
 
-        validate(): boolean;
+		unblockEvent(): void;
 
-        $compareValue: WebixCallback;
+		show(force: boolean, animation: boolean): void;
 
-        $getSize(): any[];
+		$enterKey: WebixCallback;
 
-        $getValue(): string;
+		$getSize(): any[];
 
-        $height: number;
-        $prepareValue: WebixCallback;
-        $render: WebixCallback;
-        $renderIcon: WebixCallback;
+		$height: number;
+		$scope: any;
 
-        $renderInput(obj: any, html: string, id: string | number): string;
+		$setSize(x: number, y: number): boolean;
 
-        $renderLabel(config: any, id: string | number): string;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: suggestConfig;
+		name: string;
+	}
 
-        $scope: any;
+	interface switchButtonConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		badge?: number | string;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		checkValue?: string;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		customCheckbox?: boolean;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		icon?: string;
+		id?: string | number;
+		image?: string;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelRight?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		pattern?: any;
+		placeholder?: string;
+		popup?: string;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		type?: string;
+		uncheckValue?: string;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        $setSize(x: number, y: number): boolean;
+	type switchButtonEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        $setValue(value: string): void;
+	export class switchButton implements webix.ui.baseview {
+		adjust(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: textareaConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		attachEvent(type: switchButtonEventName, functor: WebixCallback, id?: string): string | number;
 
-    interface toggleConfig {
-        view?: string;
-        align?: string;
-        animate?: any;
-        autowidth?: boolean;
-        borderless?: boolean;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        icon?: string;
-        id?: string | number;
-        inputHeight?: number;
-        inputWidth?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        name?: string;
-        offIcon?: string;
-        offLabel?: string;
-        on?: EventHash;
-        onIcon?: string;
-        onLabel?: string;
-        popup?: string;
-        tooltip?: string;
-        type?: string;
-        value?: string | number;
-        width?: number;
-    }
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-    type toggleEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		blockEvent(): void;
 
-    class toggle implements webix.ui.baseview {
-        adjust(): void;
+		blur(): void;
 
-        attachEvent(type: toggleEventName, functor: WebixCallback, id?: string): string | number;
+		callEvent(name: string, params: any[]): boolean;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		define(property: string, value: any): void;
 
-        blockEvent(): void;
+		destructor(): void;
 
-        blur(): void;
+		detachEvent(id: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		disable(): void;
 
-        define(property: string, value: any): void;
+		enable(): void;
 
-        destructor(): void;
+		focus(): void;
 
-        detachEvent(id: string): void;
+		getChildViews(): any[];
 
-        disable(): void;
+		getFormView(): webix.ui.baseview;
 
-        enable(): void;
+		getInputNode(): HTMLElement;
 
-        focus(): void;
+		getNode(): any;
 
-        getChildViews(): any[];
+		getParentView(): any;
 
-        getFormView(): webix.ui.baseview;
+		getTopParentView(): webix.ui.baseview;
 
-        getInputNode(): HTMLElement;
+		getValue(): string;
 
-        getNode(): any;
+		hasEvent(name: string): boolean;
 
-        getParentView(): any;
+		hide(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		isEnabled(): boolean;
 
-        getValue(): string;
+		isVisible(): boolean;
 
-        hasEvent(name: string): boolean;
+		mapEvent(map: any): void;
 
-        hide(): void;
+		queryView(config: any, mode?: string): any;
 
-        isEnabled(): boolean;
+		refresh(): void;
 
-        isVisible(): boolean;
+		render(id: string | number, data: any, type: string): void;
 
-        mapEvent(map: any): void;
+		resize(): void;
 
-        queryView(config: any, mode?: string): any;
+		setBottomText(text: string): void;
 
-        refresh(): void;
+		setValue(value: string): void;
 
-        render(id: string | number, data: any, type: string): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        resize(): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        setValue(value: string): void;
+		toggle(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		unbind(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		unblockEvent(): void;
 
-        toggle(): void;
+		validate(): boolean;
 
-        unbind(): void;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        unblockEvent(): void;
+		$getSize(): any[];
 
-        $compareValue: WebixCallback;
+		$getValue(): string;
 
-        $getSize(): any[];
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        $getValue(): string;
+		$renderInput(config: any): HTMLElement;
 
-        $height: number;
-        $prepareValue: WebixCallback;
+		$renderLabel(config: any, id: string | number): string;
 
-        $renderInput(config: any): HTMLElement;
+		$scope: any;
 
-        $scope: any;
+		$setSize(x: number, y: number): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		$setValue(value: string): void;
 
-        $setValue(value: string): void;
+		$skin: WebixCallback;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: toggleConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-    interface toolbarConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        cols?: any[];
-        complexData?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datatype?: string;
-        disabled?: boolean;
-        elements?: any[];
-        elementsConfig?: { [key: string]: any; };
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        isolate?: boolean;
-        margin?: number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        padding?: number;
-        paddingX?: number;
-        paddingY?: number;
-        responsive?: string;
-        rows?: any[];
-        rules?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        type?: string;
-        url?: any;
-        visibleBatch?: string;
-        width?: number;
-    }
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-    type toolbarEventName =
-        'onAfterLoad'
-        | 'onAfterScroll'
-        | 'onAfterValidation'
-        | 'onBeforeLoad'
-        | 'onBeforeValidate'
-        | 'onBindRequest'
-        | 'onChange'
-        | 'onDestruct'
-        | 'onLoadError'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onValues';
+		$tooltipOut(): void;
 
-    class toolbar implements webix.ui.baseview {
-        addView(view: any, index?: number): string | number;
+		$view: HTMLElement;
+		$width: number;
+		config: switchButtonConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        adjust(): void;
+	interface tabbarConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomOffset?: number;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		moreTemplate?: WebixCallback;
+		multiview?: boolean;
+		name?: string;
+		on?: EventHash;
+		optionWidth?: number;
+		options?: any[];
+		placeholder?: string;
+		popup?: string;
+		popupTemplate?: WebixCallback;
+		popupWidth?: number;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tabMargin?: number;
+		tabMinWidth?: number;
+		tabMoreWidth?: number;
+		tabOffset?: number;
+		tabbarPopup?: webix.ui.baseview;
+		tooltip?: any;
+		topOffset?: number;
+		type?: string;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+		yCount?: number;
+	}
 
-        attachEvent(type: toolbarEventName, functor: WebixCallback, id?: string): string | number;
+	type tabbarEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterTabClick'
+		| 'onBeforeRender'
+		| 'onBeforeTabClick'
+		| 'onBeforeTabClose'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onOptionAdd'
+		| 'onOptionRemove'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+	export class tabbar implements webix.ui.baseview {
+		addOption(id: string | number, value: any, show?: boolean, index?: number): void;
 
-        blockEvent(): void;
+		adjust(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		attachEvent(type: tabbarEventName, functor: WebixCallback, id?: string): string | number;
 
-        clear(): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        clearValidation(): void;
+		blockEvent(): void;
 
-        define(property: string, value: any): void;
+		blur(): void;
 
-        destructor(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        detachEvent(id: string): void;
+		define(property: string, value: any): void;
 
-        disable(): void;
+		destructor(): void;
 
-        enable(): void;
+		detachEvent(id: string): void;
 
-        focus(item: string): void;
+		disable(): void;
 
-        getChildViews(): any[];
+		disableOption(id: string | number): void;
 
-        getCleanValues(): any;
+		enable(): void;
 
-        getDirtyValues(): any;
+		enableOption(id: string | number): void;
 
-        getFormView(): webix.ui.baseview;
+		focus(): void;
 
-        getNode(): any;
+		getChildViews(): any[];
 
-        getParentView(): any;
+		getFormView(): webix.ui.baseview;
 
-        getScrollState(): any;
+		getInputNode(): HTMLElement;
 
-        getTopParentView(): webix.ui.baseview;
+		getNode(): any;
 
-        getValues(details?: any): any;
+		getOption(id: string | number): any;
 
-        hasEvent(name: string): boolean;
+		getParentView(): any;
 
-        hide(): void;
+		getPopup(): webix.ui.baseview;
 
-        index(obj: any): number;
+		getTopParentView(): webix.ui.baseview;
 
-        isDirty(): boolean;
+		getValue(): string;
 
-        isEnabled(): boolean;
+		hasEvent(name: string): boolean;
 
-        isVisible(): boolean;
+		hide(): void;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		hideOption(id: string | number): void;
 
-        mapEvent(map: any): void;
+		isEnabled(): boolean;
 
-        markInvalid(name: string, state?: boolean | string): void;
+		isVisible(): boolean;
 
-        parse(data: any, type: string): void;
+		mapEvent(map: any): void;
 
-        queryView(config: any, mode?: string): any;
+		optionIndex(ID: string | number): number;
 
-        reconstruct(): void;
+		queryView(config: any, mode?: string): any;
 
-        refresh(): void;
+		refresh(): void;
 
-        removeView(id: any): void;
+		removeOption(id: string | number): void;
 
-        render(id: string | number, data: any, type: string): void;
+		render(id: string | number, data: any, type: string): void;
 
-        resize(): void;
+		resize(): void;
 
-        resizeChildren(): void;
+		setBottomText(text: string): void;
 
-        restore(state: any, factory?: WebixCallback): void;
+		setValue(value: string): void;
 
-        scrollTo(x: number, y: number): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        serialize(serializer?: WebixCallback): any;
+		showOption(id: string | number): void;
 
-        setDirty(mark?: boolean): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        setValues(values: any, update?: boolean): void;
+		unbind(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		unblockEvent(): void;
 
-        showBatch(name: string, mode?: boolean): void;
+		validate(): boolean;
 
-        unbind(): void;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        unblockEvent(): void;
+		$getSize(): any[];
 
-        validate(mode?: any): boolean;
+		$getValue(): string;
 
-        $getSize(): any[];
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        $height: number;
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        $setSize(x: number, y: number): boolean;
+		$renderLabel(config: any, id: string | number): string;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: toolbarConfig;
-        name: string;
-    }
+		$scope: any;
 
-    interface tooltipConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        dx?: number;
-        dy?: number;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        on?: EventHash;
-        template?: string | WebixCallback;
-        width?: number;
-    }
+		$setSize(x: number, y: number): boolean;
 
-    type tooltipEventName =
-        'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		$setValue(value: string): void;
 
-    interface tooltip {
-        adjust(): void;
+		$skin: WebixCallback;
 
-        attachEvent(type: tooltipEventName, functor: WebixCallback, id?: string): string | number;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        blockEvent(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		$tooltipOut(): void;
 
-        customize(obj: any): void;
+		$view: HTMLElement;
+		$width: number;
+		config: tabbarConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        define(property: string, value: any): void;
+	interface tabviewConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		cells?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		multiview?: any;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		tabbar?: any;
+		type?: string;
+		width?: number;
+	}
 
-        destructor(): void;
+	type tabviewEventName = 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
-        detachEvent(id: string): void;
+	export class tabview implements webix.ui.baseview {
+		addView(obj: any): void;
 
-        disable(): void;
+		adjust(): void;
 
-        enable(): void;
+		attachEvent(type: tabviewEventName, functor: WebixCallback, id?: string): string | number;
 
-        getChildViews(): any[];
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getFormView(): webix.ui.baseview;
+		blockEvent(): void;
 
-        getNode(): any;
+		callEvent(name: string, params: any[]): boolean;
 
-        getParentView(): any;
+		define(property: string, value: any): void;
 
-        getTopParentView(): webix.ui.baseview;
+		destructor(): void;
 
-        hasEvent(name: string): boolean;
+		detachEvent(id: string): void;
 
-        hide(): void;
+		disable(): void;
 
-        isEnabled(): boolean;
+		enable(): void;
 
-        isVisible(): boolean;
+		getChildViews(): any[];
 
-        mapEvent(map: any): void;
+		getFormView(): webix.ui.baseview;
 
-        queryView(config: any, mode?: string): any;
+		getMultiview(): any;
 
-        render(id: string | number, data: any, type: string): void;
+		getNode(): any;
 
-        resize(): void;
+		getParentView(): any;
 
-        show(data: any, position: any): void;
+		getTabbar(): any;
 
-        unblockEvent(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        $getSize(): any[];
+		getValue(): string;
 
-        $height: number;
-        $scope: any;
+		hasEvent(name: string): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		hide(): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: tooltipConfig;
-        name: string;
-        type: { [key: string]: any; };
-    }
+		isEnabled(): boolean;
 
-    interface treeConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        clipboard?: boolean | string;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        drag?: boolean;
-        dragscroll?: boolean | string;
-        filterMode?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: boolean | string;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean;
-        template?: string | WebixCallback;
-        templateCopy?: WebixCallback;
-        threeState?: boolean;
-        tooltip?: string | boolean;
-        type?: any;
-        url?: any;
-        width?: number;
-    }
+		isVisible(): boolean;
 
-    type treeEventName =
-        'onAfterAdd'
-        | 'onAfterClose'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterLoad'
-        | 'onAfterOpen'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeClose'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeLoad'
-        | 'onBeforeOpen'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemCheck'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPartialRender'
-        | 'onPaste'
-        | 'onSelectChange'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		mapEvent(map: any): void;
 
-    class tree implements webix.ui.baseview {
-        add(obj: any, index?: number, parentId?: string): string;
+		queryView(config: any, mode?: string): any;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		removeView(id: any): void;
 
-        adjust(): void;
+		resize(): void;
 
-        attachEvent(type: treeEventName, functor: WebixCallback, id?: string): string | number;
+		setValue(value: string): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        blockEvent(): void;
+		unbind(): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		unblockEvent(): void;
 
-        checkAll(id?: string | number): void;
+		$getSize(): any[];
 
-        checkItem(id: string): void;
+		$height: number;
 
-        clearAll(soft?: boolean): void;
+		$setSize(x: number, y: number): boolean;
 
-        clearCss(css: string, silent?: boolean): void;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: tabviewConfig;
+		name: string;
+	}
 
-        clearValidation(): void;
+	interface templateConfig {
+		view?: string;
+		animate?: any;
+		autoheight?: boolean;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		content?: string | number | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datatype?: string;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		src?: string;
+		template?: string | WebixCallback;
+		tooltip?: any;
+		type?: string;
+		url?: any;
+		width?: number;
+	}
 
-        close(id: string | number): void;
+	type templateEventName =
+		'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        closeAll(): void;
+	export class template implements webix.ui.baseview {
+		adjust(): void;
 
-        copy(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): number;
+		attachEvent(type: templateEventName, functor: WebixCallback, id?: string): string | number;
 
-        count(): number;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        customize(obj: any): void;
+		blockEvent(): void;
 
-        define(property: string, value: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        destructor(): void;
+		define(property: string, value: any): void;
 
-        detachEvent(id: string): void;
+		destructor(): void;
 
-        disable(): void;
+		detachEvent(id: string): void;
 
-        enable(): void;
+		disable(): void;
 
-        exists(id: string | number): boolean;
+		enable(): void;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		getChildViews(): any[];
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		getFormView(): webix.ui.baseview;
 
-        getBranchIndex(id: string | number, parent?: string | number): number;
+		getNode(): any;
 
-        getChecked(): any[];
+		getParentView(): any;
 
-        getChildViews(): any[];
+		getScrollState(): any;
 
-        getFirstChildId(id: string | number): string;
+		getTopParentView(): webix.ui.baseview;
 
-        getFirstId(): string | number;
+		getValues(): void;
 
-        getFormView(): webix.ui.baseview;
+		hasEvent(name: string): boolean;
 
-        getIdByIndex(index: number): string | number;
+		hide(): void;
 
-        getIndexById(id: string | number): number;
+		isEnabled(): boolean;
 
-        getItem(id: string | number): any;
+		isVisible(): boolean;
 
-        getItemNode(id: string | number): HTMLElement;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        getLastId(): string | number;
+		mapEvent(map: any): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		parse(data: any, type: string): void;
 
-        getNextSiblingId(id: string | number): string | number;
+		queryView(config: any, mode?: string): any;
 
-        getNode(): any;
+		refresh(): void;
 
-        getOpenItems(): any[];
+		render(id: string | number, data: any, type: string): void;
 
-        getParentId(id: string | number): string | number;
+		resize(): void;
 
-        getParentView(): any;
+		scrollTo(x: number, y: number): void;
 
-        getPrevId(id: string | number, step: number): string | number;
+		setContent(node: any): void;
 
-        getPrevSiblingId(id: string | number): string | number;
+		setHTML(html: string): void;
 
-        getScrollState(): any;
+		setValues(obj: any, update?: boolean): void;
 
-        getSelectedId(as_array: boolean): string | any[];
+		show(force?: boolean, animation?: boolean): void;
 
-        getSelectedItem(as_array: boolean): any;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getState(): any;
+		unbind(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		unblockEvent(): void;
 
-        group(config: any, mode: boolean): void;
+		$getSize(): any[];
 
-        hasCss(id: string | number, css: string): boolean;
+		$height: number;
+		$scope: any;
 
-        hasEvent(name: string): boolean;
+		$setSize(x: number, y: number): boolean;
 
-        hide(): void;
+		$skin: WebixCallback;
 
-        isBranch(id: string | number): boolean;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        isBranchOpen(id: string | number): boolean;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        isChecked(id: string | number): boolean;
+		$tooltipOut(): void;
 
-        isEnabled(): boolean;
+		$view: HTMLElement;
+		$width: number;
+		config: templateConfig;
+		name: string;
+	}
 
-        isSelected(id: string | number): boolean;
+	interface textConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icon?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		pattern?: any;
+		placeholder?: string;
+		popup?: string;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		type?: string;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        isVisible(): boolean;
+	type textEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+	export class text implements webix.ui.baseview {
+		adjust(): void;
 
-        loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+		attachEvent(type: textEventName, functor: WebixCallback, id?: string): string | number;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        locate(e: Event): string | number;
+		blockEvent(): void;
 
-        mapEvent(map: any): void;
+		blur(): void;
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		callEvent(name: string, params: any[]): boolean;
 
-        moveSelection(direction: string): void;
+		define(property: string, value: any): void;
 
-        open(id: string | number, show?: boolean): void;
+		destructor(): void;
 
-        openAll(): void;
+		detachEvent(id: string): void;
 
-        parse(data: any, type: string): void;
+		disable(): void;
 
-        queryView(config: any, mode?: string): any;
+		enable(): void;
 
-        refresh(id?: string | number): void;
+		focus(): void;
 
-        remove(id: string | number): void;
+		getChildViews(): any[];
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		getFormView(): webix.ui.baseview;
 
-        render(id: string | number, data: any, type: string): void;
+		getInputNode(): HTMLElement;
 
-        resize(): void;
+		getNode(): any;
 
-        scrollTo(x: number, y: number): void;
+		getParentView(): any;
 
-        select(id: string | any[], preserve: boolean): void;
+		getTopParentView(): webix.ui.baseview;
 
-        selectAll(from?: string, to?: string): void;
+		getValue(): string;
 
-        serialize(): any[];
+		hasEvent(name: string): boolean;
 
-        setState(state: any): void;
+		hide(): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		isEnabled(): boolean;
 
-        showItem(id: string | number): void;
+		isVisible(): boolean;
 
-        sort(by: string, dir?: string, as?: string): void;
+		mapEvent(map: any): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		queryView(config: any, mode?: string): any;
 
-        unbind(): void;
+		refresh(): void;
 
-        unblockEvent(): void;
+		render(id: string | number, data: any, type: string): void;
 
-        uncheckAll(id?: string | number): void;
+		resize(): void;
 
-        uncheckItem(id: string): void;
+		setBottomText(text: string): void;
 
-        ungroup(mode: boolean): void;
+		setValue(value: string): void;
 
-        unselect(id?: string): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        unselectAll(): void;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        updateItem(id: string | number, data: any): void;
+		unbind(): void;
 
-        validate(id?: string): boolean;
+		unblockEvent(): void;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		validate(): boolean;
 
-        $dragHTML: WebixCallback;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		$getSize(): any[];
 
-        $dragMark(context: any, ev: Event): boolean;
+		$getValue(): string;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		$renderInput(config: any): HTMLElement;
 
-        $dropAllow: WebixCallback;
-        $fixEditor: WebixCallback;
+		$renderLabel(config: any, id: string | number): string;
 
-        $getSize(): any[];
+		$scope: any;
 
-        $height: number;
-        $scope: any;
+		$setSize(x: number, y: number): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		$setValue(value: string): void;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: treeConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		$skin: WebixCallback;
 
-    interface treemapConfig {
-        view?: string;
-        activeItem?: boolean;
-        animate?: any;
-        borderless?: boolean;
-        branch?: string;
-        click?: string | WebixCallback;
-        clipboard?: boolean | string;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        dataFeed?: string | WebixCallback;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        filterMode?: any;
-        gravity?: number;
-        header?: boolean;
-        headerHeight?: number;
-        headerTemplate?: string;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: string | boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        pager?: any;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean | string;
-        subRender?: boolean;
-        template?: string | WebixCallback;
-        templateCopy?: WebixCallback;
-        threeState?: boolean;
-        tooltip?: string | boolean;
-        type?: any;
-        url?: any;
-        value?: string | WebixCallback;
-        width?: number;
-    }
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-    type treemapEventName =
-        'onAfterAdd'
-        | 'onAfterClose'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterLoad'
-        | 'onAfterOpen'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeClose'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeLoad'
-        | 'onBeforeOpen'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemCheck'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPartialRender'
-        | 'onPaste'
-        | 'onSelectChange'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-    class treemap implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		$tooltipOut(): void;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		$view: HTMLElement;
+		$width: number;
+		config: textConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        adjust(): void;
+	interface textareaConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		attributes?: any;
+		borderless?: boolean;
+		bottomLabel?: string;
+		bottomPadding?: number;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		format?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputAlign?: string;
+		inputHeight?: number;
+		inputWidth?: number;
+		invalid?: boolean;
+		invalidMessage?: string;
+		keyPressTimeout?: number;
+		label?: string;
+		labelAlign?: string;
+		labelPosition?: string;
+		labelWidth?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		on?: EventHash;
+		pattern?: any;
+		placeholder?: string;
+		popup?: string;
+		readonly?: boolean;
+		relatedAction?: string;
+		relatedView?: string;
+		required?: boolean;
+		suggest?: any;
+		tooltip?: any;
+		validate?: WebixCallback;
+		validateEvent?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        attachEvent(type: treemapEventName, functor: WebixCallback, id?: string): string | number;
+	type textareaEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+	export class textarea implements webix.ui.baseview {
+		adjust(): void;
 
-        blockEvent(): void;
+		attachEvent(type: textareaEventName, functor: WebixCallback, id?: string): string | number;
 
-        callEvent(name: string, params: any[]): boolean;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        clearAll(soft?: boolean): void;
+		blockEvent(): void;
 
-        clearCss(css: string, silent?: boolean): void;
+		blur(): void;
 
-        clearValidation(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        close(id: string | number): void;
+		define(property: string, value: any): void;
 
-        closeAll(): void;
+		destructor(): void;
 
-        count(): number;
+		detachEvent(id: string): void;
 
-        customize(obj: any): void;
+		disable(): void;
 
-        define(property: string, value: any): void;
+		enable(): void;
 
-        destructor(): void;
+		focus(): void;
 
-        detachEvent(id: string): void;
+		getChildViews(): any[];
 
-        disable(): void;
+		getFormView(): webix.ui.baseview;
 
-        enable(): void;
+		getInputNode(): HTMLElement;
 
-        exists(id: string | number): boolean;
+		getNode(): any;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		getParentView(): any;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		getTopParentView(): webix.ui.baseview;
 
-        getBranchIndex(id: string | number, parent?: string | number): number;
+		getValue(): string;
 
-        getChildViews(): any[];
+		hasEvent(name: string): boolean;
 
-        getFirstChildId(id: string | number): string;
+		hide(): void;
 
-        getFirstId(): string | number;
+		isEnabled(): boolean;
 
-        getFormView(): webix.ui.baseview;
+		isVisible(): boolean;
 
-        getIdByIndex(index: number): string | number;
+		mapEvent(map: any): void;
 
-        getIndexById(id: string | number): number;
+		queryView(config: any, mode?: string): any;
 
-        getItem(id: string | number): any;
+		refresh(): void;
 
-        getItemNode(id: string | number): HTMLElement;
+		render(id: string | number, data: any, type: string): void;
 
-        getLastId(): string | number;
+		resize(): void;
 
-        getNextId(id: string | number, step: number): string | number;
+		setBottomText(text: string): void;
 
-        getNextSiblingId(id: string | number): string | number;
+		setValue(value: string): void;
 
-        getNode(): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getOpenItems(): any[];
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getPage(): number;
+		unbind(): void;
 
-        getPager(): any;
+		unblockEvent(): void;
 
-        getParentId(id: string | number): string | number;
+		validate(): boolean;
 
-        getParentView(): any;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        getPrevId(id: string | number, step: number): string | number;
+		$getSize(): any[];
 
-        getPrevSiblingId(id: string | number): string | number;
+		$getValue(): string;
 
-        getScrollState(): any;
+		$height: number;
+		$prepareValue: WebixCallback;
+		$render: WebixCallback;
+		$renderIcon: WebixCallback;
 
-        getSelectedId(as_array: boolean): string | any[];
+		$renderInput(obj: any, html: string, id: string | number): string;
 
-        getSelectedItem(as_array: boolean): any;
+		$renderLabel(config: any, id: string | number): string;
 
-        getState(): any;
+		$scope: any;
 
-        getTopParentView(): webix.ui.baseview;
+		$setSize(x: number, y: number): boolean;
 
-        group(config: any, mode: boolean): void;
+		$setValue(value: string): void;
 
-        hasCss(id: string | number, css: string): boolean;
+		$skin: WebixCallback;
 
-        hasEvent(name: string): boolean;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        hide(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        isBranch(id: string | number): boolean;
+		$tooltipOut(): void;
 
-        isBranchOpen(id: string | number): boolean;
+		$view: HTMLElement;
+		$width: number;
+		config: textareaConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        isEnabled(): boolean;
+	interface timelineConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		dataFeed?: string | WebixCallback;
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		template?: string | WebixCallback;
+		tooltip?: any;
+		type?: any;
+		url?: any;
+		width?: number;
+	}
 
-        isSelected(id: string | number): boolean;
+	type timelineEventName =
+		'onAfterAdd'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onLoadError'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onViewShow';
 
-        isVisible(): boolean;
+	export class timeline implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		adjust(): void;
 
-        loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+		attachEvent(type: timelineEventName, functor: WebixCallback, id?: string): string | number;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        locate(e: Event): string | number;
+		blockEvent(): void;
 
-        mapEvent(map: any): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        moveSelection(direction: string): void;
+		clearAll(soft?: boolean): void;
 
-        open(id: string | number, show?: boolean): void;
+		count(): number;
 
-        openAll(): void;
+		customize(obj: any): void;
 
-        parse(data: any, type: string): void;
+		define(property: string, value: any): void;
 
-        queryView(config: any, mode?: string): any;
+		destructor(): void;
 
-        refresh(id?: string | number): void;
+		detachEvent(id: string): void;
 
-        remove(id: string | number): void;
+		disable(): void;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		enable(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		exists(id: number | string): boolean;
 
-        resize(): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        scrollTo(x: number, y: number): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        select(id: string | any[], preserve: boolean): void;
+		getChildViews(): any[];
 
-        selectAll(from?: string, to?: string): void;
+		getFirstId(): number | string;
 
-        serialize(): any[];
+		getFormView(): webix.ui.baseview;
 
-        setPage(page: number): void;
+		getIdByIndex(index: number | string): string | number;
 
-        setState(state: any): void;
+		getIndexById(id: number | string): number;
 
-        show(force?: boolean, animation?: boolean): void;
+		getItem(id: number | string): any;
 
-        showBranch(branchId: string | number): void;
+		getItemNode(id: string | number): HTMLElement;
 
-        showItem(id: string | number): void;
+		getLastId(): number | string;
 
-        sort(by: string, dir?: string, as?: string): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		getNode(): any;
 
-        unbind(): void;
+		getParentView(): any;
 
-        unblockEvent(): void;
+		getPrevId(id: number | string, step: number): string | number;
 
-        ungroup(mode: boolean): void;
+		getScrollState(): any;
 
-        unselect(id?: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        unselectAll(): void;
+		hasEvent(name: string): boolean;
 
-        updateItem(id: string | number, data: any): void;
+		hide(): void;
 
-        validate(id?: string): boolean;
+		isEnabled(): boolean;
 
-        $getSize(): any[];
+		isVisible(): boolean;
 
-        $height: number;
-        $scope: any;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        $setSize(x: number, y: number): boolean;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: treemapConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		locate(e: Event): string | number;
 
-    interface treetableConfig {
-        view?: string;
-        animate?: any;
-        areaselect?: boolean;
-        autoConfig?: boolean;
-        autoheight?: boolean;
-        autowidth?: boolean;
-        blockselect?: boolean | string;
-        borderless?: boolean;
-        checkboxRefresh?: boolean;
-        clipboard?: boolean | string;
-        columnWidth?: number;
-        columns?: any[];
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datafetch?: number;
-        datathrottle?: number;
-        datatype?: string;
-        delimiter?: any;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragColumn?: boolean | string;
-        dragscroll?: boolean | string;
-        editMath?: boolean;
-        editValue?: string;
-        editable?: boolean;
-        editaction?: string;
-        externalData?: WebixCallback;
-        filterMode?: any;
-        fixedRowHeight?: boolean;
-        footer?: boolean;
-        form?: string;
-        gravity?: number;
-        header?: boolean;
-        headerRowHeight?: number;
-        headermenu?: any;
-        height?: number;
-        hidden?: boolean;
-        hover?: string;
-        id?: string | number;
-        leftSplit?: number;
-        liveValidation?: boolean;
-        loadahead?: number;
-        map?: any;
-        math?: boolean;
-        maxHeight?: number;
-        maxWidth?: number;
-        minColumnHeight?: number;
-        minColumnWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        pager?: any;
-        prerender?: boolean;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        resizeColumn?: any;
-        resizeRow?: boolean;
-        rightSplit?: number;
-        rowHeight?: number;
-        rowLineHeight?: number;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollAlignY?: boolean;
-        scrollX?: boolean;
-        scrollY?: boolean;
-        select?: boolean | string;
-        spans?: any[];
-        subRowHeight?: string;
-        subrow?: string;
-        subview?: webix.ui.baseview | WebixCallback;
-        templateCopy?: WebixCallback;
-        threeState?: boolean;
-        tooltip?: boolean;
-        topSplit?: number;
-        type?: any;
-        url?: any;
-        width?: number;
-        yCount?: number;
-    }
+		mapEvent(map: any): void;
 
-    type treetableEventName =
-        'onAfterAdd'
-        | 'onAfterAreaAdd'
-        | 'onAfterAreaRemove'
-        | 'onAfterBlockSelect'
-        | 'onAfterClose'
-        | 'onAfterColumnDrop'
-        | 'onAfterColumnDropOrder'
-        | 'onAfterColumnHide'
-        | 'onAfterColumnShow'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterEditStart'
-        | 'onAfterEditStop'
-        | 'onAfterFilter'
-        | 'onAfterLoad'
-        | 'onAfterOpen'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onAfterUnSelect'
-        | 'onAreaDrag'
-        | 'onBeforeAdd'
-        | 'onBeforeAreaAdd'
-        | 'onBeforeAreaRemove'
-        | 'onBeforeBlockSelect'
-        | 'onBeforeClose'
-        | 'onBeforeColumnDrag'
-        | 'onBeforeColumnDrop'
-        | 'onBeforeColumnDropOrder'
-        | 'onBeforeColumnHide'
-        | 'onBeforeColumnShow'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeEditStart'
-        | 'onBeforeEditStop'
-        | 'onBeforeFilter'
-        | 'onBeforeLoad'
-        | 'onBeforeOpen'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBeforeUnSelect'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onCheck'
-        | 'onCollectValues'
-        | 'onColumnResize'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEditorChange'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHeaderClick'
-        | 'onItemCheck'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onKeyPress'
-        | 'onLiveEdit'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPaste'
-        | 'onResize'
-        | 'onRowResize'
-        | 'onScrollX'
-        | 'onScrollY'
-        | 'onSelectChange'
-        | 'onStructureLoad'
-        | 'onStructureUpdate'
-        | 'onSubViewClose'
-        | 'onSubViewCreate'
-        | 'onSubViewOpen'
-        | 'onSubViewRender'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		parse(data: any, type: string): void;
 
-    class treetable implements webix.ui.baseview {
-        add(obj: any, index?: number, parentId?: string): string;
+		queryView(config: any, mode?: string): any;
 
-        addCellCss(id: string, name: string, css: string): void;
+		refresh(id?: number | string): void;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		remove(id: string | number | any[]): void;
 
-        addRowCss(id: string, css: string): void;
+		render(id: string | number, data: any, type: string): void;
 
-        adjust(): void;
+		resize(): void;
 
-        adjustColumn(id: string | number, mode?: string): void;
+		scrollTo(x: number, y: number): void;
 
-        adjustRowHeight(columnId?: string, silent?: boolean): void;
+		serialize(all?: boolean): any[];
 
-        attachEvent(type: treetableEventName, functor: WebixCallback, id?: string): string | number;
+		show(force?: boolean, animation?: boolean): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		showItem(id: string | number): void;
 
-        blockEvent(): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        checkAll(id?: string | number): void;
+		unbind(): void;
 
-        checkItem(id: string): void;
+		unblockEvent(): void;
 
-        clearAll(soft?: boolean): void;
+		updateItem(id: number | string, data: any): void;
 
-        clearCss(css: string, silent?: boolean): void;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        clearSelection(): void;
+		$getSize(): any[];
 
-        clearValidation(): void;
+		$height: number;
 
-        close(id: string | number): void;
+		$setSize(x: number, y: number): boolean;
 
-        closeAll(): void;
+		$skin: WebixCallback;
 
-        collectValues(id: string | number): any[];
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        columnId(index: number): string | number;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        copy(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): number;
+		$tooltipOut(): void;
 
-        count(): number;
+		$view: HTMLElement;
+		$width: number;
+		config: timelineConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        define(property: string, value: any): void;
+	interface toggleConfig {
+		view?: string;
+		align?: string;
+		animate?: any;
+		autowidth?: boolean;
+		borderless?: boolean;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		icon?: string;
+		id?: string | number;
+		inputHeight?: number;
+		inputWidth?: number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		name?: string;
+		offIcon?: string;
+		offLabel?: string;
+		on?: EventHash;
+		onIcon?: string;
+		onLabel?: string;
+		popup?: string;
+		tooltip?: any;
+		type?: string;
+		value?: string | number;
+		width?: number;
+	}
 
-        destructor(): void;
+	type toggleEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        detachEvent(id: string): void;
+	export class toggle implements webix.ui.baseview {
+		adjust(): void;
 
-        disable(): void;
+		attachEvent(type: toggleEventName, functor: WebixCallback, id?: string): string | number;
 
-        eachColumn(handler: WebixCallback, all?: boolean): void;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        eachRow(handler: WebixCallback): void;
+		blockEvent(): void;
 
-        edit(id: any): void;
+		blur(): void;
 
-        editCancel(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        editCell(row: string | number, col: string | number, preserve?: boolean, show?: boolean): void;
+		define(property: string, value: any): void;
 
-        editColumn(id: string): void;
+		destructor(): void;
 
-        editNext(): void;
+		detachEvent(id: string): void;
 
-        editRow(id: string): void;
+		disable(): void;
 
-        editStop(): void;
+		enable(): void;
 
-        enable(): void;
+		focus(): void;
 
-        exists(id: string | number): boolean;
+		getChildViews(): any[];
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		getFormView(): webix.ui.baseview;
 
-        filterByAll(): void;
+		getInputNode(): HTMLElement;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		getNode(): any;
 
-        focusEditor(id: any): void;
+		getParentView(): any;
 
-        freezeRow(id: number | string, state: boolean): void;
+		getTopParentView(): webix.ui.baseview;
 
-        getBranchIndex(id: string | number, parent?: string | number): number;
+		getValue(): string;
 
-        getChecked(): any[];
+		hasEvent(name: string): boolean;
 
-        getChildViews(): any[];
+		hide(): void;
 
-        getColumnConfig(id: string): any;
+		isEnabled(): boolean;
 
-        getColumnIndex(id: string | number): number;
+		isVisible(): boolean;
 
-        getCss(rowId: string | number, columnId: string | number): string;
+		mapEvent(map: any): void;
 
-        getEditState(): any;
+		queryView(config: any, mode?: string): any;
 
-        getEditor(row?: any, column?: string | number): any;
+		refresh(): void;
 
-        getEditorValue(): string;
+		render(id: string | number, data: any, type: string): void;
 
-        getFilter(columnID: string | number): any;
+		resize(): void;
 
-        getFirstChildId(id: string | number): string;
+		setValue(value: string): void;
 
-        getFirstId(): string | number;
+		show(force?: boolean, animation?: boolean): void;
 
-        getFooterNode(columnId: string, rowIndex?: number): HTMLElement;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        getFormView(): webix.ui.baseview;
+		toggle(): void;
 
-        getHeaderContent(id: string | number): { [key: string]: any; };
+		unbind(): void;
 
-        getHeaderNode(columnId: string, rowIndex?: number): HTMLElement;
+		unblockEvent(): void;
 
-        getIdByIndex(index: number): string | number;
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
 
-        getIndexById(id: string | number): number;
+		$getSize(): any[];
 
-        getItem(id: string | number): any;
+		$getValue(): string;
 
-        getItemNode(id: string | number): HTMLElement;
+		$height: number;
+		$prepareValue: WebixCallback;
 
-        getLastId(): string | number;
+		$renderInput(config: any): HTMLElement;
 
-        getNextId(id: string | number, step: number): string | number;
+		$scope: any;
 
-        getNextSiblingId(id: string | number): string | number;
+		$setSize(x: number, y: number): boolean;
 
-        getNode(): any;
+		$setValue(value: string): void;
 
-        getOpenItems(): any[];
+		$skin: WebixCallback;
 
-        getPage(): number;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        getPager(): any;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        getParentId(id: string | number): string | number;
+		$tooltipOut(): void;
 
-        getParentView(): any;
+		$view: HTMLElement;
+		$width: number;
+		config: toggleConfig;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
 
-        getPrevId(id: string | number, step: number): string | number;
+	interface toolbarConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		cols?: any[];
+		complexData?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		dataFeed?: string | WebixCallback;
+		datatype?: string;
+		disabled?: boolean;
+		elements?: any[];
+		elementsConfig?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		isolate?: boolean;
+		margin?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		padding?: any;
+		paddingX?: number;
+		paddingY?: number;
+		responsive?: string;
+		rows?: any[];
+		rules?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		type?: string;
+		url?: any;
+		visibleBatch?: string;
+		width?: number;
+	}
 
-        getPrevSiblingId(id: string | number): string | number;
+	type toolbarEventName =
+		'onAfterLoad'
+		| 'onAfterScroll'
+		| 'onAfterValidation'
+		| 'onBeforeLoad'
+		| 'onBeforeValidate'
+		| 'onBindRequest'
+		| 'onChange'
+		| 'onDestruct'
+		| 'onLoadError'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onValues'
+		| 'onViewShow';
 
-        getScrollState(): any;
+	export class toolbar implements webix.ui.baseview {
+		addView(view: any, index?: number): string | number;
 
-        getSelectedId(asArray: boolean, asString: boolean): any;
+		adjust(): void;
 
-        getSelectedItem(as_array?: boolean): any;
+		attachEvent(type: toolbarEventName, functor: WebixCallback, id?: string): string | number;
 
-        getState(): any;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getText(rowid: string | number, colid: string | number): string;
+		blockEvent(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		callEvent(name: string, params: any[]): boolean;
 
-        getVisibleCount(): number;
+		clear(): void;
 
-        group(config: any, mode: boolean): void;
+		clearValidation(): void;
 
-        hasCss(id: string | number, css: string): boolean;
+		define(property: string, value: any): void;
 
-        hasEvent(name: string): boolean;
+		destructor(): void;
 
-        hide(): void;
+		detachEvent(id: string): void;
 
-        hideColumn(id: string | number, options?: any, silent?: boolean, mode?: boolean): void;
+		disable(): void;
 
-        hideOverlay(): void;
+		enable(): void;
 
-        isBranch(id: string | number): boolean;
+		focus(item: string): void;
 
-        isBranchOpen(id: string | number): boolean;
+		getChildViews(): any[];
 
-        isChecked(id: string | number): boolean;
+		getCleanValues(): any;
 
-        isColumnVisible(id: string | number): boolean;
+		getDirtyValues(): any;
 
-        isEnabled(): boolean;
+		getFormView(): webix.ui.baseview;
 
-        isSelected(id: string | number): void;
+		getNode(): any;
 
-        isVisible(): boolean;
+		getParentView(): any;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		getScrollState(): any;
 
-        loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		getValues(details?: any): any;
 
-        locate(node: HTMLElement | Event): any;
+		hasEvent(name: string): boolean;
 
-        mapCells(startrow: number, startcol: string, numrows: number, numcols: number, callback: WebixCallback): void;
+		hide(): void;
 
-        mapEvent(map: any): void;
+		index(obj: any): number;
 
-        mapSelection(callback: WebixCallback): void;
+		isDirty(): boolean;
 
-        markSorting(column_id: string, direction: string): void;
+		isEnabled(): boolean;
 
-        move(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): string | number;
+		isVisible(): boolean;
 
-        moveBottom(id: string | number): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        moveColumn(id: string, index: number): void;
+		mapEvent(map: any): void;
 
-        moveDown(id: string | number, step: number): void;
+		markInvalid(name: string, state?: boolean | string): void;
 
-        moveSelection(direction: string): void;
+		parse(data: any, type: string): void;
 
-        moveTop(id: string | number): void;
+		queryView(config: any, mode?: string): any;
 
-        moveUp(id: string | number, step: number): void;
+		reconstruct(): void;
 
-        open(id: string | number, show?: boolean): void;
+		refresh(): void;
 
-        openAll(): void;
+		removeView(id: any): void;
 
-        parse(data: any, type: string): void;
+		render(id: string | number, data: any, type: string): void;
 
-        queryView(config: any, mode?: string): any;
+		resize(): void;
 
-        refresh(id?: string | number): void;
+		resizeChildren(): void;
 
-        refreshColumns(config?: any[], reset?: boolean): void;
+		restore(state: any, factory?: WebixCallback): void;
 
-        refreshFilter(id: string | number): void;
+		scrollTo(x: number, y: number): void;
 
-        registerFilter(object: any, config: any, controller: any): void;
+		serialize(serializer?: WebixCallback): any;
 
-        remove(id: string | number): void;
+		setDirty(mark?: boolean): void;
 
-        removeCellCss(id: string, name: string, css_name: string): void;
+		setValues(values: any, update?: boolean): void;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        removeRowCss(id: string, css_name: string): void;
+		showBatch(name: string, mode?: boolean): void;
 
-        render(id: string | number, data: any, operation: string): void;
+		unbind(): void;
 
-        resize(): void;
+		unblockEvent(): void;
 
-        scrollTo(x: number, y: number): void;
+		validate(mode?: any): boolean;
 
-        select(row_id: string | number, preserve: boolean): void;
+		$getSize(): any[];
 
-        selectAll(): void;
+		$height: number;
 
-        selectRange(row_id: string | number, end_row_id: string | number, preserve?: boolean): void;
+		$setSize(x: number, y: number): boolean;
 
-        serialize(): any[];
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: toolbarConfig;
+		name: string;
+	}
 
-        setColumnWidth(id: string | number, width: number): void;
+	interface tooltipConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		dx?: number;
+		dy?: number;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		on?: EventHash;
+		template?: string | WebixCallback;
+		width?: number;
+	}
 
-        setPage(page: number): void;
+	type tooltipEventName =
+		'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        setRowHeight(id: string | number, height: number): void;
+	export interface tooltip {
+		adjust(): void;
 
-        setState(state: any): void;
+		attachEvent(type: tooltipEventName, functor: WebixCallback, id?: string): string | number;
 
-        show(force?: boolean, animation?: boolean): void;
+		blockEvent(): void;
 
-        showCell(row: string, column: string): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        showColumn(id: string | number): void;
+		customize(obj: any): void;
 
-        showColumnBatch(batch: string | number, preserve: boolean): void;
+		define(property: string, value: any): void;
 
-        showItem(id: string | number): void;
+		destructor(): void;
 
-        showItemByIndex(index: number): void;
+		detachEvent(id: string): void;
 
-        showOverlay(message: string): void;
+		disable(): void;
 
-        sort(by: string, dir?: string, as?: string): void;
+		enable(): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		getChildViews(): any[];
 
-        unbind(): void;
+		getFormView(): webix.ui.baseview;
 
-        unblockEvent(): void;
+		getNode(): any;
 
-        uncheckAll(id?: string | number): void;
+		getParentView(): any;
 
-        uncheckItem(id: string): void;
+		getTopParentView(): webix.ui.baseview;
 
-        ungroup(mode: boolean): void;
+		hasEvent(name: string): boolean;
 
-        unselect(row_id: string | number): void;
+		hide(): void;
 
-        unselectAll(): void;
+		isEnabled(): boolean;
 
-        updateItem(id: string | number, data: any): void;
+		isVisible(): boolean;
 
-        validate(id?: string): boolean;
+		mapEvent(map: any): void;
 
-        validateEditor(id?: string | number): boolean;
+		queryView(config: any, mode?: string): any;
 
-        $customPrint: WebixCallback;
+		render(id: string | number, data: any, type: string): void;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		resize(): void;
 
-        $dragHTML: WebixCallback;
+		show(data: any, position: any): void;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		unblockEvent(): void;
 
-        $dragMark(context: any, ev: Event): boolean;
+		$getSize(): any[];
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		$height: number;
+		$scope: any;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		$setSize(x: number, y: number): boolean;
 
-        $dropAllow: WebixCallback;
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: tooltipConfig;
+		name: string;
+		type: { [key: string]: any; };
+	}
 
-        $getSize(): any[];
+	interface treeConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		clipboard?: boolean | string;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragscroll?: boolean | string;
+		filterMode?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: boolean | string;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean;
+		template?: string | WebixCallback;
+		templateCopy?: WebixCallback;
+		threeState?: boolean;
+		tooltip?: any;
+		type?: any;
+		url?: any;
+		width?: number;
+	}
 
-        $height: number;
-        $scope: any;
+	type treeEventName =
+		'onAfterAdd'
+		| 'onAfterClose'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterLoad'
+		| 'onAfterOpen'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeClose'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeLoad'
+		| 'onBeforeOpen'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemCheck'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPartialRender'
+		| 'onPaste'
+		| 'onSelectChange'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        $setSize(x: number, y: number): boolean;
+	export class tree implements webix.ui.baseview {
+		add(obj: any, index?: number, parentId?: string): string;
 
-        $skin: WebixCallback;
-        $touch: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: treetableConfig;
-        data: DataStore;
-        headerContent: any;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        waitData: Promise<any>;
-    }
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-    interface unitlistConfig {
-        view?: string;
-        animate?: any;
-        autoheight?: boolean;
-        autowidth?: boolean;
-        borderless?: boolean;
-        click?: string | WebixCallback;
-        clipboard?: boolean | string;
-        container?: string | HTMLElement;
-        css?: any;
-        data?: string | any[];
-        datafetch?: number;
-        datathrottle?: number;
-        datatype?: string;
-        disabled?: boolean;
-        drag?: boolean | string;
-        dragscroll?: boolean | string;
-        dynamic?: boolean;
-        externalData?: WebixCallback;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        item?: any;
-        layout?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        mouseEventDelay?: number;
-        multiselect?: string | boolean;
-        navigation?: boolean;
-        on?: EventHash;
-        onClick?: { [key: string]: any; };
-        onContext?: { [key: string]: any; };
-        onDblClick?: WebixCallback;
-        onMouseMove?: WebixCallback;
-        pager?: any;
-        ready?: WebixCallback;
-        removeMissed?: boolean;
-        rules?: any;
-        save?: string;
-        scheme?: any;
-        scroll?: boolean | string;
-        scrollSpeed?: string;
-        select?: boolean | string;
-        template?: string | WebixCallback;
-        templateCopy?: WebixCallback;
-        tooltip?: string | boolean;
-        type?: any;
-        uniteBy?: WebixCallback;
-        url?: any;
-        width?: number;
-        xCount?: number;
-        yCount?: number;
-    }
+		adjust(): void;
 
-    type unitlistEventName =
-        'onAfterAdd'
-        | 'onAfterContextMenu'
-        | 'onAfterDelete'
-        | 'onAfterDrop'
-        | 'onAfterDropOrder'
-        | 'onAfterLoad'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onAfterSelect'
-        | 'onAfterSort'
-        | 'onBeforeAdd'
-        | 'onBeforeContextMenu'
-        | 'onBeforeDelete'
-        | 'onBeforeDrag'
-        | 'onBeforeDragIn'
-        | 'onBeforeDrop'
-        | 'onBeforeDropOrder'
-        | 'onBeforeDropOut'
-        | 'onBeforeLoad'
-        | 'onBeforeRender'
-        | 'onBeforeSelect'
-        | 'onBeforeSort'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDataRequest'
-        | 'onDataUpdate'
-        | 'onDestruct'
-        | 'onDragOut'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onItemDblClick'
-        | 'onItemRender'
-        | 'onKeyPress'
-        | 'onLoadError'
-        | 'onLongTouch'
-        | 'onMouseMove'
-        | 'onMouseMoving'
-        | 'onMouseOut'
-        | 'onPaste'
-        | 'onSelectChange'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onValidationError'
-        | 'onValidationSuccess'
-        | 'onViewResize';
+		attachEvent(type: treeEventName, functor: WebixCallback, id?: string): string | number;
 
-    class unitlist implements webix.ui.baseview {
-        add(obj: any, index?: number): string | number;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        addCss(id: string | number, css: string, silent?: boolean): void;
+		blockEvent(): void;
 
-        adjust(): void;
+		callEvent(name: string, params: any[]): boolean;
 
-        attachEvent(type: unitlistEventName, functor: WebixCallback, id?: string): string | number;
+		checkAll(id?: string | number): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		checkItem(id: string): void;
 
-        blockEvent(): void;
+		clearAll(soft?: boolean): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		clearCss(css: string, silent?: boolean): void;
 
-        clearAll(soft?: boolean): void;
+		clearValidation(): void;
 
-        clearCss(css: string, silent?: boolean): void;
+		close(id: string | number): void;
 
-        clearValidation(): void;
+		closeAll(): void;
 
-        copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+		copy(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): number;
 
-        count(): number;
+		count(): number;
 
-        customize(obj: any): void;
+		customize(obj: any): void;
 
-        define(property: string, value: any): void;
+		define(property: string, value: any): void;
 
-        destructor(): void;
+		destructor(): void;
 
-        detachEvent(id: string): void;
+		detachEvent(id: string): void;
 
-        disable(): void;
+		disable(): void;
 
-        enable(): void;
+		enable(): void;
 
-        exists(id: string | number): boolean;
+		exists(id: number | string): boolean;
 
-        filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        find(criterion: WebixCallback, first?: boolean): any;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        getChildViews(): any[];
+		getBranchIndex(id: string | number, parent?: string | number): number;
 
-        getFirstId(): string | number;
+		getChecked(): any[];
 
-        getFormView(): webix.ui.baseview;
+		getChildViews(): any[];
 
-        getIdByIndex(index: number): string | number;
+		getFirstChildId(id: string | number): string;
 
-        getIndexById(id: string | number): number;
+		getFirstId(): number | string;
 
-        getItem(id: string | number): any;
+		getFormView(): webix.ui.baseview;
 
-        getItemNode(id: string | number): HTMLElement;
+		getIdByIndex(index: number | string): string | number;
 
-        getLastId(): string | number;
+		getIndexById(id: number | string): number;
 
-        getNextId(id: string | number, step: number): string | number;
+		getItem(id: number | string): any;
 
-        getNode(): any;
+		getItemNode(id: string | number): HTMLElement;
 
-        getPage(): number;
+		getLastId(): number | string;
 
-        getPager(): any;
+		getNextId(id: number | string, step: number): string | number;
 
-        getParentView(): any;
+		getNextSiblingId(id: string | number): string | number;
 
-        getPrevId(id: string | number, step: number): string | number;
+		getNode(): any;
 
-        getScrollState(): any;
+		getOpenItems(): any[];
 
-        getSelectedId(as_array: boolean): string | any[];
+		getParentId(id: string | number): string | number;
 
-        getSelectedItem(as_array: boolean): any;
+		getParentView(): any;
 
-        getTopParentView(): webix.ui.baseview;
+		getPrevId(id: number | string, step: number): string | number;
 
-        getUnitList(name: string): any[];
+		getPrevSiblingId(id: string | number): string | number;
 
-        getUnits(): any[];
+		getScrollState(): any;
 
-        getVisibleCount(): number;
+		getSelectedId(as_array: boolean): string | any[];
 
-        hasCss(id: string | number, css: string): boolean;
+		getSelectedItem(as_array: boolean): any;
 
-        hasEvent(name: string): boolean;
+		getState(): any;
 
-        hide(): void;
+		getTopParentView(): webix.ui.baseview;
 
-        isEnabled(): boolean;
+		group(config: any, target?: string | number): void;
 
-        isSelected(id: string | number): boolean;
+		hasCss(id: string | number, css: string): boolean;
 
-        isVisible(): boolean;
+		hasEvent(name: string): boolean;
 
-        load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+		hide(): void;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+		isBranch(id: string | number): boolean;
 
-        locate(e: Event): string | number;
+		isBranchOpen(id: string | number): boolean;
 
-        mapEvent(map: any): void;
+		isChecked(id: string | number): boolean;
 
-        move(sid: string, tindex: number, tobj?: any, details?: any): string;
+		isEnabled(): boolean;
 
-        moveBottom(id: string | number): void;
+		isSelected(id: string | number): boolean;
 
-        moveDown(id: string | number, step: number): void;
+		isVisible(): boolean;
 
-        moveSelection(direction: string): void;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        moveTop(id: string | number): void;
+		loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-        moveUp(id: string | number, step: number): void;
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-        parse(data: any, type: string): void;
+		locate(e: Event): string | number;
 
-        queryView(config: any, mode?: string): any;
+		mapEvent(map: any): void;
 
-        refresh(id?: string | number): void;
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
 
-        remove(id: string | number): void;
+		moveSelection(direction: string): void;
 
-        removeCss(id: string | number, css: string, silent?: boolean): void;
+		open(id: string | number, show?: boolean): void;
 
-        render(id: string | number, data: any, type: string): void;
+		openAll(): void;
 
-        resize(): void;
+		parse(data: any, type: string): void;
 
-        scrollTo(x: number, y: number): void;
+		queryView(config: any, mode?: string): any;
 
-        select(id: string | any[], preserve: boolean): void;
+		refresh(id?: number | string): void;
 
-        selectAll(from?: string, to?: string): void;
+		remove(id: string | number | any[]): void;
 
-        serialize(): any[];
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        setPage(page: number): void;
+		render(id: string | number, data: any, type: string): void;
 
-        show(force?: boolean, animation?: boolean): void;
+		resize(): void;
 
-        showItem(id: string | number): void;
+		scrollTo(x: number, y: number): void;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		select(id: string | any[], preserve: boolean): void;
 
-        unbind(): void;
+		selectAll(from?: string, to?: string): void;
 
-        unblockEvent(): void;
+		serialize(rootId: string | number, all: boolean): any[];
 
-        unselect(id?: string): void;
+		setState(state: any): void;
 
-        unselectAll(): void;
+		show(force?: boolean, animation?: boolean): void;
 
-        updateItem(id: string | number, data: any): void;
+		showItem(id: string | number): void;
 
-        validate(id?: string): boolean;
+		sort(by: string, dir?: string, as?: string): void;
 
-        $customPrint: WebixCallback;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        $drag(source: HTMLElement, ev: Event): string;
+		unbind(): void;
 
-        $dragHTML: WebixCallback;
+		unblockEvent(): void;
 
-        $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+		uncheckAll(id?: string | number): void;
 
-        $dragMark(context: any, ev: Event): boolean;
+		uncheckItem(id: string): void;
 
-        $dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+		ungroup(mode: boolean): void;
 
-        $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+		unselect(id?: string): void;
 
-        $dropAllow: WebixCallback;
+		unselectAll(): void;
 
-        $getSize(): any[];
+		updateItem(id: number | string, data: any): void;
 
-        $height: number;
-        $scope: any;
+		validate(id?: string): boolean;
 
-        $setSize(x: number, y: number): boolean;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: unitlistConfig;
-        data: DataStore;
-        name: string;
-        on_click: WebixCallback;
-        on_context: { [key: string]: any; };
-        on_dblclick: WebixCallback;
-        on_mouse_move: WebixCallback;
-        type: { [key: string]: any; };
-        types: { [key: string]: any; };
-        waitData: Promise<any>;
-    }
+		$drag(source: HTMLElement, ev: Event): string;
 
-    interface uploaderConfig {
-        view?: string;
-        accept?: string;
-        align?: string;
-        animate?: any;
-        apiOnly?: boolean;
-        autosend?: boolean;
-        autowidth?: boolean;
-        borderless?: boolean;
-        click?: WebixCallback;
-        container?: string | HTMLElement;
-        css?: any;
-        datatype?: string;
-        directory?: string;
-        disabled?: boolean;
-        formData?: any;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        hotkey?: string;
-        id?: string | number;
-        inputHeight?: number;
-        inputName?: string;
-        inputWidth?: number;
-        label?: string;
-        link?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        multiple?: boolean;
-        name?: string;
-        on?: EventHash;
-        popup?: string;
-        tooltip?: string;
-        type?: string;
-        upload?: string;
-        urlData?: { [key: string]: any; };
-        value?: string | number;
-        width?: number;
-    }
+		$dragHTML: WebixCallback;
 
-    type uploaderEventName =
-        'onAfterFileAdd'
-        | 'onAfterRender'
-        | 'onAfterScroll'
-        | 'onBeforeFileAdd'
-        | 'onBeforeRender'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFileUpload'
-        | 'onFileUploadError'
-        | 'onFocus'
-        | 'onItemClick'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onUploadComplete'
-        | 'onViewResize';
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
 
-    class uploader implements webix.ui.baseview {
-        addDropZone(element: HTMLElement): void;
+		$dragMark(context: any, ev: Event): boolean;
 
-        addFile(name: string, size: number, type?: string): void;
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
 
-        adjust(): void;
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
-        attachEvent(type: uploaderEventName, functor: WebixCallback, id?: string): string | number;
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
+		$fixEditor: WebixCallback;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		$getSize(): any[];
 
-        blockEvent(): void;
+		$height: number;
+		$scope: any;
 
-        blur(): void;
+		$setSize(x: number, y: number): boolean;
 
-        callEvent(name: string, params: any[]): boolean;
+		$skin: WebixCallback;
 
-        define(property: string, value: any): void;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        destructor(): void;
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
 
-        detachEvent(id: string): void;
+		$tooltipOut(): void;
 
-        disable(): void;
+		$view: HTMLElement;
+		$width: number;
+		config: treeConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
 
-        enable(): void;
+	interface treemapConfig {
+		view?: string;
+		activeItem?: boolean;
+		animate?: any;
+		borderless?: boolean;
+		branch?: string;
+		click?: string | WebixCallback;
+		clipboard?: boolean | string;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		dataFeed?: string | WebixCallback;
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		filterMode?: any;
+		gravity?: number;
+		header?: boolean;
+		headerHeight?: number;
+		headerTemplate?: string;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: string | boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		pager?: any;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean | string;
+		subRender?: boolean;
+		template?: string | WebixCallback;
+		templateCopy?: WebixCallback;
+		threeState?: boolean;
+		tooltip?: any;
+		type?: any;
+		url?: any;
+		value?: string | WebixCallback;
+		width?: number;
+	}
 
-        fileDialog(content?: any): void;
+	type treemapEventName =
+		'onAfterAdd'
+		| 'onAfterClose'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterLoad'
+		| 'onAfterOpen'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeClose'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeLoad'
+		| 'onBeforeOpen'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemCheck'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPartialRender'
+		| 'onPaste'
+		| 'onSelectChange'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
 
-        focus(): void;
+	export class treemap implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
 
-        getChildViews(): any[];
+		addCss(id: string | number, css: string, silent?: boolean): void;
 
-        getFormView(): webix.ui.baseview;
+		adjust(): void;
 
-        getInputNode(): HTMLElement;
+		attachEvent(type: treemapEventName, functor: WebixCallback, id?: string): string | number;
 
-        getNode(): any;
+		bind(target: any, rule?: WebixCallback, format?: string): void;
 
-        getParentView(): any;
+		blockEvent(): void;
 
-        getTopParentView(): webix.ui.baseview;
+		callEvent(name: string, params: any[]): boolean;
 
-        getValue(): string;
+		clearAll(soft?: boolean): void;
 
-        hasEvent(name: string): boolean;
+		clearCss(css: string, silent?: boolean): void;
 
-        hide(): void;
+		clearValidation(): void;
 
-        isEnabled(): boolean;
+		close(id: string | number): void;
 
-        isUploaded(): boolean;
+		closeAll(): void;
 
-        isVisible(): boolean;
+		count(): number;
 
-        mapEvent(map: any): void;
+		customize(obj: any): void;
 
-        queryView(config: any, mode?: string): any;
+		define(property: string, value: any): void;
 
-        refresh(): void;
+		destructor(): void;
 
-        render(id: string | number, data: any, type: string): void;
+		detachEvent(id: string): void;
 
-        resize(): void;
+		disable(): void;
 
-        send(id: number | string | WebixCallback): void;
+		enable(): void;
 
-        setValue(value: string): void;
+		exists(id: number | string): boolean;
 
-        show(force?: boolean, animation?: boolean): void;
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
-        stopUpload(id: string | number): void;
+		find(criterion: WebixCallback, first?: boolean): any;
 
-        sync(source: any, filter: WebixCallback, silent: boolean): void;
+		getBranchIndex(id: string | number, parent?: string | number): number;
 
-        unbind(): void;
+		getChildViews(): any[];
 
-        unblockEvent(): void;
+		getFirstChildId(id: string | number): string;
 
-        $compareValue: WebixCallback;
-        $cssName: string;
+		getFirstId(): number | string;
 
-        $getSize(): any[];
+		getFormView(): webix.ui.baseview;
 
-        $getValue(): string;
+		getIdByIndex(index: number | string): string | number;
 
-        $height: number;
-        $onUploadComplete: WebixCallback;
-        $prepareValue: WebixCallback;
+		getIndexById(id: number | string): number;
 
-        $renderInput(config: any): HTMLElement;
+		getItem(id: number | string): any;
 
-        $scope: any;
+		getItemNode(id: string | number): HTMLElement;
 
-        $setSize(x: number, y: number): boolean;
+		getLastId(): number | string;
 
-        $setValue(value: string): void;
+		getNextId(id: number | string, step: number): string | number;
 
-        $skin: WebixCallback;
-        $updateProgress: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: uploaderConfig;
-        name: string;
-        on_click: WebixCallback;
-        touchable: boolean;
-    }
+		getNextSiblingId(id: string | number): string | number;
 
-    interface videoConfig {
-        view?: string;
-        animate?: any;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        controls?: boolean;
-        css?: any;
-        disabled?: boolean;
-        gravity?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        src?: string;
-        width?: number;
-    }
+		getNode(): any;
 
-    type videoEventName =
-        'onAfterScroll'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewResize';
+		getOpenItems(): any[];
 
-    class video implements webix.ui.baseview {
-        adjust(): void;
+		getPage(): number;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		getPager(): any;
 
-        define(property: string, value: any): void;
+		getParentId(id: string | number): string | number;
 
-        destructor(): void;
+		getParentView(): any;
 
-        disable(): void;
+		getPrevId(id: number | string, step: number): string | number;
 
-        enable(): void;
+		getPrevSiblingId(id: string | number): string | number;
 
-        getChildViews(): any[];
+		getScrollState(): any;
 
-        getFormView(): webix.ui.baseview;
+		getSelectedId(as_array: boolean): string | any[];
 
-        getNode(): any;
+		getSelectedItem(as_array: boolean): any;
 
-        getParentView(): any;
+		getState(): any;
 
-        getTopParentView(): webix.ui.baseview;
+		getTopParentView(): webix.ui.baseview;
 
-        getVideo(): void;
+		group(config: any, target?: string | number): void;
 
-        hide(): void;
+		hasCss(id: string | number, css: string): boolean;
 
-        isEnabled(): boolean;
+		hasEvent(name: string): boolean;
 
-        isVisible(): boolean;
+		hide(): void;
 
-        queryView(config: any, mode?: string): any;
+		isBranch(id: string | number): boolean;
 
-        resize(): void;
+		isBranchOpen(id: string | number): boolean;
 
-        show(force?: boolean, animation?: boolean): void;
+		isEnabled(): boolean;
 
-        unbind(): void;
+		isSelected(id: string | number): boolean;
 
-        $getSize(): any[];
+		isVisible(): boolean;
 
-        $height: number;
-        $scope: any;
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        $setSize(x: number, y: number): boolean;
+		loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: videoConfig;
-        name: string;
-    }
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
-    interface windowConfig {
-        view?: string;
-        animate?: any;
-        autofit?: boolean;
-        autofocus?: boolean;
-        body?: string | webix.ui.baseview;
-        borderless?: boolean;
-        container?: string | HTMLElement;
-        css?: any;
-        disabled?: boolean;
-        fullscreen?: boolean;
-        gravity?: number;
-        head?: any;
-        headHeight?: number;
-        height?: number;
-        hidden?: boolean;
-        id?: string | number;
-        left?: number;
-        master?: string;
-        maxHeight?: number;
-        maxWidth?: number;
-        minHeight?: number;
-        minWidth?: number;
-        modal?: boolean;
-        move?: boolean;
-        on?: EventHash;
-        padding?: any;
-        point?: boolean;
-        position?: string | WebixCallback;
-        relative?: string;
-        resize?: boolean;
-        toFront?: boolean;
-        top?: number;
-        width?: number;
-        zIndex?: number;
-    }
+		locate(e: Event): string | number;
 
-    type windowEventName =
-        'onAfterScroll'
-        | 'onBeforeShow'
-        | 'onBindRequest'
-        | 'onBlur'
-        | 'onDestruct'
-        | 'onEnter'
-        | 'onFocus'
-        | 'onHide'
-        | 'onKeyPress'
-        | 'onLongTouch'
-        | 'onShow'
-        | 'onSwipeX'
-        | 'onSwipeY'
-        | 'onTimedKeyPress'
-        | 'onTouchEnd'
-        | 'onTouchMove'
-        | 'onTouchStart'
-        | 'onViewMove'
-        | 'onViewMoveEnd'
-        | 'onViewResize';
+		mapEvent(map: any): void;
 
-    class window implements webix.ui.baseview {
-        adjust(): void;
+		moveSelection(direction: string): void;
 
-        attachEvent(type: windowEventName, functor: WebixCallback, id?: string): string | number;
+		open(id: string | number, show?: boolean): void;
 
-        bind(target: any, rule?: WebixCallback, format?: string): void;
+		openAll(): void;
 
-        blockEvent(): void;
+		parse(data: any, type: string): void;
 
-        callEvent(name: string, params: any[]): boolean;
+		queryView(config: any, mode?: string): any;
 
-        close(): void;
+		refresh(id?: number | string): void;
 
-        define(property: string, value: any): void;
+		remove(id: string | number | any[]): void;
 
-        destructor(): void;
+		removeCss(id: string | number, css: string, silent?: boolean): void;
 
-        detachEvent(id: string): void;
+		render(id: string | number, data: any, type: string): void;
 
-        disable(): void;
+		resize(): void;
 
-        enable(): void;
+		scrollTo(x: number, y: number): void;
 
-        getBody(): any;
+		select(id: string | any[], preserve: boolean): void;
 
-        getChildViews(): any[];
+		selectAll(from?: string, to?: string): void;
 
-        getFormView(): webix.ui.baseview;
+		serialize(all?: boolean): any[];
 
-        getHead(): any;
+		setPage(page: number): void;
 
-        getNode(): any;
+		setState(state: any): void;
 
-        getParentView(): any;
+		show(force?: boolean, animation?: boolean): void;
 
-        getTopParentView(): webix.ui.baseview;
+		showBranch(branchId: string | number): void;
 
-        hasEvent(name: string): boolean;
+		showItem(id: string | number): void;
 
-        hide(): void;
+		sort(by: string, dir?: string, as?: string): void;
 
-        isEnabled(): boolean;
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        isVisible(): boolean;
+		unbind(): void;
 
-        mapEvent(map: any): void;
+		unblockEvent(): void;
 
-        queryView(config: any, mode?: string): any;
+		ungroup(mode: boolean): void;
 
-        resize(): void;
+		unselect(id?: string): void;
 
-        resizeChildren(): void;
+		unselectAll(): void;
 
-        setPosition(x: number, y: number): void;
+		updateItem(id: number | string, data: any): void;
 
-        show(node?: HTMLElement, position?: any, point?: string): void;
+		validate(id?: string): boolean;
 
-        unbind(): void;
+		waitSave(handler: WebixCallback): Promise<any>;
 
-        unblockEvent(): void;
+		$getSize(): any[];
 
-        show(force: boolean, animation: boolean): void;
+		$height: number;
+		$scope: any;
 
-        $getSize(): any[];
+		$setSize(x: number, y: number): boolean;
 
-        $height: number;
-        $scope: any;
+		$skin: WebixCallback;
 
-        $setSize(x: number, y: number): boolean;
+		$tooltipIn(node: HTMLElement): HTMLElement;
 
-        $skin: WebixCallback;
-        $view: HTMLElement;
-        $width: number;
-        config: windowConfig;
-        name: string;
-    }
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+		$tooltipOut(): void;
+
+		$view: HTMLElement;
+		$width: number;
+		config: treemapConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
+
+	interface treetableConfig {
+		view?: string;
+		animate?: any;
+		areaselect?: boolean;
+		autoConfig?: boolean;
+		autoheight?: boolean;
+		autowidth?: boolean;
+		blockselect?: boolean | string;
+		borderless?: boolean;
+		checkboxRefresh?: boolean;
+		clipboard?: boolean | string;
+		columnWidth?: number;
+		columns?: any[];
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datafetch?: number;
+		datathrottle?: number;
+		datatype?: string;
+		delimiter?: any;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragColumn?: boolean | string;
+		dragscroll?: boolean | string;
+		editMath?: boolean;
+		editValue?: string;
+		editable?: boolean;
+		editaction?: string;
+		externalData?: WebixCallback;
+		filterMode?: any;
+		fixedRowHeight?: boolean;
+		footer?: boolean;
+		form?: string;
+		gravity?: number;
+		header?: boolean;
+		headerRowHeight?: number;
+		headermenu?: any;
+		height?: number;
+		hidden?: boolean;
+		hover?: string;
+		id?: string | number;
+		keyPressTimeout?: number;
+		leftSplit?: number;
+		liveValidation?: boolean;
+		loadahead?: number;
+		map?: any;
+		math?: boolean;
+		maxColumnWidth?: number;
+		maxHeight?: number;
+		maxRowHeight?: number;
+		maxWidth?: number;
+		minColumnWidth?: number;
+		minHeight?: number;
+		minRowHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		pager?: any;
+		prerender?: boolean;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		resizeColumn?: any;
+		resizeRow?: any;
+		rightSplit?: number;
+		rowHeight?: number;
+		rowLineHeight?: number;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollAlignY?: boolean;
+		scrollX?: boolean;
+		scrollY?: boolean;
+		select?: boolean | string;
+		spans?: any[];
+		subRowHeight?: string | number;
+		subrow?: string;
+		subview?: webix.ui.baseview | WebixCallback;
+		templateCopy?: WebixCallback;
+		threeState?: boolean;
+		tooltip?: any;
+		type?: any;
+		undo?: boolean;
+		url?: any;
+		width?: number;
+		yCount?: number;
+	}
+
+	type treetableEventName =
+		'onAfterAdd'
+		| 'onAfterAreaAdd'
+		| 'onAfterAreaRemove'
+		| 'onAfterBlockSelect'
+		| 'onAfterClose'
+		| 'onAfterColumnDrop'
+		| 'onAfterColumnDropOrder'
+		| 'onAfterColumnHide'
+		| 'onAfterColumnShow'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterEditStart'
+		| 'onAfterEditStop'
+		| 'onAfterFilter'
+		| 'onAfterLoad'
+		| 'onAfterOpen'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onAfterUnSelect'
+		| 'onAreaDrag'
+		| 'onBeforeAdd'
+		| 'onBeforeAreaAdd'
+		| 'onBeforeAreaRemove'
+		| 'onBeforeBlockSelect'
+		| 'onBeforeClose'
+		| 'onBeforeColumnDrag'
+		| 'onBeforeColumnDrop'
+		| 'onBeforeColumnDropOrder'
+		| 'onBeforeColumnHide'
+		| 'onBeforeColumnShow'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeEditStart'
+		| 'onBeforeEditStop'
+		| 'onBeforeFilter'
+		| 'onBeforeLoad'
+		| 'onBeforeOpen'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBeforeUnSelect'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onCheck'
+		| 'onCollectValues'
+		| 'onColumnGroupCollapse'
+		| 'onColumnResize'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEditorChange'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHeaderClick'
+		| 'onItemCheck'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onKeyPress'
+		| 'onLiveEdit'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPaste'
+		| 'onResize'
+		| 'onRowResize'
+		| 'onScrollX'
+		| 'onScrollY'
+		| 'onSelectChange'
+		| 'onStructureLoad'
+		| 'onStructureUpdate'
+		| 'onSubViewClose'
+		| 'onSubViewCreate'
+		| 'onSubViewOpen'
+		| 'onSubViewRender'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
+
+	export class treetable implements webix.ui.baseview {
+		add(obj: any, index?: number, parentId?: string): string;
+
+		addCellCss(id: string, name: string, css: string): void;
+
+		addCss(id: string | number, css: string, silent?: boolean): void;
+
+		addRowCss(id: string, css: string): void;
+
+		addSelectArea(start: any, end: any, preserve: boolean, area_name?: string, css?: string, handle?: boolean): void;
+
+		addSpan(id: any, column: string, width: number, height: number, value?: string, css?: string): void;
+
+		adjust(): void;
+
+		adjustColumn(id: string | number, mode?: string): void;
+
+		adjustRowHeight(columnId?: string, silent?: boolean): void;
+
+		attachEvent(type: treetableEventName, functor: WebixCallback, id?: string): string | number;
+
+		bind(target: any, rule?: WebixCallback, format?: string): void;
+
+		blockEvent(): void;
+
+		callEvent(name: string, params: any[]): boolean;
+
+		checkAll(id?: string | number): void;
+
+		checkItem(id: string): void;
+
+		clearAll(soft?: boolean): void;
+
+		clearCss(css: string, silent?: boolean): void;
+
+		clearSelection(): void;
+
+		clearValidation(): void;
+
+		close(id: string | number): void;
+
+		closeAll(): void;
+
+		closeSub(id: string | number): void;
+
+		collectValues(id: string | number, mode: any): any[];
+
+		columnId(index: number): string | number;
+
+		copy(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): number;
+
+		count(): number;
+
+		define(property: string, value: any): void;
+
+		destructor(): void;
+
+		detachEvent(id: string): void;
+
+		disable(): void;
+
+		eachColumn(handler: WebixCallback, all?: boolean): void;
+
+		eachRow(handler: WebixCallback): void;
+
+		edit(id: any): void;
+
+		editCancel(): void;
+
+		editCell(row: string | number, col: string | number, preserve?: boolean, show?: boolean): void;
+
+		editColumn(id: string): void;
+
+		editNext(): void;
+
+		editRow(id: string): void;
+
+		editStop(): void;
+
+		enable(): void;
+
+		exists(id: number | string): boolean;
+
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+
+		filterByAll(): void;
+
+		find(criterion: WebixCallback, first?: boolean): any;
+
+		focusEditor(id: any): void;
+
+		getAllSelectAreas(): any;
+
+		getBranchIndex(id: string | number, parent?: string | number): number;
+
+		getChecked(): any[];
+
+		getChildViews(): any[];
+
+		getColumnConfig(id: string): any;
+
+		getColumnIndex(id: string | number): number;
+
+		getCss(rowId: string | number, columnId: string | number): string;
+
+		getEditState(): any;
+
+		getEditor(row?: any, column?: string | number): any;
+
+		getEditorValue(): string;
+
+		getFilter(columnID: string | number): any;
+
+		getFirstChildId(id: string | number): string;
+
+		getFirstId(): number | string;
+
+		getFooterNode(columnId: string, rowIndex?: number): HTMLElement;
+
+		getFormView(): webix.ui.baseview;
+
+		getHeaderContent(id: string | number): { [key: string]: any; };
+
+		getHeaderNode(columnId: string, rowIndex?: number): HTMLElement;
+
+		getIdByIndex(index: number | string): string | number;
+
+		getIndexById(id: number | string): number;
+
+		getItem(id: number | string): any;
+
+		getItemNode(id: string | number): HTMLElement;
+
+		getLastId(): number | string;
+
+		getNextId(id: number | string, step: number): string | number;
+
+		getNextSiblingId(id: string | number): string | number;
+
+		getNode(): any;
+
+		getOpenItems(): any[];
+
+		getPage(): number;
+
+		getPager(): any;
+
+		getParentId(id: string | number): string | number;
+
+		getParentView(): any;
+
+		getPrevId(id: number | string, step: number): string | number;
+
+		getPrevSiblingId(id: string | number): string | number;
+
+		getScrollState(): any;
+
+		getSelectArea(area_name: string): any;
+
+		getSelectedId(asArray: boolean, asString: boolean): any;
+
+		getSelectedItem(as_array?: boolean): any;
+
+		getSpan(): any[];
+
+		getSpanNode(id: any): HTMLElement;
+
+		getState(): any;
+
+		getSubView(id: string | number): any;
+
+		getText(rowid: string | number, colid: string | number): string;
+
+		getTopParentView(): webix.ui.baseview;
+
+		getVisibleCount(): number;
+
+		group(config: any, target?: string | number): void;
+
+		hasCss(id: string | number, css: string): boolean;
+
+		hasEvent(name: string): boolean;
+
+		hide(): void;
+
+		hideColumn(id: string | number, options?: any, silent?: boolean, mode?: boolean): void;
+
+		hideOverlay(): void;
+
+		ignoreUndo(functor: WebixCallback): void;
+
+		isBranch(id: string | number): boolean;
+
+		isBranchOpen(id: string | number): boolean;
+
+		isChecked(id: string | number): boolean;
+
+		isColumnVisible(id: string | number): boolean;
+
+		isEnabled(): boolean;
+
+		isSelected(id: string | number): void;
+
+		isVisible(): boolean;
+
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+
+		loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
+
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
+
+		locate(node: HTMLElement | Event): any;
+
+		mapCells(startrow: number, startcol: string, numrows: number, numcols: number, callback: WebixCallback): void;
+
+		mapEvent(map: any): void;
+
+		mapSelection(callback: WebixCallback): void;
+
+		markSorting(column_id: string, direction: string): void;
+
+		move(sid: string | number, tindex: number, tobj?: webix.ui.baseview, details?: any): string | number;
+
+		moveBottom(id: string | number): void;
+
+		moveColumn(id: string, index: number): void;
+
+		moveDown(id: string | number, step: number): void;
+
+		moveSelection(direction: string): void;
+
+		moveTop(id: string | number): void;
+
+		moveUp(id: string | number, step: number): void;
+
+		open(id: string | number, show?: boolean): void;
+
+		openAll(): void;
+
+		openSub(id: string | number): void;
+
+		parse(data: any, type: string): void;
+
+		queryView(config: any, mode?: string): any;
+
+		refresh(id?: number | string): void;
+
+		refreshColumns(config?: any[], reset?: boolean): void;
+
+		refreshFilter(id: string | number): void;
+
+		refreshSelectArea(): void;
+
+		registerFilter(object: any, config: any, controller: any): void;
+
+		remove(id: string | number | any[]): void;
+
+		removeCellCss(id: string, name: string, css_name: string): void;
+
+		removeCss(id: string | number, css: string, silent?: boolean): void;
+
+		removeRowCss(id: string, css_name: string): void;
+
+		removeSelectArea(area_name: string): void;
+
+		removeSpan(id: string | number, column: string): void;
+
+		removeUndo(id: string): void;
+
+		render(id: string | number, data: any, operation: string): void;
+
+		resize(): void;
+
+		resizeSubView(id: string | number): void;
+
+		scrollTo(x: number, y: number): void;
+
+		select(row_id: string | number, preserve: boolean): void;
+
+		selectAll(): void;
+
+		selectRange(row_id: string | number, end_row_id: string | number, preserve?: boolean): void;
+
+		serialize(id?: string | number, all?: boolean): any[];
+
+		setColumnWidth(id: string | number, width: number): void;
+
+		setPage(page: number): void;
+
+		setRowHeight(id: string | number, height: number): void;
+
+		setState(state: any): void;
+
+		show(force?: boolean, animation?: boolean): void;
+
+		showCell(row: string, column: string): void;
+
+		showColumn(id: string | number): void;
+
+		showColumnBatch(batch: string | number, preserve: boolean): void;
+
+		showItem(id: string | number): void;
+
+		showItemByIndex(index: number): void;
+
+		showOverlay(message: string): void;
+
+		sort(by: string, dir?: string, as?: string): void;
+
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
+
+		unbind(): void;
+
+		unblockEvent(): void;
+
+		uncheckAll(id?: string | number): void;
+
+		uncheckItem(id: string): void;
+
+		undo(id: string): void;
+
+		ungroup(mode: boolean): void;
+
+		unselect(row_id: string | number): void;
+
+		unselectAll(): void;
+
+		updateItem(id: number | string, data: any): void;
+
+		validate(id?: string): boolean;
+
+		validateEditor(id?: string | number): boolean;
+
+		waitSave(handler: WebixCallback): Promise<any>;
+
+		$customPrint: WebixCallback;
+
+		$drag(source: HTMLElement, ev: Event): string;
+
+		$dragHTML: WebixCallback;
+
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+
+		$dragMark(context: any, ev: Event): boolean;
+
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
+
+		$getSize(): any[];
+
+		$height: number;
+		$scope: any;
+
+		$setSize(x: number, y: number): boolean;
+
+		$skin: WebixCallback;
+
+		$tooltipIn(node: HTMLElement): HTMLElement;
+
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+		$tooltipOut(): void;
+
+		$touch: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: treetableConfig;
+		data: DataStore;
+		headerContent: any;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		waitData: Promise<any>;
+	}
+
+	interface unitlistConfig {
+		view?: string;
+		animate?: any;
+		autoheight?: boolean;
+		autowidth?: boolean;
+		borderless?: boolean;
+		click?: string | WebixCallback;
+		clipboard?: boolean | string;
+		container?: string | HTMLElement;
+		css?: any;
+		data?: string | any[];
+		datathrottle?: number;
+		datatype?: string;
+		disabled?: boolean;
+		drag?: boolean | string;
+		dragscroll?: boolean | string;
+		externalData?: WebixCallback;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		item?: any;
+		keyPressTimeout?: number;
+		layout?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		mouseEventDelay?: number;
+		multiselect?: string | boolean;
+		navigation?: boolean;
+		on?: EventHash;
+		onClick?: { [key: string]: any; };
+		onContext?: { [key: string]: any; };
+		onDblClick?: WebixCallback;
+		onMouseMove?: WebixCallback;
+		pager?: any;
+		ready?: WebixCallback;
+		removeMissed?: boolean;
+		rules?: any;
+		save?: any;
+		scheme?: any;
+		scroll?: boolean | string;
+		scrollSpeed?: string;
+		select?: boolean | string;
+		template?: string | WebixCallback;
+		templateCopy?: WebixCallback;
+		tooltip?: any;
+		type?: any;
+		uniteBy?: WebixCallback;
+		url?: any;
+		width?: number;
+		xCount?: number;
+		yCount?: number;
+	}
+
+	type unitlistEventName =
+		'onAfterAdd'
+		| 'onAfterContextMenu'
+		| 'onAfterDelete'
+		| 'onAfterDrop'
+		| 'onAfterLoad'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onAfterSelect'
+		| 'onAfterSort'
+		| 'onBeforeAdd'
+		| 'onBeforeContextMenu'
+		| 'onBeforeDelete'
+		| 'onBeforeDrag'
+		| 'onBeforeDragIn'
+		| 'onBeforeDrop'
+		| 'onBeforeDropOut'
+		| 'onBeforeLoad'
+		| 'onBeforeRender'
+		| 'onBeforeSelect'
+		| 'onBeforeSort'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDataRequest'
+		| 'onDataUpdate'
+		| 'onDestruct'
+		| 'onDragOut'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onItemDblClick'
+		| 'onItemRender'
+		| 'onKeyPress'
+		| 'onLoadError'
+		| 'onLongTouch'
+		| 'onMouseMove'
+		| 'onMouseMoving'
+		| 'onMouseOut'
+		| 'onPaste'
+		| 'onSelectChange'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTabFocus'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onValidationError'
+		| 'onValidationSuccess'
+		| 'onViewResize'
+		| 'onViewShow';
+
+	export class unitlist implements webix.ui.baseview {
+		add(obj: any, index?: number): string | number;
+
+		addCss(id: string | number, css: string, silent?: boolean): void;
+
+		adjust(): void;
+
+		attachEvent(type: unitlistEventName, functor: WebixCallback, id?: string): string | number;
+
+		bind(target: any, rule?: WebixCallback, format?: string): void;
+
+		blockEvent(): void;
+
+		callEvent(name: string, params: any[]): boolean;
+
+		clearAll(soft?: boolean): void;
+
+		clearCss(css: string, silent?: boolean): void;
+
+		clearValidation(): void;
+
+		copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
+
+		count(): number;
+
+		customize(obj: any): void;
+
+		define(property: string, value: any): void;
+
+		destructor(): void;
+
+		detachEvent(id: string): void;
+
+		disable(): void;
+
+		disableItem(id: string | number): void;
+
+		enable(): void;
+
+		enableItem(id: string | number): void;
+
+		exists(id: number | string): boolean;
+
+		filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+
+		find(criterion: WebixCallback, first?: boolean): any;
+
+		getChildViews(): any[];
+
+		getFirstId(): number | string;
+
+		getFormView(): webix.ui.baseview;
+
+		getIdByIndex(index: number | string): string | number;
+
+		getIndexById(id: number | string): number;
+
+		getItem(id: number | string): any;
+
+		getItemNode(id: string | number): HTMLElement;
+
+		getLastId(): number | string;
+
+		getNextId(id: number | string, step: number): string | number;
+
+		getNode(): any;
+
+		getPage(): number;
+
+		getPager(): any;
+
+		getParentView(): any;
+
+		getPrevId(id: number | string, step: number): string | number;
+
+		getScrollState(): any;
+
+		getSelectedId(as_array: boolean): string | any[];
+
+		getSelectedItem(as_array: boolean): any;
+
+		getTopParentView(): webix.ui.baseview;
+
+		getUnitList(name: string): any[];
+
+		getUnits(): any[];
+
+		getVisibleCount(): number;
+
+		hasCss(id: string | number, css: string): boolean;
+
+		hasEvent(name: string): boolean;
+
+		hide(): void;
+
+		isEnabled(): boolean;
+
+		isEnabledItem(): boolean;
+
+		isSelected(id: string | number): boolean;
+
+		isVisible(): boolean;
+
+		load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+
+		loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
+
+		locate(e: Event): string | number;
+
+		mapEvent(map: any): void;
+
+		move(sid: string, tindex: number, tobj?: any, details?: any): string;
+
+		moveBottom(id: string | number): void;
+
+		moveDown(id: string | number, step: number): void;
+
+		moveSelection(direction: string): void;
+
+		moveTop(id: string | number): void;
+
+		moveUp(id: string | number, step: number): void;
+
+		parse(data: any, type: string): void;
+
+		queryView(config: any, mode?: string): any;
+
+		refresh(id?: number | string): void;
+
+		remove(id: string | number | any[]): void;
+
+		removeCss(id: string | number, css: string, silent?: boolean): void;
+
+		render(id: string | number, data: any, type: string): void;
+
+		resize(): void;
+
+		scrollTo(x: number, y: number): void;
+
+		select(id: string | any[], preserve: boolean): void;
+
+		selectAll(from?: string, to?: string): void;
+
+		serialize(all?: boolean): any[];
+
+		setPage(page: number): void;
+
+		show(force?: boolean, animation?: boolean): void;
+
+		showItem(id: string | number): void;
+
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
+
+		unbind(): void;
+
+		unblockEvent(): void;
+
+		unselect(id?: string): void;
+
+		unselectAll(): void;
+
+		updateItem(id: number | string, data: any): void;
+
+		validate(id?: string): boolean;
+
+		waitSave(handler: WebixCallback): Promise<any>;
+
+		$customPrint: WebixCallback;
+
+		$drag(source: HTMLElement, ev: Event): string;
+
+		$dragHTML: WebixCallback;
+
+		$dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+
+		$dragMark(context: any, ev: Event): boolean;
+
+		$dragOut(source: HTMLElement, old_target: HTMLElement, new_target: HTMLElement, ev: Event): void;
+
+		$drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
+
+		$dropAllow: WebixCallback;
+		$dropHTML: WebixCallback;
+
+		$getSize(): any[];
+
+		$height: number;
+		$scope: any;
+
+		$setSize(x: number, y: number): boolean;
+
+		$skin: WebixCallback;
+
+		$tooltipIn(node: HTMLElement): HTMLElement;
+
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+		$tooltipOut(): void;
+
+		$view: HTMLElement;
+		$width: number;
+		config: unitlistConfig;
+		data: DataStore;
+		name: string;
+		on_click: WebixCallback;
+		on_context: { [key: string]: any; };
+		on_dblclick: WebixCallback;
+		on_mouse_move: WebixCallback;
+		type: { [key: string]: any; };
+		types: { [key: string]: any; };
+		waitData: Promise<any>;
+	}
+
+	interface uploaderConfig {
+		view?: string;
+		accept?: string;
+		align?: string;
+		animate?: any;
+		apiOnly?: boolean;
+		autosend?: boolean;
+		autowidth?: boolean;
+		borderless?: boolean;
+		click?: WebixCallback;
+		container?: string | HTMLElement;
+		css?: any;
+		datatype?: string;
+		directory?: string;
+		disabled?: boolean;
+		formData?: any;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		hotkey?: string;
+		id?: string | number;
+		inputHeight?: number;
+		inputName?: string;
+		inputWidth?: number;
+		keyPressTimeout?: number;
+		label?: string;
+		link?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		multiple?: boolean;
+		name?: string;
+		on?: EventHash;
+		popup?: string;
+		tooltip?: any;
+		type?: string;
+		upload?: string;
+		urlData?: any;
+		value?: string | number;
+		width?: number;
+	}
+
+	type uploaderEventName =
+		'onAfterFileAdd'
+		| 'onAfterRender'
+		| 'onAfterScroll'
+		| 'onBeforeFileAdd'
+		| 'onBeforeRender'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFileUpload'
+		| 'onFileUploadError'
+		| 'onFocus'
+		| 'onItemClick'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onUploadComplete'
+		| 'onViewResize'
+		| 'onViewShow';
+
+	export class uploader implements webix.ui.baseview {
+		addDropZone(element: HTMLElement): void;
+
+		addFile(name: any, size: number, type?: string): void;
+
+		adjust(): void;
+
+		attachEvent(type: uploaderEventName, functor: WebixCallback, id?: string): string | number;
+
+		bind(target: any, rule?: WebixCallback, format?: string): void;
+
+		blockEvent(): void;
+
+		blur(): void;
+
+		callEvent(name: string, params: any[]): boolean;
+
+		define(property: string, value: any): void;
+
+		destructor(): void;
+
+		detachEvent(id: string): void;
+
+		disable(): void;
+
+		enable(): void;
+
+		fileDialog(content?: any): void;
+
+		focus(): void;
+
+		getChildViews(): any[];
+
+		getFormView(): webix.ui.baseview;
+
+		getInputNode(): HTMLElement;
+
+		getNode(): any;
+
+		getParentView(): any;
+
+		getTopParentView(): webix.ui.baseview;
+
+		getValue(): string;
+
+		hasEvent(name: string): boolean;
+
+		hide(): void;
+
+		isEnabled(): boolean;
+
+		isUploaded(): boolean;
+
+		isVisible(): boolean;
+
+		mapEvent(map: any): void;
+
+		queryView(config: any, mode?: string): any;
+
+		refresh(): void;
+
+		render(id: string | number, data: any, type: string): void;
+
+		resize(): void;
+
+		send(id: number | string | WebixCallback): void;
+
+		setValue(value: string): void;
+
+		show(force?: boolean, animation?: boolean): void;
+
+		stopUpload(id: string | number): void;
+
+		sync(source: any, filter: WebixCallback, silent: boolean): void;
+
+		unbind(): void;
+
+		unblockEvent(): void;
+
+		$allowsClear: boolean;
+		$compareValue: WebixCallback;
+		$cssName: string;
+
+		$getSize(): any[];
+
+		$getValue(): string;
+
+		$height: number;
+		$prepareValue: WebixCallback;
+
+		$renderInput(config: any): HTMLElement;
+
+		$scope: any;
+
+		$setSize(x: number, y: number): boolean;
+
+		$setValue(value: string): void;
+
+		$skin: WebixCallback;
+
+		$tooltipIn(node: HTMLElement): HTMLElement;
+
+		$tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+		$tooltipOut(): void;
+
+		$updateProgress: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: uploaderConfig;
+		files: any;
+		name: string;
+		on_click: WebixCallback;
+		touchable: boolean;
+	}
+
+	interface videoConfig {
+		view?: string;
+		animate?: any;
+		borderless?: boolean;
+		container?: string | HTMLElement;
+		controls?: boolean;
+		css?: any;
+		disabled?: boolean;
+		gravity?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		src?: string | any[];
+		width?: number;
+	}
+
+	type videoEventName =
+		'onAfterScroll'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewResize'
+		| 'onViewShow';
+
+	export class video implements webix.ui.baseview {
+		adjust(): void;
+
+		bind(target: any, rule?: WebixCallback, format?: string): void;
+
+		define(property: string, value: any): void;
+
+		destructor(): void;
+
+		disable(): void;
+
+		enable(): void;
+
+		getChildViews(): any[];
+
+		getFormView(): webix.ui.baseview;
+
+		getNode(): any;
+
+		getParentView(): any;
+
+		getTopParentView(): webix.ui.baseview;
+
+		getVideo(): void;
+
+		hide(): void;
+
+		isEnabled(): boolean;
+
+		isVisible(): boolean;
+
+		queryView(config: any, mode?: string): any;
+
+		resize(): void;
+
+		show(force?: boolean, animation?: boolean): void;
+
+		unbind(): void;
+
+		$getSize(): any[];
+
+		$height: number;
+		$scope: any;
+
+		$setSize(x: number, y: number): boolean;
+
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: videoConfig;
+		name: string;
+	}
+
+	interface windowConfig {
+		view?: string;
+		animate?: any;
+		autofit?: boolean;
+		autofocus?: boolean;
+		body?: string | webix.ui.baseview;
+		borderless?: boolean;
+		close?: boolean;
+		container?: string | HTMLElement;
+		css?: any;
+		disabled?: boolean;
+		fullscreen?: boolean;
+		gravity?: number;
+		head?: any;
+		headHeight?: number;
+		height?: number;
+		hidden?: boolean;
+		id?: string | number;
+		keyPressTimeout?: number;
+		left?: number;
+		master?: string;
+		maxHeight?: number;
+		maxWidth?: number;
+		minHeight?: number;
+		minWidth?: number;
+		modal?: boolean;
+		move?: boolean;
+		on?: EventHash;
+		padding?: any;
+		point?: boolean;
+		position?: string | WebixCallback;
+		relative?: string;
+		resize?: boolean;
+		toFront?: boolean;
+		top?: number;
+		width?: number;
+		zIndex?: number;
+	}
+
+	type windowEventName =
+		'onAfterScroll'
+		| 'onBeforeShow'
+		| 'onBindRequest'
+		| 'onBlur'
+		| 'onDestruct'
+		| 'onEnter'
+		| 'onFocus'
+		| 'onHide'
+		| 'onKeyPress'
+		| 'onLongTouch'
+		| 'onShow'
+		| 'onSwipeX'
+		| 'onSwipeY'
+		| 'onTimedKeyPress'
+		| 'onTouchEnd'
+		| 'onTouchMove'
+		| 'onTouchStart'
+		| 'onViewMove'
+		| 'onViewMoveEnd'
+		| 'onViewResize'
+		| 'onViewShow';
+
+	export class window implements webix.ui.baseview {
+		adjust(): void;
+
+		attachEvent(type: windowEventName, functor: WebixCallback, id?: string): string | number;
+
+		bind(target: any, rule?: WebixCallback, format?: string): void;
+
+		blockEvent(): void;
+
+		callEvent(name: string, params: any[]): boolean;
+
+		close(): void;
+
+		define(property: string, value: any): void;
+
+		destructor(): void;
+
+		detachEvent(id: string): void;
+
+		disable(): void;
+
+		enable(): void;
+
+		getBody(): any;
+
+		getChildViews(): any[];
+
+		getFormView(): webix.ui.baseview;
+
+		getHead(): any;
+
+		getNode(): any;
+
+		getParentView(): any;
+
+		getTopParentView(): webix.ui.baseview;
+
+		hasEvent(name: string): boolean;
+
+		hide(): void;
+
+		isEnabled(): boolean;
+
+		isVisible(): boolean;
+
+		mapEvent(map: any): void;
+
+		queryView(config: any, mode?: string): any;
+
+		resize(): void;
+
+		resizeChildren(): void;
+
+		setPosition(x: number, y: number): void;
+
+		show(node?: HTMLElement, position?: any, point?: string): void;
+
+		unbind(): void;
+
+		unblockEvent(): void;
+
+		show(force: boolean, animation: boolean): void;
+
+		$getSize(): any[];
+
+		$height: number;
+		$scope: any;
+
+		$setSize(x: number, y: number): boolean;
+
+		$skin: WebixCallback;
+		$view: HTMLElement;
+		$width: number;
+		config: windowConfig;
+		name: string;
+	}
 
 }
 

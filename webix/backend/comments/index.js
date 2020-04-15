@@ -1,5 +1,5 @@
 /*
- * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ * <dsCode> Inc. (c) 2020. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
 
 const Datastore = require("nedb");
@@ -26,97 +26,81 @@ function fixID(a) {
 
 module.exports = function (app, root) {
 
-    app.get(root + "/comments", async(req, res, next) = > {
+    app.get(root + "/comments", async (req, res, next) => {
         try {
             const docs = await comments.findAsync({});
-    res.send(docs.map(fixID));
-} catch
-    (e)
-    {
-        next(e);
-    }
-})
-    ;
+            res.send(docs.map(fixID));
+        } catch (e) {
+            next(e);
+        }
+    });
 
-    app.get(root + "/comments_users", async(req, res, next) = > {
+    app.get(root + "/comments_users", async (req, res, next) => {
         try {
             const docs = await users.findAsync({});
-    res.send(docs.map(fixID));
-} catch
-    (e)
-    {
-        next(e);
-    }
-})
-    ;
+            res.send(docs.map(fixID));
+        } catch (e) {
+            next(e);
+        }
+    });
 
-    app.get(root + "/comments_next", async(req, res, next) = > {
+    app.get(root + "/comments_next", async (req, res, next) => {
         const pos = req.query.pos * 1;
-    const more = req.query.more * 1;
-    const chunk = 3;
-
-    try {
-        const docsCount = await
-        comments.countAsync({});
-        let docs = await
-        comments.find({});
-        let data;
-        if (more) {
-            docs = await
-            docs.skip(pos).limit(Math.min(more, chunk)).execAsync();
-            data = {
-                more: Math.max(more - chunk, 0),
-                data: docs.map(fixID)
-            }
-        } else {
-            docs = await
-            docs.limit(chunk).execAsync();
-            data = {
-                more: docsCount - chunk,
-                data: docs.map(fixID)
-            };
-        }
-        res.send(data);
-
-    } catch (e) {
-        next(e);
-    }
-})
-    ;
-
-    app.get(root + "/comments_prev", async(req, res, next) = > {
         const more = req.query.more * 1;
-    const chunk = 3;
+        const chunk = 3;
 
-    try {
-        const docsCount = await
-        comments.countAsync({});
-        const pos = Math.max(more - chunk, 0);
-        let docs = await
-        comments.find({});
-        let data;
-        if (more) {
-            docs = await
-            docs.skip(pos).limit(Math.min(more, chunk)).execAsync();
-            data = {
-                more: pos,
-                data: docs.map(fixID)
+        try {
+            const docsCount = await comments.countAsync({});
+            let docs = await comments.find({});
+            let data;
+            if (more) {
+                docs = await docs.skip(pos).limit(Math.min(more, chunk)).execAsync();
+                data = {
+                    more: Math.max(more - chunk, 0),
+                    data: docs.map(fixID)
+                }
+            } else {
+                docs = await docs.limit(chunk).execAsync();
+                data = {
+                    more: docsCount - chunk,
+                    data: docs.map(fixID)
+                };
             }
-        } else {
-            docs = await
-            docs.skip(docsCount - chunk).limit(chunk).execAsync();
-            data = {
-                more: docsCount - chunk,
-                data: docs.map(fixID)
-            };
-        }
-        res.send(data);
+            res.send(data);
 
-    } catch (e) {
-        next(e);
-    }
-})
-    ;
+        } catch (e) {
+            next(e);
+        }
+    });
+
+    app.get(root + "/comments_prev", async (req, res, next) => {
+        const more = req.query.more * 1;
+        const chunk = 3;
+
+        try {
+            const docsCount = await comments.countAsync({});
+            const pos = Math.max(more - chunk, 0);
+            let docs = await comments.find({});
+            let data;
+            if (more) {
+                docs = await docs.skip(pos).limit(Math.min(more, chunk)).execAsync();
+                data = {
+                    more: pos,
+                    data: docs.map(fixID)
+                }
+            } else {
+                docs = await docs.skip(docsCount - chunk).limit(chunk).execAsync();
+                data = {
+                    more: docsCount - chunk,
+                    data: docs.map(fixID)
+                };
+            }
+            res.send(data);
+
+        } catch (e) {
+            next(e);
+        }
+    });
 
 
 };

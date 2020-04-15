@@ -1,8 +1,8 @@
 /*
- * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ * <dsCode> Inc. (c) 2020. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
 
-// Type definitions for Webix UI 6.0.0
+// Type definitions for Webix UI 7.0
 // Project: https://webix.com
 
 declare namespace webix {
@@ -13,13 +13,13 @@ declare namespace webix {
     type SizeInfo = { width: number, height: number };
 
 
-    function ajax(): webix._ajax;
+    function ajax(url?: string, params?: any): webix.Ajax | Promise<any>;
 
     function $$(id: string | Event | HTMLElement): webix.ui.baseview;
 
 
-    interface _ajax {
-        bind(master: any): webix._ajax;
+    interface Ajax {
+        bind(master: any): Ajax;
 
         del(url: string, params?: any, callback?: WebixCallback): Promise<any>;
 
@@ -27,17 +27,17 @@ declare namespace webix {
 
         getXHR(): any;
 
-        headers(values: any): webix._ajax;
+        headers(values: any): Ajax;
 
         post(url: string, params?: any, callback?: WebixCallback): Promise<any>;
 
         put(url: string, params?: any, callback?: WebixCallback): Promise<any>;
 
-        response(type: string): webix._ajax;
+        response(type: string): Ajax;
 
         stringify(data: any): string;
 
-        sync(): webix._ajax;
+        sync(): Ajax;
 
         master: any;
     }
@@ -278,7 +278,7 @@ declare namespace webix {
         session: webix.session;
     }
 
-    function alert(text: any, type?: string | WebixCallback, callback?: WebixCallback): HTMLElement;
+    function alert(text: any, type?: string | WebixCallback, callback?: WebixCallback): Promise<any>;
 
     function animate(html_element: HTMLElement, animation: any): void;
 
@@ -292,7 +292,7 @@ declare namespace webix {
 
     function clone(source: any): any;
 
-    function confirm(text: any, type?: string | WebixCallback, callback?: WebixCallback): HTMLElement;
+    function confirm(text: any, type?: string | WebixCallback, callback?: WebixCallback): Promise<any>;
 
     function copy(source: any): any;
 
@@ -300,7 +300,7 @@ declare namespace webix {
 
     function detachEvent(id: string): void;
 
-    function dp(name: string): any;
+    function dp(name: any): any;
 
     function editStop(): void;
 
@@ -320,13 +320,11 @@ declare namespace webix {
 
     function isUndefined(check: any): boolean;
 
-    function jsonp(url: string, params?: any, callback?: WebixCallback, master?: any): void;
-
     function mapEvent(map: any): void;
 
-    function message(content: any, type?: string, expire?: number, id?: string | number): void;
+    function message(content: any, type?: string, expire?: number, id?: string | number): string;
 
-    function modalbox(text: any, type?: string | WebixCallback, callback?: WebixCallback): HTMLElement;
+    function modalbox(text: any, type?: string | WebixCallback, callback?: WebixCallback): Promise<any>;
 
     function once(code: WebixCallback): void;
 
@@ -351,8 +349,6 @@ declare namespace webix {
     function stringify(obj: any): string;
 
     function template(template: string): WebixCallback;
-
-    function toArray(array: any[]): any[];
 
     function toCSV(id: any, options?: any): any;
 
@@ -397,11 +393,6 @@ declare namespace webix {
         function hide(content: any): void;
     }
 
-    interface ActiveContent {
-    }
-
-    var ActiveContent: ActiveContent;
-
     interface AtomDataLoader {
         load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
@@ -424,6 +415,11 @@ declare namespace webix {
     var AutoScroll: AutoScroll;
 
     interface AutoTooltip {
+        $tooltipIn(node: HTMLElement): HTMLElement;
+
+        $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+        $tooltipOut: void;
     }
 
     var AutoTooltip: AutoTooltip;
@@ -546,7 +542,7 @@ declare namespace webix {
 
         detachEvent(id: string): void;
 
-        exists(id: string | number): boolean;
+        exists(id: number | string): boolean;
 
         filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -556,19 +552,19 @@ declare namespace webix {
 
         getCursor(): number;
 
-        getFirstId(): string | number;
+        getFirstId(): number | string;
 
-        getIdByIndex(index: number): string | number;
+        getIdByIndex(index: number | string): string | number;
 
-        getIndexById(id: string | number): number;
+        getIndexById(id: number | string): number;
 
-        getItem(id: string | number): any;
+        getItem(id: number | string): any;
 
-        getLastId(): string | number;
+        getLastId(): number | string;
 
-        getNextId(id: string | number, step: number): string | number;
+        getNextId(id: number | string, step: number): string | number;
 
-        getPrevId(id: string | number, step: number): string | number;
+        getPrevId(id: number | string, step: number): string | number;
 
         hasEvent(name: string): boolean;
 
@@ -576,7 +572,7 @@ declare namespace webix {
 
         load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
         mapEvent(map: any): void;
 
@@ -592,17 +588,17 @@ declare namespace webix {
 
         parse(data: any, type: string): void;
 
-        refresh(id?: string | number): void;
+        refresh(id?: number | string): void;
 
         refreshCursor(): void;
 
-        remove(id: string | number): void;
+        remove(id: string | number | any[]): void;
 
         removeBind(source: any): void;
 
         saveBatch(handler: WebixCallback): void;
 
-        serialize(): any[];
+        serialize(all?: boolean): any[];
 
         setBindData(data: any, key: string | number): void;
 
@@ -616,9 +612,11 @@ declare namespace webix {
 
         unblockEvent(): void;
 
-        updateItem(id: string | number, data: any): void;
+        updateItem(id: number | string, data: any): void;
 
         validate(id?: string): boolean;
+
+        waitSave(handler: WebixCallback): Promise<any>;
 
         config: DataCollectionConfig;
         data: DataStore;
@@ -640,7 +638,7 @@ declare namespace webix {
         ready?: WebixCallback;
         removeMissed?: boolean;
         rules?: any;
-        save?: string;
+        save?: any;
         scheme?: any;
         url?: any;
     }
@@ -690,43 +688,45 @@ declare namespace webix {
 
         count(): number;
 
-        exists(id: string | number): boolean;
+        exists(id: number | string): boolean;
 
         filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
         find(criterion: WebixCallback, first?: boolean): any;
 
-        getFirstId(): string | number;
+        getFirstId(): number | string;
 
-        getIdByIndex(index: number): string | number;
+        getIdByIndex(index: number | string): string | number;
 
-        getIndexById(id: string | number): number;
+        getIndexById(id: number | string): number;
 
-        getItem(id: string | number): any;
+        getItem(id: number | string): any;
 
-        getLastId(): string | number;
+        getLastId(): number | string;
 
-        getNextId(id: string | number, step: number): string | number;
+        getNextId(id: number | string, step: number): string | number;
 
-        getPrevId(id: string | number, step: number): string | number;
+        getPrevId(id: number | string, step: number): string | number;
 
         load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
         parse(data: any, type: string): void;
 
-        refresh(id?: string | number): void;
+        refresh(id?: number | string): void;
 
-        remove(id: string | number): void;
+        remove(id: string | number | any[]): void;
 
-        serialize(): any[];
+        serialize(all?: boolean): any[];
 
         sort(by: string, dir?: string, as?: string): void;
 
         sync(source: any, filter: WebixCallback, silent: boolean): void;
 
-        updateItem(id: string | number, data: any): void;
+        updateItem(id: number | string, data: any): void;
+
+        waitSave(handler: WebixCallback): Promise<any>;
 
         data: DataStore;
         waitData: Promise<any>;
@@ -797,9 +797,9 @@ declare namespace webix {
 
         reset(): void;
 
-        save(id: string | number, operation: string): void;
+        save(id: string | number, operation?: string, obj?: any): Promise<any>;
 
-        send(): void;
+        send(): Promise<any>;
 
         setItemState(itemId: string | number, state: boolean): void;
 
@@ -850,8 +850,20 @@ declare namespace webix {
         name: string;
     }
 
+    interface DataRecordConfig {
+        view?: string;
+        data?: string | any[];
+        dataFeed?: string | WebixCallback;
+        datatype?: string;
+        id?: string | number;
+        on?: EventHash;
+        url?: any;
+    }
+
+    type DataRecordEventName = 'onAfterLoad' | 'onBeforeLoad' | 'onBindRequest' | 'onChange' | 'onLoadError';
+
     interface DataRecordFactory {
-        new(config?: any): DataRecord;
+        new(config?: DataRecordConfig): DataRecord;
     }
 
     var DataRecord: DataRecordFactory;
@@ -889,35 +901,35 @@ declare namespace webix {
 
         each(method: WebixCallback, master?: any, all?: boolean): void;
 
-        exists(id: string | number): boolean;
+        exists(id: number | string): boolean;
 
         filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
         find(criterion: WebixCallback, first?: boolean): any;
 
-        getFirstId(): string | number;
+        getFirstId(): number | string;
 
-        getIdByIndex(index: number): string | number;
+        getIdByIndex(index: number | string): string | number;
 
-        getIndexById(id: string | number): number;
+        getIndexById(id: number | string): number;
 
         getIndexRange(from: string | number, to: string | number): any[];
 
-        getItem(id: string | number): any;
+        getItem(id: number | string): any;
 
-        getLastId(): string | number;
+        getLastId(): number | string;
 
-        getMark(id: string, mark_name: string): any;
+        getMark(id: number | string, mark_name: string): any;
 
-        getNextId(id: string | number, step: number): string | number;
+        getNextId(id: number | string, step: number): string | number;
 
-        getPrevId(id: string | number, step: number): string | number;
+        getPrevId(id: number | string, step: number): string | number;
 
-        getRange(from: string | number, to: string | number): any[];
+        getRange(from: number | string, to: string | number): any[];
 
         hasEvent(name: string): boolean;
 
-        id(item: any): string | number;
+        id(item: any): number | string;
 
         importData(source: webix.ui.baseview): void;
 
@@ -927,15 +939,15 @@ declare namespace webix {
 
         provideApi(target: any, eventable: boolean): void;
 
-        refresh(id?: string | number): void;
+        refresh(id?: number | string): void;
 
-        remove(id: string | number): void;
+        remove(id: string | number | any[]): void;
 
-        removeMark(id: string, name: string, css: boolean): void;
+        removeMark(id: number | string, name: string, css: boolean): void;
 
         scheme(config: any): void;
 
-        serialize(): any[];
+        serialize(all?: boolean): any[];
 
         setDriver(type: string): void;
 
@@ -949,7 +961,7 @@ declare namespace webix {
 
         unsync(): void;
 
-        updateItem(id: string | number, data: any): void;
+        updateItem(id: number | string, data: any): void;
 
         driver: any;
         name: string;
@@ -990,8 +1002,17 @@ declare namespace webix {
         name: string;
     }
 
+    interface DataValueConfig {
+        view?: string;
+        id?: string | number;
+        on?: EventHash;
+        value?: string | number;
+    }
+
+    type DataValueEventName = 'onBindRequest' | 'onChange';
+
     interface DataValueFactory {
-        new(config?: any): DataValue;
+        new(config?: DataValueConfig): DataValue;
     }
 
     var DataValue: DataValueFactory;
@@ -1021,7 +1042,7 @@ declare namespace webix {
 
         timePart(date: any): number;
 
-        toFixed(num: number): number;
+        toFixed(num: number | string): number | string;
 
         weekStart(date: any): any;
 
@@ -1085,6 +1106,7 @@ declare namespace webix {
         $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
         $dropAllow: WebixCallback;
+        $dropHTML: WebixCallback;
     }
 
     var DragItem: DragItem;
@@ -1092,7 +1114,13 @@ declare namespace webix {
     interface DragOrder {
         $drag(source: HTMLElement, ev: Event): string;
 
+        $dragDestroy: void;
+
         $dragIn(source: HTMLElement, target: HTMLElement, ev: Event): HTMLElement;
+
+        $dragMark: boolean;
+
+        $dragOut(source: HTMLElement, target: HTMLElement, drop: HTMLElement): void;
 
         $dragPos: WebixCallback;
 
@@ -1142,13 +1170,15 @@ declare namespace webix {
     var EventSystem: EventSystem;
 
     interface FlexLayout {
+        render(): void;
+
         $getSize: any[];
     }
 
     var FlexLayout: FlexLayout;
 
     interface Group {
-        group(config: any, mode: boolean): void;
+        group(config: any, target?: string | number): void;
 
         ungroup(mode: boolean): void;
     }
@@ -1172,7 +1202,7 @@ declare namespace webix {
     var GroupMethods: GroupMethods;
 
     interface GroupStore {
-        group(stats: any): void;
+        group(config: any, target?: string): void;
 
         ungroup(): void;
     }
@@ -1180,6 +1210,21 @@ declare namespace webix {
     var GroupStore: GroupStore;
 
     interface HTMLOptions {
+        addOption(id: string | number, value: any, show?: boolean, index?: number): void;
+
+        disableOption(id: string | number): void;
+
+        enableOption(id: string | number): void;
+
+        getOption(id: string | number): any;
+
+        hideOption(id: string | number): void;
+
+        optionIndex(ID: string | number): number;
+
+        removeOption(id: string | number): void;
+
+        showOption(id: string | number): void;
     }
 
     var HTMLOptions: HTMLOptions;
@@ -1209,7 +1254,7 @@ declare namespace webix {
     var IdSpace: IdSpace;
 
     interface KanbanView {
-        eachOtherList(): void;
+        eachOtherList(code: WebixCallback): void;
 
         getKanban(): any;
 
@@ -1218,7 +1263,7 @@ declare namespace webix {
         $dragCreate(source: HTMLElement, event: Event): HTMLElement;
 
         $dragPos: WebixCallback;
-        $kanban: boolean;
+        $dropHTML: WebixCallback;
         $skin: WebixCallback;
         on_context: { [key: string]: any; };
     }
@@ -1289,24 +1334,6 @@ declare namespace webix {
     }
 
     var PagingAbility: PagingAbility;
-
-    interface PowerArray {
-        each(functor: WebixCallback, master?: any): void;
-
-        filter(functor: WebixCallback, master: any): any[];
-
-        find(data: any): number;
-
-        insertAt(data: any, pos: number): void;
-
-        map(functor: WebixCallback, master: any): any[];
-
-        remove(value: any): void;
-
-        removeAt(pos: number, len: number): void;
-    }
-
-    var PowerArray: PowerArray;
 
     interface ProgressBar {
         hideProgress(): void;
@@ -1405,6 +1432,26 @@ declare namespace webix {
 
     var TablePaste: TablePaste;
 
+    interface TooltipControl {
+        addTooltip(target: string | HTMLElement, config: any): void;
+
+        getMaster(target: HTMLElement): any;
+
+        getTooltip(): webix.ui.baseview;
+
+        removeTooltip(target: string | HTMLElement): void;
+
+        $tooltipIn(target: HTMLElement, event: Event): void;
+
+        $tooltipMove(target: HTMLElement, event: Event, text: string): void;
+
+        $tooltipOut(previousTarget: HTMLElement, target: HTMLElement, event: Event): void;
+
+        delay: number;
+    }
+
+    var TooltipControl: TooltipControl;
+
     interface Touch {
         disable(): void;
 
@@ -1476,7 +1523,7 @@ declare namespace webix {
 
         detachEvent(id: string): void;
 
-        exists(id: string | number): boolean;
+        exists(id: number | string): boolean;
 
         filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -1490,23 +1537,23 @@ declare namespace webix {
 
         getFirstChildId(id: string | number): string;
 
-        getFirstId(): string | number;
+        getFirstId(): number | string;
 
-        getIdByIndex(index: number): string | number;
+        getIdByIndex(index: number | string): string | number;
 
-        getIndexById(id: string | number): number;
+        getIndexById(id: number | string): number;
 
-        getItem(id: string | number): any;
+        getItem(id: number | string): any;
 
-        getLastId(): string | number;
+        getLastId(): number | string;
 
-        getNextId(id: string | number, step: number): string | number;
+        getNextId(id: number | string, step: number): string | number;
 
         getNextSiblingId(id: string | number): string | number;
 
         getParentId(id: string | number): string | number;
 
-        getPrevId(id: string | number, step: number): string | number;
+        getPrevId(id: number | string, step: number): string | number;
 
         getPrevSiblingId(id: string | number): string | number;
 
@@ -1518,9 +1565,9 @@ declare namespace webix {
 
         load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-        loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+        loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+        loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
         mapEvent(map: any): void;
 
@@ -1532,17 +1579,17 @@ declare namespace webix {
 
         parse(data: any, type: string): void;
 
-        refresh(id?: string | number): void;
+        refresh(id?: number | string): void;
 
         refreshCursor(): void;
 
-        remove(id: string | number): void;
+        remove(id: string | number | any[]): void;
 
         removeBind(source: any): void;
 
         saveBatch(handler: WebixCallback): void;
 
-        serialize(): any[];
+        serialize(all?: boolean): any[];
 
         setBindData(data: any, key: string | number): void;
 
@@ -1556,9 +1603,11 @@ declare namespace webix {
 
         unblockEvent(): void;
 
-        updateItem(id: string | number, data: any): void;
+        updateItem(id: number | string, data: any): void;
 
         validate(id?: string): boolean;
+
+        waitSave(handler: WebixCallback): Promise<any>;
 
         config: TreeCollectionConfig;
         data: DataStore;
@@ -1580,7 +1629,7 @@ declare namespace webix {
         ready?: WebixCallback;
         removeMissed?: boolean;
         rules?: any;
-        save?: string;
+        save?: any;
         scheme?: any;
         url?: any;
     }
@@ -1612,7 +1661,7 @@ declare namespace webix {
     var TreeCollection: TreeCollectionFactory;
 
     interface TreeDataLoader {
-        loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+        loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
     }
 
     var TreeDataLoader: TreeDataLoader;
@@ -1688,9 +1737,9 @@ declare namespace webix {
 
         provideApi(target: any, eventable: boolean): void;
 
-        remove(id: string | number): void;
+        remove(id: string | number | any[]): void;
 
-        serialize(): any[];
+        serialize(all?: boolean): any[];
 
         name: string;
     }
@@ -1730,7 +1779,7 @@ declare namespace webix {
 
         getPrev(view: any): any;
 
-        getState(id: string, childs: boolean): any;
+        getState(id: string, children: boolean): any;
 
         getTop(id: string | number): any;
 
@@ -1756,7 +1805,6 @@ declare namespace webix {
     var Undo: Undo;
 
     interface UploadDriver {
-        flash: any;
         html5: any;
     }
 
@@ -1929,7 +1977,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type baselayoutEventName = 'onBindRequest' | 'onDestruct';
+        type baselayoutEventName = 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
         class baselayout implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -2029,7 +2077,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type baseviewEventName = 'onBindRequest' | 'onDestruct';
+        type baseviewEventName = 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
         interface baseview {
             adjust(): void;
@@ -2097,6 +2145,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -2106,10 +2155,10 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             template?: string | WebixCallback;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: any;
             url?: any;
             width?: number;
@@ -2140,13 +2189,15 @@ declare namespace webix {
             | 'onLongTouch'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class proto implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -2183,7 +2234,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -2191,21 +2242,21 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -2215,7 +2266,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getTopParentView(): webix.ui.baseview;
 
@@ -2231,7 +2282,7 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -2241,9 +2292,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -2251,7 +2302,7 @@ declare namespace webix {
 
             resize(): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setPage(page: number): void;
 
@@ -2267,9 +2318,11 @@ declare namespace webix {
 
             unblockEvent(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $getSize(): any[];
 
@@ -2279,6 +2332,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: protoConfig;
@@ -2337,6 +2397,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -2355,11 +2416,13 @@ declare namespace webix {
             | 'onLongTouch'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class view implements webix.ui.baseview {
             adjust(): void;
@@ -2486,7 +2549,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type abslayoutEventName = 'onBindRequest' | 'onDestruct';
+        type abslayoutEventName = 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
         class abslayout implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -2585,7 +2648,7 @@ declare namespace webix {
             minWidth?: number;
             multi?: boolean | string;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             panelClass?: string;
@@ -2596,7 +2659,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type accordionEventName = 'onAfterCollapse' | 'onAfterExpand' | 'onBindRequest' | 'onDestruct';
+        type accordionEventName = 'onAfterCollapse' | 'onAfterExpand' | 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
         class accordion implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -2695,6 +2758,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -2730,7 +2794,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class accordionitem implements webix.ui.baseview {
             adjust(): void;
@@ -2807,6 +2872,102 @@ declare namespace webix {
             on_mouse_move: WebixCallback;
         }
 
+        interface alignConfig {
+            view?: string;
+            align?: string;
+            animate?: any;
+            body?: any;
+            borderless?: boolean;
+            bottom?: number;
+            container?: string | HTMLElement;
+            css?: any;
+            disabled?: boolean;
+            gravity?: number;
+            height?: number;
+            hidden?: boolean;
+            id?: string | number;
+            keyPressTimeout?: number;
+            left?: number;
+            maxHeight?: number;
+            maxWidth?: number;
+            minHeight?: number;
+            minWidth?: number;
+            right?: number;
+            top?: number;
+            width?: number;
+        }
+
+        type alignEventName =
+            'onAfterScroll'
+            | 'onBindRequest'
+            | 'onBlur'
+            | 'onDestruct'
+            | 'onEnter'
+            | 'onFocus'
+            | 'onKeyPress'
+            | 'onLongTouch'
+            | 'onSwipeX'
+            | 'onSwipeY'
+            | 'onTimedKeyPress'
+            | 'onTouchEnd'
+            | 'onTouchMove'
+            | 'onTouchStart'
+            | 'onViewResize'
+            | 'onViewShow';
+
+        class align implements webix.ui.baseview {
+            adjust(): void;
+
+            bind(target: any, rule?: WebixCallback, format?: string): void;
+
+            define(property: string, value: any): void;
+
+            destructor(): void;
+
+            disable(): void;
+
+            enable(): void;
+
+            getBody(): webix.ui.baseview;
+
+            getChildViews(): any[];
+
+            getFormView(): webix.ui.baseview;
+
+            getNode(): any;
+
+            getParentView(): any;
+
+            getTopParentView(): webix.ui.baseview;
+
+            hide(): void;
+
+            isEnabled(): boolean;
+
+            isVisible(): boolean;
+
+            queryView(config: any, mode?: string): any;
+
+            resize(): void;
+
+            show(force?: boolean, animation?: boolean): void;
+
+            unbind(): void;
+
+            $getSize(): any[];
+
+            $height: number;
+            $scope: any;
+
+            $setSize(x: number, y: number): boolean;
+
+            $skin: WebixCallback;
+            $view: HTMLElement;
+            $width: number;
+            config: alignConfig;
+            name: string;
+        }
+
         interface barcodeConfig {
             view?: string;
             animate?: any;
@@ -2820,6 +2981,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -2847,7 +3009,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class barcode implements webix.ui.baseview {
             adjust(): void;
@@ -2922,6 +3085,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             label?: string;
             labelHeight?: number;
             labelWidth?: number;
@@ -2933,11 +3097,11 @@ declare namespace webix {
             minHeight?: number;
             minRange?: number;
             minWidth?: number;
-            on?: EventHash;
-            placeholder?: string;
+            placeholder?: any;
             scale?: any;
             smoothFlow?: boolean;
             stroke?: number;
+            tickSize?: number;
             value?: number;
             width?: number;
         }
@@ -2957,24 +3121,17 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class bullet implements webix.ui.baseview {
             adjust(): void;
 
-            attachEvent(type: bulletEventName, functor: WebixCallback, id?: string): string | number;
-
             bind(target: any, rule?: WebixCallback, format?: string): void;
-
-            blockEvent(): void;
-
-            callEvent(name: string, params: any[]): boolean;
 
             define(property: string, value: any): void;
 
             destructor(): void;
-
-            detachEvent(id: string): void;
 
             disable(): void;
 
@@ -2990,9 +3147,7 @@ declare namespace webix {
 
             getTopParentView(): webix.ui.baseview;
 
-            getValue(): number;
-
-            hasEvent(name: string): boolean;
+            getValue(bullet_value: number): void;
 
             hide(): void;
 
@@ -3000,9 +3155,9 @@ declare namespace webix {
 
             isVisible(): boolean;
 
-            mapEvent(map: any): void;
-
             queryView(config: any, mode?: string): any;
+
+            refresh(): void;
 
             resize(): void;
 
@@ -3011,8 +3166,6 @@ declare namespace webix {
             show(force?: boolean, animation?: boolean): void;
 
             unbind(): void;
-
-            unblockEvent(): void;
 
             $getSize(): any[];
 
@@ -3047,6 +3200,7 @@ declare namespace webix {
             image?: string;
             inputHeight?: number;
             inputWidth?: number;
+            keyPressTimeout?: number;
             label?: string;
             labelPosition?: string;
             maxHeight?: number;
@@ -3057,7 +3211,7 @@ declare namespace webix {
             on?: EventHash;
             placeholder?: string;
             popup?: string;
-            tooltip?: string;
+            tooltip?: any;
             type?: string;
             value?: string | number;
             width?: number;
@@ -3082,7 +3236,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class button implements webix.ui.baseview {
             adjust(): void;
@@ -3169,6 +3324,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: buttonConfig;
@@ -3181,6 +3343,7 @@ declare namespace webix {
             view?: string;
             animate?: any;
             blockDates?: WebixCallback;
+            blockTime?: WebixCallback;
             borderless?: boolean;
             calendarHeader?: string;
             calendarTime?: string;
@@ -3198,6 +3361,7 @@ declare namespace webix {
             hidden?: boolean;
             icons?: any;
             id?: string | number;
+            keyPressTimeout?: number;
             maxDate?: Date | string;
             maxHeight?: number;
             maxTime?: string;
@@ -3207,6 +3371,7 @@ declare namespace webix {
             minTime?: string;
             minWidth?: number;
             minuteStep?: number;
+            monthHeader?: boolean;
             monthSelect?: boolean;
             mouseEventDelay?: number;
             multiselect?: boolean | string;
@@ -3218,6 +3383,7 @@ declare namespace webix {
             onMouseMove?: WebixCallback;
             select?: boolean;
             skipEmptyWeeks?: boolean;
+            timeIcon?: string;
             timepicker?: boolean;
             timepickerHeight?: number;
             type?: string;
@@ -3260,7 +3426,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class calendar implements webix.ui.baseview {
             adjust(): void;
@@ -3363,6 +3530,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -3391,7 +3559,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class carousel implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -3489,6 +3658,7 @@ declare namespace webix {
             barWidth?: number;
             border?: boolean;
             borderColor?: string;
+            borderWidth?: number;
             borderless?: boolean;
             cant?: number;
             cellWidth?: number;
@@ -3510,6 +3680,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             label?: string | WebixCallback;
             labelOffset?: number;
             legend?: any;
@@ -3526,7 +3697,7 @@ declare namespace webix {
             onContext?: { [key: string]: any; };
             onDblClick?: WebixCallback;
             onMouseMove?: WebixCallback;
-            origin?: number;
+            origin?: number | string;
             padding?: any;
             pieHeight?: number;
             pieInnerText?: string | WebixCallback;
@@ -3534,12 +3705,12 @@ declare namespace webix {
             radius?: number;
             ready?: WebixCallback;
             removeMissed?: boolean;
-            save?: string;
+            save?: any;
             scale?: string;
             scheme?: any;
             series?: any;
             shadow?: boolean;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: string;
             url?: any;
             value?: string | WebixTemplate;
@@ -3576,6 +3747,7 @@ declare namespace webix {
             | 'onItemClick'
             | 'onItemDblClick'
             | 'onKeyPress'
+            | 'onLegendClick'
             | 'onLoadError'
             | 'onLongTouch'
             | 'onMouseMove'
@@ -3583,11 +3755,13 @@ declare namespace webix {
             | 'onMouseOut'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class chart implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -3620,7 +3794,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -3628,29 +3802,29 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getTopParentView(): webix.ui.baseview;
 
-            group(config: any, mode: boolean): void;
+            group(config: any, target?: string | number): void;
 
             hasEvent(name: string): boolean;
 
@@ -3664,7 +3838,7 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -3674,9 +3848,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeAllSeries(): void;
 
@@ -3684,7 +3858,7 @@ declare namespace webix {
 
             resize(): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             show(force?: boolean, animation?: boolean): void;
 
@@ -3700,7 +3874,9 @@ declare namespace webix {
 
             ungroup(mode: boolean): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $getSize(): any[];
 
@@ -3710,6 +3886,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             colormap: { [key: string]: any; };
@@ -3729,7 +3912,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -3747,9 +3929,9 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -3766,7 +3948,7 @@ declare namespace webix {
             relatedView?: string;
             required?: boolean;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             uncheckValue?: string;
             validate?: WebixCallback;
             validateEvent?: string;
@@ -3793,7 +3975,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class checkbox implements webix.ui.baseview {
             adjust(): void;
@@ -3868,6 +4051,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -3890,6 +4074,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: checkboxConfig;
@@ -3969,7 +4160,8 @@ declare namespace webix {
             | 'onValueSuggest'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class checksuggest implements webix.ui.baseview {
             adjust(): void;
@@ -3981,8 +4173,6 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
-
-            close(): void;
 
             define(property: string, value: any): void;
 
@@ -4080,6 +4270,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxLightness?: number;
             maxWidth?: number;
@@ -4113,7 +4304,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class colorboard implements webix.ui.baseview {
             adjust(): void;
@@ -4215,10 +4407,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -4230,6 +4422,7 @@ declare namespace webix {
             name?: string;
             on?: EventHash;
             placeholder?: string;
+            point?: boolean;
             popup?: string;
             readonly?: boolean;
             relatedAction?: string;
@@ -4237,8 +4430,7 @@ declare namespace webix {
             required?: boolean;
             stringResult?: boolean;
             suggest?: any;
-            timepicker?: boolean;
-            tooltip?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -4264,7 +4456,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class colorpicker implements webix.ui.baseview {
             adjust(): void;
@@ -4341,6 +4534,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -4363,6 +4557,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: colorpickerConfig;
@@ -4371,12 +4572,141 @@ declare namespace webix {
             touchable: boolean;
         }
 
+        interface commentsConfig {
+            view?: string;
+            animate?: any;
+            borderless?: boolean;
+            container?: string | HTMLElement;
+            css?: any;
+            currentUser?: number;
+            data?: string | any[];
+            datatype?: string;
+            disabled?: boolean;
+            gravity?: number;
+            height?: number;
+            hidden?: boolean;
+            id?: string | number;
+            listItem?: any;
+            maxHeight?: number;
+            maxWidth?: number;
+            mentions?: boolean;
+            minHeight?: number;
+            minWidth?: number;
+            mode?: string;
+            moreButton?: string | WebixCallback;
+            on?: EventHash;
+            padding?: any;
+            paddingX?: number;
+            paddingY?: number;
+            readonly?: boolean;
+            scheme?: any;
+            sendAction?: string;
+            type?: string;
+            url?: any;
+            users?: any[] | string | DataCollection;
+            width?: number;
+        }
+
+        type commentsEventName =
+            'onAfterAdd'
+            | 'onAfterDelete'
+            | 'onAfterEditStart'
+            | 'onAfterLoad'
+            | 'onBeforeAdd'
+            | 'onBeforeDelete'
+            | 'onBeforeEditStart'
+            | 'onBeforeLoad'
+            | 'onBeforeMenuAction'
+            | 'onBindRequest'
+            | 'onDestruct'
+            | 'onLoadError'
+            | 'onUserMentioned'
+            | 'onViewShow';
+
+        class comments implements webix.ui.baseview {
+            adjust(): void;
+
+            attachEvent(type: commentsEventName, functor: WebixCallback, id?: string): string | number;
+
+            bind(target: any, rule?: WebixCallback, format?: string): void;
+
+            blockEvent(): void;
+
+            callEvent(name: string, params: any[]): boolean;
+
+            define(property: string, value: any): void;
+
+            destructor(): void;
+
+            detachEvent(id: string): void;
+
+            disable(): void;
+
+            edit(id: number | string): void;
+
+            enable(): void;
+
+            getChildViews(): any[];
+
+            getFormView(): webix.ui.baseview;
+
+            getMenu(): any;
+
+            getNode(): any;
+
+            getParentView(): any;
+
+            getTopParentView(): webix.ui.baseview;
+
+            getUsers(): DataCollection;
+
+            hasEvent(name: string): boolean;
+
+            hide(): void;
+
+            isEnabled(): boolean;
+
+            isVisible(): boolean;
+
+            load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+
+            mapEvent(map: any): void;
+
+            parse(data: any, type: string): void;
+
+            queryView(config: any, mode?: string): any;
+
+            resize(): void;
+
+            setCurrentUser(id: number | string): void;
+
+            show(force?: boolean, animation?: boolean): void;
+
+            unbind(): void;
+
+            unblockEvent(): void;
+
+            $exportView(): webix.ui.baseview;
+
+            $getSize(): any[];
+
+            $height: number;
+            $onLoad: WebixCallback;
+
+            $setSize(x: number, y: number): boolean;
+
+            $skin: WebixCallback;
+            $view: HTMLElement;
+            $width: number;
+            config: commentsConfig;
+            name: string;
+        }
+
         interface comboConfig {
             view?: string;
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -4394,10 +4724,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -4417,8 +4747,7 @@ declare namespace webix {
             relatedView?: string;
             required?: boolean;
             suggest?: any;
-            tooltip?: string;
-            type?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -4444,7 +4773,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class combo implements webix.ui.baseview {
             adjust(): void;
@@ -4523,6 +4853,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -4545,6 +4876,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: comboConfig;
@@ -4569,6 +4907,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             left?: number;
             master?: string;
             maxHeight?: number;
@@ -4609,7 +4948,8 @@ declare namespace webix {
             | 'onTouchStart'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class context implements webix.ui.baseview {
             adjust(): void;
@@ -4623,8 +4963,6 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
-
-            close(): void;
 
             define(property: string, value: any): void;
 
@@ -4708,14 +5046,11 @@ declare namespace webix {
             container?: string | HTMLElement;
             css?: any;
             data?: string | any[];
-            dataFeed?: string | WebixCallback;
-            datafetch?: number;
             datathrottle?: number;
             datatype?: string;
             disabled?: boolean;
             drag?: boolean | string;
             dragscroll?: boolean | string;
-            dynamic?: boolean;
             externalData?: WebixCallback;
             gravity?: number;
             head?: any;
@@ -4724,6 +5059,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             layout?: string;
             left?: number;
             master?: string;
@@ -4751,7 +5087,7 @@ declare namespace webix {
             removeMissed?: boolean;
             resize?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
@@ -4761,7 +5097,7 @@ declare namespace webix {
             template?: string | WebixCallback;
             templateCopy?: WebixCallback;
             toFront?: boolean;
-            tooltip?: string | boolean;
+            tooltip?: any;
             top?: number;
             type?: any;
             url?: any;
@@ -4776,7 +5112,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterLoad'
             | 'onAfterRender'
             | 'onAfterScroll'
@@ -4788,7 +5123,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeLoad'
             | 'onBeforeRender'
@@ -4819,6 +5153,7 @@ declare namespace webix {
             | 'onShow'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
@@ -4827,7 +5162,8 @@ declare namespace webix {
             | 'onValidationSuccess'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class contextmenu implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -4852,8 +5188,6 @@ declare namespace webix {
 
             clearValidation(): void;
 
-            close(): void;
-
             copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
             count(): number;
@@ -4874,7 +5208,7 @@ declare namespace webix {
 
             enableItem(id: string | number): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -4886,27 +5220,27 @@ declare namespace webix {
 
             getContext(): any;
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
             getHead(): any;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
             getMenu(id: string | number): any;
 
             getMenuItem(id: string | number): any;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -4916,7 +5250,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getScrollState(): any;
 
@@ -4942,13 +5276,15 @@ declare namespace webix {
 
             isEnabled(): boolean;
 
+            isEnabledItem(): boolean;
+
             isSelected(id: string | number): boolean;
 
             isVisible(): boolean;
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -4970,9 +5306,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -4988,7 +5324,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setContext(context: any): void;
 
@@ -5014,9 +5350,11 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             show(force: boolean, animation: boolean): void;
 
@@ -5035,6 +5373,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
 
             $getSize(): any[];
 
@@ -5044,6 +5383,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: contextmenuConfig;
@@ -5063,7 +5409,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -5079,9 +5424,9 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -5100,7 +5445,7 @@ declare namespace webix {
             required?: boolean;
             step?: number;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -5126,7 +5471,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class counter implements webix.ui.baseview {
             adjust(): void;
@@ -5205,6 +5551,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -5227,6 +5574,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: counterConfig;
@@ -5238,6 +5592,7 @@ declare namespace webix {
         interface dashboardConfig {
             view?: string;
             animate?: any;
+            autoplace?: boolean;
             borderless?: boolean;
             cellHeight?: number;
             cellWidth?: number;
@@ -5268,7 +5623,16 @@ declare namespace webix {
             width?: number;
         }
 
-        type dashboardEventName = 'onBindRequest' | 'onChange' | 'onDestruct';
+        type dashboardEventName =
+            'onAfterDrop'
+            | 'onBeforeDrag'
+            | 'onBeforeDragIn'
+            | 'onBeforeDrop'
+            | 'onBindRequest'
+            | 'onChange'
+            | 'onDestruct'
+            | 'onDragOut'
+            | 'onViewShow';
 
         class dashboard implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -5388,14 +5752,14 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             ready?: WebixCallback;
             removeMissed?: boolean;
             responsive?: string;
             rows?: any[];
-            save?: string;
+            save?: any;
             scheme?: any;
             type?: string;
             url?: any;
@@ -5416,7 +5780,8 @@ declare namespace webix {
             | 'onDataRequest'
             | 'onDataUpdate'
             | 'onDestruct'
-            | 'onLoadError';
+            | 'onLoadError'
+            | 'onViewShow';
 
         class datalayout implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -5447,7 +5812,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -5455,25 +5820,25 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getTopParentView(): webix.ui.baseview;
 
@@ -5491,7 +5856,7 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             mapEvent(map: any): void;
 
@@ -5501,9 +5866,9 @@ declare namespace webix {
 
             reconstruct(): void;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeView(id: any): void;
 
@@ -5527,7 +5892,9 @@ declare namespace webix {
 
             unblockEvent(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $getSize(): any[];
 
@@ -5610,7 +5977,8 @@ declare namespace webix {
             | 'onValueSuggest'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class datasuggest implements webix.ui.baseview {
             adjust(): void;
@@ -5622,8 +5990,6 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
-
-            close(): void;
 
             define(property: string, value: any): void;
 
@@ -5751,16 +6117,19 @@ declare namespace webix {
             hidden?: boolean;
             hover?: string;
             id?: string | number;
+            keyPressTimeout?: number;
             leftSplit?: number;
             liveValidation?: boolean;
             loadahead?: number;
             map?: any;
             math?: boolean;
+            maxColumnWidth?: number;
             maxHeight?: number;
+            maxRowHeight?: number;
             maxWidth?: number;
-            minColumnHeight?: number;
             minColumnWidth?: number;
             minHeight?: number;
+            minRowHeight?: number;
             minWidth?: number;
             mouseEventDelay?: number;
             multiselect?: boolean;
@@ -5775,12 +6144,12 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             resizeColumn?: any;
-            resizeRow?: boolean;
+            resizeRow?: any;
             rightSplit?: number;
             rowHeight?: number;
             rowLineHeight?: number;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollAlignY?: boolean;
@@ -5792,9 +6161,10 @@ declare namespace webix {
             subrow?: string;
             subview?: webix.ui.baseview | WebixCallback;
             templateCopy?: WebixCallback;
-            tooltip?: boolean;
+            tooltip?: any;
             topSplit?: number;
             type?: any;
+            undo?: boolean;
             url?: any;
             width?: number;
             yCount?: number;
@@ -5812,7 +6182,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterEditStart'
             | 'onAfterEditStop'
             | 'onAfterFilter'
@@ -5837,7 +6206,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeEditStart'
             | 'onBeforeEditStop'
@@ -5851,6 +6219,7 @@ declare namespace webix {
             | 'onBlur'
             | 'onCheck'
             | 'onCollectValues'
+            | 'onColumnGroupCollapse'
             | 'onColumnResize'
             | 'onDataRequest'
             | 'onDataUpdate'
@@ -5883,13 +6252,15 @@ declare namespace webix {
             | 'onSubViewRender'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class datatable implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -5928,7 +6299,7 @@ declare namespace webix {
 
             closeSub(id: string | number): void;
 
-            collectValues(id: string | number): any[];
+            collectValues(id: string | number, mode: any): any[];
 
             columnId(index: number): string | number;
 
@@ -5964,7 +6335,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -5994,7 +6365,7 @@ declare namespace webix {
 
             getFilter(columnID: string | number): any;
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFooterNode(columnId: string, rowIndex?: number): HTMLElement;
 
@@ -6004,17 +6375,17 @@ declare namespace webix {
 
             getHeaderNode(columnId: string, rowIndex?: number): HTMLElement;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -6024,7 +6395,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getScrollState(): any;
 
@@ -6048,7 +6419,7 @@ declare namespace webix {
 
             getVisibleCount(): number;
 
-            group(config: any, mode: boolean): void;
+            group(config: any, target?: string | number): void;
 
             hasCss(id: string | number, css: string): boolean;
 
@@ -6060,6 +6431,8 @@ declare namespace webix {
 
             hideOverlay(): void;
 
+            ignoreUndo(functor: WebixCallback): void;
+
             isColumnVisible(id: string | number): boolean;
 
             isEnabled(): boolean;
@@ -6070,7 +6443,7 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(node: HTMLElement | Event): any;
 
@@ -6102,7 +6475,7 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
             refreshColumns(config?: any[], reset?: boolean): void;
 
@@ -6112,7 +6485,7 @@ declare namespace webix {
 
             registerFilter(object: any, config: any, controller: any): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCellCss(id: string, name: string, css_name: string): void;
 
@@ -6123,6 +6496,8 @@ declare namespace webix {
             removeSelectArea(area_name: string): void;
 
             removeSpan(id: string | number, column: string): void;
+
+            removeUndo(id: string): void;
 
             render(id: string | number, data: any, operation: string): void;
 
@@ -6138,7 +6513,7 @@ declare namespace webix {
 
             selectRange(row_id: string | number, end_row_id: string | number, preserve?: boolean): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setColumnWidth(id: string | number, width: number): void;
 
@@ -6170,17 +6545,21 @@ declare namespace webix {
 
             unblockEvent(): void;
 
+            undo(id: string): void;
+
             ungroup(mode: boolean): void;
 
             unselect(row_id: string | number): void;
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
 
             validateEditor(id?: string | number): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $customPrint: WebixCallback;
 
@@ -6197,6 +6576,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
 
             $getSize(): any[];
 
@@ -6206,6 +6586,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $touch: WebixCallback;
             $view: HTMLElement;
             $width: number;
@@ -6241,6 +6628,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             loadahead?: number;
             maxHeight?: number;
             maxWidth?: number;
@@ -6255,16 +6643,18 @@ declare namespace webix {
             onDblClick?: WebixCallback;
             onMouseMove?: WebixCallback;
             pager?: any;
+            prerender?: boolean;
             ready?: WebixCallback;
             removeMissed?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
             select?: boolean | string;
+            sizeToContent?: boolean;
             template?: string | WebixCallback;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: any;
             url?: any;
             width?: number;
@@ -6277,7 +6667,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterLoad'
             | 'onAfterRender'
             | 'onAfterScroll'
@@ -6289,7 +6678,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeLoad'
             | 'onBeforeRender'
@@ -6315,13 +6703,15 @@ declare namespace webix {
             | 'onSelectChange'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class dataview implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -6360,7 +6750,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -6368,21 +6758,21 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -6392,7 +6782,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getScrollState(): any;
 
@@ -6416,7 +6806,7 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -6438,9 +6828,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -6454,7 +6844,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setPage(page: number): void;
 
@@ -6474,9 +6864,11 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $customPrint: WebixCallback;
 
@@ -6493,6 +6885,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
 
             $getSize(): any[];
 
@@ -6502,6 +6895,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: dataviewConfig;
@@ -6536,7 +6936,7 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             timepicker?: boolean;
@@ -6552,7 +6952,8 @@ declare namespace webix {
             | 'onChange'
             | 'onDateClear'
             | 'onDestruct'
-            | 'onTodaySet';
+            | 'onTodaySet'
+            | 'onViewShow';
 
         class daterange implements webix.ui.baseview {
             addToRange(dates: string | Date): void;
@@ -6631,7 +7032,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -6650,10 +7050,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -6666,6 +7066,7 @@ declare namespace webix {
             on?: EventHash;
             pattern?: any;
             placeholder?: string;
+            point?: boolean;
             popup?: string;
             readonly?: boolean;
             relatedAction?: string;
@@ -6675,8 +7076,7 @@ declare namespace webix {
             suggest?: any;
             timeIcon?: string;
             timepicker?: boolean;
-            tooltip?: string;
-            type?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -6702,7 +7102,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class daterangepicker implements webix.ui.baseview {
             adjust(): void;
@@ -6779,6 +7180,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
             $cssName: string;
 
@@ -6802,6 +7204,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: daterangepickerConfig;
@@ -6876,7 +7285,8 @@ declare namespace webix {
             | 'onValueSuggest'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class daterangesuggest implements webix.ui.baseview {
             adjust(): void;
@@ -6888,8 +7298,6 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
-
-            close(): void;
 
             define(property: string, value: any): void;
 
@@ -6982,7 +7390,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -7001,10 +7408,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -7028,7 +7435,7 @@ declare namespace webix {
             suggest?: any;
             timeIcon?: string;
             timepicker?: boolean;
-            tooltip?: string;
+            tooltip?: any;
             type?: string;
             validate?: WebixCallback;
             validateEvent?: string;
@@ -7055,7 +7462,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class datepicker implements webix.ui.baseview {
             adjust(): void;
@@ -7132,6 +7540,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -7154,6 +7563,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: datepickerConfig;
@@ -7186,7 +7602,7 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             type?: string;
@@ -7201,7 +7617,8 @@ declare namespace webix {
             | 'onBindRequest'
             | 'onChange'
             | 'onDestruct'
-            | 'onLoadError';
+            | 'onLoadError'
+            | 'onViewShow';
 
         class dbllist implements webix.ui.baseview {
             adjust(): void;
@@ -7328,16 +7745,19 @@ declare namespace webix {
             hidden?: boolean;
             hover?: string;
             id?: string | number;
+            keyPressTimeout?: number;
             leftSplit?: number;
             liveValidation?: boolean;
             loadahead?: number;
             map?: any;
             math?: boolean;
+            maxColumnWidth?: number;
             maxHeight?: number;
+            maxRowHeight?: number;
             maxWidth?: number;
-            minColumnHeight?: number;
             minColumnWidth?: number;
             minHeight?: number;
+            minRowHeight?: number;
             minWidth?: number;
             mouseEventDelay?: number;
             multiselect?: boolean;
@@ -7352,12 +7772,12 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             resizeColumn?: any;
-            resizeRow?: boolean;
+            resizeRow?: any;
             rightSplit?: number;
             rowHeight?: number;
             rowLineHeight?: number;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollAlignY?: boolean;
@@ -7370,9 +7790,10 @@ declare namespace webix {
             subview?: webix.ui.baseview | WebixCallback;
             templateCopy?: WebixCallback;
             toolbar?: string;
-            tooltip?: string | boolean;
+            tooltip?: any;
             topSplit?: number;
             type?: any;
+            undo?: boolean;
             url?: any;
             width?: number;
             yCount?: number;
@@ -7390,7 +7811,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterEditStart'
             | 'onAfterEditStop'
             | 'onAfterFilter'
@@ -7415,7 +7835,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeEditStart'
             | 'onBeforeEditStop'
@@ -7461,13 +7880,15 @@ declare namespace webix {
             | 'onSubViewRender'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class excelviewer implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -7477,6 +7898,8 @@ declare namespace webix {
             addCss(id: string | number, css: string, silent?: boolean): void;
 
             addRowCss(id: string, css: string): void;
+
+            addSelectArea(start: any, end: any, preserve: boolean, area_name?: string, css?: string, handle?: boolean): void;
 
             addSpan(id: any, column: string, width: number, height: number, value?: string, css?: string): void;
 
@@ -7502,7 +7925,7 @@ declare namespace webix {
 
             closeSub(id: string | number): void;
 
-            collectValues(id: string | number): any[];
+            collectValues(id: string | number, mode: any): any[];
 
             columnId(index: number): string | number;
 
@@ -7538,7 +7961,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -7549,6 +7972,8 @@ declare namespace webix {
             focusEditor(id: any): void;
 
             freezeRow(id: number | string, state: boolean): void;
+
+            getAllSelectAreas(): any;
 
             getChildViews(): any[];
 
@@ -7566,7 +7991,7 @@ declare namespace webix {
 
             getFilter(columnID: string | number): any;
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFooterNode(columnId: string, rowIndex?: number): HTMLElement;
 
@@ -7576,17 +8001,17 @@ declare namespace webix {
 
             getHeaderNode(columnId: string, rowIndex?: number): HTMLElement;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -7596,9 +8021,11 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getScrollState(): any;
+
+            getSelectArea(area_name: string): any;
 
             getSelectedId(asArray: boolean, asString: boolean): any;
 
@@ -7620,7 +8047,7 @@ declare namespace webix {
 
             getVisibleCount(): number;
 
-            group(config: any, mode: boolean): void;
+            group(config: any, target?: string | number): void;
 
             hasCss(id: string | number, css: string): boolean;
 
@@ -7640,7 +8067,7 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(node: HTMLElement | Event): any;
 
@@ -7670,21 +8097,25 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
             refreshColumns(config?: any[], reset?: boolean): void;
 
             refreshFilter(id: string | number): void;
 
+            refreshSelectArea(): void;
+
             registerFilter(object: any, config: any, controller: any): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCellCss(id: string, name: string, css_name: string): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
             removeRowCss(id: string, css_name: string): void;
+
+            removeSelectArea(area_name: string): void;
 
             removeSpan(id: string | number, column: string): void;
 
@@ -7696,7 +8127,7 @@ declare namespace webix {
 
             scrollTo(x: number, y: number): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setColumnWidth(id: string | number, width: number): void;
 
@@ -7732,11 +8163,13 @@ declare namespace webix {
 
             ungroup(mode: boolean): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
 
             validateEditor(id?: string | number): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $customPrint: WebixCallback;
 
@@ -7753,6 +8186,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
 
             $getSize(): any[];
 
@@ -7762,6 +8196,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $touch: WebixCallback;
             $view: HTMLElement;
             $width: number;
@@ -7789,6 +8230,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             label?: string;
             maxHeight?: number;
             maxWidth?: number;
@@ -7814,7 +8256,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class fieldset implements webix.ui.baseview {
             adjust(): void;
@@ -7881,7 +8324,6 @@ declare namespace webix {
             datathrottle?: number;
             datatype?: string;
             disabled?: boolean;
-            disabledHistory?: boolean;
             filterMode?: any;
             gravity?: number;
             handlers?: any;
@@ -7892,19 +8334,20 @@ declare namespace webix {
             legacyUploader?: boolean;
             maxHeight?: number;
             maxWidth?: number;
+            menuFilter?: WebixCallback;
             minHeight?: number;
             minWidth?: number;
             mode?: string;
             modes?: any[];
             noFileCache?: boolean;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             readonly?: boolean;
             ready?: WebixCallback;
             removeMissed?: boolean;
-            save?: string;
+            save?: any;
             scheme?: any;
             structure?: any;
             templateCreate?: WebixCallback;
@@ -7993,7 +8436,8 @@ declare namespace webix {
             | 'onPathLevel'
             | 'onShowSearchResults'
             | 'onSuccessResponse'
-            | 'onViewInit';
+            | 'onViewInit'
+            | 'onViewShow';
 
         class filemanager implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -8034,13 +8478,13 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
             find(criterion: WebixCallback, first?: boolean): any;
 
-            getActive(): string;
+            getActive(): string | any[];
 
             getActiveView(): any;
 
@@ -8052,21 +8496,21 @@ declare namespace webix {
 
             getFirstChildId(id: string | number): string;
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
             getMenu(): any;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNextSiblingId(id: string | number): string | number;
 
@@ -8080,7 +8524,7 @@ declare namespace webix {
 
             getPathNames(id: string): any[];
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getPrevSiblingId(id: string | number): string | number;
 
@@ -8118,9 +8562,9 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+            loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             mapEvent(map: any): void;
 
@@ -8140,13 +8584,15 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             renameFile(id: string, name: string, property: string): void;
 
             resize(): void;
+
+            setDefaultHandlers(url: string): void;
 
             setPath(id: string): void;
 
@@ -8168,9 +8614,11 @@ declare namespace webix {
 
             unblockEvent(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             uploadFile(target: string): void;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $$: any;
             $dropAllow: WebixCallback;
@@ -8204,7 +8652,7 @@ declare namespace webix {
             datatype?: string;
             disabled?: boolean;
             elements?: any[];
-            elementsConfig?: { [key: string]: any; };
+            elementsConfig?: any;
             gravity?: number;
             height?: number;
             hidden?: boolean;
@@ -8216,7 +8664,7 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             responsive?: string;
@@ -8243,7 +8691,8 @@ declare namespace webix {
             | 'onSubmit'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onValues';
+            | 'onValues'
+            | 'onViewShow';
 
         class form implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -8373,6 +8822,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelWidth?: number;
@@ -8399,7 +8849,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class forminput implements webix.ui.baseview {
             adjust(): void;
@@ -8468,6 +8919,7 @@ declare namespace webix {
             view?: string;
             animate?: any;
             borderless?: boolean;
+            color?: string | WebixCallback;
             container?: string | HTMLElement;
             css?: any;
             disabled?: boolean;
@@ -8475,6 +8927,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             label?: string;
             maxHeight?: number;
             maxRange?: number;
@@ -8506,7 +8959,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class gage implements webix.ui.baseview {
             adjust(): void;
@@ -8553,6 +9007,8 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
+            refresh(): void;
+
             resize(): void;
 
             setValue(new_value: number): void;
@@ -8594,6 +9050,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             key?: string;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -8601,9 +9058,9 @@ declare namespace webix {
             on?: EventHash;
             ready?: WebixCallback;
             removeMissed?: boolean;
-            save?: string;
+            save?: any;
             scheme?: any;
-            tooltip?: string;
+            tooltip?: string | WebixCallback;
             url?: any;
             width?: number;
         }
@@ -8634,11 +9091,13 @@ declare namespace webix {
             | 'onRegionClick'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class geochart implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -8667,7 +9126,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -8675,27 +9134,27 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
             getMap(): any;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getTopParentView(): webix.ui.baseview;
 
@@ -8709,7 +9168,7 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             mapEvent(map: any): void;
 
@@ -8717,15 +9176,15 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             render(): void;
 
             resize(): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setDisplayMode(mode: string): void;
 
@@ -8741,7 +9200,9 @@ declare namespace webix {
 
             unblockEvent(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $getSize(): any[];
 
@@ -8776,6 +9237,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             layerType?: string;
             mapType?: string;
             maxHeight?: number;
@@ -8785,7 +9247,7 @@ declare namespace webix {
             on?: EventHash;
             ready?: WebixCallback;
             removeMissed?: boolean;
-            save?: string;
+            save?: any;
             scheme?: any;
             url?: any;
             width?: number;
@@ -8815,11 +9277,13 @@ declare namespace webix {
             | 'onLongTouch'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class googleMap implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -8848,7 +9312,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -8856,27 +9320,27 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getMap(): any;
+            getMap(waitMap?: boolean): any;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getTopParentView(): webix.ui.baseview;
 
@@ -8890,7 +9354,7 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             mapEvent(map: any): void;
 
@@ -8898,15 +9362,15 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             render(): void;
 
             resize(): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             show(force?: boolean, animation?: boolean): void;
 
@@ -8918,7 +9382,9 @@ declare namespace webix {
 
             unblockEvent(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $getSize(): any[];
 
@@ -8940,6 +9406,7 @@ declare namespace webix {
         interface gridlayoutConfig {
             view?: string;
             animate?: any;
+            autoplace?: boolean;
             borderless?: boolean;
             cellHeight?: number;
             cellWidth?: number;
@@ -8970,7 +9437,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type gridlayoutEventName = 'onBindRequest' | 'onChange' | 'onDestruct';
+        type gridlayoutEventName = 'onBindRequest' | 'onChange' | 'onDestruct' | 'onViewShow';
 
         class gridlayout implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -9122,7 +9589,8 @@ declare namespace webix {
             | 'onValueSuggest'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class gridsuggest implements webix.ui.baseview {
             adjust(): void;
@@ -9134,8 +9602,6 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
-
-            close(): void;
 
             define(property: string, value: any): void;
 
@@ -9232,20 +9698,18 @@ declare namespace webix {
             container?: string | HTMLElement;
             css?: any;
             data?: string | any[];
-            dataFeed?: string | WebixCallback;
-            datafetch?: number;
             datathrottle?: number;
             datatype?: string;
             disabled?: boolean;
             drag?: boolean | string;
             dragscroll?: boolean | string;
-            dynamic?: boolean;
             externalData?: WebixCallback;
             gravity?: number;
             height?: number;
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             layout?: string;
             maxHeight?: number;
             maxWidth?: number;
@@ -9263,7 +9727,7 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
@@ -9273,7 +9737,7 @@ declare namespace webix {
             templateCopy?: WebixCallback;
             templateGroup?: string | WebixCallback;
             templateItem?: string | WebixCallback;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: any;
             url?: any;
             width?: number;
@@ -9286,7 +9750,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterLoad'
             | 'onAfterRender'
             | 'onAfterScroll'
@@ -9298,7 +9761,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeLoad'
             | 'onBeforeRender'
@@ -9325,16 +9787,18 @@ declare namespace webix {
             | 'onSelectChange'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class grouplist implements webix.ui.baseview {
-            add(obj: any, index?: number): string | number;
+            add(obj: any, index?: number, parentId?: string): string;
 
             addCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -9368,9 +9832,13 @@ declare namespace webix {
 
             disable(): void;
 
+            disableItem(id: string | number): void;
+
             enable(): void;
 
-            exists(id: string | number): boolean;
+            enableItem(id: string | number): void;
+
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -9378,21 +9846,21 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -9404,7 +9872,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getScrollState(): any;
 
@@ -9416,7 +9884,7 @@ declare namespace webix {
 
             getVisibleCount(): number;
 
-            group(config: any, mode: boolean): void;
+            group(config: any, target?: string | number): void;
 
             hasCss(id: string | number, css: string): boolean;
 
@@ -9426,13 +9894,15 @@ declare namespace webix {
 
             isEnabled(): boolean;
 
+            isEnabledItem(): boolean;
+
             isSelected(id: string | number): boolean;
 
             isVisible(): boolean;
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -9454,9 +9924,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -9470,7 +9940,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setPage(page: number): void;
 
@@ -9492,9 +9962,11 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $customPrint: WebixCallback;
 
@@ -9511,6 +9983,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
 
             $getSize(): any[];
 
@@ -9520,6 +9993,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: grouplistConfig;
@@ -9555,7 +10035,7 @@ declare namespace webix {
             minWidth?: number;
             multi?: boolean | string;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             panelClass?: string;
@@ -9566,7 +10046,12 @@ declare namespace webix {
             width?: number;
         }
 
-        type headerlayoutEventName = 'onAfterCollapse' | 'onAfterExpand' | 'onBindRequest' | 'onDestruct';
+        type headerlayoutEventName =
+            'onAfterCollapse'
+            | 'onAfterExpand'
+            | 'onBindRequest'
+            | 'onDestruct'
+            | 'onViewShow';
 
         class headerlayout implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -9659,6 +10144,8 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
+            left?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -9666,7 +10153,9 @@ declare namespace webix {
             nextButton?: boolean | string;
             on?: EventHash;
             prevButton?: boolean | string;
+            stepTimeout?: number;
             steps?: any[];
+            top?: number;
             width?: number;
         }
 
@@ -9691,7 +10180,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class hint implements webix.ui.baseview {
             adjust(): void;
@@ -9786,6 +10276,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -9796,6 +10287,7 @@ declare namespace webix {
             scrollSpeed?: string;
             src?: string;
             template?: string | WebixCallback;
+            tooltip?: any;
             url?: any;
             width?: number;
         }
@@ -9822,7 +10314,8 @@ declare namespace webix {
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValues'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class htmlform implements webix.ui.baseview {
             adjust(): void;
@@ -9921,6 +10414,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: htmlformConfig;
@@ -9945,6 +10445,7 @@ declare namespace webix {
             id?: string | number;
             inputHeight?: number;
             inputWidth?: number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -9952,7 +10453,7 @@ declare namespace webix {
             name?: string;
             on?: EventHash;
             popup?: string;
-            tooltip?: string;
+            tooltip?: any;
             value?: string | number;
             width?: number;
         }
@@ -9976,7 +10477,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class icon implements webix.ui.baseview {
             adjust(): void;
@@ -10063,6 +10565,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: iconConfig;
@@ -10082,6 +10591,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -10108,7 +10618,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class iframe implements webix.ui.baseview {
             adjust(): void;
@@ -10184,16 +10695,21 @@ declare namespace webix {
         interface kanbanConfig {
             view?: string;
             animate?: any;
+            attachments?: string;
             borderless?: boolean;
+            cardActions?: boolean | any[];
             collapsed?: boolean;
+            colors?: any[] | string;
             cols?: any[];
+            comments?: any;
             container?: string | HTMLElement;
             css?: any;
             data?: string | any[];
-            dataFeed?: string | WebixCallback;
             datathrottle?: number;
             datatype?: string;
+            delimiter?: string;
             disabled?: boolean;
+            editor?: any;
             gravity?: number;
             height?: number;
             hidden?: boolean;
@@ -10207,7 +10723,7 @@ declare namespace webix {
             minWidth?: number;
             multi?: boolean | string;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             panelClass?: string;
@@ -10215,10 +10731,13 @@ declare namespace webix {
             removeMissed?: boolean;
             responsive?: string;
             rows?: any[];
-            save?: string;
+            save?: any;
             scheme?: any;
+            tags?: any[] | string;
             type?: string;
             url?: any;
+            userList?: any;
+            users?: any[] | string;
             visibleBatch?: string;
             width?: number;
         }
@@ -10226,14 +10745,19 @@ declare namespace webix {
         type kanbanEventName =
             'onAfterAdd'
             | 'onAfterCollapse'
+            | 'onAfterCopy'
             | 'onAfterDelete'
+            | 'onAfterEditorShow'
             | 'onAfterExpand'
             | 'onAfterLoad'
             | 'onAfterSort'
             | 'onAfterStatusChange'
             | 'onAvatarClick'
             | 'onBeforeAdd'
+            | 'onBeforeCopy'
             | 'onBeforeDelete'
+            | 'onBeforeEditorAction'
+            | 'onBeforeEditorShow'
             | 'onBeforeLoad'
             | 'onBeforeSort'
             | 'onBeforeStatusChange'
@@ -10252,7 +10776,8 @@ declare namespace webix {
             | 'onListIconClick'
             | 'onListItemClick'
             | 'onListItemDblClick'
-            | 'onLoadError';
+            | 'onLoadError'
+            | 'onViewShow';
 
         class kanban implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -10271,6 +10796,8 @@ declare namespace webix {
 
             clearAll(soft?: boolean): void;
 
+            copy(id: number | string): void;
+
             count(): number;
 
             define(property: string, value: any): void;
@@ -10285,7 +10812,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -10293,19 +10820,27 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getColors(): DataCollection;
+
+            getComments(): webix.ui.baseview;
+
+            getEditor(): webix.ui.baseview;
+
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getMenu(): webix.ui.baseview;
+
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -10313,11 +10848,19 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getSelectedId(): string | number;
 
+            getStatuses(): any[];
+
+            getTags(): DataCollection;
+
             getTopParentView(): webix.ui.baseview;
+
+            getUserList(): webix.ui.baseview;
+
+            getUsers(): DataCollection;
 
             hasEvent(name: string): boolean;
 
@@ -10331,7 +10874,7 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             mapEvent(map: any): void;
 
@@ -10341,9 +10884,9 @@ declare namespace webix {
 
             reconstruct(): void;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeView(id: any): void;
 
@@ -10355,13 +10898,13 @@ declare namespace webix {
 
             select(id: string | number): void;
 
-            serialize(): any[];
-
-            setIndex(id: string | number, index: number): void;
+            serialize(all?: boolean): any[];
 
             show(force?: boolean, animation?: boolean): void;
 
             showBatch(name: string, mode?: boolean): void;
+
+            showEditor(obj?: any): void;
 
             sort(by: string, dir?: string, as?: string): void;
 
@@ -10371,7 +10914,9 @@ declare namespace webix {
 
             unblockEvent(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $getSize(): any[];
 
@@ -10405,6 +10950,7 @@ declare namespace webix {
             id?: string | number;
             inputHeight?: number;
             inputWidth?: number;
+            keyPressTimeout?: number;
             label?: string;
             labelPosition?: string;
             maxHeight?: number;
@@ -10414,7 +10960,7 @@ declare namespace webix {
             name?: string;
             on?: EventHash;
             popup?: string;
-            tooltip?: string;
+            tooltip?: any;
             value?: string | number;
             width?: number;
         }
@@ -10438,7 +10984,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class label implements webix.ui.baseview {
             adjust(): void;
@@ -10527,6 +11074,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: labelConfig;
@@ -10554,7 +11108,7 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             responsive?: string;
@@ -10564,7 +11118,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type layoutEventName = 'onBindRequest' | 'onDestruct';
+        type layoutEventName = 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
         class layout implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -10671,6 +11225,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             layout?: string;
             maxHeight?: number;
             maxWidth?: number;
@@ -10688,14 +11243,14 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
             select?: boolean | string;
             template?: string | WebixCallback;
             templateCopy?: WebixCallback;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: any;
             url?: any;
             width?: number;
@@ -10708,7 +11263,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterLoad'
             | 'onAfterRender'
             | 'onAfterScroll'
@@ -10720,7 +11274,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeLoad'
             | 'onBeforeRender'
@@ -10747,13 +11300,15 @@ declare namespace webix {
             | 'onSelectChange'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class list implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -10790,9 +11345,13 @@ declare namespace webix {
 
             disable(): void;
 
+            disableItem(id: string | number): void;
+
             enable(): void;
 
-            exists(id: string | number): boolean;
+            enableItem(id: string | number): void;
+
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -10800,21 +11359,21 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -10824,7 +11383,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getScrollState(): any;
 
@@ -10844,13 +11403,15 @@ declare namespace webix {
 
             isEnabled(): boolean;
 
+            isEnabledItem(): boolean;
+
             isSelected(id: string | number): boolean;
 
             isVisible(): boolean;
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -10872,9 +11433,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -10888,7 +11449,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setPage(page: number): void;
 
@@ -10908,9 +11469,11 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $customPrint: WebixCallback;
 
@@ -10927,6 +11490,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
 
             $getSize(): any[];
 
@@ -10936,6 +11500,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: listConfig;
@@ -10961,20 +11532,18 @@ declare namespace webix {
             container?: string | HTMLElement;
             css?: any;
             data?: string | any[];
-            dataFeed?: string | WebixCallback;
-            datafetch?: number;
             datathrottle?: number;
             datatype?: string;
             disabled?: boolean;
             drag?: boolean | string;
             dragscroll?: boolean | string;
-            dynamic?: boolean;
             externalData?: WebixCallback;
             gravity?: number;
             height?: number;
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             layout?: string;
             maxHeight?: number;
             maxWidth?: number;
@@ -10993,7 +11562,7 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
@@ -11002,7 +11571,7 @@ declare namespace webix {
             submenuConfig?: any;
             template?: string | WebixCallback;
             templateCopy?: WebixCallback;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: any;
             url?: any;
             width?: number;
@@ -11015,7 +11584,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterLoad'
             | 'onAfterRender'
             | 'onAfterScroll'
@@ -11027,7 +11595,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeLoad'
             | 'onBeforeRender'
@@ -11055,13 +11622,15 @@ declare namespace webix {
             | 'onSelectChange'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class menu implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -11104,7 +11673,7 @@ declare namespace webix {
 
             enableItem(id: string | number): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -11112,25 +11681,25 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
             getMenu(id: string | number): any;
 
             getMenuItem(id: string | number): any;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -11140,7 +11709,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getScrollState(): any;
 
@@ -11166,13 +11735,15 @@ declare namespace webix {
 
             isEnabled(): boolean;
 
+            isEnabledItem(): boolean;
+
             isSelected(id: string | number): boolean;
 
             isVisible(): boolean;
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -11194,9 +11765,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -11210,7 +11781,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setPage(page: number): void;
 
@@ -11232,9 +11803,11 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $customPrint: WebixCallback;
 
@@ -11251,6 +11824,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
 
             $getSize(): any[];
 
@@ -11260,6 +11834,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: menuConfig;
@@ -11279,7 +11860,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -11296,11 +11876,11 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
             keepText?: boolean;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -11325,10 +11905,10 @@ declare namespace webix {
             suggest?: any;
             tagMode?: boolean;
             tagTemplate?: WebixCallback;
-            tooltip?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
-            value?: string | number;
+            value?: number | string | any[];
             width?: number;
         }
 
@@ -11351,7 +11931,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class multicombo implements webix.ui.baseview {
             adjust(): void;
@@ -11396,7 +11977,7 @@ declare namespace webix {
 
             getTopParentView(): webix.ui.baseview;
 
-            getValue(): string;
+            getValue(config?: any): string | any[];
 
             hasEvent(name: string): boolean;
 
@@ -11430,6 +12011,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
             $cssName: string;
 
@@ -11452,6 +12034,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: multicomboConfig;
@@ -11465,7 +12054,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -11482,10 +12070,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -11507,7 +12095,7 @@ declare namespace webix {
             required?: boolean;
             separator?: string;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -11533,7 +12121,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class multiselect implements webix.ui.baseview {
             adjust(): void;
@@ -11612,6 +12201,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
             $cssName: string;
 
@@ -11635,6 +12225,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: multiselectConfig;
@@ -11713,7 +12310,8 @@ declare namespace webix {
             | 'onValueSuggest'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class multisuggest implements webix.ui.baseview {
             adjust(): void;
@@ -11725,8 +12323,6 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
-
-            close(): void;
 
             define(property: string, value: any): void;
 
@@ -11817,7 +12413,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -11835,10 +12430,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -11858,7 +12453,7 @@ declare namespace webix {
             separator?: string;
             subConfig?: any;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -11886,7 +12481,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class multitext implements webix.ui.baseview {
             addSection(): string | number;
@@ -11967,6 +12563,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
             $cssName: string;
 
@@ -11990,6 +12587,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: multitextConfig;
@@ -12024,7 +12628,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type multiviewEventName = 'onBeforeBack' | 'onBindRequest' | 'onDestruct' | 'onViewChange';
+        type multiviewEventName = 'onBeforeBack' | 'onBindRequest' | 'onDestruct' | 'onViewChange' | 'onViewShow';
 
         class multiview implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -12051,7 +12655,7 @@ declare namespace webix {
 
             enable(): void;
 
-            getActiveId(): void;
+            getActiveId(): string;
 
             getChildViews(): any[];
 
@@ -12131,6 +12735,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -12144,14 +12749,14 @@ declare namespace webix {
             onMouseMove?: WebixCallback;
             ready?: WebixCallback;
             removeMissed?: boolean;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
             select?: boolean | string;
             template?: string | WebixCallback;
             threeState?: boolean;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: any;
             url?: any;
             width?: number;
@@ -12197,11 +12802,13 @@ declare namespace webix {
             | 'onSelectChange'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class organogram implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -12240,7 +12847,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -12252,21 +12859,21 @@ declare namespace webix {
 
             getFirstChildId(id: string | number): string;
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNextSiblingId(id: string | number): string | number;
 
@@ -12278,7 +12885,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getPrevSiblingId(id: string | number): string | number;
 
@@ -12292,7 +12899,7 @@ declare namespace webix {
 
             getTopParentView(): webix.ui.baseview;
 
-            group(config: any, mode: boolean): void;
+            group(config: any, target?: string | number): void;
 
             hasCss(id: string | number, css: string): boolean;
 
@@ -12312,9 +12919,9 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+            loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -12328,9 +12935,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -12344,7 +12951,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setState(state: any): void;
 
@@ -12366,7 +12973,9 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $getSize(): any[];
 
@@ -12376,6 +12985,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: organogramConfig;
@@ -12404,7 +13020,10 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
+            level?: number;
             limit?: number;
+            master?: boolean;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -12447,7 +13066,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class pager implements webix.ui.baseview {
             adjust(): void;
@@ -12549,7 +13169,7 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             resize?: boolean;
@@ -12557,7 +13177,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type panelEventName = 'onBindRequest' | 'onDestruct' | 'onViewResize';
+        type panelEventName = 'onBindRequest' | 'onDestruct' | 'onViewResize' | 'onViewShow';
 
         class panel implements webix.ui.baseview {
             adjust(): void;
@@ -12634,7 +13254,6 @@ declare namespace webix {
             container?: string | HTMLElement;
             css?: any;
             data?: string | any[];
-            dataFeed?: string | WebixCallback;
             datatype?: string;
             disabled?: boolean;
             downloadName?: string;
@@ -12642,6 +13261,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -12674,7 +13294,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class pdfviewer implements webix.ui.baseview {
             adjust(): void;
@@ -12708,6 +13329,8 @@ declare namespace webix {
             getNode(): any;
 
             getParentView(): any;
+
+            getPopup(): webix.ui.baseview;
 
             getTopParentView(): webix.ui.baseview;
 
@@ -12772,7 +13395,9 @@ declare namespace webix {
             container?: string | HTMLElement;
             css?: any;
             data?: string | any[];
+            datatable?: any;
             datatype?: string;
+            defaultOperation?: string;
             disabled?: boolean;
             externalProcessing?: boolean;
             fieldMap?: any;
@@ -12796,7 +13421,7 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             ping?: WebixCallback;
@@ -12823,7 +13448,6 @@ declare namespace webix {
             | 'onAfterDelete'
             | 'onAfterLoad'
             | 'onAfterSort'
-            | 'onApply'
             | 'onBeforeAdd'
             | 'onBeforeApply'
             | 'onBeforeCancel'
@@ -12843,6 +13467,7 @@ declare namespace webix {
             | 'onLoadError'
             | 'onPopup'
             | 'onViewInit'
+            | 'onViewShow'
             | 'onWebWorkerEnd'
             | 'onWebWorkerStart';
 
@@ -12879,7 +13504,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -12893,25 +13518,25 @@ declare namespace webix {
 
             getFilterView(): any;
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getStructure(): any;
 
@@ -12935,9 +13560,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             render(): void;
 
@@ -12957,7 +13582,9 @@ declare namespace webix {
 
             unblockEvent(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $$: any;
             $divider: string;
@@ -12984,7 +13611,6 @@ declare namespace webix {
             autofit?: boolean;
             autofocus?: boolean;
             body?: string | webix.ui.baseview;
-            borderless?: boolean;
             container?: string | HTMLElement;
             css?: any;
             disabled?: boolean;
@@ -12994,6 +13620,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             left?: number;
             master?: string;
             maxHeight?: number;
@@ -13034,7 +13661,8 @@ declare namespace webix {
             | 'onTouchStart'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class popup implements webix.ui.baseview {
             adjust(): void;
@@ -13046,8 +13674,6 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
-
-            close(): void;
 
             define(property: string, value: any): void;
 
@@ -13136,7 +13762,7 @@ declare namespace webix {
             minWidth?: number;
             mode?: string;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             responsive?: string;
@@ -13146,7 +13772,12 @@ declare namespace webix {
             width?: number;
         }
 
-        type portletEventName = 'onAfterPortletMove' | 'onBeforePortletMove' | 'onBindRequest' | 'onDestruct';
+        type portletEventName =
+            'onAfterPortletMove'
+            | 'onBeforePortletMove'
+            | 'onBindRequest'
+            | 'onDestruct'
+            | 'onViewShow';
 
         class portlet implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -13254,6 +13885,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             map?: any;
             maxHeight?: number;
             maxWidth?: number;
@@ -13269,7 +13901,7 @@ declare namespace webix {
             scroll?: boolean | string;
             scrollSpeed?: string;
             template?: string | WebixCallback;
-            tooltip?: string | boolean;
+            tooltip?: any;
             url?: any;
             width?: number;
         }
@@ -13307,7 +13939,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class property implements webix.ui.baseview {
             adjust(): void;
@@ -13319,6 +13952,8 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
+
+            clear(): void;
 
             customize(obj: any): void;
 
@@ -13418,6 +14053,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: propertyConfig;
@@ -13431,6 +14073,95 @@ declare namespace webix {
             type: { [key: string]: any; };
         }
 
+        interface proxyConfig {
+            view?: string;
+            animate?: any;
+            body?: any;
+            borderless?: boolean;
+            container?: string | HTMLElement;
+            css?: any;
+            disabled?: boolean;
+            gravity?: number;
+            height?: number;
+            hidden?: boolean;
+            id?: string | number;
+            keyPressTimeout?: number;
+            maxHeight?: number;
+            maxWidth?: number;
+            minHeight?: number;
+            minWidth?: number;
+            width?: number;
+        }
+
+        type proxyEventName =
+            'onAfterScroll'
+            | 'onBindRequest'
+            | 'onBlur'
+            | 'onDestruct'
+            | 'onEnter'
+            | 'onFocus'
+            | 'onKeyPress'
+            | 'onLongTouch'
+            | 'onSwipeX'
+            | 'onSwipeY'
+            | 'onTimedKeyPress'
+            | 'onTouchEnd'
+            | 'onTouchMove'
+            | 'onTouchStart'
+            | 'onViewResize'
+            | 'onViewShow';
+
+        class proxy implements webix.ui.baseview {
+            adjust(): void;
+
+            bind(target: any, rule?: WebixCallback, format?: string): void;
+
+            define(property: string, value: any): void;
+
+            destructor(): void;
+
+            disable(): void;
+
+            enable(): void;
+
+            getChildViews(): any[];
+
+            getFormView(): webix.ui.baseview;
+
+            getNode(): any;
+
+            getParentView(): any;
+
+            getTopParentView(): webix.ui.baseview;
+
+            hide(): void;
+
+            isEnabled(): boolean;
+
+            isVisible(): boolean;
+
+            queryView(config: any, mode?: string): any;
+
+            resize(): void;
+
+            show(force?: boolean, animation?: boolean): void;
+
+            unbind(): void;
+
+            $getSize(): any[];
+
+            $height: number;
+            $scope: any;
+
+            $setSize(x: number, y: number): boolean;
+
+            $skin: WebixCallback;
+            $view: HTMLElement;
+            $width: number;
+            config: proxyConfig;
+            name: string;
+        }
+
         interface querybuilderConfig {
             view?: string;
             animate?: any;
@@ -13441,6 +14172,8 @@ declare namespace webix {
             disabled?: boolean;
             fields?: any[];
             filtering?: boolean;
+            filters?: any[] | DataCollection;
+            glue?: string;
             gravity?: number;
             height?: number;
             hidden?: boolean;
@@ -13453,7 +14186,7 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             sorting?: boolean;
@@ -13461,7 +14194,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type querybuilderEventName = 'onBindRequest' | 'onDestruct' | 'onKeySelect';
+        type querybuilderEventName = 'onBindRequest' | 'onDestruct' | 'onKeySelect' | 'onViewShow';
 
         class querybuilder implements webix.ui.baseview {
             adjust(): void;
@@ -13482,6 +14215,8 @@ declare namespace webix {
 
             disable(): void;
 
+            eachLine(callback: WebixCallback): void;
+
             enable(): void;
 
             focus(): void;
@@ -13489,8 +14224,6 @@ declare namespace webix {
             getChildViews(): any[];
 
             getFilterHelper(): WebixCallback;
-
-            getFilters(): any[];
 
             getFormView(): webix.ui.baseview;
 
@@ -13504,7 +14237,7 @@ declare namespace webix {
 
             getTopParentView(): webix.ui.baseview;
 
-            getValue(): any[];
+            getValue(): any;
 
             hasEvent(name: string): boolean;
 
@@ -13520,9 +14253,7 @@ declare namespace webix {
 
             resize(): void;
 
-            setFilters(filters: any[]): void;
-
-            setValue(rules: any, fields: any[]): void;
+            setValue(value: any): void;
 
             show(force?: boolean, animation?: boolean): void;
 
@@ -13570,9 +14301,9 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -13591,7 +14322,7 @@ declare namespace webix {
             relatedView?: string;
             required?: boolean;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -13612,15 +14343,20 @@ declare namespace webix {
             | 'onItemClick'
             | 'onKeyPress'
             | 'onLongTouch'
+            | 'onOptionAdd'
+            | 'onOptionRemove'
             | 'onSwipeX'
             | 'onSwipeY'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class radio implements webix.ui.baseview {
+            addOption(id: string | number, value: any, show?: boolean, index?: number): void;
+
             adjust(): void;
 
             attachEvent(type: radioEventName, functor: WebixCallback, id?: string): string | number;
@@ -13641,7 +14377,11 @@ declare namespace webix {
 
             disable(): void;
 
+            disableOption(id: string | number): void;
+
             enable(): void;
+
+            enableOption(id: string | number): void;
 
             focus(): void;
 
@@ -13653,6 +14393,8 @@ declare namespace webix {
 
             getNode(): any;
 
+            getOption(id: string | number): any;
+
             getParentView(): any;
 
             getTopParentView(): webix.ui.baseview;
@@ -13663,15 +14405,21 @@ declare namespace webix {
 
             hide(): void;
 
+            hideOption(id: string | number): void;
+
             isEnabled(): boolean;
 
             isVisible(): boolean;
 
             mapEvent(map: any): void;
 
+            optionIndex(ID: string | number): number;
+
             queryView(config: any, mode?: string): any;
 
             refresh(): void;
+
+            removeOption(id: string | number): void;
 
             render(id: string | number, data: any, type: string): void;
 
@@ -13683,6 +14431,8 @@ declare namespace webix {
 
             show(force?: boolean, animation?: boolean): void;
 
+            showOption(id: string | number): void;
+
             sync(source: any, filter: WebixCallback, silent: boolean): void;
 
             unbind(): void;
@@ -13691,6 +14441,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -13713,6 +14464,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: radioConfig;
@@ -13729,6 +14487,7 @@ declare namespace webix {
             barWidth?: number;
             border?: boolean;
             borderColor?: string;
+            borderWidth?: number;
             borderless?: boolean;
             cant?: number;
             color?: string | WebixCallback;
@@ -13749,6 +14508,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             label?: string | WebixCallback;
             labelOffset?: number;
             legend?: any;
@@ -13765,7 +14525,7 @@ declare namespace webix {
             onContext?: { [key: string]: any; };
             onDblClick?: WebixCallback;
             onMouseMove?: WebixCallback;
-            origin?: number;
+            origin?: number | string;
             padding?: any;
             pieHeight?: number;
             pieInnerText?: string | WebixCallback;
@@ -13774,12 +14534,12 @@ declare namespace webix {
             range?: any;
             ready?: WebixCallback;
             removeMissed?: boolean;
-            save?: string;
+            save?: any;
             scale?: string;
             scheme?: any;
             series?: any;
             shadow?: boolean;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: string;
             url?: any;
             value?: string | WebixTemplate;
@@ -13817,6 +14577,7 @@ declare namespace webix {
             | 'onItemClick'
             | 'onItemDblClick'
             | 'onKeyPress'
+            | 'onLegendClick'
             | 'onLoadError'
             | 'onLongTouch'
             | 'onMouseMove'
@@ -13824,11 +14585,13 @@ declare namespace webix {
             | 'onMouseOut'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class rangechart implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -13861,7 +14624,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -13869,7 +14632,7 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
@@ -13877,25 +14640,25 @@ declare namespace webix {
 
             getFrameRange(): any;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getTopParentView(): webix.ui.baseview;
 
-            group(config: any, mode: boolean): void;
+            group(config: any, target?: string | number): void;
 
             hasEvent(name: string): boolean;
 
@@ -13909,7 +14672,7 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -13919,9 +14682,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeAllSeries(): void;
 
@@ -13929,7 +14692,7 @@ declare namespace webix {
 
             resize(): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setFrameRange(range: any): void;
 
@@ -13947,7 +14710,9 @@ declare namespace webix {
 
             ungroup(mode: boolean): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $getSize(): any[];
 
@@ -13957,6 +14722,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             colormap: { [key: string]: any; };
@@ -13976,7 +14748,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -13992,9 +14763,9 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -14005,6 +14776,7 @@ declare namespace webix {
             min?: number;
             minHeight?: number;
             minWidth?: number;
+            moveTitle?: boolean;
             name?: string;
             on?: EventHash;
             popup?: string;
@@ -14016,10 +14788,12 @@ declare namespace webix {
             stringResult?: boolean;
             suggest?: any;
             title?: string | WebixCallback;
-            tooltip?: string;
+            tooltip?: any;
+            type?: string;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | any[];
+            vertical?: boolean;
             width?: number;
         }
 
@@ -14043,7 +14817,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class rangeslider implements webix.ui.baseview {
             adjust(): void;
@@ -14116,6 +14891,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
             $cssName: string;
 
@@ -14139,6 +14915,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $touchCapture: boolean;
             $view: HTMLElement;
             $width: number;
@@ -14159,37 +14942,16 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
             minWidth?: number;
-            mouseEventDelay?: number;
             onContext?: { [key: string]: any; };
             width?: number;
         }
 
-        type resizerEventName =
-            'onAfterContextMenu'
-            | 'onAfterScroll'
-            | 'onBeforeContextMenu'
-            | 'onBindRequest'
-            | 'onBlur'
-            | 'onDestruct'
-            | 'onEnter'
-            | 'onFocus'
-            | 'onItemClick'
-            | 'onItemDblClick'
-            | 'onKeyPress'
-            | 'onLongTouch'
-            | 'onMouseMoving'
-            | 'onMouseOut'
-            | 'onSwipeX'
-            | 'onSwipeY'
-            | 'onTimedKeyPress'
-            | 'onTouchEnd'
-            | 'onTouchMove'
-            | 'onTouchStart'
-            | 'onViewResize';
+        type resizerEventName = 'onViewShow';
 
         class resizer implements webix.ui.baseview {
             adjust(): void;
@@ -14251,7 +15013,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -14268,10 +15029,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -14291,7 +15052,7 @@ declare namespace webix {
             relatedView?: string;
             required?: boolean;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -14317,7 +15078,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class richselect implements webix.ui.baseview {
             adjust(): void;
@@ -14396,6 +15158,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -14418,6 +15181,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: richselectConfig;
@@ -14445,7 +15215,7 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             type?: string;
@@ -14453,7 +15223,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type richtextEventName = 'onBindRequest' | 'onChange' | 'onDestruct';
+        type richtextEventName = 'onBindRequest' | 'onChange' | 'onDestruct' | 'onViewShow';
 
         class richtext implements webix.ui.baseview {
             adjust(): void;
@@ -14547,6 +15317,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -14572,7 +15343,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class scrollview implements webix.ui.baseview {
             adjust(): void;
@@ -14671,10 +15443,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -14693,7 +15465,7 @@ declare namespace webix {
             relatedView?: string;
             required?: boolean;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             type?: string;
             validate?: WebixCallback;
             validateEvent?: string;
@@ -14721,7 +15493,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class search implements webix.ui.baseview {
             adjust(): void;
@@ -14794,6 +15567,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -14816,6 +15590,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: searchConfig;
@@ -14844,9 +15625,9 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -14859,13 +15640,13 @@ declare namespace webix {
             name?: string;
             on?: EventHash;
             optionWidth?: number;
-            options?: any;
+            options?: any[];
             popup?: string;
             relatedAction?: string;
             relatedView?: string;
             required?: boolean;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -14887,6 +15668,7 @@ declare namespace webix {
             | 'onItemClick'
             | 'onKeyPress'
             | 'onLongTouch'
+            | 'onOptionAdd'
             | 'onOptionRemove'
             | 'onSwipeX'
             | 'onSwipeY'
@@ -14894,10 +15676,10 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class segmented implements webix.ui.baseview {
-            addOption(obj: any, show?: boolean, index?: number): void;
             addOption(id: string | number, value: any, show?: boolean, index?: number): void;
 
             adjust(): void;
@@ -14920,7 +15702,11 @@ declare namespace webix {
 
             disable(): void;
 
+            disableOption(id: string | number): void;
+
             enable(): void;
+
+            enableOption(id: string | number): void;
 
             focus(): void;
 
@@ -14931,6 +15717,8 @@ declare namespace webix {
             getInputNode(): HTMLElement;
 
             getNode(): any;
+
+            getOption(id: string | number): any;
 
             getParentView(): any;
 
@@ -14978,6 +15766,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -15000,6 +15789,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: segmentedConfig;
@@ -15013,7 +15809,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -15029,10 +15824,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -15051,7 +15846,7 @@ declare namespace webix {
             relatedView?: string;
             required?: boolean;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -15077,7 +15872,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class select implements webix.ui.baseview {
             adjust(): void;
@@ -15148,6 +15944,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -15170,6 +15967,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: selectConfig;
@@ -15202,11 +16006,13 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
             minWidth?: number;
             mouseEventDelay?: number;
+            multipleOpen?: boolean;
             multiselect?: string | boolean;
             navigation?: boolean;
             on?: EventHash;
@@ -15219,7 +16025,7 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
@@ -15228,7 +16034,7 @@ declare namespace webix {
             templateCopy?: WebixCallback;
             threeState?: boolean;
             titleHeight?: number;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: any;
             url?: any;
             width?: number;
@@ -15240,7 +16046,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterLoad'
             | 'onAfterOpen'
             | 'onAfterRender'
@@ -15254,7 +16059,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeLoad'
             | 'onBeforeOpen'
@@ -15284,13 +16088,15 @@ declare namespace webix {
             | 'onSelectChange'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class sidebar implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -15339,7 +16145,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             expand(): void;
 
@@ -15355,21 +16161,21 @@ declare namespace webix {
 
             getFirstChildId(id: string | number): string;
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNextSiblingId(id: string | number): string | number;
 
@@ -15387,7 +16193,7 @@ declare namespace webix {
 
             getPopup(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getPrevSiblingId(id: string | number): string | number;
 
@@ -15401,7 +16207,7 @@ declare namespace webix {
 
             getTopParentView(): webix.ui.baseview;
 
-            group(config: any, mode: boolean): void;
+            group(config: any, target?: string | number): void;
 
             hasCss(id: string | number, css: string): boolean;
 
@@ -15423,9 +16229,9 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+            loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -15443,9 +16249,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -15459,7 +16265,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setPage(page: number): void;
 
@@ -15489,9 +16295,11 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $drag(source: HTMLElement, ev: Event): string;
 
@@ -15506,6 +16314,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
             $fixEditor: WebixCallback;
 
             $getSize(): any[];
@@ -15516,6 +16325,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: sidebarConfig;
@@ -15546,6 +16362,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             left?: number;
             master?: string;
             maxHeight?: number;
@@ -15581,13 +16398,15 @@ declare namespace webix {
             | 'onShow'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class sidemenu implements webix.ui.baseview {
             adjust(): void;
@@ -15599,8 +16418,6 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
-
-            close(): void;
 
             define(property: string, value: any): void;
 
@@ -15669,7 +16486,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -15685,10 +16501,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -15711,7 +16527,8 @@ declare namespace webix {
             step?: number;
             suggest?: any;
             title?: string | WebixCallback;
-            tooltip?: string;
+            tooltip?: any;
+            type?: string;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -15739,7 +16556,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class slider implements webix.ui.baseview {
             adjust(): void;
@@ -15812,6 +16630,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -15834,6 +16653,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $touchCapture: boolean;
             $view: HTMLElement;
             $width: number;
@@ -15854,6 +16680,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -15876,7 +16703,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class spacer implements webix.ui.baseview {
             adjust(): void;
@@ -15935,7 +16763,10 @@ declare namespace webix {
             borderless?: boolean;
             bottombar?: boolean;
             buttons?: any;
+            clipboard?: boolean;
+            clipboardDecimalDelimiter?: string;
             columnCount?: number;
+            columnWidth?: number;
             conditionStyle?: any[];
             container?: string | HTMLElement;
             css?: any;
@@ -15953,12 +16784,13 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             readonly?: boolean;
             resizeCell?: boolean;
             rowCount?: number;
+            rowHeight?: number;
             sheetTabWidth?: number;
             subbar?: any;
             toolbar?: string | boolean;
@@ -15968,9 +16800,14 @@ declare namespace webix {
         }
 
         type spreadsheetEventName =
-            'onAfterLoad'
+            'onAfterConditionSet'
+            | 'onAfterLoad'
+            | 'onAfterRangeSet'
             | 'onAfterSelect'
             | 'onAfterSheetShow'
+            | 'onAfterSpan'
+            | 'onAfterSplit'
+            | 'onBeforeCommentShow'
             | 'onBeforeLoad'
             | 'onBeforeSheetShow'
             | 'onBeforeSpan'
@@ -15978,6 +16815,8 @@ declare namespace webix {
             | 'onBeforeValueChange'
             | 'onBindRequest'
             | 'onCellChange'
+            | 'onChange'
+            | 'onCommentHide'
             | 'onComponentInit'
             | 'onDataParse'
             | 'onDataSerialize'
@@ -15988,7 +16827,9 @@ declare namespace webix {
             | 'onSheetAdd'
             | 'onSheetRemove'
             | 'onSheetRename'
-            | 'onStyleSet';
+            | 'onStyleSet'
+            | 'onViewInit'
+            | 'onViewShow';
 
         class spreadsheet implements webix.ui.baseview {
             addFilter(rowId: number, columnId: number): void;
@@ -16012,6 +16853,8 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
+
+            changeDecimals(row: number, column: number, change: number): void;
 
             clearRange(rangeStr: string, type: any): void;
 
@@ -16075,6 +16918,8 @@ declare namespace webix {
 
             getTopParentView(): webix.ui.baseview;
 
+            groupUndo(func: WebixCallback): void;
+
             hasEvent(name: string): boolean;
 
             hide(): void;
@@ -16086,6 +16931,8 @@ declare namespace webix {
             hideHeaders(state: boolean): void;
 
             hideRow(rowId: number, state: boolean): void;
+
+            ignoreUndo(func: WebixCallback): void;
 
             innerId(id: number | string): number | string;
 
@@ -16143,6 +16990,8 @@ declare namespace webix {
 
             setCellValue(row: number, column: any, value: string): void;
 
+            setColumnWidth(id: string | number, width: number): void;
+
             setFormat(rowId: number, columnId: number, format: string): void;
 
             setPlaceholder(placeholder: any): void;
@@ -16150,6 +16999,8 @@ declare namespace webix {
             setRangeStyle(rangeStr: string, style: any): void;
 
             setRangeValue(range: string): void;
+
+            setRowHeight(id: string | number, height: number): void;
 
             setStyle(row: number, column: number, style: any): void;
 
@@ -16180,6 +17031,7 @@ declare namespace webix {
             $skin: WebixCallback;
             $view: HTMLElement;
             $width: number;
+            comments: any;
             config: spreadsheetConfig;
             name: string;
         }
@@ -16198,14 +17050,11 @@ declare namespace webix {
             container?: string | HTMLElement;
             css?: any;
             data?: string | any[];
-            dataFeed?: string | WebixCallback;
-            datafetch?: number;
             datathrottle?: number;
             datatype?: string;
             disabled?: boolean;
             drag?: boolean | string;
             dragscroll?: boolean | string;
-            dynamic?: boolean;
             externalData?: WebixCallback;
             gravity?: number;
             head?: any;
@@ -16214,6 +17063,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             layout?: string;
             left?: number;
             master?: string;
@@ -16241,7 +17091,7 @@ declare namespace webix {
             removeMissed?: boolean;
             resize?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
@@ -16251,7 +17101,7 @@ declare namespace webix {
             template?: string | WebixCallback;
             templateCopy?: WebixCallback;
             toFront?: boolean;
-            tooltip?: string | boolean;
+            tooltip?: any;
             top?: number;
             type?: any;
             url?: any;
@@ -16266,7 +17116,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterLoad'
             | 'onAfterRender'
             | 'onAfterScroll'
@@ -16278,7 +17127,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeLoad'
             | 'onBeforeRender'
@@ -16309,6 +17157,7 @@ declare namespace webix {
             | 'onShow'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
@@ -16317,7 +17166,8 @@ declare namespace webix {
             | 'onValidationSuccess'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class submenu implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -16340,8 +17190,6 @@ declare namespace webix {
 
             clearValidation(): void;
 
-            close(): void;
-
             copy(sid: string | number, tindex: number, tobj?: any, details?: any): void;
 
             count(): number;
@@ -16362,7 +17210,7 @@ declare namespace webix {
 
             enableItem(id: string | number): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -16372,27 +17220,27 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
             getHead(): any;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
             getMenu(id: string | number): any;
 
             getMenuItem(id: string | number): any;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -16402,7 +17250,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getScrollState(): any;
 
@@ -16428,13 +17276,15 @@ declare namespace webix {
 
             isEnabled(): boolean;
 
+            isEnabledItem(): boolean;
+
             isSelected(id: string | number): boolean;
 
             isVisible(): boolean;
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -16456,9 +17306,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -16474,7 +17324,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setPage(page: number): void;
 
@@ -16498,9 +17348,11 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             show(force: boolean, animation: boolean): void;
 
@@ -16519,6 +17371,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
 
             $getSize(): any[];
 
@@ -16528,6 +17381,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: submenuConfig;
@@ -16608,7 +17468,8 @@ declare namespace webix {
             | 'onValueSuggest'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class suggest implements webix.ui.baseview {
             adjust(): void;
@@ -16620,8 +17481,6 @@ declare namespace webix {
             blockEvent(): void;
 
             callEvent(name: string, params: any[]): boolean;
-
-            close(): void;
 
             define(property: string, value: any): void;
 
@@ -16712,7 +17571,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             badge?: number | string;
             borderless?: boolean;
             bottomLabel?: string;
@@ -16727,16 +17585,15 @@ declare namespace webix {
             gravity?: number;
             height?: number;
             hidden?: boolean;
-            hotkey?: string;
             icon?: string;
             id?: string | number;
             image?: string;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -16756,7 +17613,7 @@ declare namespace webix {
             relatedView?: string;
             required?: boolean;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             type?: string;
             uncheckValue?: string;
             validate?: WebixCallback;
@@ -16784,7 +17641,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class switchButton implements webix.ui.baseview {
             adjust(): void;
@@ -16859,6 +17717,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -16881,6 +17740,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: switchButtonConfig;
@@ -16894,7 +17760,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomOffset?: number;
@@ -16911,10 +17776,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -16928,7 +17793,7 @@ declare namespace webix {
             name?: string;
             on?: EventHash;
             optionWidth?: number;
-            options?: any;
+            options?: any[];
             placeholder?: string;
             popup?: string;
             popupTemplate?: WebixCallback;
@@ -16943,6 +17808,7 @@ declare namespace webix {
             tabMoreWidth?: number;
             tabOffset?: number;
             tabbarPopup?: webix.ui.baseview;
+            tooltip?: any;
             topOffset?: number;
             type?: string;
             validate?: WebixCallback;
@@ -16968,6 +17834,7 @@ declare namespace webix {
             | 'onItemClick'
             | 'onKeyPress'
             | 'onLongTouch'
+            | 'onOptionAdd'
             | 'onOptionRemove'
             | 'onSwipeX'
             | 'onSwipeY'
@@ -16975,10 +17842,10 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class tabbar implements webix.ui.baseview {
-            addOption(obj: any, show?: boolean, index?: number): void;
             addOption(id: string | number, value: any, show?: boolean, index?: number): void;
 
             adjust(): void;
@@ -17001,7 +17868,11 @@ declare namespace webix {
 
             disable(): void;
 
+            disableOption(id: string | number): void;
+
             enable(): void;
+
+            enableOption(id: string | number): void;
 
             focus(): void;
 
@@ -17012,6 +17883,8 @@ declare namespace webix {
             getInputNode(): HTMLElement;
 
             getNode(): any;
+
+            getOption(id: string | number): any;
 
             getParentView(): any;
 
@@ -17061,6 +17934,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -17083,6 +17957,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: tabbarConfig;
@@ -17109,7 +17990,7 @@ declare namespace webix {
             minWidth?: number;
             multiview?: any;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             tabbar?: any;
@@ -17117,7 +17998,7 @@ declare namespace webix {
             width?: number;
         }
 
-        type tabviewEventName = 'onBindRequest' | 'onDestruct';
+        type tabviewEventName = 'onBindRequest' | 'onDestruct' | 'onViewShow';
 
         class tabview implements webix.ui.baseview {
             addView(obj: any): void;
@@ -17204,13 +18085,13 @@ declare namespace webix {
             content?: string | number | HTMLElement;
             css?: any;
             data?: string | any[];
-            dataFeed?: string | WebixCallback;
             datatype?: string;
             disabled?: boolean;
             gravity?: number;
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -17221,6 +18102,7 @@ declare namespace webix {
             scrollSpeed?: string;
             src?: string;
             template?: string | WebixCallback;
+            tooltip?: any;
             type?: string;
             url?: any;
             width?: number;
@@ -17246,7 +18128,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class template implements webix.ui.baseview {
             adjust(): void;
@@ -17329,6 +18212,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: templateConfig;
@@ -17340,7 +18230,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -17357,10 +18246,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -17379,7 +18268,7 @@ declare namespace webix {
             relatedView?: string;
             required?: boolean;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             type?: string;
             validate?: WebixCallback;
             validateEvent?: string;
@@ -17406,7 +18295,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class text implements webix.ui.baseview {
             adjust(): void;
@@ -17479,6 +18369,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -17501,6 +18392,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: textConfig;
@@ -17514,7 +18412,6 @@ declare namespace webix {
             align?: string;
             animate?: any;
             attributes?: any;
-            autowidth?: boolean;
             borderless?: boolean;
             bottomLabel?: string;
             bottomPadding?: number;
@@ -17530,10 +18427,10 @@ declare namespace webix {
             id?: string | number;
             inputAlign?: string;
             inputHeight?: number;
-            inputPadding?: number;
             inputWidth?: number;
             invalid?: boolean;
             invalidMessage?: string;
+            keyPressTimeout?: number;
             label?: string;
             labelAlign?: string;
             labelPosition?: string;
@@ -17552,7 +18449,7 @@ declare namespace webix {
             relatedView?: string;
             required?: boolean;
             suggest?: any;
-            tooltip?: string;
+            tooltip?: any;
             validate?: WebixCallback;
             validateEvent?: string;
             value?: string | number;
@@ -17578,7 +18475,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class textarea implements webix.ui.baseview {
             adjust(): void;
@@ -17651,6 +18549,7 @@ declare namespace webix {
 
             validate(): boolean;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -17673,12 +18572,225 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: textareaConfig;
             name: string;
             on_click: WebixCallback;
             touchable: boolean;
+        }
+
+        interface timelineConfig {
+            view?: string;
+            animate?: any;
+            borderless?: boolean;
+            click?: string | WebixCallback;
+            container?: string | HTMLElement;
+            css?: any;
+            data?: string | any[];
+            dataFeed?: string | WebixCallback;
+            datathrottle?: number;
+            datatype?: string;
+            disabled?: boolean;
+            gravity?: number;
+            height?: number;
+            hidden?: boolean;
+            id?: string | number;
+            item?: any;
+            maxHeight?: number;
+            maxWidth?: number;
+            minHeight?: number;
+            minWidth?: number;
+            mouseEventDelay?: number;
+            on?: EventHash;
+            onClick?: { [key: string]: any; };
+            onContext?: { [key: string]: any; };
+            onDblClick?: WebixCallback;
+            onMouseMove?: WebixCallback;
+            ready?: WebixCallback;
+            removeMissed?: boolean;
+            save?: any;
+            scheme?: any;
+            scroll?: boolean | string;
+            scrollSpeed?: string;
+            template?: string | WebixCallback;
+            tooltip?: any;
+            type?: any;
+            url?: any;
+            width?: number;
+        }
+
+        type timelineEventName =
+            'onAfterAdd'
+            | 'onAfterContextMenu'
+            | 'onAfterDelete'
+            | 'onAfterLoad'
+            | 'onAfterRender'
+            | 'onAfterScroll'
+            | 'onAfterSort'
+            | 'onBeforeAdd'
+            | 'onBeforeContextMenu'
+            | 'onBeforeDelete'
+            | 'onBeforeLoad'
+            | 'onBeforeRender'
+            | 'onBeforeSort'
+            | 'onBindRequest'
+            | 'onDataRequest'
+            | 'onDataUpdate'
+            | 'onDestruct'
+            | 'onItemClick'
+            | 'onItemDblClick'
+            | 'onItemRender'
+            | 'onLoadError'
+            | 'onMouseMove'
+            | 'onMouseMoving'
+            | 'onMouseOut'
+            | 'onViewShow';
+
+        class timeline implements webix.ui.baseview {
+            add(obj: any, index?: number): string | number;
+
+            adjust(): void;
+
+            attachEvent(type: timelineEventName, functor: WebixCallback, id?: string): string | number;
+
+            bind(target: any, rule?: WebixCallback, format?: string): void;
+
+            blockEvent(): void;
+
+            callEvent(name: string, params: any[]): boolean;
+
+            clearAll(soft?: boolean): void;
+
+            count(): number;
+
+            customize(obj: any): void;
+
+            define(property: string, value: any): void;
+
+            destructor(): void;
+
+            detachEvent(id: string): void;
+
+            disable(): void;
+
+            enable(): void;
+
+            exists(id: number | string): boolean;
+
+            filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
+
+            find(criterion: WebixCallback, first?: boolean): any;
+
+            getChildViews(): any[];
+
+            getFirstId(): number | string;
+
+            getFormView(): webix.ui.baseview;
+
+            getIdByIndex(index: number | string): string | number;
+
+            getIndexById(id: number | string): number;
+
+            getItem(id: number | string): any;
+
+            getItemNode(id: string | number): HTMLElement;
+
+            getLastId(): number | string;
+
+            getNextId(id: number | string, step: number): string | number;
+
+            getNode(): any;
+
+            getParentView(): any;
+
+            getPrevId(id: number | string, step: number): string | number;
+
+            getScrollState(): any;
+
+            getTopParentView(): webix.ui.baseview;
+
+            hasEvent(name: string): boolean;
+
+            hide(): void;
+
+            isEnabled(): boolean;
+
+            isVisible(): boolean;
+
+            load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
+
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
+
+            locate(e: Event): string | number;
+
+            mapEvent(map: any): void;
+
+            parse(data: any, type: string): void;
+
+            queryView(config: any, mode?: string): any;
+
+            refresh(id?: number | string): void;
+
+            remove(id: string | number | any[]): void;
+
+            render(id: string | number, data: any, type: string): void;
+
+            resize(): void;
+
+            scrollTo(x: number, y: number): void;
+
+            serialize(all?: boolean): any[];
+
+            show(force?: boolean, animation?: boolean): void;
+
+            showItem(id: string | number): void;
+
+            sort(by: string, dir?: string, as?: string): void;
+
+            sync(source: any, filter: WebixCallback, silent: boolean): void;
+
+            unbind(): void;
+
+            unblockEvent(): void;
+
+            updateItem(id: number | string, data: any): void;
+
+            waitSave(handler: WebixCallback): Promise<any>;
+
+            $getSize(): any[];
+
+            $height: number;
+
+            $setSize(x: number, y: number): boolean;
+
+            $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
+            $view: HTMLElement;
+            $width: number;
+            config: timelineConfig;
+            data: DataStore;
+            name: string;
+            on_click: WebixCallback;
+            on_context: { [key: string]: any; };
+            on_dblclick: WebixCallback;
+            on_mouse_move: WebixCallback;
+            type: { [key: string]: any; };
+            types: { [key: string]: any; };
+            waitData: Promise<any>;
         }
 
         interface toggleConfig {
@@ -17699,6 +18811,7 @@ declare namespace webix {
             id?: string | number;
             inputHeight?: number;
             inputWidth?: number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -17710,7 +18823,7 @@ declare namespace webix {
             onIcon?: string;
             onLabel?: string;
             popup?: string;
-            tooltip?: string;
+            tooltip?: any;
             type?: string;
             value?: string | number;
             width?: number;
@@ -17735,7 +18848,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class toggle implements webix.ui.baseview {
             adjust(): void;
@@ -17806,6 +18920,7 @@ declare namespace webix {
 
             unblockEvent(): void;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
 
             $getSize(): any[];
@@ -17824,6 +18939,13 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: toggleConfig;
@@ -17845,7 +18967,7 @@ declare namespace webix {
             datatype?: string;
             disabled?: boolean;
             elements?: any[];
-            elementsConfig?: { [key: string]: any; };
+            elementsConfig?: any;
             gravity?: number;
             height?: number;
             hidden?: boolean;
@@ -17857,7 +18979,7 @@ declare namespace webix {
             minHeight?: number;
             minWidth?: number;
             on?: EventHash;
-            padding?: number;
+            padding?: any;
             paddingX?: number;
             paddingY?: number;
             responsive?: string;
@@ -17883,7 +19005,8 @@ declare namespace webix {
             | 'onLoadError'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onValues';
+            | 'onValues'
+            | 'onViewShow';
 
         class toolbar implements webix.ui.baseview {
             addView(view: any, index?: number): string | number;
@@ -18012,6 +19135,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -18038,7 +19162,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         interface tooltip {
             adjust(): void;
@@ -18118,7 +19243,7 @@ declare namespace webix {
             datathrottle?: number;
             datatype?: string;
             disabled?: boolean;
-            drag?: boolean;
+            drag?: boolean | string;
             dragscroll?: boolean | string;
             filterMode?: any;
             gravity?: number;
@@ -18126,6 +19251,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -18141,7 +19267,7 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
@@ -18149,7 +19275,7 @@ declare namespace webix {
             template?: string | WebixCallback;
             templateCopy?: WebixCallback;
             threeState?: boolean;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: any;
             url?: any;
             width?: number;
@@ -18161,7 +19287,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterLoad'
             | 'onAfterOpen'
             | 'onAfterRender'
@@ -18175,7 +19300,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeLoad'
             | 'onBeforeOpen'
@@ -18205,13 +19329,15 @@ declare namespace webix {
             | 'onSelectChange'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class tree implements webix.ui.baseview {
             add(obj: any, index?: number, parentId?: string): string;
@@ -18258,7 +19384,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -18272,21 +19398,21 @@ declare namespace webix {
 
             getFirstChildId(id: string | number): string;
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNextSiblingId(id: string | number): string | number;
 
@@ -18298,7 +19424,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getPrevSiblingId(id: string | number): string | number;
 
@@ -18312,7 +19438,7 @@ declare namespace webix {
 
             getTopParentView(): webix.ui.baseview;
 
-            group(config: any, mode: boolean): void;
+            group(config: any, target?: string | number): void;
 
             hasCss(id: string | number, css: string): boolean;
 
@@ -18334,9 +19460,9 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+            loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -18354,9 +19480,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -18370,7 +19496,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(rootId: string | number, all: boolean): any[];
 
             setState(state: any): void;
 
@@ -18396,9 +19522,11 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $drag(source: HTMLElement, ev: Event): string;
 
@@ -18413,6 +19541,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
             $fixEditor: WebixCallback;
 
             $getSize(): any[];
@@ -18423,6 +19552,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: treeConfig;
@@ -18461,6 +19597,7 @@ declare namespace webix {
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
@@ -18477,7 +19614,7 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
@@ -18486,7 +19623,7 @@ declare namespace webix {
             template?: string | WebixCallback;
             templateCopy?: WebixCallback;
             threeState?: boolean;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: any;
             url?: any;
             value?: string | WebixCallback;
@@ -18535,13 +19672,15 @@ declare namespace webix {
             | 'onSelectChange'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class treemap implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -18582,7 +19721,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -18594,21 +19733,21 @@ declare namespace webix {
 
             getFirstChildId(id: string | number): string;
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNextSiblingId(id: string | number): string | number;
 
@@ -18624,7 +19763,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getPrevSiblingId(id: string | number): string | number;
 
@@ -18638,7 +19777,7 @@ declare namespace webix {
 
             getTopParentView(): webix.ui.baseview;
 
-            group(config: any, mode: boolean): void;
+            group(config: any, target?: string | number): void;
 
             hasCss(id: string | number, css: string): boolean;
 
@@ -18658,9 +19797,9 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+            loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -18676,9 +19815,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -18692,7 +19831,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setPage(page: number): void;
 
@@ -18718,9 +19857,11 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $getSize(): any[];
 
@@ -18730,6 +19871,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: treemapConfig;
@@ -18785,16 +19933,19 @@ declare namespace webix {
             hidden?: boolean;
             hover?: string;
             id?: string | number;
+            keyPressTimeout?: number;
             leftSplit?: number;
             liveValidation?: boolean;
             loadahead?: number;
             map?: any;
             math?: boolean;
+            maxColumnWidth?: number;
             maxHeight?: number;
+            maxRowHeight?: number;
             maxWidth?: number;
-            minColumnHeight?: number;
             minColumnWidth?: number;
             minHeight?: number;
+            minRowHeight?: number;
             minWidth?: number;
             mouseEventDelay?: number;
             multiselect?: boolean;
@@ -18809,12 +19960,12 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             resizeColumn?: any;
-            resizeRow?: boolean;
+            resizeRow?: any;
             rightSplit?: number;
             rowHeight?: number;
             rowLineHeight?: number;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollAlignY?: boolean;
@@ -18822,14 +19973,14 @@ declare namespace webix {
             scrollY?: boolean;
             select?: boolean | string;
             spans?: any[];
-            subRowHeight?: string;
+            subRowHeight?: string | number;
             subrow?: string;
             subview?: webix.ui.baseview | WebixCallback;
             templateCopy?: WebixCallback;
             threeState?: boolean;
-            tooltip?: boolean;
-            topSplit?: number;
+            tooltip?: any;
             type?: any;
+            undo?: boolean;
             url?: any;
             width?: number;
             yCount?: number;
@@ -18848,7 +19999,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterEditStart'
             | 'onAfterEditStop'
             | 'onAfterFilter'
@@ -18875,7 +20025,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeEditStart'
             | 'onBeforeEditStop'
@@ -18890,6 +20039,7 @@ declare namespace webix {
             | 'onBlur'
             | 'onCheck'
             | 'onCollectValues'
+            | 'onColumnGroupCollapse'
             | 'onColumnResize'
             | 'onDataRequest'
             | 'onDataUpdate'
@@ -18923,13 +20073,15 @@ declare namespace webix {
             | 'onSubViewRender'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class treetable implements webix.ui.baseview {
             add(obj: any, index?: number, parentId?: string): string;
@@ -18939,6 +20091,10 @@ declare namespace webix {
             addCss(id: string | number, css: string, silent?: boolean): void;
 
             addRowCss(id: string, css: string): void;
+
+            addSelectArea(start: any, end: any, preserve: boolean, area_name?: string, css?: string, handle?: boolean): void;
+
+            addSpan(id: any, column: string, width: number, height: number, value?: string, css?: string): void;
 
             adjust(): void;
 
@@ -18970,7 +20126,9 @@ declare namespace webix {
 
             closeAll(): void;
 
-            collectValues(id: string | number): any[];
+            closeSub(id: string | number): void;
+
+            collectValues(id: string | number, mode: any): any[];
 
             columnId(index: number): string | number;
 
@@ -19006,7 +20164,7 @@ declare namespace webix {
 
             enable(): void;
 
-            exists(id: string | number): boolean;
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -19016,7 +20174,7 @@ declare namespace webix {
 
             focusEditor(id: any): void;
 
-            freezeRow(id: number | string, state: boolean): void;
+            getAllSelectAreas(): any;
 
             getBranchIndex(id: string | number, parent?: string | number): number;
 
@@ -19040,7 +20198,7 @@ declare namespace webix {
 
             getFirstChildId(id: string | number): string;
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFooterNode(columnId: string, rowIndex?: number): HTMLElement;
 
@@ -19050,17 +20208,17 @@ declare namespace webix {
 
             getHeaderNode(columnId: string, rowIndex?: number): HTMLElement;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNextSiblingId(id: string | number): string | number;
 
@@ -19076,17 +20234,25 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getPrevSiblingId(id: string | number): string | number;
 
             getScrollState(): any;
 
+            getSelectArea(area_name: string): any;
+
             getSelectedId(asArray: boolean, asString: boolean): any;
 
             getSelectedItem(as_array?: boolean): any;
 
+            getSpan(): any[];
+
+            getSpanNode(id: any): HTMLElement;
+
             getState(): any;
+
+            getSubView(id: string | number): any;
 
             getText(rowid: string | number, colid: string | number): string;
 
@@ -19094,7 +20260,7 @@ declare namespace webix {
 
             getVisibleCount(): number;
 
-            group(config: any, mode: boolean): void;
+            group(config: any, target?: string | number): void;
 
             hasCss(id: string | number, css: string): boolean;
 
@@ -19105,6 +20271,8 @@ declare namespace webix {
             hideColumn(id: string | number, options?: any, silent?: boolean, mode?: boolean): void;
 
             hideOverlay(): void;
+
+            ignoreUndo(functor: WebixCallback): void;
 
             isBranch(id: string | number): boolean;
 
@@ -19122,9 +20290,9 @@ declare namespace webix {
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadBranch(id: string | number, callback: WebixCallback, url: string): void;
+            loadBranch(id: string | number, callback: WebixCallback, url: string): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(node: HTMLElement | Event): any;
 
@@ -19154,19 +20322,23 @@ declare namespace webix {
 
             openAll(): void;
 
+            openSub(id: string | number): void;
+
             parse(data: any, type: string): void;
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
             refreshColumns(config?: any[], reset?: boolean): void;
 
             refreshFilter(id: string | number): void;
 
+            refreshSelectArea(): void;
+
             registerFilter(object: any, config: any, controller: any): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCellCss(id: string, name: string, css_name: string): void;
 
@@ -19174,9 +20346,17 @@ declare namespace webix {
 
             removeRowCss(id: string, css_name: string): void;
 
+            removeSelectArea(area_name: string): void;
+
+            removeSpan(id: string | number, column: string): void;
+
+            removeUndo(id: string): void;
+
             render(id: string | number, data: any, operation: string): void;
 
             resize(): void;
+
+            resizeSubView(id: string | number): void;
 
             scrollTo(x: number, y: number): void;
 
@@ -19186,7 +20366,7 @@ declare namespace webix {
 
             selectRange(row_id: string | number, end_row_id: string | number, preserve?: boolean): void;
 
-            serialize(): any[];
+            serialize(id?: string | number, all?: boolean): any[];
 
             setColumnWidth(id: string | number, width: number): void;
 
@@ -19222,17 +20402,21 @@ declare namespace webix {
 
             uncheckItem(id: string): void;
 
+            undo(id: string): void;
+
             ungroup(mode: boolean): void;
 
             unselect(row_id: string | number): void;
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
 
             validateEditor(id?: string | number): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $customPrint: WebixCallback;
 
@@ -19249,6 +20433,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
 
             $getSize(): any[];
 
@@ -19258,6 +20443,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $touch: WebixCallback;
             $view: HTMLElement;
             $width: number;
@@ -19283,19 +20475,18 @@ declare namespace webix {
             container?: string | HTMLElement;
             css?: any;
             data?: string | any[];
-            datafetch?: number;
             datathrottle?: number;
             datatype?: string;
             disabled?: boolean;
             drag?: boolean | string;
             dragscroll?: boolean | string;
-            dynamic?: boolean;
             externalData?: WebixCallback;
             gravity?: number;
             height?: number;
             hidden?: boolean;
             id?: string | number;
             item?: any;
+            keyPressTimeout?: number;
             layout?: string;
             maxHeight?: number;
             maxWidth?: number;
@@ -19313,14 +20504,14 @@ declare namespace webix {
             ready?: WebixCallback;
             removeMissed?: boolean;
             rules?: any;
-            save?: string;
+            save?: any;
             scheme?: any;
             scroll?: boolean | string;
             scrollSpeed?: string;
             select?: boolean | string;
             template?: string | WebixCallback;
             templateCopy?: WebixCallback;
-            tooltip?: string | boolean;
+            tooltip?: any;
             type?: any;
             uniteBy?: WebixCallback;
             url?: any;
@@ -19334,7 +20525,6 @@ declare namespace webix {
             | 'onAfterContextMenu'
             | 'onAfterDelete'
             | 'onAfterDrop'
-            | 'onAfterDropOrder'
             | 'onAfterLoad'
             | 'onAfterRender'
             | 'onAfterScroll'
@@ -19346,7 +20536,6 @@ declare namespace webix {
             | 'onBeforeDrag'
             | 'onBeforeDragIn'
             | 'onBeforeDrop'
-            | 'onBeforeDropOrder'
             | 'onBeforeDropOut'
             | 'onBeforeLoad'
             | 'onBeforeRender'
@@ -19373,13 +20562,15 @@ declare namespace webix {
             | 'onSelectChange'
             | 'onSwipeX'
             | 'onSwipeY'
+            | 'onTabFocus'
             | 'onTimedKeyPress'
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onValidationError'
             | 'onValidationSuccess'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class unitlist implements webix.ui.baseview {
             add(obj: any, index?: number): string | number;
@@ -19416,9 +20607,13 @@ declare namespace webix {
 
             disable(): void;
 
+            disableItem(id: string | number): void;
+
             enable(): void;
 
-            exists(id: string | number): boolean;
+            enableItem(id: string | number): void;
+
+            exists(id: number | string): boolean;
 
             filter(text: string | WebixTemplate | WebixCallback, value?: string, preserve?: boolean): void;
 
@@ -19426,21 +20621,21 @@ declare namespace webix {
 
             getChildViews(): any[];
 
-            getFirstId(): string | number;
+            getFirstId(): number | string;
 
             getFormView(): webix.ui.baseview;
 
-            getIdByIndex(index: number): string | number;
+            getIdByIndex(index: number | string): string | number;
 
-            getIndexById(id: string | number): number;
+            getIndexById(id: number | string): number;
 
-            getItem(id: string | number): any;
+            getItem(id: number | string): any;
 
             getItemNode(id: string | number): HTMLElement;
 
-            getLastId(): string | number;
+            getLastId(): number | string;
 
-            getNextId(id: string | number, step: number): string | number;
+            getNextId(id: number | string, step: number): string | number;
 
             getNode(): any;
 
@@ -19450,7 +20645,7 @@ declare namespace webix {
 
             getParentView(): any;
 
-            getPrevId(id: string | number, step: number): string | number;
+            getPrevId(id: number | string, step: number): string | number;
 
             getScrollState(): any;
 
@@ -19474,13 +20669,15 @@ declare namespace webix {
 
             isEnabled(): boolean;
 
+            isEnabledItem(): boolean;
+
             isSelected(id: string | number): boolean;
 
             isVisible(): boolean;
 
             load(url: string, type?: string, callback?: WebixCallback): Promise<any>;
 
-            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): void;
+            loadNext(count: number, start: number, callback: WebixCallback, url: string, now: boolean): Promise<any>;
 
             locate(e: Event): string | number;
 
@@ -19502,9 +20699,9 @@ declare namespace webix {
 
             queryView(config: any, mode?: string): any;
 
-            refresh(id?: string | number): void;
+            refresh(id?: number | string): void;
 
-            remove(id: string | number): void;
+            remove(id: string | number | any[]): void;
 
             removeCss(id: string | number, css: string, silent?: boolean): void;
 
@@ -19518,7 +20715,7 @@ declare namespace webix {
 
             selectAll(from?: string, to?: string): void;
 
-            serialize(): any[];
+            serialize(all?: boolean): any[];
 
             setPage(page: number): void;
 
@@ -19536,9 +20733,11 @@ declare namespace webix {
 
             unselectAll(): void;
 
-            updateItem(id: string | number, data: any): void;
+            updateItem(id: number | string, data: any): void;
 
             validate(id?: string): boolean;
+
+            waitSave(handler: WebixCallback): Promise<any>;
 
             $customPrint: WebixCallback;
 
@@ -19555,6 +20754,7 @@ declare namespace webix {
             $drop(source: HTMLElement, target: HTMLElement, ev: Event): void;
 
             $dropAllow: WebixCallback;
+            $dropHTML: WebixCallback;
 
             $getSize(): any[];
 
@@ -19564,6 +20764,13 @@ declare namespace webix {
             $setSize(x: number, y: number): boolean;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $view: HTMLElement;
             $width: number;
             config: unitlistConfig;
@@ -19602,6 +20809,7 @@ declare namespace webix {
             inputHeight?: number;
             inputName?: string;
             inputWidth?: number;
+            keyPressTimeout?: number;
             label?: string;
             link?: string;
             maxHeight?: number;
@@ -19612,10 +20820,10 @@ declare namespace webix {
             name?: string;
             on?: EventHash;
             popup?: string;
-            tooltip?: string;
+            tooltip?: any;
             type?: string;
             upload?: string;
-            urlData?: { [key: string]: any; };
+            urlData?: any;
             value?: string | number;
             width?: number;
         }
@@ -19643,12 +20851,13 @@ declare namespace webix {
             | 'onTouchMove'
             | 'onTouchStart'
             | 'onUploadComplete'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class uploader implements webix.ui.baseview {
             addDropZone(element: HTMLElement): void;
 
-            addFile(name: string, size: number, type?: string): void;
+            addFile(name: any, size: number, type?: string): void;
 
             adjust(): void;
 
@@ -19724,6 +20933,7 @@ declare namespace webix {
 
             unblockEvent(): void;
 
+            $allowsClear: boolean;
             $compareValue: WebixCallback;
             $cssName: string;
 
@@ -19732,7 +20942,6 @@ declare namespace webix {
             $getValue(): string;
 
             $height: number;
-            $onUploadComplete: WebixCallback;
             $prepareValue: WebixCallback;
 
             $renderInput(config: any): HTMLElement;
@@ -19744,10 +20953,18 @@ declare namespace webix {
             $setValue(value: string): void;
 
             $skin: WebixCallback;
+
+            $tooltipIn(node: HTMLElement): HTMLElement;
+
+            $tooltipMove(t: HTMLElement, e: Event, text: string): void;
+
+            $tooltipOut(): void;
+
             $updateProgress: WebixCallback;
             $view: HTMLElement;
             $width: number;
             config: uploaderConfig;
+            files: any;
             name: string;
             on_click: WebixCallback;
             touchable: boolean;
@@ -19765,11 +20982,12 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             maxHeight?: number;
             maxWidth?: number;
             minHeight?: number;
             minWidth?: number;
-            src?: string;
+            src?: string | any[];
             width?: number;
         }
 
@@ -19788,7 +21006,8 @@ declare namespace webix {
             | 'onTouchEnd'
             | 'onTouchMove'
             | 'onTouchStart'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class video implements webix.ui.baseview {
             adjust(): void;
@@ -19850,6 +21069,7 @@ declare namespace webix {
             autofocus?: boolean;
             body?: string | webix.ui.baseview;
             borderless?: boolean;
+            close?: boolean;
             container?: string | HTMLElement;
             css?: any;
             disabled?: boolean;
@@ -19860,6 +21080,7 @@ declare namespace webix {
             height?: number;
             hidden?: boolean;
             id?: string | number;
+            keyPressTimeout?: number;
             left?: number;
             master?: string;
             maxHeight?: number;
@@ -19900,7 +21121,8 @@ declare namespace webix {
             | 'onTouchStart'
             | 'onViewMove'
             | 'onViewMoveEnd'
-            | 'onViewResize';
+            | 'onViewResize'
+            | 'onViewShow';
 
         class window implements webix.ui.baseview {
             adjust(): void;

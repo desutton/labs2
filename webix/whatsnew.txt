@@ -1,57 +1,123 @@
-Version 6.1.5
+Version 7.2.4 (March 2020)
+==============================
+
+### Fixes 
+
+- align Datatable and CustomScroll to current skin row sizes
+- customized cell editors cannot apply new values
+- color editor cannot apply new value
+
+Version 7.2.3 (March 2020)
+==============================
+
+### Fixes 
+
+- simplify built-in editors logic
+
+Version 7.2.2 (March 2020)
+==============================
+
+### Fixes 
+
+- non-existent font mentions
+- correct width for Segmented options
+- Datatable: touch scroll issue
+
+Version 7.2.1 (March 2020)
+==============================
+
+### Fixes 
+
+- PDF viewer navigation to zero page
+- Colorboard onItemClick event does not fire for selected cells
+
+
+Version 7.2 (February 2020)
+==============================
+
+### Major features
+
+- New File Manager widget
+- Multi-column sorting for Datatable
+- ExcelFilter for Datatable
+- Customization API for Filter widget
+- Export to PDF with styles
+
+Version 7.1.0 (December 2019)
+==============================
+
+### Major features
+
+- Filter widget
+- TextHighlight widget
+- Improved behaviors on touch devices
+
+[Full list of changes and fixes](https://docs.webix.com/desktop__whats_new_7_1.html)
+
+
+Version 7.0.0 (September 2019)
+==============================
+
+### Major features
+
+- [Visual designer tool](https://designer.webix.com)
+- Timeline widget
+- Mention suggest widget
+- Ability to hide/disable options and items across widgets
+
+[Full list of changes and fixes](https://docs.webix.com/desktop__whats_new_7_0.html)
+
+
+Version 6.4 (June 2019)
 ==================
 
-[fix] areaselection in datatable and hidden columns
-[fix] sidebar generates unnecessary popups
-[fix] getSpan api in datatable and hidden columns
-[fix] multicombo doesn't support fitMaster option
-[fix] sparklines break math in datatable 
-[fix] old math references not cleared in datatable
-[fix] incorrect cursor for legend items in chart
-[fix] label positition for textarea view
-[fix] webix.requiere doesn't recognize css files with parameters
-[fix] sometimes tabview renders incorrect when animate:false used
-[fix] export comments widget to pdf and excel
-[fix] input pattern can generate unnecessary onChange event
+### Major features
+
+- .Net Core demos for major widgets
+- AWS S3 backend for FileManager widget
+
+### Minor features
+
+- wjet cli tool update
+- monthHeader property in the Calendar widget
+- drag scroll during column drag-n-drop in the Datatable
+
+[Full list of changes and fixes](http://docs.webix.com/desktop__whats_new_6_4.html)
 
 
-Version 6.1.4
+Version 6.3 (April 2019)
 ==================
 
-[fix] subview not destroyed on parent row deletion
-[fix] number formatting affects data saving logic
-[fix] queryView doesn't collect all nodes in "all" mode
-[fix] forminput and fieldset styling
-[fix] labelPosition:top and forminput
-[fix] there was no way to subclass fieldset of forminput widgets
+### Major features
 
-Version 6.1.3
+- Updated styling for buttons
+- Optional fullscreen mode for all widgets
+- Compatibility with SalesForce
+- Promises for data saving operations
+- Close buttons for Window widget
+
+### Minor features
+
+- Extended grouping functionality
+- Unified API for Datatable column options
+- Mentions in Comments widget
+- Drag-n-drop events for dashboard
+- Ability to style modal boxes
+
+[Full list of changes and fixes](http://docs.webix.com/desktop__whats_new_6_3.html)
+
+Version 6.2 (February 2019)
 ==================
 
-[fix] comments widget can't be fully destroyed
-[fix] incorrect styling for textarea with top label
-[fix] incorrect styling for narrow tree items
-[fix] regression in templates processing in strict mode
-[fix] regression in dynamic scroll swithching in list and dataview widgets
+### Major features
 
-Version 6.1.2
-==================
+- Tooltips are available for all widgets
+- Ability to export charts and images to PDF
+- Improved drag-n-drop
+- webix.proxy, webix.alert and webix.confirm work with promises
+- NodeJs backend for Spreadsheet and FileManager
 
-[fix] regression in export to excel for datatable with complex content in headers
-[fix] incorrect rendering of multicombo after adding a new value
-[fix] incorrect rendering of combo editor while scrolling datatable
-[fix] focus for form with disabled element
-[fix] export to excel for datatable with hidden spans
-
-Version 6.1.1
-==================
-
-[update] CollectValues can fetch visible values only
-[update] select like filters can autofill self with visible values
-[fix] regressions in IE8
-[fix] incorrect behavior of counter with string value
-[fix] using setValue for combo with dupplicate id
-[fix] positions of icons in the comments widget
+[Full list of changes and fixes](http://docs.webix.com/desktop__whats_new_6_2.html)
 
 Version 6.1 (November 2018)
 ==================

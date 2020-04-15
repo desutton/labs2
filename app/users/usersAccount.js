@@ -8,6 +8,7 @@ var $useruuid = 'xxxxxxxx-xxxx-5xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function
 });
 
 var $userId = JSON.parse(decodeURIComponent(document.cookie).substring(5))['UserName']; //Extract out the username from the cookie file
+//var $userId = (JSON.parse(document.cookie).substring());
 //var $userId = "<?php echo $theUserName ?>";
 console.log($userId);
 
@@ -103,13 +104,16 @@ var editor = {
             view: "select",
             name: "users_css",
             id: "users_css",
-            label: "CSS",
+            label: "Colors *(Please logout to take effect)",
             labelPosition: "top",
             labelWidth: "100",
             width: "220",
             options: [
-                {id: "flat.min.css", value: "Basic"},
+                {id: "flat.css", value: "Basic"},
+                {id: "material.css", value: "Gray"},
                 {id: "metro.css", value: "Modern"},
+                {id: "compact.min.css", value: "Compact"},
+                {id: "mini.min.css", value: "Mini"},
                 {id: "contrast.css", value: "ADA"}
             ]
         }

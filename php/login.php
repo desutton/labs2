@@ -60,7 +60,6 @@ if($result != "0"){
     $theUserPass = $result->users_pass;
     $theUserDisplayName = $result->users_displayName;
     $theUserCSS = $result->users_css;
-    //$theUserCookieData = array('UserName'=>$theUserName,'UserDisplayName'=>$theUserDisplayName); //added to try some js out
     $theUserCookieData = array('UserName' => $theUserName, 'UserDisplayName' => $theUserDisplayName, 'UserCSS' => $theUserCSS);
     setcookie($theCookieName, json_encode($theUserCookieData), time() + 28800, "/", $domain, $secure, $httponly); //cookie is good for 8hrs to the "/" whole site
 }else{

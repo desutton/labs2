@@ -1,5 +1,5 @@
 /*
- * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ * <dsCode> Inc. (c) 2020. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
 
 const Datastore = require("nedb");
@@ -21,15 +21,11 @@ function fixID(a) {
     return a;
 }
 
-async
-
-function getProjectsLevel(parent, kids) {
-    const docs = await
-    projects.findAsync({parent});
+async function getProjectsLevel(parent, kids) {
+    const docs = await projects.findAsync({parent});
     if (kids) {
         for (const doc of docs) {
-            const sub = await
-            getProjectsLevel(doc._id, kids);
+            const sub = await getProjectsLevel(doc._id, kids);
             if (sub)
                 doc.data = sub;
         }
@@ -47,40 +43,31 @@ function getProjectsLevel(parent, kids) {
 
 module.exports = function (app, root) {
 
-    app.get(root + "/projects", async(req, res, next) = > {
+    app.get(root + "/projects", async (req, res, next) => {
         try {
             // return all
-            const docs = await getProjectsLevel(0, true
-)
-    ;
-    res.send({
-        parent: 0,
-        data: docs.map(fixID)
+            const docs = await getProjectsLevel(0, true);
+            res.send({
+                parent: 0,
+                data: docs.map(fixID)
+            });
+        } catch (e) {
+            next(e);
+        }
     });
-} catch
-    (e)
-    {
-        next(e);
-    }
-})
-    ;
 
-    app.get(root + "/projects_dynamic", async(req, res, next) = > {
+    app.get(root + "/projects_dynamic", async (req, res, next) => {
         try {
             // return all
             const parent = parseInt(req.query.parent || 0);
-    const docs = await
-    getProjectsLevel(parent, false);
-    res.send({
-        parent: parent,
-        data: docs.map(fixID)
+            const docs = await getProjectsLevel(parent, false);
+            res.send({
+                parent: parent,
+                data: docs.map(fixID)
+            });
+        } catch (e) {
+            next(e);
+        }
     });
-} catch
-    (e)
-    {
-        next(e);
-    }
-})
-    ;
 
 };

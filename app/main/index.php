@@ -123,16 +123,22 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/appVersion.php';  //
                                             id: "customerList",
                                             icon: "fas fa-list-alt",
                                             iFrame: "../customers/customerList.php"
+                                        },
+                                        {
+                                            value: "Customer Portal",
+                                            id: "customerPortal",
+                                            icon: "fas fa-file-pdf",
+                                            iFrame: "../samplewatch/reportPortal.php"
                                         }
                                     ]
                                 },
-                                {
-                                    id: 4, value: "Invoices", icon: "fas fa-file-invoice-dollar",
-                                    submenu: [
-                                        {
-                                            value: "New Invoice",
-                                            id: "invoiceMaker",
-                                            icon: "fas fa-plus-circle",
+                            {
+                                id: 4, value: "Invoices", icon: "fas fa-file-invoice-dollar",
+                                submenu: [
+                                    {
+                                        value: "New Invoice",
+                                        id: "invoiceMaker",
+                                        icon: "fas fa-plus-circle",
                                             iFrame: "../invoices/newInvoices.php"
                                         },
                                         {

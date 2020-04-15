@@ -43,11 +43,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/accessApp.php'
 </head>
 <body class="des_DesktopBackground">
 
-<!-- copied the code from "http://www.w3schools.com/canvas/canvas_clock.asp" -->
+<!-- This code is used under license from "http://www.w3schools.com/canvas/canvas_clock.asp" -->
 <div class="des_DesktopInfo">
     <canvas id="canvas" width="100" height="100" style="background-color:transparent"></canvas>
     <script src="/labs2/supportjs/clock.js" type="text/javascript"></script>
 </div>
+<!-- End of code -->
+
 <div class="des_DesktopInfo">
     <br/>Hello: <b><?php echo($theDisplayName); ?></b>
     <br/>You are logged in as: <b><?php echo($theUserName); ?></b>

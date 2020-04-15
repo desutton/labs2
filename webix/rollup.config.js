@@ -1,5 +1,5 @@
 /*
- * <dsCode> Inc. (c) 2019. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ * <dsCode> Inc. (c) 2020. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
 
 import less from "rollup-plugin-less";
@@ -31,9 +31,10 @@ module.exports = function (cli) {
         license({
             sourceMap: true,
             banner: `@license
-webix <%= pkg.productName %> v.<%= pkg.version %>
-This software is allowed to use under GPL or you need to obtain Commercial License 
- to use it in non-GPL project. Please contact sales@webix.com for details`
+Webix <%= pkg.productName %> v.<%= pkg.version %>
+This software is covered by Webix Commercial License.
+Usage without proper license is prohibited.
+(c) XB Software Ltd.`
         })
     ];
 
@@ -49,7 +50,9 @@ This software is allowed to use under GPL or you need to obtain Commercial Licen
                 [
                     "@babel/preset-env",
                     {
-                        targets: {"ie": "8"}
+                        loose: true,
+                        targets: {"ie": "8"},
+                        exclude: ["transform-function-name"]
                     }
                 ]
             ]
