@@ -6,8 +6,8 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/header.php'; ?>
 
-Sample Submission Page
+Customer Support
+<script src="../../supportjs/qrious.js" type="text/javascript"></script>
 <script src="newsamplesubmission.js" type="text/javascript"></script>
-
 </body>
 </html>

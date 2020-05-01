@@ -60,6 +60,9 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/accessApp.php'
     <br/>Your browser type: <b id="desweb"></b>
     <br/>You are using a <b id="hardware">computer</b>
     <br/>Current Script: <b><?php echo $_SERVER['SCRIPT_NAME']; ?></b>
+    <br/>Framework version: <b>
+        <script type="text/javascript">document.write(webix.version);</script>
+    </b>
     <br/>
 </div>
 <script>document.getElementById("desweb").innerHTML = navigator.appCodeName + " " + navigator.appVersion.slice(79, 106);</script>

@@ -57,15 +57,21 @@
     padding-left: 10px;
 }
 .des_select {
-    background:transparent;
-    height:24px;
-    border:1px solid #d8d8d8;
-    width:226px;
+    background: transparent;
+    height: 24px;
+    border: 1px solid #d8d8d8;
+    width: 226px;
     -webkit-appearance: none;
     font-weight: bold;
     font-family: sans-serif;
     font-size: 1.2em;
     color: #777777
+}
+
+.des_iconLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .des_logo{

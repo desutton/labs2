@@ -16,7 +16,6 @@ console.log($userId);
 var tabbar = {
     view: "toolbar",
     id: "userProfileSettingsToolbar",
-    margin: -4,
     cols: [
         //{view: "button", value: "Add", width: 70, click: "add_row"},
 
@@ -140,7 +139,7 @@ webix.ui({
 }).show();
 
 /////////////////////////// Loads window with users data ///////////////////////////
-$$("userDetail").load("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_firstname,users_lastname,users_name,users_displayName,users_pass,users_employeeId,users_UUID,users_css&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1");
+$$("userDetail").load("/labs2/php/api_methods/SELECTz.php?tableName=usersCustomer&columnNames=*&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1");
 
 /////////////////////////// Loads window with users data ///////////////////////////
 function delete_row() {
@@ -148,6 +147,7 @@ function delete_row() {
     webix.message({text: "Deleted"}); //Optional UI to display that something happened
     window.setTimeout(refresh_row, 1000);
 }
+
 /////////////////////////// Updates database with users data ///////////////////////////
 function update_row() {
     var firstname = $$("users_firstname").getValue();
@@ -159,7 +159,7 @@ function update_row() {
     var useruuid = $$("users_UUID").getValue();
     var usercss = $$("users_css").getValue();
     var dataSumit2Users = '{"users_firstname":"' + firstname + '", "users_lastname":"' + lastname + '", "users_name":"' + username + '", "users_displayName":"' + displayname + '", "users_employeeId":"' + employeeid + '","users_css":"' + usercss + '", "users_pass":"' + userpass + '"}';
-    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=users&JSONdata=" + dataSumit2Users + "&theWhereColumn=users_UUID&theUUID=" + useruuid);
+    webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=usersCustomer&JSONdata=" + dataSumit2Users + "&theWhereColumn=users_UUID&theUUID=" + useruuid);
 //    console.log("JSON DATA being sent to the server " + theSubmitDataRAW2); //just a debug code
     webix.message({text: "Saved"}); //Optional UI to display that something happened
     window.setTimeout(refresh_row, 1000);
@@ -169,7 +169,7 @@ function update_row() {
 function refresh_row() {
     //console.log("hello");
     webix.message({text: "Reloading..."});
-    webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=users&columnNames=users_firstname,users_lastname,users_name,users_displayName,users_pass,users_employeeID,users_UUID,users_css&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1", function (text, data) {
+    webix.ajax().get("/labs2/php/api_methods/SELECTz.php?tableName=usersCustomer&columnNames=users_firstname,users_lastname,users_name,users_displayName,users_pass,users_employeeID,users_UUID,users_css&selectColumn=users_name&selectData=" + $userId + "&dataName=data&select=1", function (text, data) {
         var userAuthor = text;
         userAuthor = userAuthor.replace('[', "");
         userAuthor = userAuthor.replace(']', "");

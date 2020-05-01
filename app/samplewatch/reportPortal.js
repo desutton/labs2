@@ -1,85 +1,38 @@
 /*
  * <dsCode> Inc. (c) 2020. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
-var navMenuList = [{id: "1", value: "Reports"}, {id: "2", value: "New Submission"}, {id: "3", value: "Settings"}];
-var custFolders = [{
-    id: "1",
-    value: "/",
-    open: true,
-    data: [{id: "1.1", value: "New Reports"}, {id: "1.2", value: "Old Reports"}]
-}];
-
-var custRec = [{
-    "cusRec_id": "1",
-    "cusRec_UUID": "0",
-    "cusRec_lotNumber": "ABC123",
-    "cusRec_trackingNumber": "DESTest1.1",
-    "cusRec_customerName": "DigitaleSolutions",
-    "cusRec_ai": "2 Active Ingredients",
-    "data": [{
-        "cusRec_id": "18",
-        "cusRec_parentID": "1",
-        "cusRec_UUID": "0",
-        "cusRec_lotNumber": "ABC123",
-        "cusRec_trackingNumber": "DESTest1.1",
-        "cusRec_customerName": "DigitaleSolutions",
-        "cusRec_ai": "ZPac",
-        "cusRec_recievedDate": "2020-04-1200:00:00",
-        "cusRec_recievedUser": "MHENRY",
-        "cusRec_reportDate": "2020-04-1300:00:00",
-        "cusRec_reportedUser": "KMARTIN",
-        "cusRec_tests": "POT,SIA",
-        "cusRec_notes": "Fourscoreandsevenyearsago",
-        "cusRec_folder": null,
-        "cusRec_uiStatus": "1",
-        "cusRec_paymentStatus": "1",
-        "cusRec_status": "1"
-    }, {"cusRec_lotNumber": "ABC123", "cusRec_ai": "Aspirin"}],
-    "cusRec_recievedDate": "2020-04-1200:00:00",
-    "cusRec_recievedUser": "MHENRY",
-    "cusRec_reportDate": "2020-04-1300:00:00",
-    "cusRec_reportedUser": "KMARTIN",
-    "cusRec_tests": "POT,SIA",
-    "cusRec_notes": "Fourscoreandsevenyearsago",
-    "cusRec_folder": null,
-    "cusRec_uiStatus": "1",
-    "cusRec_paymentStatus": "1",
-    "cusRec_status": "1"
-}, {
-    "cusRec_id": "2",
-    "cusRec_UUID": "0",
-    "cusRec_lotNumber": "321CBA",
-    "cusRec_trackingNumber": "DESTest1.2",
-    "cusRec_customerName": "DigitaleSolutions",
-    "cusRec_ai": "Amoxicillin",
-    "cusRec_recievedDate": "2020-04-1200:00:00",
-    "cusRec_recievedUser": "MHENRY",
-    "cusRec_reportDate": "2020-04-1200:00:00",
-    "cusRec_reportedUser": "LWESTER",
-    "cusRec_tests": "FUN",
-    "cusRec_notes": "WethePeople...",
-    "cusRec_folder": null,
-    "cusRec_uiStatus": "1",
-    "cusRec_paymentStatus": "1",
-    "cusRec_status": "1"
-}];
 
 
-const theCustomerReportList = "/labs2/php/api_methods/SELECTz.php?columnNames=customerRecords.cusRec_id,customerRecords.cusRec_UUID,customerRecords.cusRec_lotNumber,customerRecords.cusRec_trackingNumber,customerRecords.cusRec_customerName,customerRecords.cusRec_ai,customerRecords.cusRec_recievedDate,customerRecords.cusRec_recievedUser,customerRecords.cusRec_reportDate,customerRecords.cusRec_reportedUser,customerRecords.cusRec_tests,customerRecords.cusRec_notes,customerRecords.cusRec_folder,customerRecords.cusRec_uiStatus,customerRecords.cusRec_paymentStatus,customerRecords.cusRec_status&db_name=labs&tableName=customerRecords&dataName=data&select=5";
+///////////////////////////////////////////////////////////////////////////////
+///                          START OF Global Vars                           ///
 
-//UI Elements
-const uiSubmissionPanel = {
+var gv_customerName = "Digital eSolutions";
+var gv_navMenuList = [{id: "1", value: "Reports"}, {id: "2", value: "New Submission"}, {id: "3", value: "Settings"}];
+var gv_custFolders = "/labs2/php/api_methods/SELECTz.php?tableName=customerFolders&columnNames=custFolders_id,custFolders_UUID%20AS%20id,custFolders_folderName%20AS%20value,custFolders_parentFolder&parentid=custFolders_parentFolder&childid=custFolders_id&selectColumn=custFolder_owner&selectData=" + gv_customerName + "&select=100&db_name=labs";
+var gv_theCustomerReportList = "/labs2/php/api_methods/SELECTz.php?tableName=customerRecords&columnNames=*&parentid=custRec_parentId&childid=cusRec_id&selectColumn=cusRec_customerName&selectData=" + gv_customerName + "&select=100&db_name=labs";
+
+///                        END OF Global VARS                               ///
+///////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////
+///                          START OF UI Vars                               ///
+
+const uigSubmissionPanel = {
     view: "treetable",
     id: "customerRecordList",
     select: "row",
     scrollX: false,
-    data: custRec,
-    //url: theCustomerReportList,
+    filterMode: {
+        level: false,
+        showSubItems: false
+    },
+    url: gv_theCustomerReportList,
     yCount: 10,
     columns: [
         {
             id: "cusRec_lotNumber",
-            header: "Lot Number",
+            header: ["Lot Number", {content: "textFilter"}],
             fillspace: true,
             sort: "string",
             adjust: "data",
@@ -88,14 +41,14 @@ const uiSubmissionPanel = {
         },
         {
             id: "cusRec_ai",
-            header: "Active Ingredient",
+            header: ["Active Ingredient", {content: "textFilter"}],
             sort: "string",
             adjust: "data",
             fillspace: true,
             hidden: false
         }, {
             id: "cusRec_trackingNumber",
-            header: "Tracking Number",
+            header: ["Tracking Number", {content: "textFilter"}],
             sort: "string",
             adjust: "data",
             fillspace: true,
@@ -107,7 +60,7 @@ const uiSubmissionPanel = {
             sort: "date",
             fillspace: true,
             hidden: false,
-            format: webix.Date.dateToStr("%M-%d-%Y")
+            format: webix.Date.dateToStr("%M-%d-%Y %g:%i %a")
         },
         {
             id: "cusRec_reportDate",
@@ -124,11 +77,15 @@ const uiSubmissionPanel = {
             sort: "string",
             fillspace: false,
             hidden: false
-        }
+        },
+        {id: "cusRec_UUID", hidden: true}
     ]
 };
-const uiDetailPanel = {
+
+
+const uigDetailPanel = {
     view: "form",
+    id: "receivingView",
     minHeight: 380,
     autoheight: false,
     elements: [
@@ -177,6 +134,7 @@ const uiDetailPanel = {
         },
         {
             view: "button",
+            id: "btPrintReport",
             value: "Print Report",
             css: "webix_primary",
             align: "center",
@@ -186,6 +144,89 @@ const uiDetailPanel = {
     ]
 };
 
+const uigPOTPanel = {
+    template: "Hello Potency",
+    id: "potView",
+    minHeight: 380,
+    autoheight: false
+
+};
+
+const uigMICROPanel = {
+    template: "Hello Micro",
+    id: "microView",
+    minHeight: 380,
+    autoheight: false,
+
+};
+
+const uigSpChemPanel = {
+    template: "Hello Special Chem",
+    id: "chemView",
+    minHeight: 380,
+    autoheight: false
+
+};
+
+const uigBillingPanel = {
+    template: "Hello Billing",
+    id: "billView",
+    minHeight: 380,
+    autoheight: false
+
+};
+
+const uiTrendingPanel = {
+    template: "Hello Trending",
+    id: "trendView",
+    minHeight: 380,
+    autoheight: false
+
+};
+
+
+const uiDataDetail = {
+    cells: [
+        uigDetailPanel,
+        uigMICROPanel,
+        uigPOTPanel,
+        uigSpChemPanel,
+        uigBillingPanel,
+        uiTrendingPanel
+    ]
+};
+
+const uigDetailTabbar = {
+    view: "tabbar", id: "tabbar", multiview: true, options: [
+        {value: '<span class="fas fa-truck"></span>Receiving', id: 'receivingView'},
+        {value: '<span class="fas fa-bug"></span> Microbiology', id: 'microView'},
+        {value: '<span class="fas fa-flask"></span> Potency', id: 'potView'},
+        {value: '<span class="fas fa-microscope"></span> Special Chem', id: 'chemView'},
+        {value: '<span class="fas fa-dollar-sign"></span>Billing', id: 'billView'},
+        {value: '<span class="fas fa-chart-line"></span> Trending', id: 'trendView'}
+    ]
+};
+
+const uigFolderList = {
+    view: "tree",
+    id: "uiFolderList",
+    width: 0,
+    select: "true",
+    activeTitle: false,
+    url: gv_custFolders
+
+
+};
+
+///                        END OF UI VARS                                   ///
+///////////////////////////////////////////////////////////////////////////////
+
+
+//***************************************************************************//
+//                                                                           //
+//                               UI CONTROL                                  //
+//                                                                           //
+//***************************************************************************//
 webix.ui(
     {
         view: "window",
@@ -218,14 +259,15 @@ webix.ui(
                     cols: [
                         {
                             width: 217, rows: [
-                                {view: "tree", data: custFolders, width: 0},
-                                {view: "sidebar", data: navMenuList, width: 0}
+                                uigFolderList,
+                                {view: "sidebar", data: gv_navMenuList, width: 0}
                             ]
                         },
                         {
                             rows: [
-                                uiSubmissionPanel,
-                                uiDetailPanel
+                                uigSubmissionPanel,
+                                uigDetailTabbar,
+                                uiDataDetail
                             ]
                         }
                     ]
@@ -256,3 +298,21 @@ $$('customerRecordList').attachEvent("onAfterSelect", function (id) {
     $$("cusRec_notes").setValue(this.getItem(id).cusRec_notes);
 });
 ///////////////////////////////////////////////////////////////////////////////
+
+//******************** Datagrid Filter            *******************//
+$$('uiFolderList').attachEvent("onItemClick", function (id) {
+    var value = this.getItem(id).id;
+    if (value === 'root') {
+        $$("customerRecordList").filter()
+    } else {
+        $$("customerRecordList").filter(function (obj) {
+            return obj.cusRec_folder.indexOf(value) !== -1;
+        })
+    }
+});
+///////////////////////////////////////////////////////////////////////////////
+
+/////////// Just an experiment to see how hiding tabs works
+$$('btPrintReport').attachEvent("onItemClick", function () {
+    $$("tabbar").hideOption("microView");
+})
