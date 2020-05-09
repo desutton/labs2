@@ -59,6 +59,7 @@ $theOrderColumn = $_GET['sortby']; //The column name you want to sort by
 $theOrderSort = $_GET['sort']; //How do you want to sort ASC or DESC?
 $theOperator = $_GET['operator'];
 $theUserID = $_GET['usenid']; //Collect the user id for logging
+$theWhereCause = $_GET['whereclause']; //Complex WHERE clause can be send in UML form
 $theTreeParentID = $_GET['parentid']; //Get the name of the field used as the parent id
 $theTreeChildID = $_GET['childid']; //Get the name of the field used as the child ID
 
@@ -128,6 +129,11 @@ switch ($pickSQL) {
         $x = 1;
         standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
         break;
+    case 9:
+        $sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " WHERE " . $theWhereCause;
+        $x = 1;
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        break;
     case 100:
         $sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " WHERE " . $theSelectColumn . $theOperator . "'" . $theSelectColumnValue . "'";
         nestedJSONRequest($sql_query, $hostname, $username, $password, $DB_NAME, $theTreeParentID, $theTreeChildID, $sysmode, $filename, $timestamp, $theUserName, $clientIP);
@@ -170,8 +176,10 @@ function standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $cli
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // perform the JSON encode in the EXTJS format
-        $JSON_RESULTS = json_encode($results);
-        echo($JSON_RESULTS); //Send back to JS the results from the db and server
+        $JSON_RESULTS = json_encode($results);                 ///*************** I CHANGED THE JSON CODE HERE!!!! Just remove array_values() *******///
+        //$JSON_RESULTS = json_encode(array_values($results)); ///*************** I CHANGED THE JSON CODE HERE!!!! Just remove array_values() *******///
+        //echo($JSON_RESULTS); //Send back to JS the results from the db and server   This is original code
+        echo str_replace(array('[', ']'), '', htmlspecialchars($JSON_RESULTS, ENT_NOQUOTES)); ///*************** I CHANGED THE JSON CODE HERE!!!! Just remove array_values() *******///
 //    file_put_contents($filename, $JSON_RESULTS . "\r", FILE_APPEND | LOCK_EX);
     } // Out put the error to the file
     catch (PDOException $errorMess) {

@@ -10,6 +10,9 @@ var gv_customerName = "Digital eSolutions";
 var gv_navMenuList = [{id: "1", value: "Reports"}, {id: "2", value: "New Submission"}, {id: "3", value: "Settings"}];
 var gv_custFolders = "/labs2/php/api_methods/SELECTz.php?tableName=customerFolders&columnNames=custFolders_id,custFolders_UUID%20AS%20id,custFolders_folderName%20AS%20value,custFolders_parentFolder&parentid=custFolders_parentFolder&childid=custFolders_id&selectColumn=custFolder_owner&selectData=" + gv_customerName + "&select=100&db_name=labs";
 var gv_theCustomerReportList = "/labs2/php/api_methods/SELECTz.php?tableName=customerRecords&columnNames=*&parentid=custRec_parentId&childid=cusRec_id&selectColumn=cusRec_customerName&selectData=" + gv_customerName + "&select=100&db_name=labs";
+var gv_theParentFolderNumber = webix.ajax("/labs2/php/api_methods/SELECTz.php?tableName=customerFolders&columnNames=custFolders_id&whereclause=custFolders_parentFolder%3D0%20AND%20custFolder_owner%3D%20'" + gv_customerName + "'&select=9&db_name=labs");
+console.log(gv_theParentFolderNumber.custFolders_id); //This isn't working. It's not a JSON array I think.
+
 
 ///                        END OF Global VARS                               ///
 ///////////////////////////////////////////////////////////////////////////////
@@ -21,8 +24,11 @@ var gv_theCustomerReportList = "/labs2/php/api_methods/SELECTz.php?tableName=cus
 const uigSubmissionPanel = {
     view: "treetable",
     id: "customerRecordList",
-    select: "row",
+    //select: "row",
     scrollX: false,
+    select: true,
+    multiselect: "level",
+    drag: "move",
     filterMode: {
         level: false,
         showSubItems: false
@@ -211,11 +217,45 @@ const uigFolderList = {
     view: "tree",
     id: "uiFolderList",
     width: 0,
-    select: "true",
     activeTitle: false,
+    select: true,
+    multiselect: "level",
+    drag: "move",
     url: gv_custFolders
 
 
+};
+
+const uigFolderMaker = {
+    view: "form",
+    rows: [
+        {
+            cols: [
+                {
+                    view: "text",
+                    name: "uiFolderName",
+                    id: "uiFolderName",
+                    placeholder: "Untitled Folder",
+                    inputWidth: 125
+                },
+                {
+                    view: "button",
+                    type: "icon",
+                    icon: "fas fa-folder-plus",
+                    id: "uiNewFolder",
+                    autoHeight: true,
+                    width: 50,
+                    align: "center",
+                    click: "uiNewFolder"
+                }
+            ]
+        },
+        {
+            view: "button",
+            css: "webix_primary",
+            label: "Save"
+        }
+    ]
 };
 
 ///                        END OF UI VARS                                   ///
@@ -260,6 +300,7 @@ webix.ui(
                         {
                             width: 217, rows: [
                                 uigFolderList,
+                                uigFolderMaker,
                                 {view: "sidebar", data: gv_navMenuList, width: 0}
                             ]
                         },
@@ -312,7 +353,23 @@ $$('uiFolderList').attachEvent("onItemClick", function (id) {
 });
 ///////////////////////////////////////////////////////////////////////////////
 
+//******************** New Folder Maker *************************************//
+function uiNewFolder() {
+    var $useruuid = 'xxxxxxxx-xxxx-5xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c === 'x' ? r : r & 0x3 | 0x8;
+        return v.toString(16);
+    });
+    var folderName = $$("uiFolderName").getValue();
+    var parentFolder = gv_theParentFolderNumber;
+    var folderOwner = gv_customerName;
+    var newFolderDetails = '{"success":true,"data":[{"custFolders_UUID":"' + $useruuid + '", "custFolders_folderName":"' + folderName + '", "custFolders_parentFolder":"' + parentFolder + '", "custFolder_owner":"' + folderOwner + '"}]}';
+
+    webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=customerFolders&db_name=labs&JSONdata=" + newFolderDetails);
+};
+///////////////////////////////////////////////////////////////////////////////
+
 /////////// Just an experiment to see how hiding tabs works
 $$('btPrintReport').attachEvent("onItemClick", function () {
     $$("tabbar").hideOption("microView");
 })
+
