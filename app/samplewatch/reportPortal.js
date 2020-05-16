@@ -6,13 +6,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///                          START OF Global Vars                           ///
 
-var gv_customerName = "Digital eSolutions";
+var gv_theUserName = JSON.parse(decodeURIComponent(document.cookie).substring(5))['UserName'];
+var gv_customerName = sessionStorage.getItem('users_company'); //"Digital eSolutions";
+var gv_theCustomerParentFolder = sessionStorage.getItem('users_2group');
 var gv_navMenuList = [{id: "1", value: "Reports"}, {id: "2", value: "New Submission"}, {id: "3", value: "Settings"}];
 var gv_custFolders = "/labs2/php/api_methods/SELECTz.php?tableName=customerFolders&columnNames=custFolders_id,custFolders_UUID%20AS%20id,custFolders_folderName%20AS%20value,custFolders_parentFolder&parentid=custFolders_parentFolder&childid=custFolders_id&selectColumn=custFolder_owner&selectData=" + gv_customerName + "&select=100&db_name=labs";
 var gv_theCustomerReportList = "/labs2/php/api_methods/SELECTz.php?tableName=customerRecords&columnNames=*&parentid=custRec_parentId&childid=cusRec_id&selectColumn=cusRec_customerName&selectData=" + gv_customerName + "&select=100&db_name=labs";
-var gv_theParentFolderNumber = webix.ajax("/labs2/php/api_methods/SELECTz.php?tableName=customerFolders&columnNames=custFolders_id&whereclause=custFolders_parentFolder%3D0%20AND%20custFolder_owner%3D%20'" + gv_customerName + "'&select=9&db_name=labs");
-console.log(gv_theParentFolderNumber.custFolders_id); //This isn't working. It's not a JSON array I think.
 
+console.log("Parent Folder is: " + gv_theCustomerParentFolder);
 
 ///                        END OF Global VARS                               ///
 ///////////////////////////////////////////////////////////////////////////////
@@ -249,14 +250,18 @@ const uigFolderMaker = {
                     click: "uiNewFolder"
                 }
             ]
-        },
-        {
-            view: "button",
-            css: "webix_primary",
-            label: "Save"
         }
     ]
 };
+
+/*const uigParentFolder = {
+    view:"text",
+    id: "gv_theCustomerParentFolder",
+    value:"gv_theCustomerParentFolder",
+    hidden: true
+};
+*/
+
 
 ///                        END OF UI VARS                                   ///
 ///////////////////////////////////////////////////////////////////////////////
@@ -279,6 +284,8 @@ webix.ui(
             view: "toolbar", margin: -4, cols: [
                 {view: "icon", icon: "fas fa-prescription"},
                 {view: "label", label: "CUSTOMER DASHBOARD", css: {"font-weight": "bold"}},
+                {view: "label", id: "gv_theCustomerName", label: gv_customerName},
+                //{view: "label", id:"gv_theCustomerNames", label: gv_theUserName},
                 {
                     view: "icon", icon: "fas fa-times", click: function () {
                         $$('CustomerPortal').close();
@@ -301,6 +308,7 @@ webix.ui(
                             width: 217, rows: [
                                 uigFolderList,
                                 uigFolderMaker,
+                                //uigParentFolder,
                                 {view: "sidebar", data: gv_navMenuList, width: 0}
                             ]
                         },
@@ -360,16 +368,35 @@ function uiNewFolder() {
         return v.toString(16);
     });
     var folderName = $$("uiFolderName").getValue();
-    var parentFolder = gv_theParentFolderNumber;
+    var parentFolder = gv_theCustomerParentFolder;
     var folderOwner = gv_customerName;
     var newFolderDetails = '{"success":true,"data":[{"custFolders_UUID":"' + $useruuid + '", "custFolders_folderName":"' + folderName + '", "custFolders_parentFolder":"' + parentFolder + '", "custFolder_owner":"' + folderOwner + '"}]}';
 
     webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=customerFolders&db_name=labs&JSONdata=" + newFolderDetails);
+    refresh_row();
 };
+
+function refresh_row() {
+    console.log("Refreshing Folder List");
+    $$("uiFolderList").clearAll();
+    $$("uiFolderList").load(gv_custFolders);
+    $$("uiFolderList").refresh();
+    $$("uiFolderName").setValue("");
+    webix.message({text: "Reloading..."});
+
+
+};
+///////////////////////////////////////////////////////////////////////////////
+
+//******************** Delete Folder Maker *************************************//
+$$('uiFolderList').attachEvent("onDragOut", function (context, e) {
+    var value = this.getItem(context.target);    //// THIS IS WHERE I LEFT OFF
+    webix.message({text: value});
+    //$$("uiFolderList").remove(value);
+});
 ///////////////////////////////////////////////////////////////////////////////
 
 /////////// Just an experiment to see how hiding tabs works
 $$('btPrintReport').attachEvent("onItemClick", function () {
     $$("tabbar").hideOption("microView");
-})
-
+});

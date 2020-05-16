@@ -4,5 +4,5 @@
 
 var $theAppVersion = {
 
-    verNum: "LABS2 v.11_4-19"
+    verNum: "LABS2 v.5-20-2020"
 };

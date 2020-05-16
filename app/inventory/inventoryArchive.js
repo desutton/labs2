@@ -1430,7 +1430,7 @@ function buildJSONDataTransport(lineSelector, lineSelectorBox, lineSelectorBag, 
     console.log(theSubmitDataRAW);
     console.log("Changed the JobLine id to: " + lineSelector);
 //// AJAX URL that sends data to the PHP API
-    //// ****** WARNING ****** This is an asynchronous transmission. There is no guaranty that the first will complete before the second starts
+    //// ****** WARNING ****** This is an asynchronous transmission. There is no guarantee that the first will complete before the second starts
     webix.ajax().get("/labs2/php/api_methods/UPDATEz.php?db_name=LABSPRD&tableName=JobLines&JSONdata=" + theSubmitDataForJobLine + "&theWhereColumn=id&theUUID=" + lineSelectorJobLine_id);
     webix.ajax().get("/labs2/php/api_methods/INSERT.php?db_name=labs&tableName=archives&JSONdata=" + theSubmitDataRAW);
 //// User conformation that it did something

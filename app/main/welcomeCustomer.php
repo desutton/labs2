@@ -1,6 +1,6 @@
 <?php
 /**
- * <dsCode> Inc. (c) 2016. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
+ * <dsCode> Inc. (c) 2020. This copyright is based on the Apache License 2.0. Please contact David Sutton for use of this software.
  */
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -10,12 +10,17 @@
 /// during reloads and allows for the individual apps to be separated
 /// in memory, from the main web-app. The parent-child relationship of
 /// the app back to this background app also allows certain var to be
-///  passed from one app to another - if done correctly.
-///
+/// passed from one app to another - if done correctly. Or you can just
+/// use the session storage.
 ///
 ///////////////////////////////////////////////////////////////////////////////
 $theUserName = $_GET['users_name'];  // Grab the user name from the cookieMonster
-include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/appVersion.php';  //
+$pickSQL = 2;       // getCustomerInfo needs vars to execute. Since you can't //
+$JSONswitch = true; // send URL parameters with PHP INCLUDE the vars are set  //
+// here before the call to getCustomerInfo                //
+include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/appVersion.php';  // Grab the app's version
+include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/api_methods/getCustomerInfo.php';  // Sets the JS Browser Session Storage
+
 ?>
 <html>
 <header>
@@ -90,7 +95,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/appVersion.php';  //
                             id: 2,
                             value: "Settings",
                             icon: "fas fa-cogs",
-                            iFrame: "../users/index.php",
+                            iFrame: "../users/CustUsersAccount.php",
                             css: "des_menuLink",
                             subMenuPos: "right",
                             submenu: [
@@ -110,7 +115,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/labs2/php/resources/appVersion.php';  //
                         },
 
                         {
-                            id: 3, value: "Apps", icon: "fas fa-users",
+                            id: 3, value: "Apps",
+                            icon: "fas fa-users",
+                            iFrame: "../samplewatch/reportPortal.php",
+                            css: "des_menuLink",
+                            subMenuPos: "right",
                             submenu: [
                                 {
                                     value: "Add Customer",

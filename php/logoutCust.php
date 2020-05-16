@@ -14,5 +14,6 @@ setcookie($theCookieName, "", time() - 3600, "/");
 <html>
 <head>
     <meta http-equiv="refresh" content="1; url=../default.html">
+    <script>sessionStorage.clear();</script>
 </head>
 </html>
