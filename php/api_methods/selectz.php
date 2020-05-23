@@ -62,6 +62,7 @@ $theUserID = $_GET['usenid']; //Collect the user id for logging
 $theWhereCause = $_GET['whereclause']; //Complex WHERE clause can be send in UML form
 $theTreeParentID = $_GET['parentid']; //Get the name of the field used as the parent id
 $theTreeChildID = $_GET['childid']; //Get the name of the field used as the child ID
+$theJSONBrackets = $_GET['bracket']; //Boolean to add brackets to the JSON
 
 //$theTreeParentID="custRec_parentId";
 //$theTreeChildID="cusRec_id";
@@ -83,32 +84,32 @@ switch ($pickSQL) {
 	case 1:
 		$sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " WHERE " . $theSelectColumn . $theOperator . "'" . $theSelectColumnValue . "'";
         $x = 1;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
 		break;
 	case 2:
 		$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName." WHERE ".$theSelectColumn." LIKE '".$theSelectColumnValue."%'";
         $x = 1;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
 		break;	
 	case 3:
 		$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName." LIMIT ".$rowLimits;
         $x = 1;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
 		break;
 	case 4: //Used to build the DataTree
 		$sql_query = "SELECT ".$theColumnSelection." AS 'value' FROM ".$theTableName." INNER JOIN ".$theJoinTable." ON ".$theJoinColumn." = ".$theJoinColumnValue." ORDER BY ".$theOrderColumn." ".$theOrderSort." LIMIT ".$rowLimits;
         $x = 1;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
 		break;
 	case 5:
 		$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName;
         $x = 1;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
 		break;
 	case 6:
 		$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName." ORDER BY cust_company ASC";
         $x = 1;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
 		break;
 	case 7: //Used to build the DataTree
         $theColumnSelection = "customers.cust_company,invoice.invoice_paid,invoice.invoice_invoiceDate,invoice.invoice_invoiceNumber,invoice.invoice_UUID";
@@ -122,37 +123,37 @@ switch ($pickSQL) {
         //$sql_query = "SELECT ".$theColumnSelection." FROM ".$theTableName." JOIN ".$theJoinTable." ON ".$theJoinColumn." = ".$theJoinColumnValue." ORDER BY ".$theOrderColumn." ".$theOrderSort." LIMIT ".$rowLimits;
         $sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " JOIN " . $theJoinTable . " ON " . $theJoinColumn . " = " . $theJoinColumnValue . " ORDER BY " . $theJoinColumnValue1 . " ASC, " . $theJoinColumnValue2 . " ASC, " . $theJoinColumnValue3 . " ASC ";
         $x = 1;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
         break;
     case 8:
         $sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " INNER JOIN " . $theJoinTable . " ON " . $theJoinColumn . " = " . $theJoinColumnValue . " WHERE " . $theSelectColumn . $theOperator . "'" . $theSelectColumnValue . "'" . " ORDER BY " . $theOrderColumn . " " . $theOrderSort . " LIMIT " . $rowLimits;
         $x = 1;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
         break;
     case 9:
         $sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " WHERE " . $theWhereCause;
         $x = 1;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
         break;
     case 100:
         $sql_query = "SELECT " . $theColumnSelection . " FROM " . $theTableName . " WHERE " . $theSelectColumn . $theOperator . "'" . $theSelectColumnValue . "'";
-        nestedJSONRequest($sql_query, $hostname, $username, $password, $DB_NAME, $theTreeParentID, $theTreeChildID, $sysmode, $filename, $timestamp, $theUserName, $clientIP);
+        nestedJSONRequest($sql_query, $hostname, $username, $password, $DB_NAME, $theTreeParentID, $theTreeChildID, $sysmode, $filename, $timestamp, $theUserName, $clientIP, $theJSONBrackets);
         break;
 
     case 1000: //Method case
         //$sql_query = "SELECT activeIngredient.ai_name, activeIngredient.ai_description, jobs.jobs_name,	jobs.jobs_dueDate, jobs.jobs_modifyDate, jobs.jobs_createDate, jobs.jobs_assignment, jobs.jobs_2accessLevel, jobs.jobs_2group, jobs.jobs_2userLog, methodCalculation.methodC_areaSamplePeak, methodCalculation.methodC_areaStandardPeak, methodCalculation.methodC_amountInSample, methodCalculation.methodC_amountOfSample, methodCalculation.methodC_calcPotency, methodCalculation.methodC_calcPotencyPercent, methodCalculation.methodC_targetPotency, methodCalculation.methodC_calcPotencyPercentOfPotencyTarget, methodCalculation.methodC_targetPotencyPercent, methodCalculation.methodC_calcPotencyPercentOfPotencyTargetPercent, methodCalculation.methodC_mixSampleConcetration, methodCalculation.methodC_concentrationStandard, methodCalculation.methodC_dilutionFactor, customers.cust_company, customers.cust_customerNumber FROM method INNER JOIN activeIngredient ON method.method_2activeIngredient = activeIngredient.ai_UUID INNER JOIN jobs ON method.method_2jobs = jobs.jobs_UUID INNER JOIN methodProperties ON method.method_2methodProperties = methodProperties.methodP_UUID INNER JOIN methodCalculation ON method.method_2Calculation = methodCalculation.methodC_UUID INNER JOIN customers ON method.method_2customer = customers.cust_UUID";
         $x = 1;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
         break;
 
     default:
         $sql_query = "SELECT * FROM `appinfo`";
         $x = 500;
-        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn);
+        standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets);
 }
 
 
-function standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn)
+function standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn, $theJSONBrackets)
 {
 ////////////////////////////////////////////////////////////
 ///             START LOGGING CODE
@@ -175,11 +176,19 @@ function standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $cli
 // Get back data then parse it into an php array
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// perform the JSON encode in the EXTJS format
-        $JSON_RESULTS = json_encode($results);                 ///*************** I CHANGED THE JSON CODE HERE!!!! Just remove array_values() *******///
-        //$JSON_RESULTS = json_encode(array_values($results)); ///*************** I CHANGED THE JSON CODE HERE!!!! Just remove array_values() *******///
-        //echo($JSON_RESULTS); //Send back to JS the results from the db and server   This is original code
-        echo str_replace(array('[', ']'), '', htmlspecialchars($JSON_RESULTS, ENT_NOQUOTES)); ///*************** I CHANGED THE JSON CODE HERE!!!! Just remove array_values() *******///
+// perform the JSON encode
+        if ($theJSONBrackets == "1") {
+            echo json_encode(array_values($results));  //<--with brackets around JSON    format = [{...}];
+        } else if ($theJSONBrackets == "0") {
+            //$JSON_RESULTS = json_encode($results);    //<--without brackets around JSON               format = {0:{...}};             ///*************** I CHANGED THE JSON CODE HERE!!!! Just remove array_values() *******///
+            $JSON_RESULTS = json_encode(array_values($results)); //<--with brackets around JSON    format = [{...}]; ///*************** I CHANGED THE JSON CODE HERE!!!! Just remove array_values() *******///
+            //echo($JSON_RESULTS); //Send back to JS the results from the db and server   This is original code
+            echo str_replace(array('[', ']'), '', htmlspecialchars($JSON_RESULTS, ENT_NOQUOTES)); // Strip off the bracket  ///*************** I CHANGED THE JSON CODE HERE!!!! Just remove array_values() *******///
+        } else {
+            $JSON_RESULTS = json_encode(array_values($results)); //<--with brackets around JSON    format = [{...}];
+            echo str_replace(array('[', ']'), '', htmlspecialchars($JSON_RESULTS, ENT_NOQUOTES)); // Strip off the bracket
+        }
+
 //    file_put_contents($filename, $JSON_RESULTS . "\r", FILE_APPEND | LOCK_EX);
     } // Out put the error to the file
     catch (PDOException $errorMess) {
@@ -195,7 +204,7 @@ function standardJSONRequest($sysmode, $filename, $timestamp, $theUserName, $cli
 ///////////////////////////////////////////////////////////////////////////////
 ///             Nested JSON
 //function nestedJSONRequest($sysmode, $filename, $timestamp, $theUserName, $clientIP, $sql_query, $conn)
-function nestedJSONRequest($sql_query, $hostname, $username, $password, $DB_NAME, $theTreeParentID, $theTreeChildID, $sysmode, $filename, $timestamp, $theUserName, $clientIP)
+function nestedJSONRequest($sql_query, $hostname, $username, $password, $DB_NAME, $theTreeParentID, $theTreeChildID, $sysmode, $filename, $timestamp, $theUserName, $clientIP, $theJSONBrackets)
 {
 ////////////////////////////////////////////////////////////
 ///             START LOGGING CODE
@@ -234,8 +243,13 @@ function nestedJSONRequest($sql_query, $hostname, $username, $password, $DB_NAME
             unset($data[$key]);
     }
 // Encode:
-//echo "[".json_encode($data)."]";
-    echo json_encode(array_values($data));
+    if ($theJSONBrackets == "0") {
+        echo json_encode(array_values($data));  //<--with brackets around JSON    format = [{...}];
+    } else {
+        //echo json_encode($data);  //<--without brackets around JSON               format = {0:{...}};
+        $JSON_RESULTS_NESTED = json_encode(array_values($data));//<--with brackets around JSON    format = [{...}];
+        echo str_replace(array('[', ']'), '', htmlspecialchars($JSON_RESULTS_NESTED, ENT_NOQUOTES)); // Strip off the bracket
+    }
 }
 
 ///             END OF Nested JSON

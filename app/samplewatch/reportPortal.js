@@ -7,13 +7,11 @@
 ///                          START OF Global Vars                           ///
 
 var gv_theUserName = JSON.parse(decodeURIComponent(document.cookie).substring(5))['UserName'];
-var gv_customerName = sessionStorage.getItem('users_company'); //"Digital eSolutions";
+var gv_customerName = sessionStorage.getItem('users_company');
 var gv_theCustomerParentFolder = sessionStorage.getItem('users_2group');
-var gv_navMenuList = [{id: "1", value: "Reports"}, {id: "2", value: "New Submission"}, {id: "3", value: "Settings"}];
-var gv_custFolders = "/labs2/php/api_methods/SELECTz.php?tableName=customerFolders&columnNames=custFolders_id,custFolders_UUID%20AS%20id,custFolders_folderName%20AS%20value,custFolders_parentFolder&parentid=custFolders_parentFolder&childid=custFolders_id&selectColumn=custFolder_owner&selectData=" + gv_customerName + "&select=100&db_name=labs";
-var gv_theCustomerReportList = "/labs2/php/api_methods/SELECTz.php?tableName=customerRecords&columnNames=*&parentid=custRec_parentId&childid=cusRec_id&selectColumn=cusRec_customerName&selectData=" + gv_customerName + "&select=100&db_name=labs";
-
-console.log("Parent Folder is: " + gv_theCustomerParentFolder);
+//var gv_currentStatus = {id: "150", value: "Reporting"}; //<-- No long being used
+var gv_custFolders = "/labs2/php/api_methods/SELECTz.php?tableName=customerFolders&columnNames=custFolders_UUID%20AS%20id,custFolders_folderName%20AS%20value,custFolders_parentFolder&parentid=custFolders_parentFolder&childid=id&selectColumn=custFolder_owner&selectData=" + gv_customerName + "&select=100&db_name=labs&bracket=0";
+var gv_theCustomerReportList = "/labs2/php/api_methods/SELECTz.php?tableName=customerRecords&columnNames=*&parentid=custRec_parentId&childid=cusRec_id&selectColumn=cusRec_customerName&selectData=" + gv_customerName + "&select=100&db_name=labs&bracket=0";
 
 ///                        END OF Global VARS                               ///
 ///////////////////////////////////////////////////////////////////////////////
@@ -35,7 +33,15 @@ const uigSubmissionPanel = {
         showSubItems: false
     },
     url: gv_theCustomerReportList,
+    //data:custJSON,
     yCount: 10,
+    on: {
+        onBeforeDragIn: function (context, ev) {
+            if (!context.target || context.target.header) return false;	//block dnd on top level and for headers
+            //block dnd in leaf items
+            if (!this.getItem(context.target).$count) return false;
+        }
+    },
     columns: [
         {
             id: "cusRec_lotNumber",
@@ -88,7 +94,6 @@ const uigSubmissionPanel = {
         {id: "cusRec_UUID", hidden: true}
     ]
 };
-
 
 const uigDetailPanel = {
     view: "form",
@@ -191,7 +196,6 @@ const uiTrendingPanel = {
 
 };
 
-
 const uiDataDetail = {
     cells: [
         uigDetailPanel,
@@ -221,14 +225,18 @@ const uigFolderList = {
     activeTitle: false,
     select: true,
     multiselect: "level",
-    drag: "move",
-    url: gv_custFolders
+    drag: true,  //<-- This needs to be on
+    onContext: {},
+    url: gv_custFolders,
+    externalData: sample2folder,    //<---- Added this
 
 
 };
 
 const uigFolderMaker = {
     view: "form",
+    id: "uigFolderMaker",
+    hidden: true,
     rows: [
         {
             cols: [
@@ -254,14 +262,82 @@ const uigFolderMaker = {
     ]
 };
 
-/*const uigParentFolder = {
-    view:"text",
-    id: "gv_theCustomerParentFolder",
-    value:"gv_theCustomerParentFolder",
+const uigParentFolderID = {
+    view: "text",
+    id: "gv_theParentFolderID",
+    //value:"gv_theParentFolderID",
     hidden: true
 };
-*/
 
+const uigSidebarBullet = {
+    view: "bullet",
+    id: "uigSidebarBullet",
+    labelHeight: 40,
+    layout: "y",
+    minRange: 0,
+    maxRange: 100,
+    value: 0,
+    bands: [
+        {value: 100, color: "#b4e5fb"},
+        {value: 80, color: "#55c2f3"},
+        {value: 30, color: "#1997dc"}
+    ],
+    label: "Progress Overview",
+    placeholder: "Percent Complete",
+    //marker:70,
+    stroke: 8,
+    scale: {
+        step: 10
+    }
+};
+
+const uigPrintableReport = {
+
+    "id": 1590178576694,
+    "rows": [
+        {"view": "template", "template": "You can place any widget here..", "role": "placeholder"},
+        {
+            "url": "demo->5e5d4869630d1f0012f03828",
+            "columns": [
+                {"id": "title", "header": "Test Date", "sort": "string"},
+                {"id": "year", "header": "Test", "sort": "string"},
+                {"id": "votes", "header": "Test Method", "sort": "string"},
+                {"id": "rating", "header": "Acceptance Criteria", "sort": "string"},
+                {"id": "rank", "header": "Results", "sort": "string"},
+                {"id": "category", "header": "Pass/Fail", "sort": "string"}
+            ],
+            "view": "datatable",
+            "id": 1590178576803
+        },
+        {
+            "url": "demo->5e5d4869630d1f0012f03828",
+            "columns": [
+                {"id": "title", "header": "Title", "sort": "string"},
+                {"id": "year", "header": "Year", "sort": "string"},
+                {"id": "votes", "header": "Votes", "sort": "string"},
+                {"id": "rating", "header": "Rating", "sort": "string"},
+                {"id": "rank", "header": "Rank", "sort": "string"},
+                {"id": "category", "header": "Category", "sort": "string"},
+                {"id": "category", "header": "% Label Claim", "sort": "string"},
+                {"id": "category", "header": "% Label Claim", "sort": "string"}
+            ],
+            "view": "datatable"
+        },
+        {
+            "url": "demo->5e5d4869630d1f0012f03828",
+            "columns": [
+                {"id": "title", "header": "Test Date", "sort": "string"},
+                {"id": "year", "header": "Test", "sort": "string"},
+                {"id": "votes", "header": "Test Method", "sort": "string"},
+                {"id": "rating", "header": " Acceptance Criteria", "sort": "string"},
+                {"id": "rank", "header": "Results", "sort": "string"},
+                {"id": "category", "header": "Pass/Fail", "sort": "string"}
+            ],
+            "view": "datatable"
+        }
+    ]
+
+};
 
 ///                        END OF UI VARS                                   ///
 ///////////////////////////////////////////////////////////////////////////////
@@ -308,8 +384,8 @@ webix.ui(
                             width: 217, rows: [
                                 uigFolderList,
                                 uigFolderMaker,
-                                //uigParentFolder,
-                                {view: "sidebar", data: gv_navMenuList, width: 0}
+                                uigParentFolderID,
+                                uigSidebarBullet
                             ]
                         },
                         {
@@ -326,6 +402,41 @@ webix.ui(
     }
 ).show();
 
+webix.ui({
+    view: "contextmenu",
+    id: "uig_folderListContextMenu",
+    data: ["Add", "Rename", "Delete", {$template: "Separator"}, "Cancel"],
+    on: {
+        onItemClick: function (id) {
+            var context = this.getContext();
+            var list = context.obj;
+            var listId = context.id;
+            if (this.getItem(id).value === "Add") {
+                webix.message("Added item: <i>" + list.getItem(listId).value + "</i><br/>" + list.getItem(listId).id + "</i>");
+                $$("uigFolderMaker").show();
+                $$("uiFolderName").setValue("");
+                $$("gv_theParentFolderID").setValue("");
+            } else if (this.getItem(id).value === "Rename") {
+                webix.message("Rename item: <i>" + list.getItem(listId).value + "</i>");
+                $$("uigFolderMaker").show();
+
+            } else if (this.getItem(id).value === "Delete") {
+                webix.message("Delete item: <i>" + list.getItem(listId).value + "</i>");// Delete item: <i>"+list.getItem(listId).id+"</i>");
+                var theKey = list.getItem(listId).id;
+                console.log("DELETED Folder " + theKey);
+                webix.ajax().post("/labs2/php/api_methods/DELETE.php?db_name=labs&tableName=customerFolders&columnNames=custFolders_UUID&id=" + theKey);
+                refresh_row();
+                //open(list.getItem(listId).id);
+            } else if (this.getItem(id).value === "Cancel") {
+                webix.message("Info item: <i>" + list.getItem(listId).value + "</i><br/>" + list.getItem(listId).id + "</i>");
+                $$("uigFolderMaker").hide();
+                $$("uiFolderName").setValue("");
+                $$("gv_theParentFolderID").setValue("");
+            }
+            //webix.message("List item: <i>"+list.getItem(listId).value+"</i>");// <br/>Context menu item: <i>"+this.getItem(id).value+"</i>");
+        }
+    }
+});
 
 //***************************************************************************//
 //                                                                           //
@@ -348,7 +459,7 @@ $$('customerRecordList').attachEvent("onAfterSelect", function (id) {
 });
 ///////////////////////////////////////////////////////////////////////////////
 
-//******************** Datagrid Filter            *******************//
+//******************** Datagrid Filter by Folder ****************************//
 $$('uiFolderList').attachEvent("onItemClick", function (id) {
     var value = this.getItem(id).id;
     if (value === 'root') {
@@ -361,18 +472,26 @@ $$('uiFolderList').attachEvent("onItemClick", function (id) {
 });
 ///////////////////////////////////////////////////////////////////////////////
 
-//******************** New Folder Maker *************************************//
+//******************** New&Modify Folder Form Logic *************************//
 function uiNewFolder() {
-    var $useruuid = 'xxxxxxxx-xxxx-5xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c === 'x' ? r : r & 0x3 | 0x8;
-        return v.toString(16);
-    });
     var folderName = $$("uiFolderName").getValue();
     var parentFolder = gv_theCustomerParentFolder;
     var folderOwner = gv_customerName;
-    var newFolderDetails = '{"success":true,"data":[{"custFolders_UUID":"' + $useruuid + '", "custFolders_folderName":"' + folderName + '", "custFolders_parentFolder":"' + parentFolder + '", "custFolder_owner":"' + folderOwner + '"}]}';
+    var $useruuid = $$("gv_theParentFolderID").getValue();
+    var newFolderDetails;
+    if ($useruuid === "") {
+        $useruuid = 'xxxxxxxx-xxxx-5xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c === 'x' ? r : r & 0x3 | 0x8;
+            return v.toString(16);
+        });
+        newFolderDetails = '{"success":true,"data":[{"custFolders_UUID":"' + $useruuid + '", "custFolders_folderName":"' + folderName + '", "custFolders_parentFolder":"' + parentFolder + '", "custFolder_owner":"' + folderOwner + '"}]}';
 
-    webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=customerFolders&db_name=labs&JSONdata=" + newFolderDetails);
+        webix.ajax("/labs2/php/api_methods/INSERT.php?tableName=customerFolders&db_name=labs&JSONdata=" + newFolderDetails + "");
+    } else {
+        newFolderDetails = '{"custFolders_folderName":"' + folderName + '"}';
+
+        webix.ajax("/labs2/php/api_methods/UPDATEz.php?tableName=customerFolders&db_name=labs&theWhereColumn=custFolders_UUID&theUUID=" + $useruuid + "&JSONdata=" + newFolderDetails + "");
+    }
     refresh_row();
 };
 
@@ -380,21 +499,49 @@ function refresh_row() {
     console.log("Refreshing Folder List");
     $$("uiFolderList").clearAll();
     $$("uiFolderList").load(gv_custFolders);
-    $$("uiFolderList").refresh();
+    //$$("uiFolderList").refresh();
     $$("uiFolderName").setValue("");
     webix.message({text: "Reloading..."});
-
+    $$("uigFolderMaker").hide();
 
 };
 ///////////////////////////////////////////////////////////////////////////////
 
-//******************** Delete Folder Maker *************************************//
-$$('uiFolderList').attachEvent("onDragOut", function (context, e) {
-    var value = this.getItem(context.target);    //// THIS IS WHERE I LEFT OFF
-    webix.message({text: value});
-    //$$("uiFolderList").remove(value);
+//******************** ContextMenu Bind *************************************//
+$$("uig_folderListContextMenu").attachTo($$("uiFolderList"));
+///////////////////////////////////////////////////////////////////////////////
+
+//******************** ReName Folder Bind **********************************//
+$$('uiFolderList').attachEvent("onAfterSelect", function (id) {
+    var theValue = this.getItem(id).value;
+    var theIDofTheValue = this.getItem(id).id;
+    $$("uiFolderName").setValue(theValue);
+    $$("gv_theParentFolderID").setValue(theIDofTheValue)
 });
 ///////////////////////////////////////////////////////////////////////////////
+
+//******************** Datagrid Status Value For Bullet *********************//
+$$('customerRecordList').attachEvent("onAfterSelect", function (id) {
+    var theStatus = this.getItem(id).cusRec_status;
+    var theStatusText = this.getItem(id).cusRec_uiStatus;
+    var theStatusCalc = (theStatus * 1);     //(((170 - theStatus) / 170) - 1) * -100;
+    $$("uigSidebarBullet").setValue(theStatusCalc);
+});
+///////////////////////////////////////////////////////////////////////////////
+
+
+//******************** Datagrid MoveElement **********************************//
+function sample2folder(data, id) {
+    data.value = data.value || data.cusRec_UUID;  //<-- THIS FUNCTION WORKS BUT NOT THE RIGHT WAY
+    webix.message(data.value);
+    return data;
+}
+
+/*$$('customerRecordList').attachEvent("onDragOut", function (context,native_event) {
+    webix.message("hello"+ context.start);
+});*/
+///////////////////////////////////////////////////////////////////////////////
+
 
 /////////// Just an experiment to see how hiding tabs works
 $$('btPrintReport').attachEvent("onItemClick", function () {
